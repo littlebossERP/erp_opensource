@@ -1,0 +1,2891 @@
+<?xml version="1.0" encoding="utf-8"?>
+<address>
+  <province code="110000" name="北京">
+    <city code="110100" name="北京市" cityClass="1">
+      <county code="110101" name="东城区" />
+      <county code="110102" name="西城区" />
+      <county code="110103" name="崇文区" />
+      <county code="110104" name="宣武区" />
+      <county code="110105" name="朝阳区" />
+      <county code="110106" name="丰台区" />
+      <county code="110107" name="石景山区" />
+      <county code="110108" name="海淀区" />
+      <county code="110109" name="门头沟区" />
+      <county code="110111" name="房山区" />
+      <county code="110112" name="通州区" />
+      <county code="110113" name="顺义区" />
+      <county code="110114" name="昌平区" />
+      <county code="110115" name="大兴区" />
+      <county code="110116" name="怀柔区" />
+      <county code="110117" name="平谷区" />
+      <county code="110228" name="密云县" />
+      <county code="110229" name="延庆县" />
+      <county code="110230" name="其它区" />
+    </city>
+  </province>
+  <province code="120000" name="天津">
+    <city code="120100" name="天津市" cityClass="1">
+      <county code="120101" name="和平区" />
+      <county code="120102" name="河东区" />
+      <county code="120103" name="河西区" />
+      <county code="120104" name="南开区" />
+      <county code="120105" name="河北区" />
+      <county code="120106" name="红桥区" />
+      <county code="120107" name="塘沽区" />
+      <county code="120108" name="汉沽区" />
+      <county code="120109" name="大港区" />
+      <county code="120110" name="东丽区" />
+      <county code="120111" name="西青区" />
+      <county code="120112" name="津南区" />
+      <county code="120113" name="北辰区" />
+      <county code="120114" name="武清区" />
+      <county code="120115" name="宝坻区" />
+      <county code="120221" name="宁河县" />
+      <county code="120223" name="静海县" />
+      <county code="120225" name="蓟县" />
+      <county code="120226" name="其它区" />
+    </city>
+  </province>
+  <province code="130000" name="河北">
+    <city code="130100" name="石家庄市" cityClass="1">
+      <county code="130102" name="长安区" />
+      <county code="130103" name="桥东区" />
+      <county code="130104" name="桥西区" />
+      <county code="130105" name="新华区" />
+      <county code="130107" name="井陉矿区" />
+      <county code="130108" name="裕华区" />
+      <county code="130121" name="井陉县" />
+      <county code="130123" name="正定县" />
+      <county code="130124" name="栾城县" />
+      <county code="130125" name="行唐县" />
+      <county code="130126" name="灵寿县" />
+      <county code="130127" name="高邑县" />
+      <county code="130128" name="深泽县" />
+      <county code="130129" name="赞皇县" />
+      <county code="130130" name="无极县" />
+      <county code="130131" name="平山县" />
+      <county code="130132" name="元氏县" />
+      <county code="130133" name="赵县" />
+      <county code="130181" name="辛集市" />
+      <county code="130182" name="藁城市" />
+      <county code="130183" name="晋州市" />
+      <county code="130184" name="新乐市" />
+      <county code="130185" name="鹿泉市" />
+      <county code="130186" name="其它区" />
+    </city>
+    <city code="130200" name="唐山市" cityClass="1">
+      <county code="130202" name="路南区" />
+      <county code="130203" name="路北区" />
+      <county code="130204" name="古冶区" />
+      <county code="130205" name="开平区" />
+      <county code="130207" name="丰南区" />
+      <county code="130208" name="丰润区" />
+      <county code="130223" name="滦县" />
+      <county code="130224" name="滦南县" />
+      <county code="130225" name="乐亭县" />
+      <county code="130227" name="迁西县" />
+      <county code="130229" name="玉田县" />
+      <county code="130230" name="唐海县" />
+      <county code="130281" name="遵化市" />
+      <county code="130283" name="迁安市" />
+      <county code="130284" name="其它区" />
+    </city>
+    <city code="130300" name="秦皇岛市" cityClass="1">
+      <county code="130302" name="海港区" />
+      <county code="130303" name="山海关区" />
+      <county code="130304" name="北戴河区" />
+      <county code="130321" name="青龙满族自治县" />
+      <county code="130322" name="昌黎县" />
+      <county code="130323" name="抚宁县" />
+      <county code="130324" name="卢龙县" />
+      <county code="130398" name="其它区" />
+      <county code="130399" name="经济技术开发区" />
+    </city>
+    <city code="130400" name="邯郸市" cityClass="1">
+      <county code="130402" name="邯山区" />
+      <county code="130403" name="丛台区" />
+      <county code="130404" name="复兴区" />
+      <county code="130406" name="峰峰矿区" />
+      <county code="130421" name="邯郸县" />
+      <county code="130423" name="临漳县" />
+      <county code="130424" name="成安县" />
+      <county code="130425" name="大名县" />
+      <county code="130426" name="涉县" />
+      <county code="130427" name="磁县" />
+      <county code="130428" name="肥乡县" />
+      <county code="130429" name="永年县" />
+      <county code="130430" name="邱县" />
+      <county code="130431" name="鸡泽县" />
+      <county code="130432" name="广平县" />
+      <county code="130433" name="馆陶县" />
+      <county code="130434" name="魏县" />
+      <county code="130435" name="曲周县" />
+      <county code="130481" name="武安市" />
+      <county code="130482" name="其它区" />
+    </city>
+    <city code="130500" name="邢台市" cityClass="1">
+      <county code="130502" name="桥东区" />
+      <county code="130503" name="桥西区" />
+      <county code="130521" name="邢台县" />
+      <county code="130522" name="临城县" />
+      <county code="130523" name="内丘县" />
+      <county code="130524" name="柏乡县" />
+      <county code="130525" name="隆尧县" />
+      <county code="130526" name="任县" />
+      <county code="130527" name="南和县" />
+      <county code="130528" name="宁晋县" />
+      <county code="130529" name="巨鹿县" />
+      <county code="130530" name="新河县" />
+      <county code="130531" name="广宗县" />
+      <county code="130532" name="平乡县" />
+      <county code="130533" name="威县" />
+      <county code="130534" name="清河县" />
+      <county code="130535" name="临西县" />
+      <county code="130581" name="南宫市" />
+      <county code="130582" name="沙河市" />
+      <county code="130583" name="其它区" />
+    </city>
+    <city code="130600" name="保定市" cityClass="1">
+      <county code="130602" name="新市区" />
+      <county code="130603" name="北市区" />
+      <county code="130604" name="南市区" />
+      <county code="130621" name="满城县" />
+      <county code="130622" name="清苑县" />
+      <county code="130623" name="涞水县" />
+      <county code="130624" name="阜平县" />
+      <county code="130625" name="徐水县" />
+      <county code="130626" name="定兴县" />
+      <county code="130627" name="唐县" />
+      <county code="130628" name="高阳县" />
+      <county code="130629" name="容城县" />
+      <county code="130630" name="涞源县" />
+      <county code="130631" name="望都县" />
+      <county code="130632" name="安新县" />
+      <county code="130633" name="易县" />
+      <county code="130634" name="曲阳县" />
+      <county code="130635" name="蠡县" />
+      <county code="130636" name="顺平县" />
+      <county code="130637" name="博野县" />
+      <county code="130638" name="雄县" />
+      <county code="130681" name="涿州市" />
+      <county code="130682" name="定州市" />
+      <county code="130683" name="安国市" />
+      <county code="130684" name="高碑店市" />
+      <county code="130698" name="高开区" />
+      <county code="130699" name="其它区" />
+    </city>
+    <city code="130700" name="张家口市" cityClass="1">
+      <county code="130702" name="桥东区" />
+      <county code="130703" name="桥西区" />
+      <county code="130705" name="宣化区" />
+      <county code="130706" name="下花园区" />
+      <county code="130721" name="宣化县" />
+      <county code="130722" name="张北县" />
+      <county code="130723" name="康保县" />
+      <county code="130724" name="沽源县" />
+      <county code="130725" name="尚义县" />
+      <county code="130726" name="蔚县" />
+      <county code="130727" name="阳原县" />
+      <county code="130728" name="怀安县" />
+      <county code="130729" name="万全县" />
+      <county code="130730" name="怀来县" />
+      <county code="130731" name="涿鹿县" />
+      <county code="130732" name="赤城县" />
+      <county code="130733" name="崇礼县" />
+      <county code="130734" name="其它区" />
+    </city>
+    <city code="130800" name="承德市" cityClass="1">
+      <county code="130802" name="双桥区" />
+      <county code="130803" name="双滦区" />
+      <county code="130804" name="鹰手营子矿区" />
+      <county code="130821" name="承德县" />
+      <county code="130822" name="兴隆县" />
+      <county code="130823" name="平泉县" />
+      <county code="130824" name="滦平县" />
+      <county code="130825" name="隆化县" />
+      <county code="130826" name="丰宁满族自治县" />
+      <county code="130827" name="宽城满族自治县" />
+      <county code="130828" name="围场满族蒙古族自治县" />
+      <county code="130829" name="其它区" />
+    </city>
+    <city code="130900" name="沧州市" cityClass="1">
+      <county code="130902" name="新华区" />
+      <county code="130903" name="运河区" />
+      <county code="130921" name="沧县" />
+      <county code="130922" name="青县" />
+      <county code="130923" name="东光县" />
+      <county code="130924" name="海兴县" />
+      <county code="130925" name="盐山县" />
+      <county code="130926" name="肃宁县" />
+      <county code="130927" name="南皮县" />
+      <county code="130928" name="吴桥县" />
+      <county code="130929" name="献县" />
+      <county code="130930" name="孟村回族自治县" />
+      <county code="130981" name="泊头市" />
+      <county code="130982" name="任丘市" />
+      <county code="130983" name="黄骅市" />
+      <county code="130984" name="河间市" />
+      <county code="130985" name="其它区" />
+    </city>
+    <city code="131000" name="廊坊市" cityClass="1">
+      <county code="131002" name="安次区" />
+      <county code="131003" name="广阳区" />
+      <county code="131022" name="固安县" />
+      <county code="131023" name="永清县" />
+      <county code="131024" name="香河县" />
+      <county code="131025" name="大城县" />
+      <county code="131026" name="文安县" />
+      <county code="131028" name="大厂回族自治县" />
+      <county code="131051" name="开发区" />
+      <county code="131052" name="燕郊经济技术开发区" />
+      <county code="131081" name="霸州市" />
+      <county code="131082" name="三河市" />
+      <county code="131083" name="其它区" />
+    </city>
+    <city code="131100" name="衡水市" cityClass="1">
+      <county code="131102" name="桃城区" />
+      <county code="131121" name="枣强县" />
+      <county code="131122" name="武邑县" />
+      <county code="131123" name="武强县" />
+      <county code="131124" name="饶阳县" />
+      <county code="131125" name="安平县" />
+      <county code="131126" name="故城县" />
+      <county code="131127" name="景县" />
+      <county code="131128" name="阜城县" />
+      <county code="131181" name="冀州市" />
+      <county code="131182" name="深州市" />
+      <county code="131183" name="其它区" />
+    </city>
+  </province>
+  <province code="140000" name="山西">
+    <city code="140100" name="太原市" cityClass="1">
+      <county code="140105" name="小店区" />
+      <county code="140106" name="迎泽区" />
+      <county code="140107" name="杏花岭区" />
+      <county code="140108" name="尖草坪区" />
+      <county code="140109" name="万柏林区" />
+      <county code="140110" name="晋源区" />
+      <county code="140121" name="清徐县" />
+      <county code="140122" name="阳曲县" />
+      <county code="140123" name="娄烦县" />
+      <county code="140181" name="古交市" />
+      <county code="140182" name="其它区" />
+    </city>
+    <city code="140200" name="大同市" cityClass="1">
+      <county code="140202" name="城区" />
+      <county code="140203" name="矿区" />
+      <county code="140211" name="南郊区" />
+      <county code="140212" name="新荣区" />
+      <county code="140221" name="阳高县" />
+      <county code="140222" name="天镇县" />
+      <county code="140223" name="广灵县" />
+      <county code="140224" name="灵丘县" />
+      <county code="140225" name="浑源县" />
+      <county code="140226" name="左云县" />
+      <county code="140227" name="大同县" />
+      <county code="140228" name="其它区" />
+    </city>
+    <city code="140300" name="阳泉市" cityClass="1">
+      <county code="140302" name="城区" />
+      <county code="140303" name="矿区" />
+      <county code="140311" name="郊区" />
+      <county code="140321" name="平定县" />
+      <county code="140322" name="盂县" />
+      <county code="140323" name="其它区" />
+    </city>
+    <city code="140400" name="长治市" cityClass="1">
+      <county code="140421" name="长治县" />
+      <county code="140423" name="襄垣县" />
+      <county code="140424" name="屯留县" />
+      <county code="140425" name="平顺县" />
+      <county code="140426" name="黎城县" />
+      <county code="140427" name="壶关县" />
+      <county code="140428" name="长子县" />
+      <county code="140429" name="武乡县" />
+      <county code="140430" name="沁县" />
+      <county code="140431" name="沁源县" />
+      <county code="140481" name="潞城市" />
+      <county code="140482" name="城区" />
+      <county code="140483" name="郊区" />
+      <county code="140484" name="高新区" />
+      <county code="140485" name="其它区" />
+    </city>
+    <city code="140500" name="晋城市" cityClass="1">
+      <county code="140502" name="城区" />
+      <county code="140521" name="沁水县" />
+      <county code="140522" name="阳城县" />
+      <county code="140524" name="陵川县" />
+      <county code="140525" name="泽州县" />
+      <county code="140581" name="高平市" />
+      <county code="140582" name="其它区" />
+    </city>
+    <city code="140600" name="朔州市" cityClass="1">
+      <county code="140602" name="朔城区" />
+      <county code="140603" name="平鲁区" />
+      <county code="140621" name="山阴县" />
+      <county code="140622" name="应县" />
+      <county code="140623" name="右玉县" />
+      <county code="140624" name="怀仁县" />
+      <county code="140625" name="其它区" />
+    </city>
+    <city code="140700" name="晋中市" cityClass="1">
+      <county code="140702" name="榆次区" />
+      <county code="140721" name="榆社县" />
+      <county code="140722" name="左权县" />
+      <county code="140723" name="和顺县" />
+      <county code="140724" name="昔阳县" />
+      <county code="140725" name="寿阳县" />
+      <county code="140726" name="太谷县" />
+      <county code="140727" name="祁县" />
+      <county code="140728" name="平遥县" />
+      <county code="140729" name="灵石县" />
+      <county code="140781" name="介休市" />
+      <county code="140782" name="其它区" />
+    </city>
+    <city code="140800" name="运城市" cityClass="1">
+      <county code="140802" name="盐湖区" />
+      <county code="140821" name="临猗县" />
+      <county code="140822" name="万荣县" />
+      <county code="140823" name="闻喜县" />
+      <county code="140824" name="稷山县" />
+      <county code="140825" name="新绛县" />
+      <county code="140826" name="绛县" />
+      <county code="140827" name="垣曲县" />
+      <county code="140828" name="夏县" />
+      <county code="140829" name="平陆县" />
+      <county code="140830" name="芮城县" />
+      <county code="140881" name="永济市" />
+      <county code="140882" name="河津市" />
+      <county code="140883" name="其它区" />
+    </city>
+    <city code="140900" name="忻州市" cityClass="1">
+      <county code="140902" name="忻府区" />
+      <county code="140921" name="定襄县" />
+      <county code="140922" name="五台县" />
+      <county code="140923" name="代县" />
+      <county code="140924" name="繁峙县" />
+      <county code="140925" name="宁武县" />
+      <county code="140926" name="静乐县" />
+      <county code="140927" name="神池县" />
+      <county code="140928" name="五寨县" />
+      <county code="140929" name="岢岚县" />
+      <county code="140930" name="河曲县" />
+      <county code="140931" name="保德县" />
+      <county code="140932" name="偏关县" />
+      <county code="140981" name="原平市" />
+      <county code="140982" name="其它区" />
+    </city>
+    <city code="141000" name="临汾市" cityClass="1">
+      <county code="141002" name="尧都区" />
+      <county code="141021" name="曲沃县" />
+      <county code="141022" name="翼城县" />
+      <county code="141023" name="襄汾县" />
+      <county code="141024" name="洪洞县" />
+      <county code="141025" name="古县" />
+      <county code="141026" name="安泽县" />
+      <county code="141027" name="浮山县" />
+      <county code="141028" name="吉县" />
+      <county code="141029" name="乡宁县" />
+      <county code="141030" name="大宁县" />
+      <county code="141031" name="隰县" />
+      <county code="141032" name="永和县" />
+      <county code="141033" name="蒲县" />
+      <county code="141034" name="汾西县" />
+      <county code="141081" name="侯马市" />
+      <county code="141082" name="霍州市" />
+      <county code="141083" name="其它区" />
+    </city>
+    <city code="141100" name="吕梁市" cityClass="1">
+      <county code="141102" name="离石区" />
+      <county code="141121" name="文水县" />
+      <county code="141122" name="交城县" />
+      <county code="141123" name="兴县" />
+      <county code="141124" name="临县" />
+      <county code="141125" name="柳林县" />
+      <county code="141126" name="石楼县" />
+      <county code="141127" name="岚县" />
+      <county code="141128" name="方山县" />
+      <county code="141129" name="中阳县" />
+      <county code="141130" name="交口县" />
+      <county code="141181" name="孝义市" />
+      <county code="141182" name="汾阳市" />
+      <county code="141183" name="其它区" />
+    </city>
+  </province>
+  <province code="150000" name="内蒙古">
+    <city code="150100" name="呼和浩特市" cityClass="1">
+      <county code="150102" name="新城区" />
+      <county code="150103" name="回民区" />
+      <county code="150104" name="玉泉区" />
+      <county code="150105" name="赛罕区" />
+      <county code="150121" name="土默特左旗" />
+      <county code="150122" name="托克托县" />
+      <county code="150123" name="和林格尔县" />
+      <county code="150124" name="清水河县" />
+      <county code="150125" name="武川县" />
+      <county code="150126" name="其它区" />
+    </city>
+  </province>
+  <province code="210000" name="辽宁">
+    <city code="210100" name="沈阳市" cityClass="1">
+      <county code="210102" name="和平区" />
+      <county code="210103" name="沈河区" />
+      <county code="210104" name="大东区" />
+      <county code="210105" name="皇姑区" />
+      <county code="210106" name="铁西区" />
+      <county code="210111" name="苏家屯区" />
+      <county code="210112" name="东陵区" />
+      <county code="210113" name="新城子区" />
+      <county code="210114" name="于洪区" />
+      <county code="210122" name="辽中县" />
+      <county code="210123" name="康平县" />
+      <county code="210124" name="法库县" />
+      <county code="210181" name="新民市" />
+      <county code="210182" name="浑南新区" />
+      <county code="210183" name="张士开发区" />
+      <county code="210184" name="沈北新区" />
+      <county code="210185" name="其它区" />
+    </city>
+    <city code="210200" name="大连市" cityClass="1">
+      <county code="210202" name="中山区" />
+      <county code="210203" name="西岗区" />
+      <county code="210204" name="沙河口区" />
+      <county code="210211" name="甘井子区" />
+      <county code="210212" name="旅顺口区" />
+      <county code="210213" name="金州区" />
+      <county code="210224" name="长海县" />
+      <county code="210251" name="开发区" />
+      <county code="210281" name="瓦房店市" />
+      <county code="210282" name="普兰店市" />
+      <county code="210283" name="庄河市" />
+      <county code="210297" name="岭前区" />
+      <county code="210298" name="其它区" />
+    </city>
+    <city code="210300" name="鞍山市" cityClass="1">
+      <county code="210302" name="铁东区" />
+      <county code="210303" name="铁西区" />
+      <county code="210304" name="立山区" />
+      <county code="210311" name="千山区" />
+      <county code="210321" name="台安县" />
+      <county code="210323" name="岫岩满族自治县" />
+      <county code="210351" name="高新区" />
+      <county code="210381" name="海城市" />
+      <county code="210382" name="其它区" />
+    </city>
+    <city code="210400" name="抚顺市" cityClass="1">
+      <county code="210402" name="新抚区" />
+      <county code="210403" name="东洲区" />
+      <county code="210404" name="望花区" />
+      <county code="210411" name="顺城区" />
+      <county code="210421" name="抚顺县" />
+      <county code="210422" name="新宾满族自治县" />
+      <county code="210423" name="清原满族自治县" />
+      <county code="210424" name="其它区" />
+    </city>
+    <city code="210500" name="本溪市" cityClass="1">
+      <county code="210502" name="平山区" />
+      <county code="210503" name="溪湖区" />
+      <county code="210504" name="明山区" />
+      <county code="210505" name="南芬区" />
+      <county code="210521" name="本溪满族自治县" />
+      <county code="210522" name="桓仁满族自治县" />
+      <county code="210523" name="其它区" />
+    </city>
+    <city code="210600" name="丹东市" cityClass="1">
+      <county code="210602" name="元宝区" />
+      <county code="210603" name="振兴区" />
+      <county code="210604" name="振安区" />
+      <county code="210624" name="宽甸满族自治县" />
+      <county code="210681" name="东港市" />
+      <county code="210682" name="凤城市" />
+      <county code="210683" name="其它区" />
+    </city>
+    <city code="210700" name="锦州市" cityClass="1">
+      <county code="210702" name="古塔区" />
+      <county code="210703" name="凌河区" />
+      <county code="210711" name="太和区" />
+      <county code="210726" name="黑山县" />
+      <county code="210727" name="义县" />
+      <county code="210781" name="凌海市" />
+      <county code="210782" name="北镇市" />
+      <county code="210783" name="其它区" />
+    </city>
+    <city code="210800" name="营口市" cityClass="1">
+      <county code="210802" name="站前区" />
+      <county code="210803" name="西市区" />
+      <county code="210804" name="鲅鱼圈区" />
+      <county code="210811" name="老边区" />
+      <county code="210881" name="盖州市" />
+      <county code="210882" name="大石桥市" />
+      <county code="210883" name="其它区" />
+    </city>
+    <city code="210900" name="阜新市" cityClass="1">
+      <county code="210902" name="海州区" />
+      <county code="210903" name="新邱区" />
+      <county code="210904" name="太平区" />
+      <county code="210905" name="清河门区" />
+      <county code="210911" name="细河区" />
+      <county code="210921" name="阜新蒙古族自治县" />
+      <county code="210922" name="彰武县" />
+      <county code="210923" name="其它区" />
+    </city>
+    <city code="211000" name="辽阳市" cityClass="1">
+      <county code="211002" name="白塔区" />
+      <county code="211003" name="文圣区" />
+      <county code="211004" name="宏伟区" />
+      <county code="211005" name="弓长岭区" />
+      <county code="211011" name="太子河区" />
+      <county code="211021" name="辽阳县" />
+      <county code="211081" name="灯塔市" />
+      <county code="211082" name="其它区" />
+    </city>
+    <city code="211100" name="盘锦市" cityClass="1">
+      <county code="211102" name="双台子区" />
+      <county code="211103" name="兴隆台区" />
+      <county code="211121" name="大洼县" />
+      <county code="211122" name="盘山县" />
+      <county code="211123" name="其它区" />
+    </city>
+    <city code="211200" name="铁岭市" cityClass="1">
+      <county code="211202" name="银州区" />
+      <county code="211204" name="清河区" />
+      <county code="211221" name="铁岭县" />
+      <county code="211223" name="西丰县" />
+      <county code="211224" name="昌图县" />
+      <county code="211281" name="调兵山市" />
+      <county code="211282" name="开原市" />
+      <county code="211283" name="其它区" />
+    </city>
+    <city code="211300" name="朝阳市" cityClass="1">
+      <county code="211302" name="双塔区" />
+      <county code="211303" name="龙城区" />
+      <county code="211321" name="朝阳县" />
+      <county code="211322" name="建平县" />
+      <county code="211324" name="喀喇沁左翼蒙古族自治县" />
+      <county code="211381" name="北票市" />
+      <county code="211382" name="凌源市" />
+      <county code="211383" name="其它区" />
+    </city>
+    <city code="211400" name="葫芦岛市" cityClass="1">
+      <county code="211402" name="连山区" />
+      <county code="211403" name="龙港区" />
+      <county code="211404" name="南票区" />
+      <county code="211421" name="绥中县" />
+      <county code="211422" name="建昌县" />
+      <county code="211481" name="兴城市" />
+      <county code="211482" name="其它区" />
+    </city>
+  </province>
+  <province code="220000" name="吉林">
+    <city code="220100" name="长春市" cityClass="1">
+      <county code="220102" name="南关区" />
+      <county code="220103" name="宽城区" />
+      <county code="220104" name="朝阳区" />
+      <county code="220105" name="二道区" />
+      <county code="220106" name="绿园区" />
+      <county code="220112" name="双阳区" />
+      <county code="220122" name="农安县" />
+      <county code="220181" name="九台市" />
+      <county code="220182" name="榆树市" />
+      <county code="220183" name="德惠市" />
+      <county code="220184" name="高新技术产业开发区" />
+      <county code="220185" name="汽车产业开发区" />
+      <county code="220186" name="经济技术开发区" />
+      <county code="220187" name="净月旅游开发区" />
+      <county code="220188" name="其它区" />
+    </city>
+    <city code="220200" name="吉林市" cityClass="1">
+      <county code="220202" name="昌邑区" />
+      <county code="220203" name="龙潭区" />
+      <county code="220204" name="船营区" />
+      <county code="220211" name="丰满区" />
+      <county code="220221" name="永吉县" />
+      <county code="220281" name="蛟河市" />
+      <county code="220282" name="桦甸市" />
+      <county code="220283" name="舒兰市" />
+      <county code="220284" name="磐石市" />
+      <county code="220285" name="其它区" />
+    </city>
+    <city code="220300" name="四平市" cityClass="1">
+      <county code="220302" name="铁西区" />
+      <county code="220303" name="铁东区" />
+      <county code="220322" name="梨树县" />
+      <county code="220323" name="伊通满族自治县" />
+      <county code="220381" name="公主岭市" />
+      <county code="220382" name="双辽市" />
+      <county code="220383" name="其它区" />
+    </city>
+    <city code="220400" name="辽源市" cityClass="1">
+      <county code="220402" name="龙山区" />
+      <county code="220403" name="西安区" />
+      <county code="220421" name="东丰县" />
+      <county code="220422" name="东辽县" />
+      <county code="220423" name="其它区" />
+    </city>
+    <city code="220500" name="通化市" cityClass="1">
+      <county code="220502" name="东昌区" />
+      <county code="220503" name="二道江区" />
+      <county code="220521" name="通化县" />
+      <county code="220523" name="辉南县" />
+      <county code="220524" name="柳河县" />
+      <county code="220581" name="梅河口市" />
+      <county code="220582" name="集安市" />
+      <county code="220583" name="其它区" />
+    </city>
+    <city code="220600" name="白山市" cityClass="1">
+      <county code="220602" name="八道江区" />
+      <county code="220621" name="抚松县" />
+      <county code="220622" name="靖宇县" />
+      <county code="220623" name="长白朝鲜族自治县" />
+      <county code="220625" name="江源县" />
+      <county code="220681" name="临江市" />
+      <county code="220682" name="其它区" />
+    </city>
+    <city code="220700" name="松原市" cityClass="1">
+      <county code="220702" name="宁江区" />
+      <county code="220721" name="前郭尔罗斯蒙古族自治县" />
+      <county code="220722" name="长岭县" />
+      <county code="220723" name="乾安县" />
+      <county code="220724" name="扶余县" />
+      <county code="220725" name="其它区" />
+    </city>
+    <city code="220800" name="白城市" cityClass="1">
+      <county code="220802" name="洮北区" />
+      <county code="220821" name="镇赉县" />
+      <county code="220822" name="通榆县" />
+      <county code="220881" name="洮南市" />
+      <county code="220882" name="大安市" />
+      <county code="220883" name="其它区" />
+    </city>
+    <city code="222400" name="延边朝鲜族自治州" cityClass="1">
+      <county code="222401" name="延吉市" />
+      <county code="222402" name="图们市" />
+      <county code="222403" name="敦化市" />
+      <county code="222404" name="珲春市" />
+      <county code="222405" name="龙井市" />
+      <county code="222406" name="和龙市" />
+      <county code="222424" name="汪清县" />
+      <county code="222426" name="安图县" />
+      <county code="222427" name="其它区" />
+    </city>
+  </province>
+  <province code="230000" name="黑龙江">
+    <city code="230100" name="哈尔滨市" cityClass="1">
+      <county code="230102" name="道里区" />
+      <county code="230103" name="南岗区" />
+      <county code="230104" name="道外区" />
+      <county code="230106" name="香坊区" />
+      <county code="230107" name="动力区" />
+      <county code="230108" name="平房区" />
+      <county code="230109" name="松北区" />
+      <county code="230111" name="呼兰区" />
+      <county code="230123" name="依兰县" />
+      <county code="230124" name="方正县" />
+      <county code="230125" name="宾县" />
+      <county code="230126" name="巴彦县" />
+      <county code="230127" name="木兰县" />
+      <county code="230128" name="通河县" />
+      <county code="230129" name="延寿县" />
+      <county code="230181" name="阿城市" />
+      <county code="230182" name="双城市" />
+      <county code="230183" name="尚志市" />
+      <county code="230184" name="五常市" />
+      <county code="230185" name="阿城市" />
+      <county code="230186" name="其它区" />
+    </city>
+    <city code="230200" name="齐齐哈尔市" cityClass="1">
+      <county code="230202" name="龙沙区" />
+      <county code="230203" name="建华区" />
+      <county code="230204" name="铁锋区" />
+      <county code="230205" name="昂昂溪区" />
+      <county code="230206" name="富拉尔基区" />
+      <county code="230207" name="碾子山区" />
+      <county code="230208" name="梅里斯达斡尔族区" />
+      <county code="230221" name="龙江县" />
+      <county code="230223" name="依安县" />
+      <county code="230224" name="泰来县" />
+      <county code="230225" name="甘南县" />
+      <county code="230227" name="富裕县" />
+      <county code="230229" name="克山县" />
+      <county code="230230" name="克东县" />
+      <county code="230231" name="拜泉县" />
+      <county code="230281" name="讷河市" />
+      <county code="230282" name="其它区" />
+    </city>
+    <city code="230300" name="鸡西市" cityClass="1">
+      <county code="230302" name="鸡冠区" />
+      <county code="230303" name="恒山区" />
+      <county code="230304" name="滴道区" />
+      <county code="230305" name="梨树区" />
+      <county code="230306" name="城子河区" />
+      <county code="230307" name="麻山区" />
+      <county code="230321" name="鸡东县" />
+      <county code="230381" name="虎林市" />
+      <county code="230382" name="密山市" />
+      <county code="230383" name="其它区" />
+    </city>
+    <city code="230600" name="大庆市" cityClass="1">
+      <county code="230602" name="萨尔图区" />
+      <county code="230603" name="龙凤区" />
+      <county code="230604" name="让胡路区" />
+      <county code="230605" name="红岗区" />
+      <county code="230606" name="大同区" />
+      <county code="230621" name="肇州县" />
+      <county code="230622" name="肇源县" />
+      <county code="230623" name="林甸县" />
+      <county code="230624" name="杜尔伯特蒙古族自治县" />
+      <county code="230625" name="其它区" />
+    </city>
+    <city code="230800" name="佳木斯市" cityClass="1">
+      <county code="230802" name="永红区" />
+      <county code="230803" name="向阳区" />
+      <county code="230804" name="前进区" />
+      <county code="230805" name="东风区" />
+      <county code="230811" name="郊区" />
+      <county code="230822" name="桦南县" />
+      <county code="230826" name="桦川县" />
+      <county code="230828" name="汤原县" />
+      <county code="230833" name="抚远县" />
+      <county code="230881" name="同江市" />
+      <county code="230882" name="富锦市" />
+      <county code="230883" name="其它区" />
+    </city>
+    <city code="231000" name="牡丹江市" cityClass="1">
+      <county code="231002" name="东安区" />
+      <county code="231003" name="阳明区" />
+      <county code="231004" name="爱民区" />
+      <county code="231005" name="西安区" />
+      <county code="231024" name="东宁县" />
+      <county code="231025" name="林口县" />
+      <county code="231081" name="绥芬河市" />
+      <county code="231083" name="海林市" />
+      <county code="231084" name="宁安市" />
+      <county code="231085" name="穆棱市" />
+      <county code="231086" name="其它区" />
+    </city>
+    <city code="231200" name="绥化市" cityClass="1">
+      <county code="231202" name="北林区" />
+      <county code="231221" name="望奎县" />
+      <county code="231222" name="兰西县" />
+      <county code="231223" name="青冈县" />
+      <county code="231224" name="庆安县" />
+      <county code="231225" name="明水县" />
+      <county code="231226" name="绥棱县" />
+      <county code="231281" name="安达市" />
+      <county code="231282" name="肇东市" />
+      <county code="231283" name="海伦市" />
+      <county code="231284" name="其它区" />
+    </city>
+  </province>
+  <province code="310000" name="上海">
+    <city code="310100" name="上海市" cityClass="1">
+      <county code="310101" name="黄浦区" />
+      <county code="310103" name="卢湾区" />
+      <county code="310104" name="徐汇区" />
+      <county code="310105" name="长宁区" />
+      <county code="310106" name="静安区" />
+      <county code="310107" name="普陀区" />
+      <county code="310108" name="闸北区" />
+      <county code="310109" name="虹口区" />
+      <county code="310110" name="杨浦区" />
+      <county code="310112" name="闵行区" />
+      <county code="310113" name="宝山区" />
+      <county code="310114" name="嘉定区" />
+      <county code="310115" name="浦东新区" />
+      <county code="310116" name="金山区" />
+      <county code="310117" name="松江区" />
+      <county code="310118" name="青浦区" />
+      <county code="310119" name="南汇区" />
+      <county code="310120" name="奉贤区" />
+      <county code="310152" name="川沙区" />
+      <county code="310230" name="崇明县" />
+      <county code="310231" name="其它区" />
+    </city>
+  </province>
+  <province code="320000" name="江苏">
+    <city code="320100" name="南京市" cityClass="1">
+      <county code="320102" name="玄武区" />
+      <county code="320103" name="白下区" />
+      <county code="320104" name="秦淮区" />
+      <county code="320105" name="建邺区" />
+      <county code="320106" name="鼓楼区" />
+      <county code="320107" name="下关区" />
+      <county code="320111" name="浦口区" />
+      <county code="320113" name="栖霞区" />
+      <county code="320114" name="雨花台区" />
+      <county code="320115" name="江宁区" />
+      <county code="320116" name="六合区" />
+      <county code="320124" name="溧水县" />
+      <county code="320125" name="高淳县" />
+      <county code="320126" name="其它区" />
+    </city>
+    <city code="320200" name="无锡市" cityClass="1">
+      <county code="320202" name="崇安区" />
+      <county code="320203" name="南长区" />
+      <county code="320204" name="北塘区" />
+      <county code="320205" name="锡山区" />
+      <county code="320206" name="惠山区" />
+      <county code="320211" name="滨湖区" />
+      <county code="320281" name="江阴市" />
+      <county code="320282" name="宜兴市" />
+      <county code="320296" name="新区" />
+      <county code="320297" name="其它区" />
+    </city>
+    <city code="320300" name="徐州市" cityClass="1">
+      <county code="320302" name="鼓楼区" />
+      <county code="320303" name="云龙区" />
+      <county code="320304" name="九里区" />
+      <county code="320305" name="贾汪区" />
+      <county code="320311" name="泉山区" />
+      <county code="320321" name="丰县" />
+      <county code="320322" name="沛县" />
+      <county code="320323" name="铜山县" />
+      <county code="320324" name="睢宁县" />
+      <county code="320381" name="新沂市" />
+      <county code="320382" name="邳州市" />
+      <county code="320383" name="其它区" />
+    </city>
+    <city code="320400" name="常州市" cityClass="1">
+      <county code="320402" name="天宁区" />
+      <county code="320404" name="钟楼区" />
+      <county code="320405" name="戚墅堰区" />
+      <county code="320411" name="新北区" />
+      <county code="320412" name="武进区" />
+      <county code="320481" name="溧阳市" />
+      <county code="320482" name="金坛市" />
+      <county code="320483" name="其它区" />
+    </city>
+    <city code="320500" name="苏州市" cityClass="1">
+      <county code="320502" name="沧浪区" />
+      <county code="320503" name="平江区" />
+      <county code="320504" name="金阊区" />
+      <county code="320505" name="虎丘区" />
+      <county code="320506" name="吴中区" />
+      <county code="320507" name="相城区" />
+      <county code="320581" name="常熟市" />
+      <county code="320582" name="张家港市" />
+      <county code="320583" name="昆山市" />
+      <county code="320584" name="吴江市" />
+      <county code="320585" name="太仓市" />
+      <county code="320594" name="新区" />
+      <county code="320595" name="园区" />
+      <county code="320596" name="其它区" />
+    </city>
+    <city code="320600" name="南通市" cityClass="1">
+      <county code="320602" name="崇川区" />
+      <county code="320611" name="港闸区" />
+      <county code="320621" name="海安县" />
+      <county code="320623" name="如东县" />
+      <county code="320681" name="启东市" />
+      <county code="320682" name="如皋市" />
+      <county code="320683" name="通州市" />
+      <county code="320684" name="海门市" />
+      <county code="320693" name="开发区" />
+      <county code="320694" name="其它区" />
+    </city>
+    <city code="320700" name="连云港市" cityClass="1">
+      <county code="320703" name="连云区" />
+      <county code="320705" name="新浦区" />
+      <county code="320706" name="海州区" />
+      <county code="320721" name="赣榆县" />
+      <county code="320722" name="东海县" />
+      <county code="320723" name="灌云县" />
+      <county code="320724" name="灌南县" />
+      <county code="320725" name="其它区" />
+    </city>
+    <city code="320800" name="淮安市" cityClass="1">
+      <county code="320802" name="清河区" />
+      <county code="320803" name="楚州区" />
+      <county code="320804" name="淮阴区" />
+      <county code="320811" name="清浦区" />
+      <county code="320826" name="涟水县" />
+      <county code="320829" name="洪泽县" />
+      <county code="320830" name="盱眙县" />
+      <county code="320831" name="金湖县" />
+      <county code="320832" name="其它区" />
+    </city>
+    <city code="320900" name="盐城市" cityClass="1">
+      <county code="320902" name="亭湖区" />
+      <county code="320903" name="盐都区" />
+      <county code="320921" name="响水县" />
+      <county code="320922" name="滨海县" />
+      <county code="320923" name="阜宁县" />
+      <county code="320924" name="射阳县" />
+      <county code="320925" name="建湖县" />
+      <county code="320981" name="东台市" />
+      <county code="320982" name="大丰市" />
+      <county code="320983" name="其它区" />
+    </city>
+    <city code="321000" name="扬州市" cityClass="1">
+      <county code="321002" name="广陵区" />
+      <county code="321003" name="邗江区" />
+      <county code="321011" name="维扬区" />
+      <county code="321023" name="宝应县" />
+      <county code="321081" name="仪征市" />
+      <county code="321084" name="高邮市" />
+      <county code="321088" name="江都市" />
+      <county code="321092" name="经济开发区" />
+      <county code="321093" name="其它区" />
+    </city>
+    <city code="321100" name="镇江市" cityClass="1">
+      <county code="321102" name="京口区" />
+      <county code="321111" name="润州区" />
+      <county code="321112" name="丹徒区" />
+      <county code="321181" name="丹阳市" />
+      <county code="321182" name="扬中市" />
+      <county code="321183" name="句容市" />
+      <county code="321184" name="其它区" />
+    </city>
+    <city code="321200" name="泰州市" cityClass="1">
+      <county code="321202" name="海陵区" />
+      <county code="321203" name="高港区" />
+      <county code="321281" name="兴化市" />
+      <county code="321282" name="靖江市" />
+      <county code="321283" name="泰兴市" />
+      <county code="321284" name="姜堰市" />
+      <county code="321285" name="其它区" />
+    </city>
+    <city code="321300" name="宿迁市" cityClass="1">
+      <county code="321302" name="宿城区" />
+      <county code="321311" name="宿豫区" />
+      <county code="321322" name="沭阳县" />
+      <county code="321323" name="泗阳县" />
+      <county code="321324" name="泗洪县" />
+      <county code="321325" name="其它区" />
+    </city>
+  </province>
+  <province code="330000" name="浙江">
+    <city code="330100" name="杭州市" cityClass="1">
+      <county code="330102" name="上城区" />
+      <county code="330103" name="下城区" />
+      <county code="330104" name="江干区" />
+      <county code="330105" name="拱墅区" />
+      <county code="330106" name="西湖区" />
+      <county code="330108" name="滨江区" />
+      <county code="330109" name="萧山区" />
+      <county code="330110" name="余杭区" />
+      <county code="330122" name="桐庐县" />
+      <county code="330127" name="淳安县" />
+      <county code="330182" name="建德市" />
+      <county code="330183" name="富阳市" />
+      <county code="330185" name="临安市" />
+      <county code="330186" name="其它区" />
+    </city>
+    <city code="330200" name="宁波市" cityClass="1">
+      <county code="330203" name="海曙区" />
+      <county code="330204" name="江东区" />
+      <county code="330205" name="江北区" />
+      <county code="330206" name="北仑区" />
+      <county code="330211" name="镇海区" />
+      <county code="330212" name="鄞州区" />
+      <county code="330225" name="象山县" />
+      <county code="330226" name="宁海县" />
+      <county code="330281" name="余姚市" />
+      <county code="330282" name="慈溪市" />
+      <county code="330283" name="奉化市" />
+      <county code="330284" name="其它区" />
+    </city>
+    <city code="330300" name="温州市" cityClass="1">
+      <county code="330302" name="鹿城区" />
+      <county code="330303" name="龙湾区" />
+      <county code="330304" name="瓯海区" />
+      <county code="330322" name="洞头县" />
+      <county code="330324" name="永嘉县" />
+      <county code="330326" name="平阳县" />
+      <county code="330327" name="苍南县" />
+      <county code="330328" name="文成县" />
+      <county code="330329" name="泰顺县" />
+      <county code="330381" name="瑞安市" />
+      <county code="330382" name="乐清市" />
+      <county code="330383" name="其它区" />
+    </city>
+    <city code="330400" name="嘉兴市" cityClass="1">
+      <county code="330402" name="南湖区" />
+      <county code="330411" name="秀洲区" />
+      <county code="330421" name="嘉善县" />
+      <county code="330424" name="海盐县" />
+      <county code="330481" name="海宁市" />
+      <county code="330482" name="平湖市" />
+      <county code="330483" name="桐乡市" />
+      <county code="330484" name="其它区" />
+    </city>
+    <city code="330500" name="湖州市" cityClass="1">
+      <county code="330502" name="吴兴区" />
+      <county code="330503" name="南浔区" />
+      <county code="330521" name="德清县" />
+      <county code="330522" name="长兴县" />
+      <county code="330523" name="安吉县" />
+      <county code="330524" name="其它区" />
+    </city>
+    <city code="330600" name="绍兴市" cityClass="1">
+      <county code="330602" name="越城区" />
+      <county code="330621" name="绍兴县" />
+      <county code="330624" name="新昌县" />
+      <county code="330681" name="诸暨市" />
+      <county code="330682" name="上虞市" />
+      <county code="330683" name="嵊州市" />
+      <county code="330684" name="其它区" />
+    </city>
+    <city code="330700" name="金华市" cityClass="1">
+      <county code="330702" name="婺城区" />
+      <county code="330703" name="金东区" />
+      <county code="330723" name="武义县" />
+      <county code="330726" name="浦江县" />
+      <county code="330727" name="磐安县" />
+      <county code="330781" name="兰溪市" />
+      <county code="330782" name="义乌市" />
+      <county code="330783" name="东阳市" />
+      <county code="330784" name="永康市" />
+      <county code="330785" name="其它区" />
+    </city>
+    <city code="330800" name="衢州市" cityClass="1">
+      <county code="330802" name="柯城区" />
+      <county code="330803" name="衢江区" />
+      <county code="330822" name="常山县" />
+      <county code="330824" name="开化县" />
+      <county code="330825" name="龙游县" />
+      <county code="330881" name="江山市" />
+      <county code="330882" name="其它区" />
+    </city>
+    <city code="330900" name="舟山市" cityClass="1">
+      <county code="330902" name="定海区" />
+      <county code="330903" name="普陀区" />
+      <county code="330921" name="岱山县" />
+      <county code="330922" name="嵊泗县" />
+      <county code="330923" name="其它区" />
+    </city>
+    <city code="331000" name="台州市" cityClass="1">
+      <county code="331002" name="椒江区" />
+      <county code="331003" name="黄岩区" />
+      <county code="331004" name="路桥区" />
+      <county code="331021" name="玉环县" />
+      <county code="331022" name="三门县" />
+      <county code="331023" name="天台县" />
+      <county code="331024" name="仙居县" />
+      <county code="331081" name="温岭市" />
+      <county code="331082" name="临海市" />
+      <county code="331083" name="其它区" />
+    </city>
+    <city code="331100" name="丽水市" cityClass="1">
+      <county code="331102" name="莲都区" />
+      <county code="331121" name="青田县" />
+      <county code="331122" name="缙云县" />
+      <county code="331123" name="遂昌县" />
+      <county code="331124" name="松阳县" />
+      <county code="331125" name="云和县" />
+      <county code="331126" name="庆元县" />
+      <county code="331127" name="景宁畲族自治县" />
+      <county code="331181" name="龙泉市" />
+      <county code="331182" name="其它区" />
+    </city>
+  </province>
+  <province code="340000" name="安徽">
+    <city code="340100" name="合肥市" cityClass="1">
+      <county code="340102" name="瑶海区" />
+      <county code="340103" name="庐阳区" />
+      <county code="340104" name="蜀山区" />
+      <county code="340111" name="包河区" />
+      <county code="340121" name="长丰县" />
+      <county code="340122" name="肥东县" />
+      <county code="340123" name="肥西县" />
+      <county code="340151" name="高新区" />
+      <county code="340191" name="中区" />
+      <county code="340192" name="其它区" />
+    </city>
+    <city code="340200" name="芜湖市" cityClass="1">
+      <county code="340202" name="镜湖区" />
+      <county code="340203" name="弋江区" />
+      <county code="340207" name="鸠江区" />
+      <county code="340208" name="三山区" />
+      <county code="340221" name="芜湖县" />
+      <county code="340222" name="繁昌县" />
+      <county code="340223" name="南陵县" />
+      <county code="340224" name="其它区" />
+    </city>
+    <city code="340300" name="蚌埠市" cityClass="1">
+      <county code="340302" name="龙子湖区" />
+      <county code="340303" name="蚌山区" />
+      <county code="340304" name="禹会区" />
+      <county code="340311" name="淮上区" />
+      <county code="340321" name="怀远县" />
+      <county code="340322" name="五河县" />
+      <county code="340323" name="固镇县" />
+      <county code="340324" name="其它区" />
+    </city>
+    <city code="340400" name="淮南市" cityClass="1">
+      <county code="340402" name="大通区" />
+      <county code="340403" name="田家庵区" />
+      <county code="340404" name="谢家集区" />
+      <county code="340405" name="八公山区" />
+      <county code="340406" name="潘集区" />
+      <county code="340421" name="凤台县" />
+      <county code="340422" name="其它区" />
+    </city>
+    <city code="340500" name="马鞍山市" cityClass="1">
+      <county code="340502" name="金家庄区" />
+      <county code="340503" name="花山区" />
+      <county code="340504" name="雨山区" />
+      <county code="340521" name="当涂县" />
+      <county code="340522" name="其它区" />
+    </city>
+    <city code="340600" name="淮北市" cityClass="1">
+      <county code="340602" name="杜集区" />
+      <county code="340603" name="相山区" />
+      <county code="340604" name="烈山区" />
+      <county code="340621" name="濉溪县" />
+      <county code="340622" name="其它区" />
+    </city>
+    <city code="340700" name="铜陵市" cityClass="1">
+      <county code="340702" name="铜官山区" />
+      <county code="340703" name="狮子山区" />
+      <county code="340711" name="郊区" />
+      <county code="340721" name="铜陵县" />
+      <county code="340722" name="其它区" />
+    </city>
+    <city code="340800" name="安庆市" cityClass="1">
+      <county code="340802" name="迎江区" />
+      <county code="340803" name="大观区" />
+      <county code="340811" name="宜秀区" />
+      <county code="340822" name="怀宁县" />
+      <county code="340823" name="枞阳县" />
+      <county code="340824" name="潜山县" />
+      <county code="340825" name="太湖县" />
+      <county code="340826" name="宿松县" />
+      <county code="340827" name="望江县" />
+      <county code="340828" name="岳西县" />
+      <county code="340881" name="桐城市" />
+      <county code="340882" name="其它区" />
+    </city>
+    <city code="341000" name="黄山市" cityClass="1">
+      <county code="341002" name="屯溪区" />
+      <county code="341003" name="黄山区" />
+      <county code="341004" name="徽州区" />
+      <county code="341021" name="歙县" />
+      <county code="341022" name="休宁县" />
+      <county code="341023" name="黟县" />
+      <county code="341024" name="祁门县" />
+      <county code="341025" name="其它区" />
+    </city>
+    <city code="341100" name="滁州市" cityClass="1">
+      <county code="341102" name="琅琊区" />
+      <county code="341103" name="南谯区" />
+      <county code="341122" name="来安县" />
+      <county code="341124" name="全椒县" />
+      <county code="341125" name="定远县" />
+      <county code="341126" name="凤阳县" />
+      <county code="341181" name="天长市" />
+      <county code="341182" name="明光市" />
+      <county code="341183" name="其它区" />
+    </city>
+    <city code="341200" name="阜阳市" cityClass="1">
+      <county code="341202" name="颍州区" />
+      <county code="341203" name="颍东区" />
+      <county code="341204" name="颍泉区" />
+      <county code="341221" name="临泉县" />
+      <county code="341222" name="太和县" />
+      <county code="341225" name="阜南县" />
+      <county code="341226" name="颍上县" />
+      <county code="341282" name="界首市" />
+      <county code="341283" name="其它区" />
+    </city>
+    <city code="341300" name="宿州市" cityClass="1">
+      <county code="341302" name="埇桥区" />
+      <county code="341321" name="砀山县" />
+      <county code="341322" name="萧县" />
+      <county code="341323" name="灵璧县" />
+      <county code="341324" name="泗县" />
+      <county code="341325" name="其它区" />
+    </city>
+    <city code="341400" name="巢湖市" cityClass="1">
+      <county code="341402" name="居巢区" />
+      <county code="341421" name="庐江县" />
+      <county code="341422" name="无为县" />
+      <county code="341423" name="含山县" />
+      <county code="341424" name="和县" />
+      <county code="341425" name="其它区" />
+    </city>
+    <city code="341500" name="六安市" cityClass="1">
+      <county code="341502" name="金安区" />
+      <county code="341503" name="裕安区" />
+      <county code="341521" name="寿县" />
+      <county code="341522" name="霍邱县" />
+      <county code="341523" name="舒城县" />
+      <county code="341524" name="金寨县" />
+      <county code="341525" name="霍山县" />
+      <county code="341526" name="其它区" />
+    </city>
+    <city code="341600" name="亳州市" cityClass="1">
+      <county code="341602" name="谯城区" />
+      <county code="341621" name="涡阳县" />
+      <county code="341622" name="蒙城县" />
+      <county code="341623" name="利辛县" />
+      <county code="341624" name="其它区" />
+    </city>
+    <city code="341700" name="池州市" cityClass="1">
+      <county code="341702" name="贵池区" />
+      <county code="341721" name="东至县" />
+      <county code="341722" name="石台县" />
+      <county code="341723" name="青阳县" />
+      <county code="341724" name="其它区" />
+    </city>
+    <city code="341800" name="宣城市" cityClass="1">
+      <county code="341802" name="宣州区" />
+      <county code="341821" name="郎溪县" />
+      <county code="341822" name="广德县" />
+      <county code="341823" name="泾县" />
+      <county code="341824" name="绩溪县" />
+      <county code="341825" name="旌德县" />
+      <county code="341881" name="宁国市" />
+      <county code="341882" name="其它区" />
+    </city>
+  </province>
+  <province code="350000" name="福建">
+    <city code="350100" name="福州市" cityClass="1">
+      <county code="350102" name="鼓楼区" />
+      <county code="350103" name="台江区" />
+      <county code="350104" name="仓山区" />
+      <county code="350105" name="马尾区" />
+      <county code="350111" name="晋安区" />
+      <county code="350121" name="闽侯县" />
+      <county code="350122" name="连江县" />
+      <county code="350123" name="罗源县" />
+      <county code="350124" name="闽清县" />
+      <county code="350125" name="永泰县" />
+      <county code="350128" name="平潭县" />
+      <county code="350181" name="福清市" />
+      <county code="350182" name="长乐市" />
+      <county code="350183" name="其它区" />
+    </city>
+    <city code="350200" name="厦门市" cityClass="1">
+      <county code="350203" name="思明区" />
+      <county code="350205" name="海沧区" />
+      <county code="350206" name="湖里区" />
+      <county code="350211" name="集美区" />
+      <county code="350212" name="同安区" />
+      <county code="350213" name="翔安区" />
+      <county code="350214" name="其它区" />
+    </city>
+    <city code="350300" name="莆田市" cityClass="1">
+      <county code="350302" name="城厢区" />
+      <county code="350303" name="涵江区" />
+      <county code="350304" name="荔城区" />
+      <county code="350305" name="秀屿区" />
+      <county code="350322" name="仙游县" />
+      <county code="350323" name="其它区" />
+    </city>
+    <city code="350400" name="三明市" cityClass="1">
+      <county code="350402" name="梅列区" />
+      <county code="350403" name="三元区" />
+      <county code="350421" name="明溪县" />
+      <county code="350423" name="清流县" />
+      <county code="350424" name="宁化县" />
+      <county code="350425" name="大田县" />
+      <county code="350426" name="尤溪县" />
+      <county code="350427" name="沙县" />
+      <county code="350428" name="将乐县" />
+      <county code="350429" name="泰宁县" />
+      <county code="350430" name="建宁县" />
+      <county code="350481" name="永安市" />
+      <county code="350482" name="其它区" />
+    </city>
+    <city code="350500" name="泉州市" cityClass="1">
+      <county code="350502" name="鲤城区" />
+      <county code="350503" name="丰泽区" />
+      <county code="350504" name="洛江区" />
+      <county code="350505" name="泉港区" />
+      <county code="350521" name="惠安县" />
+      <county code="350524" name="安溪县" />
+      <county code="350525" name="永春县" />
+      <county code="350526" name="德化县" />
+      <county code="350527" name="金门县" />
+      <county code="350581" name="石狮市" />
+      <county code="350582" name="晋江市" />
+      <county code="350583" name="南安市" />
+      <county code="350584" name="其它区" />
+    </city>
+    <city code="350600" name="漳州市" cityClass="1">
+      <county code="350602" name="芗城区" />
+      <county code="350603" name="龙文区" />
+      <county code="350622" name="云霄县" />
+      <county code="350623" name="漳浦县" />
+      <county code="350624" name="诏安县" />
+      <county code="350625" name="长泰县" />
+      <county code="350626" name="东山县" />
+      <county code="350627" name="南靖县" />
+      <county code="350628" name="平和县" />
+      <county code="350629" name="华安县" />
+      <county code="350681" name="龙海市" />
+      <county code="350682" name="其它区" />
+    </city>
+    <city code="350700" name="南平市" cityClass="1">
+      <county code="350702" name="延平区" />
+      <county code="350721" name="顺昌县" />
+      <county code="350722" name="浦城县" />
+      <county code="350723" name="光泽县" />
+      <county code="350724" name="松溪县" />
+      <county code="350725" name="政和县" />
+      <county code="350781" name="邵武市" />
+      <county code="350782" name="武夷山市" />
+      <county code="350783" name="建瓯市" />
+      <county code="350784" name="建阳市" />
+      <county code="350785" name="其它区" />
+    </city>
+    <city code="350800" name="龙岩市" cityClass="1">
+      <county code="350802" name="新罗区" />
+      <county code="350821" name="长汀县" />
+      <county code="350822" name="永定县" />
+      <county code="350823" name="上杭县" />
+      <county code="350824" name="武平县" />
+      <county code="350825" name="连城县" />
+      <county code="350881" name="漳平市" />
+      <county code="350882" name="其它区" />
+    </city>
+    <city code="350900" name="宁德市" cityClass="1">
+      <county code="350902" name="蕉城区" />
+      <county code="350921" name="霞浦县" />
+      <county code="350922" name="古田县" />
+      <county code="350923" name="屏南县" />
+      <county code="350924" name="寿宁县" />
+      <county code="350925" name="周宁县" />
+      <county code="350926" name="柘荣县" />
+      <county code="350981" name="福安市" />
+      <county code="350982" name="福鼎市" />
+      <county code="350983" name="其它区" />
+    </city>
+  </province>
+  <province code="360000" name="江西">
+    <city code="360100" name="南昌市" cityClass="1">
+      <county code="360102" name="东湖区" />
+      <county code="360103" name="西湖区" />
+      <county code="360104" name="青云谱区" />
+      <county code="360105" name="湾里区" />
+      <county code="360111" name="青山湖区" />
+      <county code="360121" name="南昌县" />
+      <county code="360122" name="新建县" />
+      <county code="360123" name="安义县" />
+      <county code="360124" name="进贤县" />
+      <county code="360125" name="红谷滩新区" />
+      <county code="360126" name="经济技术开发区" />
+      <county code="360127" name="昌北区" />
+      <county code="360128" name="其它区" />
+    </city>
+    <city code="360200" name="景德镇市" cityClass="1">
+      <county code="360202" name="昌江区" />
+      <county code="360203" name="珠山区" />
+      <county code="360222" name="浮梁县" />
+      <county code="360281" name="乐平市" />
+      <county code="360282" name="其它区" />
+    </city>
+    <city code="360300" name="萍乡市" cityClass="1">
+      <county code="360302" name="安源区" />
+      <county code="360313" name="湘东区" />
+      <county code="360321" name="莲花县" />
+      <county code="360322" name="上栗县" />
+      <county code="360323" name="芦溪县" />
+      <county code="360324" name="其它区" />
+    </city>
+    <city code="360400" name="九江市" cityClass="1">
+      <county code="360402" name="庐山区" />
+      <county code="360403" name="浔阳区" />
+      <county code="360421" name="九江县" />
+      <county code="360423" name="武宁县" />
+      <county code="360424" name="修水县" />
+      <county code="360425" name="永修县" />
+      <county code="360426" name="德安县" />
+      <county code="360427" name="星子县" />
+      <county code="360428" name="都昌县" />
+      <county code="360429" name="湖口县" />
+      <county code="360430" name="彭泽县" />
+      <county code="360481" name="瑞昌市" />
+      <county code="360482" name="其它区" />
+    </city>
+    <city code="360500" name="新余市" cityClass="1">
+      <county code="360502" name="渝水区" />
+      <county code="360521" name="分宜县" />
+      <county code="360522" name="其它区" />
+    </city>
+    <city code="360600" name="鹰潭市" cityClass="1">
+      <county code="360602" name="月湖区" />
+      <county code="360622" name="余江县" />
+      <county code="360681" name="贵溪市" />
+      <county code="360682" name="其它区" />
+    </city>
+    <city code="360700" name="赣州市" cityClass="1">
+      <county code="360702" name="章贡区" />
+      <county code="360721" name="赣县" />
+      <county code="360722" name="信丰县" />
+      <county code="360723" name="大余县" />
+      <county code="360724" name="上犹县" />
+      <county code="360725" name="崇义县" />
+      <county code="360726" name="安远县" />
+      <county code="360727" name="龙南县" />
+      <county code="360728" name="定南县" />
+      <county code="360729" name="全南县" />
+      <county code="360730" name="宁都县" />
+      <county code="360731" name="于都县" />
+      <county code="360732" name="兴国县" />
+      <county code="360733" name="会昌县" />
+      <county code="360734" name="寻乌县" />
+      <county code="360735" name="石城县" />
+      <county code="360751" name="黄金区" />
+      <county code="360781" name="瑞金市" />
+      <county code="360782" name="南康市" />
+      <county code="360783" name="其它区" />
+    </city>
+    <city code="360800" name="吉安市" cityClass="1">
+      <county code="360802" name="吉州区" />
+      <county code="360803" name="青原区" />
+      <county code="360821" name="吉安县" />
+      <county code="360822" name="吉水县" />
+      <county code="360823" name="峡江县" />
+      <county code="360824" name="新干县" />
+      <county code="360825" name="永丰县" />
+      <county code="360826" name="泰和县" />
+      <county code="360827" name="遂川县" />
+      <county code="360828" name="万安县" />
+      <county code="360829" name="安福县" />
+      <county code="360830" name="永新县" />
+      <county code="360881" name="井冈山市" />
+      <county code="360882" name="其它区" />
+    </city>
+    <city code="360900" name="宜春市" cityClass="1">
+      <county code="360902" name="袁州区" />
+      <county code="360921" name="奉新县" />
+      <county code="360922" name="万载县" />
+      <county code="360923" name="上高县" />
+      <county code="360924" name="宜丰县" />
+      <county code="360925" name="靖安县" />
+      <county code="360926" name="铜鼓县" />
+      <county code="360981" name="丰城市" />
+      <county code="360982" name="樟树市" />
+      <county code="360983" name="高安市" />
+      <county code="360984" name="其它区" />
+    </city>
+    <city code="361000" name="抚州市" cityClass="1">
+      <county code="361002" name="临川区" />
+      <county code="361021" name="南城县" />
+      <county code="361022" name="黎川县" />
+      <county code="361023" name="南丰县" />
+      <county code="361024" name="崇仁县" />
+      <county code="361025" name="乐安县" />
+      <county code="361026" name="宜黄县" />
+      <county code="361027" name="金溪县" />
+      <county code="361028" name="资溪县" />
+      <county code="361029" name="东乡县" />
+      <county code="361030" name="广昌县" />
+      <county code="361031" name="其它区" />
+    </city>
+    <city code="361100" name="上饶市" cityClass="1">
+      <county code="361102" name="信州区" />
+      <county code="361121" name="上饶县" />
+      <county code="361122" name="广丰县" />
+      <county code="361123" name="玉山县" />
+      <county code="361124" name="铅山县" />
+      <county code="361125" name="横峰县" />
+      <county code="361126" name="弋阳县" />
+      <county code="361127" name="余干县" />
+      <county code="361128" name="鄱阳县" />
+      <county code="361129" name="万年县" />
+      <county code="361130" name="婺源县" />
+      <county code="361181" name="德兴市" />
+      <county code="361182" name="其它区" />
+    </city>
+  </province>
+  <province code="370000" name="山东">
+    <city code="370100" name="济南市" cityClass="1">
+      <county code="370102" name="历下区" />
+      <county code="370103" name="市中区" />
+      <county code="370104" name="槐荫区" />
+      <county code="370105" name="天桥区" />
+      <county code="370112" name="历城区" />
+      <county code="370113" name="长清区" />
+      <county code="370124" name="平阴县" />
+      <county code="370125" name="济阳县" />
+      <county code="370126" name="商河县" />
+      <county code="370181" name="章丘市" />
+      <county code="370182" name="其它区" />
+    </city>
+    <city code="370200" name="青岛市" cityClass="1">
+      <county code="370202" name="市南区" />
+      <county code="370203" name="市北区" />
+      <county code="370205" name="四方区" />
+      <county code="370211" name="黄岛区" />
+      <county code="370212" name="崂山区" />
+      <county code="370213" name="李沧区" />
+      <county code="370214" name="城阳区" />
+      <county code="370251" name="开发区" />
+      <county code="370281" name="胶州市" />
+      <county code="370282" name="即墨市" />
+      <county code="370283" name="平度市" />
+      <county code="370284" name="胶南市" />
+      <county code="370285" name="莱西市" />
+      <county code="370286" name="其它区" />
+    </city>
+    <city code="370300" name="淄博市" cityClass="1">
+      <county code="370302" name="淄川区" />
+      <county code="370303" name="张店区" />
+      <county code="370304" name="博山区" />
+      <county code="370305" name="临淄区" />
+      <county code="370306" name="周村区" />
+      <county code="370321" name="桓台县" />
+      <county code="370322" name="高青县" />
+      <county code="370323" name="沂源县" />
+      <county code="370324" name="其它区" />
+    </city>
+    <city code="370400" name="枣庄市" cityClass="1">
+      <county code="370402" name="市中区" />
+      <county code="370403" name="薛城区" />
+      <county code="370404" name="峄城区" />
+      <county code="370405" name="台儿庄区" />
+      <county code="370406" name="山亭区" />
+      <county code="370481" name="滕州市" />
+      <county code="370482" name="其它区" />
+    </city>
+    <city code="370500" name="东营市" cityClass="1">
+      <county code="370502" name="东营区" />
+      <county code="370503" name="河口区" />
+      <county code="370521" name="垦利县" />
+      <county code="370522" name="利津县" />
+      <county code="370523" name="广饶县" />
+      <county code="370589" name="西城区" />
+      <county code="370590" name="东城区" />
+      <county code="370591" name="其它区" />
+    </city>
+    <city code="370600" name="烟台市" cityClass="1">
+      <county code="370602" name="芝罘区" />
+      <county code="370611" name="福山区" />
+      <county code="370612" name="牟平区" />
+      <county code="370613" name="莱山区" />
+      <county code="370634" name="长岛县" />
+      <county code="370681" name="龙口市" />
+      <county code="370682" name="莱阳市" />
+      <county code="370683" name="莱州市" />
+      <county code="370684" name="蓬莱市" />
+      <county code="370685" name="招远市" />
+      <county code="370686" name="栖霞市" />
+      <county code="370687" name="海阳市" />
+      <county code="370688" name="其它区" />
+    </city>
+    <city code="370700" name="潍坊市" cityClass="1">
+      <county code="370702" name="潍城区" />
+      <county code="370703" name="寒亭区" />
+      <county code="370704" name="坊子区" />
+      <county code="370705" name="奎文区" />
+      <county code="370724" name="临朐县" />
+      <county code="370725" name="昌乐县" />
+      <county code="370751" name="开发区" />
+      <county code="370781" name="青州市" />
+      <county code="370782" name="诸城市" />
+      <county code="370783" name="寿光市" />
+      <county code="370784" name="安丘市" />
+      <county code="370785" name="高密市" />
+      <county code="370786" name="昌邑市" />
+      <county code="370787" name="其它区" />
+    </city>
+    <city code="370800" name="济宁市" cityClass="1">
+      <county code="370802" name="市中区" />
+      <county code="370811" name="任城区" />
+      <county code="370826" name="微山县" />
+      <county code="370827" name="鱼台县" />
+      <county code="370828" name="金乡县" />
+      <county code="370829" name="嘉祥县" />
+      <county code="370830" name="汶上县" />
+      <county code="370831" name="泗水县" />
+      <county code="370832" name="梁山县" />
+      <county code="370881" name="曲阜市" />
+      <county code="370882" name="兖州市" />
+      <county code="370883" name="邹城市" />
+      <county code="370884" name="其它区" />
+    </city>
+    <city code="370900" name="泰安市" cityClass="1">
+      <county code="370902" name="泰山区" />
+      <county code="370903" name="岱岳区" />
+      <county code="370921" name="宁阳县" />
+      <county code="370923" name="东平县" />
+      <county code="370982" name="新泰市" />
+      <county code="370983" name="肥城市" />
+      <county code="370984" name="其它区" />
+    </city>
+    <city code="371000" name="威海市" cityClass="1">
+      <county code="371002" name="环翠区" />
+      <county code="371081" name="文登市" />
+      <county code="371082" name="荣成市" />
+      <county code="371083" name="乳山市" />
+      <county code="371084" name="其它区" />
+    </city>
+    <city code="371100" name="日照市" cityClass="1">
+      <county code="371102" name="东港区" />
+      <county code="371103" name="岚山区" />
+      <county code="371121" name="五莲县" />
+      <county code="371122" name="莒县" />
+      <county code="371123" name="其它区" />
+    </city>
+    <city code="371200" name="莱芜市" cityClass="1">
+      <county code="371202" name="莱城区" />
+      <county code="371203" name="钢城区" />
+      <county code="371204" name="其它区" />
+    </city>
+    <city code="371300" name="临沂市" cityClass="1">
+      <county code="371302" name="兰山区" />
+      <county code="371311" name="罗庄区" />
+      <county code="371312" name="河东区" />
+      <county code="371321" name="沂南县" />
+      <county code="371322" name="郯城县" />
+      <county code="371323" name="沂水县" />
+      <county code="371324" name="苍山县" />
+      <county code="371325" name="费县" />
+      <county code="371326" name="平邑县" />
+      <county code="371327" name="莒南县" />
+      <county code="371328" name="蒙阴县" />
+      <county code="371329" name="临沭县" />
+      <county code="371330" name="其它区" />
+    </city>
+    <city code="371400" name="德州市" cityClass="1">
+      <county code="371402" name="德城区" />
+      <county code="371421" name="陵县" />
+      <county code="371422" name="宁津县" />
+      <county code="371423" name="庆云县" />
+      <county code="371424" name="临邑县" />
+      <county code="371425" name="齐河县" />
+      <county code="371426" name="平原县" />
+      <county code="371427" name="夏津县" />
+      <county code="371428" name="武城县" />
+      <county code="371451" name="开发区" />
+      <county code="371481" name="乐陵市" />
+      <county code="371482" name="禹城市" />
+      <county code="371483" name="其它区" />
+    </city>
+    <city code="371500" name="聊城市" cityClass="1">
+      <county code="371502" name="东昌府区" />
+      <county code="371521" name="阳谷县" />
+      <county code="371522" name="莘县" />
+      <county code="371523" name="茌平县" />
+      <county code="371524" name="东阿县" />
+      <county code="371525" name="冠县" />
+      <county code="371526" name="高唐县" />
+      <county code="371581" name="临清市" />
+      <county code="371582" name="其它区" />
+    </city>
+    <city code="371600" name="滨州市" cityClass="1">
+      <county code="371602" name="滨城区" />
+      <county code="371621" name="惠民县" />
+      <county code="371622" name="阳信县" />
+      <county code="371623" name="无棣县" />
+      <county code="371624" name="沾化县" />
+      <county code="371625" name="博兴县" />
+      <county code="371626" name="邹平县" />
+      <county code="371627" name="其它区" />
+    </city>
+    <city code="371700" name="菏泽市" cityClass="1">
+      <county code="371702" name="牡丹区" />
+      <county code="371721" name="曹县" />
+      <county code="371722" name="单县" />
+      <county code="371723" name="成武县" />
+      <county code="371724" name="巨野县" />
+      <county code="371725" name="郓城县" />
+      <county code="371726" name="鄄城县" />
+      <county code="371727" name="定陶县" />
+      <county code="371728" name="东明县" />
+      <county code="371729" name="其它区" />
+    </city>
+  </province>
+  <province code="410000" name="河南">
+    <city code="410100" name="郑州市" cityClass="1">
+      <county code="410102" name="中原区" />
+      <county code="410103" name="二七区" />
+      <county code="410104" name="管城回族区" />
+      <county code="410105" name="金水区" />
+      <county code="410106" name="上街区" />
+      <county code="410108" name="惠济区" />
+      <county code="410122" name="中牟县" />
+      <county code="410181" name="巩义市" />
+      <county code="410182" name="荥阳市" />
+      <county code="410183" name="新密市" />
+      <county code="410184" name="新郑市" />
+      <county code="410185" name="登封市" />
+      <county code="410186" name="郑东新区" />
+      <county code="410187" name="高新区" />
+      <county code="410188" name="其它区" />
+    </city>
+    <city code="410200" name="开封市" cityClass="1">
+      <county code="410202" name="龙亭区" />
+      <county code="410203" name="顺河回族区" />
+      <county code="410204" name="鼓楼区" />
+      <county code="410205" name="禹王台区" />
+      <county code="410211" name="金明区" />
+      <county code="410221" name="杞县" />
+      <county code="410222" name="通许县" />
+      <county code="410223" name="尉氏县" />
+      <county code="410224" name="开封县" />
+      <county code="410225" name="兰考县" />
+      <county code="410226" name="其它区" />
+    </city>
+    <city code="410300" name="洛阳市" cityClass="1">
+      <county code="410302" name="老城区" />
+      <county code="410303" name="西工区" />
+      <county code="410304" name="廛河回族区" />
+      <county code="410305" name="涧西区" />
+      <county code="410306" name="吉利区" />
+      <county code="410307" name="洛龙区" />
+      <county code="410322" name="孟津县" />
+      <county code="410323" name="新安县" />
+      <county code="410324" name="栾川县" />
+      <county code="410325" name="嵩县" />
+      <county code="410326" name="汝阳县" />
+      <county code="410327" name="宜阳县" />
+      <county code="410328" name="洛宁县" />
+      <county code="410329" name="伊川县" />
+      <county code="410381" name="偃师市" />
+      <county code="471004" name="高新区" />
+      <county code="471005" name="其它区" />
+    </city>
+    <city code="410400" name="平顶山市" cityClass="1">
+      <county code="410402" name="新华区" />
+      <county code="410403" name="卫东区" />
+      <county code="410404" name="石龙区" />
+      <county code="410411" name="湛河区" />
+      <county code="410421" name="宝丰县" />
+      <county code="410422" name="叶县" />
+      <county code="410423" name="鲁山县" />
+      <county code="410425" name="郏县" />
+      <county code="410481" name="舞钢市" />
+      <county code="410482" name="汝州市" />
+      <county code="410483" name="其它区" />
+    </city>
+    <city code="410500" name="安阳市" cityClass="1">
+      <county code="410502" name="文峰区" />
+      <county code="410503" name="北关区" />
+      <county code="410505" name="殷都区" />
+      <county code="410506" name="龙安区" />
+      <county code="410522" name="安阳县" />
+      <county code="410523" name="汤阴县" />
+      <county code="410526" name="滑县" />
+      <county code="410527" name="内黄县" />
+      <county code="410581" name="林州市" />
+      <county code="410582" name="其它区" />
+    </city>
+    <city code="410600" name="鹤壁市" cityClass="1">
+      <county code="410602" name="鹤山区" />
+      <county code="410603" name="山城区" />
+      <county code="410611" name="淇滨区" />
+      <county code="410621" name="浚县" />
+      <county code="410622" name="淇县" />
+      <county code="410623" name="其它区" />
+    </city>
+    <city code="410700" name="新乡市" cityClass="1">
+      <county code="410702" name="红旗区" />
+      <county code="410703" name="卫滨区" />
+      <county code="410704" name="凤泉区" />
+      <county code="410711" name="牧野区" />
+      <county code="410721" name="新乡县" />
+      <county code="410724" name="获嘉县" />
+      <county code="410725" name="原阳县" />
+      <county code="410726" name="延津县" />
+      <county code="410727" name="封丘县" />
+      <county code="410728" name="长垣县" />
+      <county code="410781" name="卫辉市" />
+      <county code="410782" name="辉县市" />
+      <county code="410783" name="其它区" />
+    </city>
+    <city code="410800" name="焦作市" cityClass="1">
+      <county code="410802" name="解放区" />
+      <county code="410803" name="中站区" />
+      <county code="410804" name="马村区" />
+      <county code="410811" name="山阳区" />
+      <county code="410821" name="修武县" />
+      <county code="410822" name="博爱县" />
+      <county code="410823" name="武陟县" />
+      <county code="410825" name="温县" />
+      <county code="410882" name="沁阳市" />
+      <county code="410883" name="孟州市" />
+      <county code="410884" name="其它区" />
+      <county code="410881" name="济源市" />
+      <county code="410880" name="济源市" />
+    </city>
+    <city code="410900" name="濮阳市" cityClass="1">
+      <county code="410902" name="华龙区" />
+      <county code="410922" name="清丰县" />
+      <county code="410923" name="南乐县" />
+      <county code="410926" name="范县" />
+      <county code="410927" name="台前县" />
+      <county code="410928" name="濮阳县" />
+      <county code="410929" name="其它区" />
+    </city>
+    <city code="411000" name="许昌市" cityClass="1">
+      <county code="411002" name="魏都区" />
+      <county code="411023" name="许昌县" />
+      <county code="411024" name="鄢陵县" />
+      <county code="411025" name="襄城县" />
+      <county code="411081" name="禹州市" />
+      <county code="411082" name="长葛市" />
+      <county code="411083" name="其它区" />
+    </city>
+    <city code="411100" name="漯河市" cityClass="1">
+      <county code="411102" name="源汇区" />
+      <county code="411103" name="郾城区" />
+      <county code="411104" name="召陵区" />
+      <county code="411121" name="舞阳县" />
+      <county code="411122" name="临颍县" />
+      <county code="411123" name="其它区" />
+    </city>
+    <city code="411200" name="三门峡市" cityClass="1">
+      <county code="411202" name="湖滨区" />
+      <county code="411221" name="渑池县" />
+      <county code="411222" name="陕县" />
+      <county code="411224" name="卢氏县" />
+      <county code="411281" name="义马市" />
+      <county code="411282" name="灵宝市" />
+      <county code="411283" name="其它区" />
+    </city>
+    <city code="411300" name="南阳市" cityClass="1">
+      <county code="411302" name="宛城区" />
+      <county code="411303" name="卧龙区" />
+      <county code="411321" name="南召县" />
+      <county code="411322" name="方城县" />
+      <county code="411323" name="西峡县" />
+      <county code="411324" name="镇平县" />
+      <county code="411325" name="内乡县" />
+      <county code="411326" name="淅川县" />
+      <county code="411327" name="社旗县" />
+      <county code="411328" name="唐河县" />
+      <county code="411329" name="新野县" />
+      <county code="411330" name="桐柏县" />
+      <county code="411381" name="邓州市" />
+      <county code="411382" name="其它区" />
+    </city>
+    <city code="411400" name="商丘市" cityClass="1">
+      <county code="411402" name="梁园区" />
+      <county code="411403" name="睢阳区" />
+      <county code="411421" name="民权县" />
+      <county code="411422" name="睢县" />
+      <county code="411423" name="宁陵县" />
+      <county code="411424" name="柘城县" />
+      <county code="411425" name="虞城县" />
+      <county code="411426" name="夏邑县" />
+      <county code="411481" name="永城市" />
+      <county code="411482" name="其它区" />
+    </city>
+    <city code="411500" name="信阳市" cityClass="1">
+      <county code="411502" name="浉河区" />
+      <county code="411503" name="平桥区" />
+      <county code="411521" name="罗山县" />
+      <county code="411522" name="光山县" />
+      <county code="411523" name="新县" />
+      <county code="411524" name="商城县" />
+      <county code="411525" name="固始县" />
+      <county code="411526" name="潢川县" />
+      <county code="411527" name="淮滨县" />
+      <county code="411528" name="息县" />
+      <county code="411529" name="其它区" />
+    </city>
+    <city code="411600" name="周口市" cityClass="1">
+      <county code="411602" name="川汇区" />
+      <county code="411621" name="扶沟县" />
+      <county code="411622" name="西华县" />
+      <county code="411623" name="商水县" />
+      <county code="411624" name="沈丘县" />
+      <county code="411625" name="郸城县" />
+      <county code="411626" name="淮阳县" />
+      <county code="411627" name="太康县" />
+      <county code="411628" name="鹿邑县" />
+      <county code="411681" name="项城市" />
+      <county code="411682" name="其它区" />
+    </city>
+    <city code="411700" name="驻马店市" cityClass="1">
+      <county code="411702" name="驿城区" />
+      <county code="411721" name="西平县" />
+      <county code="411722" name="上蔡县" />
+      <county code="411723" name="平舆县" />
+      <county code="411724" name="正阳县" />
+      <county code="411725" name="确山县" />
+      <county code="411726" name="泌阳县" />
+      <county code="411727" name="汝南县" />
+      <county code="411728" name="遂平县" />
+      <county code="411729" name="新蔡县" />
+      <county code="411730" name="其它区" />
+    </city>
+  </province>
+  <province code="420000" name="湖北">
+    <city code="420100" name="武汉市" cityClass="1">
+      <county code="420102" name="江岸区" />
+      <county code="420103" name="江汉区" />
+      <county code="420104" name="硚口区" />
+      <county code="420105" name="汉阳区" />
+      <county code="420106" name="武昌区" />
+      <county code="420107" name="青山区" />
+      <county code="420111" name="洪山区" />
+      <county code="420112" name="东西湖区" />
+      <county code="420113" name="汉南区" />
+      <county code="420114" name="蔡甸区" />
+      <county code="420115" name="江夏区" />
+      <county code="420116" name="黄陂区" />
+      <county code="420117" name="新洲区" />
+      <county code="420118" name="其它区" />
+    </city>
+    <city code="420200" name="黄石市" cityClass="1">
+      <county code="420202" name="黄石港区" />
+      <county code="420203" name="西塞山区" />
+      <county code="420204" name="下陆区" />
+      <county code="420205" name="铁山区" />
+      <county code="420222" name="阳新县" />
+      <county code="420281" name="大冶市" />
+      <county code="420282" name="其它区" />
+    </city>
+    <city code="420300" name="十堰市" cityClass="1">
+      <county code="420302" name="茅箭区" />
+      <county code="420303" name="张湾区" />
+      <county code="420321" name="郧县" />
+      <county code="420322" name="郧西县" />
+      <county code="420323" name="竹山县" />
+      <county code="420324" name="竹溪县" />
+      <county code="420325" name="房县" />
+      <county code="420381" name="丹江口市" />
+      <county code="420382" name="城区" />
+      <county code="420383" name="其它区" />
+    </city>
+    <city code="420500" name="宜昌市" cityClass="1">
+      <county code="420502" name="西陵区" />
+      <county code="420503" name="伍家岗区" />
+      <county code="420504" name="点军区" />
+      <county code="420505" name="猇亭区" />
+      <county code="420506" name="夷陵区" />
+      <county code="420525" name="远安县" />
+      <county code="420526" name="兴山县" />
+      <county code="420527" name="秭归县" />
+      <county code="420528" name="长阳土家族自治县" />
+      <county code="420529" name="五峰土家族自治县" />
+      <county code="420551" name="葛洲坝区" />
+      <county code="420552" name="开发区" />
+      <county code="420581" name="宜都市" />
+      <county code="420582" name="当阳市" />
+      <county code="420583" name="枝江市" />
+      <county code="420584" name="其它区" />
+    </city>
+    <city code="420600" name="襄阳市" cityClass="1">
+      <county code="420602" name="襄城区" />
+      <county code="420606" name="樊城区" />
+      <county code="420607" name="襄阳区" />
+      <county code="420624" name="南漳县" />
+      <county code="420625" name="谷城县" />
+      <county code="420626" name="保康县" />
+      <county code="420682" name="老河口市" />
+      <county code="420683" name="枣阳市" />
+      <county code="420684" name="宜城市" />
+      <county code="420685" name="其它区" />
+    </city>
+    <city code="420700" name="鄂州市" cityClass="1">
+      <county code="420702" name="梁子湖区" />
+      <county code="420703" name="华容区" />
+      <county code="420704" name="鄂城区" />
+      <county code="420705" name="其它区" />
+    </city>
+    <city code="420800" name="荆门市" cityClass="1">
+      <county code="420802" name="东宝区" />
+      <county code="420804" name="掇刀区" />
+      <county code="420821" name="京山县" />
+      <county code="420822" name="沙洋县" />
+      <county code="420881" name="钟祥市" />
+      <county code="420882" name="其它区" />
+    </city>
+    <city code="420900" name="孝感市" cityClass="1">
+      <county code="420902" name="孝南区" />
+      <county code="420921" name="孝昌县" />
+      <county code="420922" name="大悟县" />
+      <county code="420923" name="云梦县" />
+      <county code="420981" name="应城市" />
+      <county code="420982" name="安陆市" />
+      <county code="420984" name="汉川市" />
+      <county code="420985" name="其它区" />
+    </city>
+    <city code="421000" name="荆州市" cityClass="1">
+      <county code="421002" name="沙市区" />
+      <county code="421003" name="荆州区" />
+      <county code="421022" name="公安县" />
+      <county code="421023" name="监利县" />
+      <county code="421024" name="江陵县" />
+      <county code="421081" name="石首市" />
+      <county code="421083" name="洪湖市" />
+      <county code="421087" name="松滋市" />
+      <county code="421088" name="其它区" />
+    </city>
+    <city code="421100" name="黄冈市" cityClass="1">
+      <county code="421102" name="黄州区" />
+      <county code="421121" name="团风县" />
+      <county code="421122" name="红安县" />
+      <county code="421123" name="罗田县" />
+      <county code="421124" name="英山县" />
+      <county code="421125" name="浠水县" />
+      <county code="421126" name="蕲春县" />
+      <county code="421127" name="黄梅县" />
+      <county code="421181" name="麻城市" />
+      <county code="421182" name="武穴市" />
+      <county code="421183" name="其它区" />
+    </city>
+    <city code="421200" name="咸宁市" cityClass="1">
+      <county code="421202" name="咸安区" />
+      <county code="421221" name="嘉鱼县" />
+      <county code="421222" name="通城县" />
+      <county code="421223" name="崇阳县" />
+      <county code="421224" name="通山县" />
+      <county code="421281" name="赤壁市" />
+      <county code="421282" name="温泉城区" />
+      <county code="421283" name="其它区" />
+    </city>
+    <city code="421300" name="随州市" cityClass="1">
+      <county code="421302" name="曾都区" />
+      <county code="421381" name="广水市" />
+      <county code="421382" name="其它区" />
+    </city>
+    <city code="422800" name="恩施土家族苗族自治州" cityClass="1">
+      <county code="422801" name="恩施市" />
+      <county code="422802" name="利川市" />
+      <county code="422822" name="建始县" />
+      <county code="422823" name="巴东县" />
+      <county code="422825" name="宣恩县" />
+      <county code="422826" name="咸丰县" />
+      <county code="422827" name="来凤县" />
+      <county code="422828" name="鹤峰县" />
+      <county code="422829" name="其它区" />
+      <county code="429004" name="仙桃市" />
+      <county code="429994" name="仙桃市" />
+      <county code="429005" name="潜江市" />
+      <county code="429995" name="潜江市" />
+      <county code="429006" name="天门市" />
+      <county code="429007" name="天门市" />
+      <county code="429021" name="神农架林区" />
+      <county code="429921" name="神农架林区" />
+    </city>
+  </province>
+  <province code="430000" name="湖南">
+    <city code="430100" name="长沙市" cityClass="1">
+      <county code="430102" name="芙蓉区" />
+      <county code="430103" name="天心区" />
+      <county code="430104" name="岳麓区" />
+      <county code="430105" name="开福区" />
+      <county code="430111" name="雨花区" />
+      <county code="430121" name="长沙县" />
+      <county code="430122" name="望城县" />
+      <county code="430124" name="宁乡县" />
+      <county code="430181" name="浏阳市" />
+      <county code="430182" name="其它区" />
+    </city>
+    <city code="430200" name="株洲市" cityClass="1">
+      <county code="430202" name="荷塘区" />
+      <county code="430203" name="芦淞区" />
+      <county code="430204" name="石峰区" />
+      <county code="430211" name="天元区" />
+      <county code="430221" name="株洲县" />
+      <county code="430223" name="攸县" />
+      <county code="430224" name="茶陵县" />
+      <county code="430225" name="炎陵县" />
+      <county code="430281" name="醴陵市" />
+      <county code="430282" name="其它区" />
+    </city>
+    <city code="431000" name="郴州市" cityClass="1">
+      <county code="431002" name="北湖区" />
+      <county code="431003" name="苏仙区" />
+      <county code="431021" name="桂阳县" />
+      <county code="431022" name="宜章县" />
+      <county code="431023" name="永兴县" />
+      <county code="431024" name="嘉禾县" />
+      <county code="431025" name="临武县" />
+      <county code="431026" name="汝城县" />
+      <county code="431027" name="桂东县" />
+      <county code="431028" name="安仁县" />
+      <county code="431081" name="资兴市" />
+      <county code="431082" name="其它区" />
+    </city>
+  </province>
+  <province code="440000" name="广东">
+    <city code="440100" name="广州市" cityClass="1">
+      <county code="440103" name="荔湾区" />
+      <county code="440104" name="越秀区" />
+      <county code="440105" name="海珠区" />
+      <county code="440106" name="天河区" />
+      <county code="440111" name="白云区" />
+      <county code="440112" name="黄埔区" />
+      <county code="440113" name="番禺区" />
+      <county code="440114" name="花都区" />
+      <county code="440115" name="南沙区" />
+      <county code="440116" name="萝岗区" />
+      <county code="440183" name="增城市" />
+      <county code="440184" name="从化市" />
+      <county code="440188" name="东山区" />
+      <county code="440189" name="其它区" />
+    </city>
+    <city code="440200" name="韶关市" cityClass="1">
+      <county code="440203" name="武江区" />
+      <county code="440204" name="浈江区" />
+      <county code="440205" name="曲江区" />
+      <county code="440222" name="始兴县" />
+      <county code="440224" name="仁化县" />
+      <county code="440229" name="翁源县" />
+      <county code="440232" name="乳源瑶族自治县" />
+      <county code="440233" name="新丰县" />
+      <county code="440281" name="乐昌市" />
+      <county code="440282" name="南雄市" />
+      <county code="440283" name="其它区" />
+    </city>
+    <city code="440300" name="深圳市" cityClass="1">
+      <county code="440303" name="罗湖区" />
+      <county code="440304" name="福田区" />
+      <county code="440305" name="南山区" />
+      <county code="440306" name="宝安区" />
+      <county code="440307" name="龙岗区" />
+      <county code="440308" name="盐田区" />
+      <county code="440309" name="其它区" />
+    </city>
+    <city code="440400" name="珠海市" cityClass="1">
+      <county code="440402" name="香洲区" />
+      <county code="440403" name="斗门区" />
+      <county code="440404" name="金湾区" />
+      <county code="440486" name="金唐区" />
+      <county code="440487" name="南湾区" />
+      <county code="440488" name="其它区" />
+    </city>
+    <city code="440500" name="汕头市" cityClass="1">
+      <county code="440507" name="龙湖区" />
+      <county code="440511" name="金平区" />
+      <county code="440512" name="濠江区" />
+      <county code="440513" name="潮阳区" />
+      <county code="440514" name="潮南区" />
+      <county code="440515" name="澄海区" />
+      <county code="440523" name="南澳县" />
+      <county code="440524" name="其它区" />
+    </city>
+    <city code="440600" name="佛山市" cityClass="1">
+      <county code="440604" name="禅城区" />
+      <county code="440605" name="南海区" />
+      <county code="440606" name="顺德区" />
+      <county code="440607" name="三水区" />
+      <county code="440608" name="高明区" />
+      <county code="440609" name="其它区" />
+    </city>
+    <city code="440700" name="江门市" cityClass="1">
+      <county code="440703" name="蓬江区" />
+      <county code="440704" name="江海区" />
+      <county code="440705" name="新会区" />
+      <county code="440781" name="台山市" />
+      <county code="440783" name="开平市" />
+      <county code="440784" name="鹤山市" />
+      <county code="440785" name="恩平市" />
+      <county code="440786" name="其它区" />
+    </city>
+    <city code="440800" name="湛江市" cityClass="1">
+      <county code="440802" name="赤坎区" />
+      <county code="440803" name="霞山区" />
+      <county code="440804" name="坡头区" />
+      <county code="440811" name="麻章区" />
+      <county code="440823" name="遂溪县" />
+      <county code="440825" name="徐闻县" />
+      <county code="440881" name="廉江市" />
+      <county code="440882" name="雷州市" />
+      <county code="440883" name="吴川市" />
+      <county code="440884" name="其它区" />
+    </city>
+    <city code="440900" name="茂名市" cityClass="1">
+      <county code="440902" name="茂南区" />
+      <county code="440903" name="茂港区" />
+      <county code="440923" name="电白县" />
+      <county code="440981" name="高州市" />
+      <county code="440982" name="化州市" />
+      <county code="440983" name="信宜市" />
+      <county code="440984" name="其它区" />
+    </city>
+    <city code="441200" name="肇庆市" cityClass="1">
+      <county code="441202" name="端州区" />
+      <county code="441203" name="鼎湖区" />
+      <county code="441223" name="广宁县" />
+      <county code="441224" name="怀集县" />
+      <county code="441225" name="封开县" />
+      <county code="441226" name="德庆县" />
+      <county code="441283" name="高要市" />
+      <county code="441284" name="四会市" />
+      <county code="441285" name="其它区" />
+    </city>
+    <city code="441300" name="惠州市" cityClass="1">
+      <county code="441302" name="惠城区" />
+      <county code="441303" name="惠阳区" />
+      <county code="441322" name="博罗县" />
+      <county code="441323" name="惠东县" />
+      <county code="441324" name="龙门县" />
+      <county code="441325" name="其它区" />
+    </city>
+    <city code="441400" name="梅州市" cityClass="1">
+      <county code="441402" name="梅江区" />
+      <county code="441421" name="梅县" />
+      <county code="441422" name="大埔县" />
+      <county code="441423" name="丰顺县" />
+      <county code="441424" name="五华县" />
+      <county code="441426" name="平远县" />
+      <county code="441427" name="蕉岭县" />
+      <county code="441481" name="兴宁市" />
+      <county code="441482" name="其它区" />
+    </city>
+    <city code="441500" name="汕尾市" cityClass="1">
+      <county code="441502" name="城区" />
+      <county code="441521" name="海丰县" />
+      <county code="441523" name="陆河县" />
+      <county code="441581" name="陆丰市" />
+      <county code="441582" name="其它区" />
+    </city>
+    <city code="441600" name="河源市" cityClass="1">
+      <county code="441602" name="源城区" />
+      <county code="441621" name="紫金县" />
+      <county code="441622" name="龙川县" />
+      <county code="441623" name="连平县" />
+      <county code="441624" name="和平县" />
+      <county code="441625" name="东源县" />
+      <county code="441626" name="其它区" />
+    </city>
+    <city code="441700" name="阳江市" cityClass="1">
+      <county code="441702" name="江城区" />
+      <county code="441721" name="阳西县" />
+      <county code="441723" name="阳东县" />
+      <county code="441781" name="阳春市" />
+      <county code="441782" name="其它区" />
+    </city>
+    <city code="441800" name="清远市" cityClass="1">
+      <county code="441802" name="清城区" />
+      <county code="441821" name="佛冈县" />
+      <county code="441823" name="阳山县" />
+      <county code="441825" name="连山壮族瑶族自治县" />
+      <county code="441826" name="连南瑶族自治县" />
+      <county code="441827" name="清新县" />
+      <county code="441881" name="英德市" />
+      <county code="441882" name="连州市" />
+      <county code="441883" name="其它区" />
+    </city>
+    <city code="441900" name="东莞市" cityClass="1">
+      <county code="441901" name="东莞市" />
+    </city>
+    <city code="442000" name="中山市" cityClass="1">
+      <county code="442001" name="中山市" />
+    </city>
+    <city code="445100" name="潮州市" cityClass="1">
+      <county code="445102" name="湘桥区" />
+      <county code="445121" name="潮安县" />
+      <county code="445122" name="饶平县" />
+      <county code="445185" name="枫溪区" />
+      <county code="445186" name="其它区" />
+    </city>
+    <city code="445200" name="揭阳市" cityClass="1">
+      <county code="445202" name="榕城区" />
+      <county code="445221" name="揭东县" />
+      <county code="445222" name="揭西县" />
+      <county code="445224" name="惠来县" />
+      <county code="445281" name="普宁市" />
+      <county code="445284" name="东山区" />
+      <county code="445285" name="其它区" />
+    </city>
+    <city code="445300" name="云浮市" cityClass="1">
+      <county code="445302" name="云城区" />
+      <county code="445321" name="新兴县" />
+      <county code="445322" name="郁南县" />
+      <county code="445323" name="云安县" />
+      <county code="445381" name="罗定市" />
+      <county code="445382" name="其它区" />
+    </city>
+  </province>
+  <province code="450000" name="广西">
+    <city code="450100" name="南宁市" cityClass="1">
+      <county code="450102" name="兴宁区" />
+      <county code="450103" name="青秀区" />
+      <county code="450105" name="江南区" />
+      <county code="450107" name="西乡塘区" />
+      <county code="450108" name="良庆区" />
+      <county code="450109" name="邕宁区" />
+      <county code="450122" name="武鸣县" />
+      <county code="450123" name="隆安县" />
+      <county code="450124" name="马山县" />
+      <county code="450125" name="上林县" />
+      <county code="450126" name="宾阳县" />
+      <county code="450127" name="横县" />
+      <county code="450128" name="其它区" />
+    </city>
+    <city code="450200" name="柳州市" cityClass="1">
+      <county code="450202" name="城中区" />
+      <county code="450203" name="鱼峰区" />
+      <county code="450204" name="柳南区" />
+      <county code="450205" name="柳北区" />
+      <county code="450221" name="柳江县" />
+      <county code="450222" name="柳城县" />
+      <county code="450223" name="鹿寨县" />
+      <county code="450224" name="融安县" />
+      <county code="450225" name="融水苗族自治县" />
+      <county code="450226" name="三江侗族自治县" />
+      <county code="450227" name="其它区" />
+    </city>
+    <city code="450300" name="桂林市" cityClass="1">
+      <county code="450302" name="秀峰区" />
+      <county code="450303" name="叠彩区" />
+      <county code="450304" name="象山区" />
+      <county code="450305" name="七星区" />
+      <county code="450311" name="雁山区" />
+      <county code="450321" name="阳朔县" />
+      <county code="450322" name="临桂县" />
+      <county code="450323" name="灵川县" />
+      <county code="450324" name="全州县" />
+      <county code="450325" name="兴安县" />
+      <county code="450326" name="永福县" />
+      <county code="450327" name="灌阳县" />
+      <county code="450328" name="龙胜各族自治县" />
+      <county code="450329" name="资源县" />
+      <county code="450330" name="平乐县" />
+      <county code="450331" name="荔浦县" />
+      <county code="450332" name="恭城瑶族自治县" />
+      <county code="450333" name="其它区" />
+    </city>
+    <city code="450400" name="梧州市" cityClass="1">
+      <county code="450403" name="万秀区" />
+      <county code="450404" name="蝶山区" />
+      <county code="450405" name="长洲区" />
+      <county code="450421" name="苍梧县" />
+      <county code="450422" name="藤县" />
+      <county code="450423" name="蒙山县" />
+      <county code="450481" name="岑溪市" />
+      <county code="450482" name="其它区" />
+    </city>
+    <city code="450500" name="北海市" cityClass="1">
+      <county code="450502" name="海城区" />
+      <county code="450503" name="银海区" />
+      <county code="450512" name="铁山港区" />
+      <county code="450521" name="合浦县" />
+      <county code="450522" name="其它区" />
+    </city>
+    <city code="450600" name="防城港市" cityClass="1">
+      <county code="450602" name="港口区" />
+      <county code="450603" name="防城区" />
+      <county code="450621" name="上思县" />
+      <county code="450681" name="东兴市" />
+      <county code="450682" name="其它区" />
+    </city>
+    <city code="450700" name="钦州市" cityClass="1">
+      <county code="450702" name="钦南区" />
+      <county code="450703" name="钦北区" />
+      <county code="450721" name="灵山县" />
+      <county code="450722" name="浦北县" />
+      <county code="450723" name="其它区" />
+    </city>
+    <city code="450800" name="贵港市" cityClass="1">
+      <county code="450802" name="港北区" />
+      <county code="450803" name="港南区" />
+      <county code="450804" name="覃塘区" />
+      <county code="450821" name="平南县" />
+      <county code="450881" name="桂平市" />
+      <county code="450882" name="其它区" />
+    </city>
+    <city code="450900" name="玉林市" cityClass="1">
+      <county code="450902" name="玉州区" />
+      <county code="450921" name="容县" />
+      <county code="450922" name="陆川县" />
+      <county code="450923" name="博白县" />
+      <county code="450924" name="兴业县" />
+      <county code="450981" name="北流市" />
+      <county code="450982" name="其它区" />
+    </city>
+    <city code="451000" name="百色市" cityClass="1">
+      <county code="451002" name="右江区" />
+      <county code="451021" name="田阳县" />
+      <county code="451022" name="田东县" />
+      <county code="451023" name="平果县" />
+      <county code="451024" name="德保县" />
+      <county code="451025" name="靖西县" />
+      <county code="451026" name="那坡县" />
+      <county code="451027" name="凌云县" />
+      <county code="451028" name="乐业县" />
+      <county code="451029" name="田林县" />
+      <county code="451030" name="西林县" />
+      <county code="451031" name="隆林各族自治县" />
+      <county code="451032" name="其它区" />
+    </city>
+    <city code="451100" name="贺州市" cityClass="1">
+      <county code="451102" name="八步区" />
+      <county code="451121" name="昭平县" />
+      <county code="451122" name="钟山县" />
+      <county code="451123" name="富川瑶族自治县" />
+      <county code="451124" name="其它区" />
+    </city>
+    <city code="451200" name="河池市" cityClass="1">
+      <county code="451202" name="金城江区" />
+      <county code="451221" name="南丹县" />
+      <county code="451222" name="天峨县" />
+      <county code="451223" name="凤山县" />
+      <county code="451224" name="东兰县" />
+      <county code="451225" name="罗城仫佬族自治县" />
+      <county code="451226" name="环江毛南族自治县" />
+      <county code="451227" name="巴马瑶族自治县" />
+      <county code="451228" name="都安瑶族自治县" />
+      <county code="451229" name="大化瑶族自治县" />
+      <county code="451281" name="宜州市" />
+      <county code="451282" name="其它区" />
+    </city>
+    <city code="451300" name="来宾市" cityClass="1">
+      <county code="451302" name="兴宾区" />
+      <county code="451321" name="忻城县" />
+      <county code="451322" name="象州县" />
+      <county code="451323" name="武宣县" />
+      <county code="451324" name="金秀瑶族自治县" />
+      <county code="451381" name="合山市" />
+      <county code="451382" name="其它区" />
+    </city>
+    <city code="451400" name="崇左市" cityClass="1">
+      <county code="451402" name="江州区" />
+      <county code="451421" name="扶绥县" />
+      <county code="451422" name="宁明县" />
+      <county code="451423" name="龙州县" />
+      <county code="451424" name="大新县" />
+      <county code="451425" name="天等县" />
+      <county code="451481" name="凭祥市" />
+      <county code="451482" name="其它区" />
+    </city>
+  </province>
+  <province code="460000" name="海南">
+    <city code="460100" name="海口市" cityClass="1">
+      <county code="460105" name="秀英区" />
+      <county code="460106" name="龙华区" />
+      <county code="460107" name="琼山区" />
+      <county code="460108" name="美兰区" />
+      <county code="460109" name="其它区" />
+    </city>
+  </province>
+  <province code="500000" name="重庆">
+    <city code="500100" name="重庆市" cityClass="1">
+      <county code="500101" name="万州区" />
+      <county code="500102" name="涪陵区" />
+      <county code="500103" name="渝中区" />
+      <county code="500104" name="大渡口区" />
+      <county code="500105" name="江北区" />
+      <county code="500106" name="沙坪坝区" />
+      <county code="500107" name="九龙坡区" />
+      <county code="500108" name="南岸区" />
+      <county code="500109" name="北碚区" />
+      <county code="500110" name="万盛区" />
+      <county code="500111" name="双桥区" />
+      <county code="500112" name="渝北区" />
+      <county code="500113" name="巴南区" />
+      <county code="500114" name="黔江区" />
+      <county code="500115" name="长寿区" />
+      <county code="500222" name="綦江县" />
+      <county code="500223" name="潼南县" />
+      <county code="500224" name="铜梁县" />
+      <county code="500225" name="大足县" />
+      <county code="500226" name="荣昌县" />
+      <county code="500227" name="璧山县" />
+      <county code="500228" name="梁平县" />
+      <county code="500229" name="城口县" />
+      <county code="500230" name="丰都县" />
+      <county code="500231" name="垫江县" />
+      <county code="500232" name="武隆县" />
+      <county code="500233" name="忠县" />
+      <county code="500234" name="开县" />
+      <county code="500235" name="云阳县" />
+      <county code="500236" name="奉节县" />
+      <county code="500237" name="巫山县" />
+      <county code="500238" name="巫溪县" />
+      <county code="500240" name="石柱土家族自治县" />
+      <county code="500241" name="秀山土家族苗族自治县" />
+      <county code="500242" name="酉阳土家族苗族自治县" />
+      <county code="500243" name="彭水苗族土家族自治县" />
+      <county code="500381" name="江津区" />
+      <county code="500382" name="合川区" />
+      <county code="500383" name="永川区" />
+      <county code="500384" name="南川区" />
+      <county code="500385" name="其它区" />
+    </city>
+  </province>
+  <province code="510000" name="四川">
+    <city code="510100" name="成都市" cityClass="1">
+      <county code="510104" name="锦江区" />
+      <county code="510105" name="青羊区" />
+      <county code="510106" name="金牛区" />
+      <county code="510107" name="武侯区" />
+      <county code="510108" name="成华区" />
+      <county code="510112" name="龙泉驿区" />
+      <county code="510113" name="青白江区" />
+      <county code="510114" name="新都区" />
+      <county code="510115" name="温江区" />
+      <county code="510121" name="金堂县" />
+      <county code="510122" name="双流县" />
+      <county code="510124" name="郫县" />
+      <county code="510129" name="大邑县" />
+      <county code="510131" name="蒲江县" />
+      <county code="510132" name="新津县" />
+      <county code="510181" name="都江堰市" />
+      <county code="510182" name="彭州市" />
+      <county code="510183" name="邛崃市" />
+      <county code="510184" name="崇州市" />
+      <county code="510185" name="其它区" />
+    </city>
+    <city code="510300" name="自贡市" cityClass="1">
+      <county code="510302" name="自流井区" />
+      <county code="510303" name="贡井区" />
+      <county code="510304" name="大安区" />
+      <county code="510311" name="沿滩区" />
+      <county code="510321" name="荣县" />
+      <county code="510322" name="富顺县" />
+      <county code="510323" name="其它区" />
+    </city>
+    <city code="510500" name="泸州市" cityClass="1">
+      <county code="510502" name="江阳区" />
+      <county code="510503" name="纳溪区" />
+      <county code="510504" name="龙马潭区" />
+      <county code="510521" name="泸县" />
+      <county code="510522" name="合江县" />
+      <county code="510524" name="叙永县" />
+      <county code="510525" name="古蔺县" />
+      <county code="510526" name="其它区" />
+    </city>
+    <city code="510600" name="德阳市" cityClass="1">
+      <county code="510603" name="旌阳区" />
+      <county code="510623" name="中江县" />
+      <county code="510626" name="罗江县" />
+      <county code="510681" name="广汉市" />
+      <county code="510682" name="什邡市" />
+      <county code="510683" name="绵竹市" />
+      <county code="510684" name="其它区" />
+    </city>
+    <city code="510700" name="绵阳市" cityClass="1">
+      <county code="510703" name="涪城区" />
+      <county code="510704" name="游仙区" />
+      <county code="510722" name="三台县" />
+      <county code="510723" name="盐亭县" />
+      <county code="510724" name="安县" />
+      <county code="510725" name="梓潼县" />
+      <county code="510726" name="北川羌族自治县" />
+      <county code="510727" name="平武县" />
+      <county code="510751" name="高新区" />
+      <county code="510781" name="江油市" />
+      <county code="510782" name="其它区" />
+    </city>
+    <city code="510900" name="遂宁市" cityClass="1">
+      <county code="510903" name="船山区" />
+      <county code="510904" name="安居区" />
+      <county code="510921" name="蓬溪县" />
+      <county code="510922" name="射洪县" />
+      <county code="510923" name="大英县" />
+      <county code="510924" name="其它区" />
+    </city>
+    <city code="511000" name="内江市" cityClass="1">
+      <county code="511002" name="市中区" />
+      <county code="511011" name="东兴区" />
+      <county code="511024" name="威远县" />
+      <county code="511025" name="资中县" />
+      <county code="511028" name="隆昌县" />
+      <county code="511029" name="其它区" />
+    </city>
+    <city code="511100" name="乐山市" cityClass="1">
+      <county code="511102" name="市中区" />
+      <county code="511111" name="沙湾区" />
+      <county code="511112" name="五通桥区" />
+      <county code="511113" name="金口河区" />
+      <county code="511123" name="犍为县" />
+      <county code="511124" name="井研县" />
+      <county code="511126" name="夹江县" />
+      <county code="511129" name="沐川县" />
+      <county code="511132" name="峨边彝族自治县" />
+      <county code="511133" name="马边彝族自治县" />
+      <county code="511181" name="峨眉山市" />
+      <county code="511182" name="其它区" />
+    </city>
+    <city code="511300" name="南充市" cityClass="1">
+      <county code="511302" name="顺庆区" />
+      <county code="511303" name="高坪区" />
+      <county code="511304" name="嘉陵区" />
+      <county code="511321" name="南部县" />
+      <county code="511322" name="营山县" />
+      <county code="511323" name="蓬安县" />
+      <county code="511324" name="仪陇县" />
+      <county code="511325" name="西充县" />
+      <county code="511381" name="阆中市" />
+      <county code="511382" name="其它区" />
+    </city>
+    <city code="511400" name="眉山市" cityClass="1">
+      <county code="511402" name="东坡区" />
+      <county code="511421" name="仁寿县" />
+      <county code="511422" name="彭山县" />
+      <county code="511423" name="洪雅县" />
+      <county code="511424" name="丹棱县" />
+      <county code="511425" name="青神县" />
+      <county code="511426" name="其它区" />
+    </city>
+    <city code="511500" name="宜宾市" cityClass="1">
+      <county code="511502" name="翠屏区" />
+      <county code="511521" name="宜宾县" />
+      <county code="511522" name="南溪县" />
+      <county code="511523" name="江安县" />
+      <county code="511524" name="长宁县" />
+      <county code="511525" name="高县" />
+      <county code="511526" name="珙县" />
+      <county code="511527" name="筠连县" />
+      <county code="511528" name="兴文县" />
+      <county code="511529" name="屏山县" />
+      <county code="511530" name="其它区" />
+    </city>
+    <city code="511700" name="达州市" cityClass="1">
+      <county code="511702" name="通川区" />
+      <county code="511721" name="达县" />
+      <county code="511722" name="宣汉县" />
+      <county code="511723" name="开江县" />
+      <county code="511724" name="大竹县" />
+      <county code="511725" name="渠县" />
+      <county code="511781" name="万源市" />
+      <county code="511782" name="其它区" />
+    </city>
+    <city code="512000" name="资阳市" cityClass="1">
+      <county code="512002" name="雁江区" />
+      <county code="512021" name="安岳县" />
+      <county code="512022" name="乐至县" />
+      <county code="512081" name="简阳市" />
+      <county code="512082" name="其它区" />
+    </city>
+  </province>
+  <province code="520000" name="贵州">
+    <city code="520100" name="贵阳市" cityClass="1">
+      <county code="520102" name="南明区" />
+      <county code="520103" name="云岩区" />
+      <county code="520111" name="花溪区" />
+      <county code="520112" name="乌当区" />
+      <county code="520113" name="白云区" />
+      <county code="520114" name="小河区" />
+      <county code="520121" name="开阳县" />
+      <county code="520122" name="息烽县" />
+      <county code="520123" name="修文县" />
+      <county code="520151" name="金阳开发区" />
+      <county code="520181" name="清镇市" />
+      <county code="520182" name="其它区" />
+    </city>
+    <city code="520200" name="六盘水市" cityClass="1">
+      <county code="520201" name="钟山区" />
+      <county code="520203" name="六枝特区" />
+      <county code="520221" name="水城县" />
+      <county code="520222" name="盘县" />
+      <county code="520223" name="其它区" />
+    </city>
+    <city code="520300" name="遵义市" cityClass="1">
+      <county code="520302" name="红花岗区" />
+      <county code="520303" name="汇川区" />
+      <county code="520321" name="遵义县" />
+      <county code="520322" name="桐梓县" />
+      <county code="520323" name="绥阳县" />
+      <county code="520324" name="正安县" />
+      <county code="520325" name="道真仡佬族苗族自治县" />
+      <county code="520326" name="务川仡佬族苗族自治县" />
+      <county code="520327" name="凤冈县" />
+      <county code="520328" name="湄潭县" />
+      <county code="520329" name="余庆县" />
+      <county code="520330" name="习水县" />
+      <county code="520381" name="赤水市" />
+      <county code="520382" name="仁怀市" />
+      <county code="520383" name="其它区" />
+    </city>
+    <city code="520400" name="安顺市" cityClass="1">
+      <county code="520402" name="西秀区" />
+      <county code="520421" name="平坝县" />
+      <county code="520422" name="普定县" />
+      <county code="520423" name="镇宁布依族苗族自治县" />
+      <county code="520424" name="关岭布依族苗族自治县" />
+      <county code="520425" name="紫云苗族布依族自治县" />
+      <county code="520426" name="其它区" />
+    </city>
+    <city code="522200" name="铜仁地区" cityClass="1">
+      <county code="522201" name="铜仁市" />
+      <county code="522222" name="江口县" />
+      <county code="522223" name="玉屏侗族自治县" />
+      <county code="522224" name="石阡县" />
+      <county code="522225" name="思南县" />
+      <county code="522226" name="印江土家族苗族自治县" />
+      <county code="522227" name="德江县" />
+      <county code="522228" name="沿河土家族自治县" />
+      <county code="522229" name="松桃苗族自治县" />
+      <county code="522230" name="万山特区" />
+      <county code="522231" name="其它区" />
+    </city>
+    <city code="522300" name="黔西南布依族苗族自治州" cityClass="1">
+      <county code="522301" name="兴义市" />
+      <county code="522322" name="兴仁县" />
+      <county code="522323" name="普安县" />
+      <county code="522324" name="晴隆县" />
+      <county code="522325" name="贞丰县" />
+      <county code="522326" name="望谟县" />
+      <county code="522327" name="册亨县" />
+      <county code="522328" name="安龙县" />
+      <county code="522329" name="其它区" />
+    </city>
+    <city code="522400" name="毕节地区" cityClass="1">
+      <county code="522401" name="毕节市" />
+      <county code="522422" name="大方县" />
+      <county code="522423" name="黔西县" />
+      <county code="522424" name="金沙县" />
+      <county code="522425" name="织金县" />
+      <county code="522426" name="纳雍县" />
+      <county code="522427" name="威宁彝族回族苗族自治县" />
+      <county code="522428" name="赫章县" />
+      <county code="522429" name="其它区" />
+    </city>
+    <city code="522600" name="黔东南苗族侗族自治州" cityClass="1">
+      <county code="522601" name="凯里市" />
+      <county code="522622" name="黄平县" />
+      <county code="522623" name="施秉县" />
+      <county code="522624" name="三穗县" />
+      <county code="522625" name="镇远县" />
+      <county code="522626" name="岑巩县" />
+      <county code="522627" name="天柱县" />
+      <county code="522628" name="锦屏县" />
+      <county code="522629" name="剑河县" />
+      <county code="522630" name="台江县" />
+      <county code="522631" name="黎平县" />
+      <county code="522632" name="榕江县" />
+      <county code="522633" name="从江县" />
+      <county code="522634" name="雷山县" />
+      <county code="522635" name="麻江县" />
+      <county code="522636" name="丹寨县" />
+      <county code="522637" name="其它区" />
+    </city>
+    <city code="522700" name="黔南布依族苗族自治州" cityClass="1">
+      <county code="522701" name="都匀市" />
+      <county code="522702" name="福泉市" />
+      <county code="522722" name="荔波县" />
+      <county code="522723" name="贵定县" />
+      <county code="522725" name="瓮安县" />
+      <county code="522726" name="独山县" />
+      <county code="522727" name="平塘县" />
+      <county code="522728" name="罗甸县" />
+      <county code="522729" name="长顺县" />
+      <county code="522730" name="龙里县" />
+      <county code="522731" name="惠水县" />
+      <county code="522732" name="三都水族自治县" />
+      <county code="522733" name="其它区" />
+    </city>
+  </province>
+  <province code="530000" name="云南">
+    <city code="530100" name="昆明市" cityClass="1">
+      <county code="530102" name="五华区" />
+      <county code="530103" name="盘龙区" />
+      <county code="530111" name="官渡区" />
+      <county code="530112" name="西山区" />
+      <county code="530113" name="东川区" />
+      <county code="530121" name="呈贡县" />
+      <county code="530122" name="晋宁县" />
+      <county code="530124" name="富民县" />
+      <county code="530125" name="宜良县" />
+      <county code="530126" name="石林彝族自治县" />
+      <county code="530127" name="嵩明县" />
+      <county code="530128" name="禄劝彝族苗族自治县" />
+      <county code="530129" name="寻甸回族彝族自治县" />
+      <county code="530181" name="安宁市" />
+      <county code="530182" name="其它区" />
+    </city>
+  </province>
+  <province code="540000" name="西藏">
+    <city code="540100" name="拉萨市" cityClass="1">
+      <county code="540102" name="城关区" />
+      <county code="540121" name="林周县" />
+      <county code="540122" name="当雄县" />
+      <county code="540123" name="尼木县" />
+      <county code="540124" name="曲水县" />
+      <county code="540125" name="堆龙德庆县" />
+      <county code="540126" name="达孜县" />
+      <county code="540127" name="墨竹工卡县" />
+      <county code="540128" name="其它区" />
+    </city>
+  </province>
+  <province code="610000" name="陕西">
+    <city code="610100" name="西安市" cityClass="1">
+      <county code="610102" name="新城区" />
+      <county code="610103" name="碑林区" />
+      <county code="610104" name="莲湖区" />
+      <county code="610111" name="灞桥区" />
+      <county code="610112" name="未央区" />
+      <county code="610113" name="雁塔区" />
+      <county code="610114" name="阎良区" />
+      <county code="610115" name="临潼区" />
+      <county code="610116" name="长安区" />
+      <county code="610122" name="蓝田县" />
+      <county code="610124" name="周至县" />
+      <county code="610125" name="户县" />
+      <county code="610126" name="高陵县" />
+      <county code="610127" name="其它区" />
+      <county code="610302" name="渭滨区" />
+      <county code="610303" name="金台区" />
+      <county code="610304" name="陈仓区" />
+      <county code="610322" name="凤翔县" />
+      <county code="610323" name="岐山县" />
+      <county code="610324" name="扶风县" />
+      <county code="610326" name="眉县" />
+      <county code="610327" name="陇县" />
+      <county code="610328" name="千阳县" />
+      <county code="610329" name="麟游县" />
+      <county code="610330" name="凤县" />
+      <county code="610331" name="太白县" />
+      <county code="610332" name="其它区" />
+    </city>
+    <city code="610400" name="咸阳市" cityClass="1">
+      <county code="610402" name="秦都区" />
+      <county code="610403" name="杨凌区" />
+      <county code="610404" name="渭城区" />
+      <county code="610422" name="三原县" />
+      <county code="610423" name="泾阳县" />
+      <county code="610424" name="乾县" />
+      <county code="610425" name="礼泉县" />
+      <county code="610426" name="永寿县" />
+      <county code="610427" name="彬县" />
+      <county code="610428" name="长武县" />
+      <county code="610429" name="旬邑县" />
+      <county code="610430" name="淳化县" />
+      <county code="610431" name="武功县" />
+      <county code="610481" name="兴平市" />
+      <county code="610482" name="其它区" />
+    </city>
+  </province>
+  <province code="620000" name="甘肃">
+    <city code="620100" name="兰州市" cityClass="1">
+      <county code="620102" name="城关区" />
+      <county code="620103" name="七里河区" />
+      <county code="620104" name="西固区" />
+      <county code="620105" name="安宁区" />
+      <county code="620111" name="红古区" />
+      <county code="620121" name="永登县" />
+      <county code="620122" name="皋兰县" />
+      <county code="620123" name="榆中县" />
+      <county code="620124" name="其它区" />
+    </city>
+  </province>
+  <province code="630000" name="青海">
+    <city code="630100" name="西宁市" cityClass="1">
+      <county code="630102" name="城东区" />
+      <county code="630103" name="城中区" />
+      <county code="630104" name="城西区" />
+      <county code="630105" name="城北区" />
+      <county code="630121" name="大通回族土族自治县" />
+      <county code="630122" name="湟中县" />
+      <county code="630123" name="湟源县" />
+      <county code="630124" name="其它区" />
+    </city>
+  </province>
+  <province code="640000" name="宁夏">
+    <city code="640100" name="银川市" cityClass="1">
+      <county code="640104" name="兴庆区" />
+      <county code="640105" name="西夏区" />
+      <county code="640106" name="金凤区" />
+      <county code="640121" name="永宁县" />
+      <county code="640122" name="贺兰县" />
+      <county code="640181" name="灵武市" />
+      <county code="640182" name="其它区" />
+    </city>
+  </province>
+  <province code="650000" name="新疆">
+    <city code="650100" name="乌鲁木齐市" cityClass="1">
+      <county code="650102" name="天山区" />
+      <county code="650103" name="沙依巴克区" />
+      <county code="650104" name="新市区" />
+      <county code="650105" name="水磨沟区" />
+      <county code="650106" name="头屯河区" />
+      <county code="650107" name="达坂城区" />
+      <county code="650108" name="东山区" />
+      <county code="650109" name="米东区" />
+      <county code="650121" name="乌鲁木齐县" />
+      <county code="650122" name="其它区" />
+    </city>
+  </province>
+</address>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GetFeedSubmissionListByNextTokenResponse xmlns="http://mws.amazonaws.com/doc/2009-01-01/">
+  <GetFeedSubmissionListByNextTokenResult>
+    <NextToken>string</NextToken>
+    <HasNext>false</HasNext>
+    <!--1 or more repetitions:-->
+    <FeedSubmissionInfo>
+      <FeedSubmissionId>string</FeedSubmissionId>
+      <FeedType>string</FeedType>
+      <SubmittedDate>string</SubmittedDate>
+      <FeedProcessingStatus>string</FeedProcessingStatus>
+      <!--Optional:-->
+      <StartedProcessingDate>2007-10-25T23:36:28</StartedProcessingDate>
+      <!--Optional:-->
+      <CompletedProcessingDate>2004-02-14T10:44:14</CompletedProcessingDate>
+    </FeedSubmissionInfo>
+  </GetFeedSubmissionListByNextTokenResult>
+  <ResponseMetadata>
+    <RequestId>string</RequestId>
+  </ResponseMetadata>
+</GetFeedSubmissionListByNextTokenResponse>

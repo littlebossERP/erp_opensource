@@ -1,0 +1,93 @@
+<?php 
+	$warehouse = [
+		'YORK'=>'东部PA仓',
+		'GUANGZHOU'=>'铁三角广州仓',
+		'ZZ'=>'郑州仓',
+		'SHANGHAI'=>'上海仓',
+	];
+
+	$warehouseService = [
+		'YORK'=>[
+// 			'SEA'=>'中-美海运',
+// 			'UPS-GROUND'=>'UPS 本地大包',
+// 			'UPS-NEXT-DAY-AIR'=>'UPS 本地隔天邮',
+// 			'UPS-2ND-DAY-AIR'=>'UPS 本地两天邮',
+// 			'UPS-3-DAYS-SELECT'=>'UPS 本地3天邮',
+// 			'UPS-EXPEDITED-MI'=>'UPS 本土小包',
+// 			'UPS-FOREIGN-PRI-MI'=>'UPS MI 国际包裹',
+// 			'UPS-STANDARD'=>'UPS国际大包',
+// 			'USPS-F-CLASS-LETTER'=>'美国邮局-本地平邮信封',
+// 			'USPS-LARGE-ENVELOPE'=>'美国邮局-本地平邮大信封',
+// 			'USPS-F-CLASS-PARCELS'=>'美国邮局-本地挂号小包',
+// 			'USPS-PRIORITY-MAIL'=>'美国邮局-本土快捷包裹',
+// 			'USPS-PADDED-ENVELOPE'=>'美国邮局-本地统一费率-快捷气泡信封',
+// 			'USPS-FLAT-ENVELOPE'=>'美国邮局-本地统一费率-快捷 大信封',
+// 			'USPS-FLAT-SMALL-BOX'=>'美国邮局-本地统一费率-快捷小箱',
+// 			'USPS-FLAT-MEDIUM-BOX'=>'美国邮局-本地统一费率-快捷中箱',
+// 			'USPS-FLAT-LARGE-BOX'=>'美国邮局-本地统一费率-快捷大箱',
+// 			'USPS-FOREIGN-LETTER'=>'美国邮局-国际平邮信封',
+// 			'USPS-FRG-LAR-EVLP'=>'美国邮局-国际平邮大信封',
+// 			'USPS-FOREIGN-PACKAGE'=>'美国邮局-国际挂号小包',
+// 			'USPS-PRI-ITN-PARCEL'=>'美国邮局-国际快捷包裹',
+// 			'USPS-ITN-PAD-ENLOPE'=>'美国邮局-国际统一费率--快捷气泡信封',
+// 			'USPS-ITN-MEDIUM-BOX'=>'美国邮局-国际统一费率--快捷中箱',
+// 			'USPS-ITN-LARGE-BOX'=>'美国邮局-国际统一费率--快捷大箱',
+// 			'USPS-ITN-SMALL-BOX'=>'美国邮局-国际统一费率--快捷小箱',
+// 			'USPS-OVERNIGH'=>'美国邮局-本地EMS快递',
+// 			'USPS-ITN-EMS'=>'美国邮局-国际EMS',
+// 			'UPS-SURE-POST'=>'UPS-USPS 本地经济包裹',
+			
+			'AMAON-VENDOR'=>'AMAZON VE',
+			'AMAZON-VC'=>'AMAZON VC',
+			'DHL-PE'=>'DHL快捷小包2-6日',
+			'DHL-PPG'=>'DHL本地大包4-9日',
+			'DHL_EXPRESS_TO_CHINA'=>'DHL快递至中国',
+			'DROP-SHIP'=>'drop ship',
+			'FBA'=>'FBA',
+			'SEA'=>'中-美海运',
+			'UPS-2ND-DAY-AIR'=>'UPS 本地两天邮',
+			'UPS-3-DAYS-SELECT'=>'UPS 本地3天邮',
+			'UPS-GROUND'=>'UPS 本地大包',
+			'UPS-NEXT-DAY-AIR'=>'UPS 本地隔天邮',
+			'UPS-STANDARD'=>'UPS国际大包',
+			'UPS-SURE-POST'=>'UPS-USPS 本地经济包裹',
+			'USPS-F-CLASS-LETTER'=>'美国邮局-信封',
+			'USPS-F-CLASS-PARCELS'=>'美国邮局-挂号小包',
+			'USPS-FLAT-LARGE-BOX'=>'美国邮局-快捷大箱',
+			'USPS-FLAT-MEDIUM-BOX'=>'美国邮局-快捷中箱',
+			'USPS-FLAT-SMALL-BOX'=>'美国邮局-快捷小箱',
+			'USPS-FOREIGN-LETTER'=>'美国邮局-国际平邮信封',
+			'USPS-FOREIGN-PACKAGE'=>'美国邮局-国际挂号小包',
+			'USPS-FRG-LAR-EVLP'=>'美国邮局-国际平邮大信封',
+			'USPS-ITN-EMS'=>'美国邮局-国际EMS',
+			'USPS-ITN-LARGE-BOX'=>'美国邮局-国际快捷大箱',
+			'USPS-ITN-MEDIUM-BOX'=>'美国邮局-国际快捷中箱',
+			'USPS-ITN-PAD-ENLOPE'=>'美国邮局-国际快捷气泡信封',
+			'USPS-ITN-SMALL-BOX'=>'美国邮局-国际快捷小箱',
+			'USPS-LARGE-ENVELOPE'=>'美国邮局-本地平邮大信封',
+			'USPS-OVERNIGH'=>'美国邮局-本地EMS快递',
+			'USPS-PADDED-ENVELOPE'=>'美国邮局-快捷气泡信封',
+			'USPS-PRI-ITN-PARCEL'=>'美国邮局-国际快捷包裹',
+			'USPS-PRIORITY-MAIL'=>'美国邮局-本土快捷包裹',
+			'FEDEX_3DAYS_PAK'=>'fedex 3天气泡信封',
+			'FEDEX_GROUND'=>'大包',
+			'FEDEX-GROUND'=>'Fedex大包'
+		],
+		'GUANGZHOU'=>[
+			'SEA'=>'中-美海运',
+			'EXPRESS-MAIL'=>'中-美快递',
+		],
+
+		'ZZ'=>[
+			'SEA'=>'中-美海运',
+			'EXPRESS-MAIL'=>'中-美快递',
+		],
+
+		'SHANGHAI'=>[
+			'SEA'=>'中-美海运',
+			'EXPRESS-MAIL'=>'中-美快递',
+		],
+	];
+
+ ?>
+

@@ -1,0 +1,108 @@
+body {
+  background: #dbdbdb url(/images/project/trackerhome/index/login/bg_body.jpg);
+  padding-bottom: 47px;
+  min-width: 1000px;
+}
+#footer {
+  background: #404040 url(/images/project/trackerhome/index/login/bg_footer.jpg);
+  height: 47px;
+  line-height: 47px;
+  text-align: center;
+  color: #707070;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+#login_panel {
+  background: url(/images/project/trackerhome/index/login/login_panel.png) no-repeat;
+  width: 665px;
+  height: 328px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -333px;
+  margin-top: -186px;
+}
+.bbs_link {
+  width: 160px;
+  height: 60px;
+  position: absolute;
+  margin: 180px 0 0 82px;
+}
+.bbs_link a {
+  display: block;
+  height: 60px;
+}
+.login_form {
+  margin: 40px 0 0 330px;
+}
+.legend {
+  font-size: 24px;
+  color: #626262;
+}
+.legend span {
+  font-size: 18px;
+  color: #a0a0a0;
+}
+.control-group {
+  margin-top: 10px;
+  line-height: 18px;
+}
+.control-label {
+  display: none;
+}
+.controls {
+  position: relative;
+}
+.input_login {
+  background: url(/images/project/trackerhome/index/login/input_login.png) no-repeat;
+  background-repeat: no-repeat;
+  width: 192px;
+  height: 33px;
+  padding: 8px 10px 9px 40px !important;
+  border: none !important;
+  overflow: hidden;
+}
+.input_account {
+  background-position: 0 0;
+}
+.input_account_active {
+  background-position: 0 -50px;
+}
+.input_password {
+  background-position: 0 -100px;
+}
+.input_password_active {
+  background-position: 0 -150px;
+}
+.btn_login {
+  background: url(/images/project/trackerhome/index/login/btn_login.png) no-repeat;
+  width: 120px;
+  height: 41px;
+  border: none;
+  margin-right: 8px;
+  cursor: pointer;
+  vertical-align: top;
+  font-size: 0;
+  line-height: 0;
+}
+.link_group {
+  display: inline-block;
+}
+.link_group a:hover {
+  text-decoration: none;
+}
+.poptip {
+  border-color: #e2dfdf;
+  box-shadow: none;
+  color: #e30b20;
+  background: #fffcf1;
+  top: -3px;
+  *top: 10px;
+  left: 245px;
+  width: 150px;
+  display: none;
+}
+.poptip-arrow em {
+  color: #e2dfdf;
+}

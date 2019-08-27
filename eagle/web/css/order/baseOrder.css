@@ -1,0 +1,192 @@
+@CHARSET "UTF-8";
+.table th{
+	text-align: center;
+}
+.table td{
+	text-align: left;
+}
+
+table{
+	font-size:12px;
+}
+.table>tbody td{
+color:#637c99;
+}
+.table>tbody a{
+color:#337ab7;
+}
+.table>thead>tr>th {
+height: 35px;
+vertical-align: middle;
+}
+.table>tbody>tr>td {
+height: 35px;
+vertical-align: middle;
+}
+/* 平台订单状态小图标 */
+.sprite_pay_0,.sprite_pay_1,.sprite_pay_2,.sprite_pay_3,.sprite_shipped_0,.sprite_shipped_1,.sprite_check_1,.sprite_check_0
+{
+	display:block;
+	background-image:url(/images/MyEbaySprite.png);
+	overflow:hidden;
+	float:left;
+	width:20px;
+	height:20px;
+	text-indent:20px;
+}
+.sprite_pay_0
+{
+	background-position:0px -92px;
+}
+.sprite_pay_1
+{
+	background-position:-50px -92px;
+}
+.sprite_pay_2
+{
+	background-position:-95px -92px;
+}
+.sprite_pay_3
+{
+	background-position:-120px -92px;
+}
+.sprite_shipped_0
+{
+	background-position:0px -67px;
+}
+.sprite_shipped_1
+{
+	background-position:-50px -67px;
+}
+.sprite_check_1
+{
+	background-position:-100px -15px;
+}
+.sprite_check_0
+{
+	background-position:-77px -15px;
+}
+.exception_201,.exception_202,.exception_221,.exception_210,.exception_222,.exception_223,.exception_299,.exception_manual{
+	display:block;
+	background-image:url(/images/icon-yichang-eBay.png);
+	overflow:hidden;
+	float:left;
+	width:30px;
+	height:15px;
+	text-indent:20px;
+}
+.exception_201{
+	background-position:-3px -10px;
+}
+.exception_202{
+	background-position:-26px -10px;
+}
+.exception_221{
+	background-position:-55px -10px;
+	width:50px;
+}
+.exception_210{
+	background-position:-107px -10px;
+}
+.exception_222{
+	background-position:-135px -10px;
+}
+.exception_223{
+	background-position:-170px -10px;
+}
+.exception_299{
+	background-position:-199px -10px;
+}
+.exception_manual{
+	background-position:-230px -10px;
+}
+.input-group-btn > button{
+  padding: 0px;
+  height: 28px;
+  width: 30px;
+  border-radius: 0px;
+  border: 1px solid #b9d6e8;
+}
+
+.div-input-group{
+	  width: 150px;
+  display: inline-block;
+  vertical-align: middle;
+	margin-top:1px;
+
+}
+
+.div-input-group>.input-group>input{
+	height: 28px;
+}
+
+.div_select_tag>.input-group , .div_new_tag>.input-group{
+  float: left;
+  width: 32%;
+  vertical-align: middle;
+  padding-right: 10px;
+  padding-left: 10px;
+  margin-bottom: 10px;
+}
+
+.div_select_tag{
+	display: inline-block;
+	border-bottom: 1px dotted #d4dde4;
+	margin-bottom: 10px;
+	width: 100%;
+}
+
+.div_new_tag {
+  display: inline-block;
+}
+
+.span-click-btn{
+	cursor: pointer;
+}
+
+.btn_tag_qtip a {
+  margin-right: 5px;
+}
+
+.div_add_tag{
+	width: 600px;
+}
+
+/*商品的数量如果大于1给予的span样式*/
+.multiitem{
+	padding:0 4px 0 4px;
+	background:rgb(255,153,0);
+	border-radius:8px;
+	color:#fff;
+}
+
+.checkbox{
+	display: block;
+    float: left;
+ 	margin-top: 2px;
+}
+
+/* 订单搜索区域样式 */
+
+.showAdvSearch,
+.showAdvSearch:focus,
+.showAdvSearch:hover,
+.hideAdvSearch,
+.hideAdvSearch:focus,
+.hideAdvSearch:hover{
+	color: #999999;
+	font: normal 12px Arial;
+	text-decoration: none;
+}
+.search-area-bg .adv-search-opt.off , .search-area-bg .showAdvSearch.off , .search-area-bg .hideAdvSearch.off{display: none;}
+.hideAdvSearch{
+	display: block;
+	position: absolute;
+	left: 50%;
+	bottom: -6px;
+	background-color: #fff;
+	padding: 0 5px;
+}
+
+.search-area-bg .btn-success{margin: 5px 0 10px 0;}
+

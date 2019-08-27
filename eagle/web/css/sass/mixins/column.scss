@@ -1,0 +1,45 @@
+@import "compass/css3";
+@import "compass/utilities";
+
+$columns-num: 12;
+$columns-media-break:(
+	'min':480px,
+	'max':768px
+);
+$columns-gutter-width:5px;
+
+.iv-row{
+	@include clearfix;
+	margin-left:-$columns-gutter-width;
+	margin-right:-$columns-gutter-width;
+}
+@media screen and (max-width:map-get($columns-media-break,'min')){
+	@for $i from 1 to $columns-num+1 {
+		.iv-mob-#{$i}{
+			float:left;
+			width: percentage($i / $columns-num) ;
+			padding-left:-$columns-gutter-width;
+			padding-right:-$columns-gutter-width;
+		}
+	}
+}
+@media screen and (min-width:map-get($columns-media-break,'min')) and (max-width:map-get($columns-media-break,'max')){
+	@for $i from 1 to $columns-num+1 {
+		.iv-pad-#{$i}{
+			float:left;
+			width: percentage($i / $columns-num) ;
+			padding-left:-$columns-gutter-width;
+			padding-right:-$columns-gutter-width;
+		}
+	}
+}
+@media screen and (min-width:map-get($columns-media-break,'max')){
+	@for $i from 1 to $columns-num+1 {
+		.iv-pc-#{$i}{
+			float:left;
+			width: percentage($i / $columns-num) ;
+			padding-left:-$columns-gutter-width;
+			padding-right:-$columns-gutter-width;
+		}
+	}
+}

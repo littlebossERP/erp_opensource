@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GetReportListResponse xmlns="http://mws.amazonaws.com/doc/2009-01-01/">
+  <GetReportListResult>
+    <NextToken>string</NextToken>
+    <HasNext>false</HasNext>
+    <!--1 or more repetitions:-->
+    <ReportInfo>
+      <ReportId>string</ReportId>
+      <ReportType>string</ReportType>
+      <!--Optional:-->
+      <ReportRequestId>string</ReportRequestId>
+      <AvailableDate>2007-10-25T23:36:28</AvailableDate>
+      <Acknowledged>true</Acknowledged>
+      <AcknowledgedDate>2014-06-09T08:15:04-07:00</AcknowledgedDate>
+    </ReportInfo>
+  </GetReportListResult>
+  <ResponseMetadata>
+    <RequestId>string</RequestId>
+  </ResponseMetadata>
+</GetReportListResponse>

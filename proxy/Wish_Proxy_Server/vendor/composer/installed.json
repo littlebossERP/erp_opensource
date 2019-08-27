@@ -1,0 +1,47 @@
+[
+    {
+        "name": "wish/php-sdk",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/ContextLogic/Wish-Merchant-API.git",
+            "reference": "2838b165cf222c3864bc0889f536157667ae2556"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/ContextLogic/Wish-Merchant-API/zipball/2838b165cf222c3864bc0889f536157667ae2556",
+            "reference": "2838b165cf222c3864bc0889f536157667ae2556",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">5.3.0"
+        },
+        "time": "2014-05-23 02:21:14",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Wish": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "Wish",
+                "homepage": "http://wish.com"
+            }
+        ],
+        "description": "A PHP SDK for Wish merchants",
+        "homepage": "http://merchant.wish.com/api/documentation",
+        "keywords": [
+            "merchant",
+            "php",
+            "sdk",
+            "wish"
+        ]
+    }
+]

@@ -1,0 +1,31 @@
+@import "compass/css3";
+
+
+.svg{
+	// background-image:url(../Comprehensive.svg);
+	background-repeat: no-repeat;
+	@include inline-block;
+}
+
+.svg-xiangyouzhankai{
+	width:16px;
+	height:16px;
+	background-size:16px;
+	background-image:url(../sass/SVG/19.svg);
+	
+}
+
+.svg-test{
+	width:20px;
+	height:20px;
+	background-position:-673px -80px;
+	&:hover{
+		background-position:-642px -80px;
+	}
+}
+
+.svg-label:hover{
+	> .svg-test{
+		background-position:-642px -80px;
+	}
+}

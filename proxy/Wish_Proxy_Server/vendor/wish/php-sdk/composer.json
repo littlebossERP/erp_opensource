@@ -1,0 +1,22 @@
+{
+    "name": "wish/php-sdk",
+    "homepage":"http://merchant.wish.com/api/documentation",
+    "description": "A PHP SDK for Wish merchants",
+    "keywords":["wish","php","sdk","merchant"],
+    "authors": [
+        {
+            "name": "Wish",
+            "homepage": "http://wish.com"
+        }
+    ],
+    "license":"Apache-2.0",
+    "minimum-stability": "dev",
+    "require": {
+        "php":">5.3.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Wish": "src/"
+        }
+    }
+}

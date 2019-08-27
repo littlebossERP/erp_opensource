@@ -1,0 +1,123 @@
+<div data-name="${color}" class="product-image-lib">
+	<label>${color}图片信息</label>
+	<div style="border:1px solid #ccc;width:910px;margin:10px 0;">
+		<div class="iv-form form-base">
+			<div class="form-group" style="margin:0;">
+				<div class="row" style="margin:0;">
+					<div class="input-control input-area" style="margin:0 auto;margin-top:5px;flex: 0 0 880px;">
+						<label id="select-img-lib">产品图片</label>
+						<form class="product-image-list">
+							<ul class="iv-image-lib">
+								<div class="iv-image-upload iv-v2">
+									<div class="iv-image-header clearfix">
+										<div class="pull-left"></div>
+										<div class="pull-right">
+											<input type="file" class="iv-btn btn-success btn-upload iv-image-upload-upload " multiple="multiple" value="从本地选择图片">
+											<input type="file" class="iv-btn btn-success btn-upload iv-image-upload-upload " multiple="multiple" value="从本地选择图片">
+											<a target="_modal" title="图片库" class="iv-btn btn-success" href="/util/image/select-image-lib" btn-resolve="" btn-reject="">从网络地址（URL）选择图片</a>
+											<a target="_modal" title="图片库" class="iv-btn btn-success" href="/util/image/select-image-lib" btn-resolve="" btn-reject="">从图片库选择图片</a>
+										</div>
+									</div>
+									<div class="iv-image-body">
+										<ul class="sortable clearfix">
+											{{if product_imgs.length}}
+												{{each(i,img) product_imgs}}
+													<li class="iv-image-box">
+														<div class="iv-image-box-header">
+															<input type="checkbox" name="extra_images[]" value="${img.original}" checked="checked">
+														</div>
+														<label class="primary">
+															<input type="radio" name="main_image" value="">
+															<span class="text-danger">主图</span>
+															<a>设为主图</a>
+														</label>
+														<div class="iv-image-box-body">
+															<img width="100%" height="100%" src="${img.thumb}" title="">
+															<div class="iv-image-box-cover"></div>
+															<div class="iv-image-box-cover2">
+																<a class="iv-btn btn-none copy-url" style="padding:2px 5px;" data-clipboard-text="{img.original}">复制地址</a>
+																<a class="cover-close iconfont icon-guanbi"></a>
+																<p>${img.original}</p>
+															</div>
+														</div>
+														<div class="iv-image-box-footer">
+															<a title="在线美图" class="iv-image-box-footer-icon iconfont icon-kebianji"></a>
+															<a title="复制链接" class="iv-image-box-footer-icon iconfont icon-link"></a>
+															<a title="删除" class="iv-image-box-footer-icon iconfont icon-shanchu"></a>
+														</div>
+													</li>
+												{{/each}}
+											{{/if}}
+										</ul>
+									</div>
+								</div>
+							</ul>
+						</form>
+						<label style="color:#333333;">小提示:</label>
+						<font style="display: inline-block;margin-left:10px;vertical-align: top;line-height: 15px;color:#949494;">
+							产品图片要求<br>(1)图片图片纯白色背景，不能有倒影 、不能有文字 、不能有水印 (2)产品要占图片<i class="fRed">80%</i>的部分 (3)图片像素最小<i class="fRed">500x500</i>，最大<i class="fRed">2000x2000</i><br>(4)不可以在同一张图有几个产品,不可以多个角度合成的拼图
+						</font>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="iv-form form-base">
+			<div class="form-group" style="margin:0;">
+				<div class="row" style="margin:0;">
+					<div class="input-control input-area" style="margin:0 auto;flex: 0 0 880px;">
+						<label id="select-img-lib">产品图片</label>
+						<ul class="product-describImg-lib">
+							<div class="iv-image-upload iv-v2">
+								<div class="iv-image-header clearfix">
+									<div class="pull-left"></div>
+									<div class="pull-right">
+										<a title="复制产品图片" class="iv-btn btn-default">复制产品图片</a>
+										<input type="file" class="iv-btn btn-success btn-upload iv-image-upload-upload " multiple="multiple" value="从本地选择图片">
+										<a target="_modal" title="图片库" class="iv-btn btn-success" href="/util/image/select-image-lib" btn-resolve="" btn-reject="">从网络地址（URL）选择图片</a>
+										<a target="_modal" title="图片库" class="iv-btn btn-success" href="/util/image/select-image-lib" btn-resolve="" btn-reject="">从图片库选择图片</a>
+									</div>
+								</div>
+							</div>
+							<div class="iv-image-body">
+								<ul class="sortable clearfix ui-sortable">
+									{{if product_describ_imgs.length}}
+										{{each(i,img) product_describ_imgs}}
+											<li class="iv-image-box" tmpl-url="/tmpl/ImageLibAddOne">
+												<div class="iv-image-box-header">
+													<input type="checkbox" name="extra_images[]" value="${img.original}" checked="checked">
+												</div>
+												<label class="primary">
+													<input type="radio" name="main_image" value="">
+													<span class="text-danger">主图</span>
+													<a>设为主图</a>
+												</label>
+												<div class="iv-image-box-body">
+													<img width="100%" height="100%" src="${img.thumb}" title="">
+													<div class="iv-image-box-cover"></div>
+													<div class="iv-image-box-cover2">
+														<a class="iv-btn btn-none copy-url" style="padding:2px 5px;" data-clipboard-text="{img.original}">复制地址</a>
+														<a class="cover-close iconfont icon-guanbi"></a>
+														<p>${img.original}</p>
+													</div>
+												</div>
+												<div class="iv-image-box-footer">
+													<a title="在线美图" class="iv-image-box-footer-icon iconfont icon-kebianji"></a>
+													<a title="复制链接" class="iv-image-box-footer-icon iconfont icon-link"></a>
+													<a title="删除" class="iv-image-box-footer-icon iconfont icon-shanchu"></a>
+												</div>
+											</li>
+										{{/each}}
+									{{/if}}
+								</ul>
+							</div>
+						</ul>
+						<label style="color:#333333;">小提示:</label>
+						<font style="display: inline-block;margin-left:10px;vertical-align: top;line-height: 15px;color:#949494;">
+								此处可以上传的产品描述图片。此处的图片将被插入到Product Description的最后，没有图片则不会插入。
+						</font>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://impl.appservice.sfexpress.business.ieca.sf.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://appservice.sfexpress.business.ieca.sf.com/" name="SfexpressServiceImplService" targetNamespace="http://impl.appservice.sfexpress.business.ieca.sf.com/">
+  <wsdl:import location="http://intl.sf-express.com/CBTA/ws/sfexpressService?wsdl=SfexpressService.wsdl" namespace="http://appservice.sfexpress.business.ieca.sf.com/">
+    </wsdl:import>
+  <wsdl:binding name="SfexpressServiceImplServiceSoapBinding" type="ns1:SfexpressService">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="sfexpressSecurityService">
+      <soap:operation soapAction="" style="rpc"/>
+      <wsdl:input name="sfexpressSecurityService">
+        <soap:body namespace="http://appservice.sfexpress.business.ieca.sf.com/" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="sfexpressSecurityServiceResponse">
+        <soap:body namespace="http://appservice.sfexpress.business.ieca.sf.com/" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sfexpressService">
+      <soap:operation soapAction="" style="rpc"/>
+      <wsdl:input name="sfexpressService">
+        <soap:body namespace="http://appservice.sfexpress.business.ieca.sf.com/" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="sfexpressServiceResponse">
+        <soap:body namespace="http://appservice.sfexpress.business.ieca.sf.com/" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SfexpressServiceImplService">
+    <wsdl:port binding="tns:SfexpressServiceImplServiceSoapBinding" name="SfexpressServiceImplPort">
+      <soap:address location="http://intl.sf-express.com/CBTA/ws/sfexpressService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

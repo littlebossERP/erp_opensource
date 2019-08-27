@@ -1,0 +1,68 @@
+/* edit order start */
+
+/* 背景色 */
+.panel-edit-order>.panel-edit-order-body>.order-edit-row:nth-child(odd) {
+    background-color: #f7f7f9;
+}
+
+.order-edit-row {
+    padding: 10px 0 10px 0;
+}
+
+.panel-edit-order-body{
+	border: 1px solid gray;
+	margin: 10px 0 10px 0;
+}
+
+.order-edit-row>.row>.col-md-6>.row{
+	padding:8px;
+	
+}
+
+
+#frm_order_edit>h1{
+	color: #FF9900;
+	font-family: 'Applied Font Bold', 'Applied Font';
+	font-size: 24px;
+	font-style: normal;
+	font-weight: bold;
+}
+
+.edit-order-label{
+color: rgb(51, 51, 51);
+font-family: 'Applied Font Regular', 'Applied Font';
+font-size: 13px;
+font-style: normal;
+font-weight: normal;
+line-height: normal;
+text-align: left;
+white-space: nowrap;
+}
+
+
+.edit-order-title-label{
+color: rgb(51, 51, 51);
+display: inline;
+font-family: 'Applied Font Bold', 'Applied Font';
+font-size: 14px;
+font-style: normal;
+font-weight: bold;
+height: auto;
+line-height: normal;
+text-align: left;
+white-space: nowrap;
+width: auto;
+}
+
+#div_consignee_info input, select{
+	width:100%;
+}
+
+#origin_consignee_info>.row{
+	min-height:38px;
+}
+
+.panel-edit-order-head{
+	margin: 15px 0 5px 0;
+}
+/* edit order end */

@@ -1,0 +1,28 @@
+{
+  "name": "jurosh/pdf-merge",
+  "description": "PHP PDF Merger",
+  "version": "1.0.0",
+  "keywords": [
+    "pdf",
+    "merge"
+  ],
+  "homepage": "https://github.com/jurosh/php-pdf-merge",
+  "license": "MIT",
+  "require": {
+    "php": ">=5.3.0",
+    "itbz/fpdi": "^1.5"
+  },
+  "authors": [
+    {
+      "name": "Juraj Husar",
+      "email": "jurosh@jurosh.com",
+      "homepage": "http://jurosh.com"
+    }
+  ],
+  "autoload": {
+    "classmap": [
+      "src/Jurosh/PDFMerge/PDFMerger.php",
+      "src/Jurosh/PDFMerge/PDFObject.php"
+    ]
+  }
+}

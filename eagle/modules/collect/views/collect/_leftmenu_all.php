@@ -1,0 +1,30 @@
+<?php
+	$menu = [
+		'商品采集'=>[
+			'icon'=>'icon-chanpin',
+			'items'=>[
+				'采集箱'=>[
+					'url'=>'#',
+					'items'=>[
+						'Wish'=>[
+							'url'=>'/collect/collect/wish',
+						],
+						'eBay'=>[
+							'url'=>'/collect/collect/ebay',
+						],
+						'Lazada'=>[
+							'url'=>'/collect/collect/lazada',
+						],
+						'Ensogo'=>[
+							'url'=>'/collect/collect/ensogo',
+						],
+					]
+				],
+			]
+		],
+	];
+	echo $this->render('//layouts/new/left_menu_2',[
+		'menu'=>$menu,
+		'active'=>isset($active)?$active:''
+	]);
+?>	

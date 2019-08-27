@@ -1,0 +1,35 @@
+/* line 4, ../sass/svg.scss */
+.svg {
+  background-repeat: no-repeat;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+}
+
+/* line 10, ../sass/svg.scss */
+.svg-xiangyouzhankai {
+  width: 16px;
+  height: 16px;
+  background-size: 16px;
+  background-image: url(../sass/SVG/19.svg);
+}
+
+/* line 18, ../sass/svg.scss */
+.svg-test {
+  width: 20px;
+  height: 20px;
+  background-position: -673px -80px;
+}
+/* line 22, ../sass/svg.scss */
+.svg-test:hover {
+  background-position: -642px -80px;
+}
+
+/* line 28, ../sass/svg.scss */
+.svg-label:hover > .svg-test {
+  background-position: -642px -80px;
+}
+
+/*# sourceMappingURL=svg.css.map */

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SubmitFeedResponse xmlns="http://mws.amazonaws.com/doc/2009-01-01/">
+  <SubmitFeedResult>
+    <FeedSubmissionInfo>
+      <FeedSubmissionId>string</FeedSubmissionId>
+      <FeedType>string</FeedType>
+      <SubmittedDate>string</SubmittedDate>
+      <FeedProcessingStatus>string</FeedProcessingStatus>
+      <!--Optional:-->
+      <StartedProcessingDate>2008-09-28T18:49:45</StartedProcessingDate>
+      <!--Optional:-->
+      <CompletedProcessingDate>2014-09-18T16:18:33</CompletedProcessingDate>
+    </FeedSubmissionInfo>
+  </SubmitFeedResult>
+  <ResponseMetadata>
+    <RequestId>string</RequestId>
+  </ResponseMetadata>
+</SubmitFeedResponse>

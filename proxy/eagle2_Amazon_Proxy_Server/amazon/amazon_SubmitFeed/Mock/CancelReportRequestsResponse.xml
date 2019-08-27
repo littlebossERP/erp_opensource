@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CancelReportRequestsResponse xmlns="http://mws.amazonaws.com/doc/2009-01-01/">
+  <CancelReportRequestsResult>
+    <Count>100</Count>
+    <!--1 or more repetitions:-->
+    <ReportRequestInfo>
+      <ReportRequestId>string</ReportRequestId>
+      <ReportType>string</ReportType>
+      <StartDate>2008-09-28T18:49:45</StartDate>
+      <EndDate>2014-09-18T16:18:33</EndDate>
+      <SubmittedDate>2006-08-19T10:27:14-07:00</SubmittedDate>
+      <ReportProcessingStatus>string</ReportProcessingStatus>
+    </ReportRequestInfo>
+  </CancelReportRequestsResult>
+  <ResponseMetadata>
+    <RequestId>string</RequestId>
+  </ResponseMetadata>
+</CancelReportRequestsResponse>

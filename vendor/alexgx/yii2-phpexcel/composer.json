@@ -1,0 +1,23 @@
+{
+	"name": "alexgx/yii2-phpexcel",
+	"description": "PhpExcel component extension for Yii2.",
+	"keywords": ["yii", "extension", "component", "PhpExcel"],
+	"type": "yii2-extension",
+	"license": "BSD-3-Clause",
+	"authors": [
+		{
+			"name": "Alexander Gubarev",
+			"email": "gubarev.alex@gmail.com",
+			"homepage": "http://actionmedia-labs.net"
+		}
+	],
+	"require": {
+		"yiisoft/yii2": "*",
+		"phpoffice/phpexcel": "1.8.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"alexgx\\phpexcel\\": ""
+		}
+	}
+}

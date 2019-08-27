@@ -1,0 +1,66 @@
+@import "variable";
+@import "compass/css3";
+
+.main-tab{
+	width:100%;
+	border-bottom:1px solid #d1d2d5;
+	margin-top:5px;
+	margin-bottom:5px;
+	label {
+		margin-right:40px;
+		margin-bottom:-1px;
+		color:map-get($textColor,'tab');
+		cursor:pointer;
+		@include inline-block();
+		&:hover{
+			color:map-get($textColor,'default');
+		}
+		span{
+			padding:5px 0;
+			height: 100%;
+			width: 100%;
+			@include inline-block();
+		}
+		input{
+			width: 0;
+			height: 0;
+			float:left;
+			@include opacity(0);
+			&:checked + span{
+				border-bottom:3px solid $activeColor;
+				color:$activeColor;
+				font-weight: bold;
+			}
+		}
+	}
+	li{
+		border-bottom:3px solid transparent;
+		&.active{
+			border-bottom:3px solid $activeColor;
+			a{
+				color:$activeColor;
+				font-weight: bold;
+			}
+		}
+		&:not(.active) a{
+			color:map-get($textColor,'tab');
+			&:hover{
+				color:map-get($textColor,'default');
+			}
+		}
+		// display: inline-block;
+		@include inline-block();
+		padding:5px 0;
+		margin-right:40px;
+		margin-bottom:-1px;
+		
+	}
+
+}
+
+*[tab-view]{
+	display:none;
+	&.active{
+		display: block;
+	}
+}

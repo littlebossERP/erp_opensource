@@ -1,0 +1,7 @@
+/* line 5, ../../sass/mixins/float.scss */
+.clearfix {
+  overflow: hidden;
+  *zoom: 1;
+}
+
+/*# sourceMappingURL=float.css.map */

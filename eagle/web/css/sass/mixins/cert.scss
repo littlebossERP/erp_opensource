@@ -1,0 +1,81 @@
+@import "variable";
+
+
+$cert_size:(
+	'small':4,
+	'middle':6,
+	'large':8
+);
+
+$cert_color:(
+	'light':#ffffff,
+	'default':map-get($textColor,'default'),
+	'success':'green'
+);
+
+
+
+@mixin cert($direction:top,$width:5px,$color:white) {
+	width:0;
+	height:0;
+	border-style:solid;
+	border-color:transparent;
+	border-width:$width;
+	border-#{$direction}-color:$color;
+	// &.right{
+	// 	margin-left:$width;
+	// }
+}
+
+
+.cert{
+	width:0;
+	height:0;
+	margin:0;
+	padding:0;
+	border-style:solid;
+	display:inline-block;
+	// margin-left:3px;
+
+	@each $k,$v in $cert_size{
+		&.cert-#{$k}{
+			border-width:#{$v}px;
+			&.right{
+				margin-left:#{$v/2}px;
+			}
+			&.left{
+				margin-right:#{$v/2}px;
+			}
+		}
+	}
+
+	@each $k,$v in $cert_color{
+		&.cert-#{$k}{
+			&.down{
+				border-top-color:$v;
+				border-left-color:transparent;
+				border-right-color:transparent;
+				border-bottom-color:transparent;
+			}
+			&.top{
+				border-top-color:transparent;
+				border-left-color:transparent;
+				border-right-color:transparent;
+				border-bottom-color:$v;
+			}
+			&.left{
+				border-top-color:transparent;
+				border-left-color:transparent;
+				border-right-color:$v;
+				border-bottom-color:transparent;
+			}
+			&.right{
+				border-top-color:transparent;
+				border-left-color:$v;
+				border-right-color:transparent;
+				border-bottom-color:transparent;
+			}
+		}
+	}
+
+}

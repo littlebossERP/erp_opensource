@@ -1,0 +1,85 @@
+@import "variable";
+@import "compass/css3";
+@import "compass/utilities";
+
+.filter-bar{
+	margin-top:5px;
+	margin-bottom:5px;
+	
+	input[type=submit]{
+		@include inline-block;
+	}
+
+}
+
+
+.filter-group{
+	width:100%;
+	border:1px solid #ccc;
+	display:table;
+	border-spacing:0;
+	border-collapse:collapse;
+	.category-group{
+		margin:10px;
+		line-height: 2;
+		display: table-row;
+		border-bottom:1px dashed #ccc;
+		margin:0 10px;
+		.group-name,
+		.group-items{
+			display: table-cell;
+			vertical-align: top;
+		}
+		.group-name{
+			padding:10px 15px;
+			color:map-get($textColor,'title');
+		}
+		.group-items{
+			position: relative;
+			padding-right:30px;
+			&.more{
+				height: 45px;
+				overflow: hidden;
+				display: block;
+				a.toggle-more::after{
+					content:'更多';
+				}
+			}
+			.toggle-more{
+				color: map-get(map-get($colors,'important'),'main');
+				position: absolute;
+				top:10px;
+				right:10px;
+				&::after{
+					content:'收起';
+				}
+			}
+			ul{
+				@include clearfix;
+				li{
+					margin: 10px 25px 10px 0;
+					padding:0px 5px;
+					float: left;
+					cursor: pointer;
+					&.active{
+						color: map-get(map-get($colors,'important'),'sub');
+						background-color: map-get(map-get($colors,'important'),'main');
+						a{
+							color: map-get(map-get($colors,'important'),'sub');
+						}
+					}
+					label{
+						cursor: pointer;
+					}
+					input{
+						opacity: 0;
+						width:0;
+						height:0;
+						margin:0;
+					}
+				}
+			}
+		}
+	}
+
+}

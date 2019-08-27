@@ -1,0 +1,66 @@
+	*{
+		margin:0px;
+		padding:0px;	
+	}
+	.content-wrapper{
+		margin-top:20px;
+		}
+	.content-wrapper .select_goods{
+		padding:500px;
+	}
+	.content-wrapper .button_top{
+		margin-top:10px;
+		font-size:13px;
+		text-align:center;
+		width:100px;
+		height:22px;
+		line-height:10px;
+		margin-left:2px;
+		margin-bottom:10px;
+	}
+	.content-wrapper .button_bottom{
+		/*font-size:13px;*/
+		text-align:center;
+		width:100px;
+		/*height:22px;*/
+		/*line-height:1px;*/
+		margin-left:2px;
+		margin-bottom:10px;
+	}
+	.content-wrapper .product-css{
+		padding-top:8px;
+		padding-bottom:8px;
+		padding-left:30px;
+		padding-right:30px;
+	}
+	.content-wrapper .btn-goto-page{
+		padding-top:0px;
+		padding-bottom:0px;
+		padding-left:5px;
+		padding-right:5px;
+	}
+	.content-wrapper .btn-goto-page1{
+		padding-top:5px;
+		padding-bottom:5px;
+		padding-left:5px;
+		padding-right:5px;
+	}
+	.content-wrapper .btn-search{
+		padding-left:16px;
+		padding-right:16px;
+	}
+	.content-wrapper .link-more{
+		font-size:13px;
+		margin-left:10px;
+		color:#646464;
+	}
+	.content-wrapper .link-more:hover{
+		color:#646464;
+	}
+	.middle-tab td{
+		word-break: break-all;
+	}
+	.img-td2{
+		width:80px;
+		height:90px;
+	}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GetFeedSubmissionCountResponse xmlns="http://mws.amazonaws.com/doc/2009-01-01/">
+  <GetFeedSubmissionCountResult>
+    <Count>100</Count>
+  </GetFeedSubmissionCountResult>
+  <ResponseMetadata>
+    <RequestId>string</RequestId>
+  </ResponseMetadata>
+</GetFeedSubmissionCountResponse>

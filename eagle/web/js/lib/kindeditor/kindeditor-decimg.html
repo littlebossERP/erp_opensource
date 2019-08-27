@@ -1,0 +1,31 @@
+<div class="row">
+	<div class="col-lg-2"><p class="text-right">图片</p></div>
+	<div class="col-lg-10">
+
+	<div id="divimgurl"><div><img src="" width="50" height="50"> <input type="text" id="imgurl9901" name="imgurl[]" size="80" style="width: 300px;" onblur="javascript:DecImg.blurImageUrlInput(this)" value=""> <input type="button" value="删除" onclick="javascript:DecImg.delImageUrlInput(this)"> <input type="button" value="本地上传" onclick="javascript:DecImg.localUpOneImg(this)"></div></div><br>
+	<button type="button" onclick="javascript:DecImg.addImageUrlInput();return false;">添加一张图片</button>					<input type="file" id="img_tmp" class="hidden" name="product_photo_file" value="">
+	</div>
+</div>
+<hr>
+<div class="row">
+	<div class="col-lg-2"><p class="text-right">图片大小</p></div>
+	<div class="col-lg-10">
+		宽<input type="text" value="" id="localPicWidth">
+		<span class="fColor2">根据已设置的图片宽度，等比例缩放高度。</span>
+	</div>
+</div>
+<hr>
+<div class="row">
+	<div class="col-lg-2"><p class="text-right">对齐方式</p></div>
+	<div class="col-lg-10">
+		<label>
+			<input checked="" type="radio" value="left" name="localPicAlign">&nbsp;左对齐
+		</label>
+		<label>
+			<input type="radio" value="center" name="localPicAlign">&nbsp;中对齐
+		</label>
+		<label>
+			<input type="radio" value="right" name="localPicAlign">&nbsp;右对齐
+		</label>				
+	</div>
+</div>

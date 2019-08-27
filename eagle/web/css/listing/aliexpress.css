@@ -1,0 +1,637 @@
+.product-box table tr, .product-box table th,.table-box table tr,.table-box table th{
+	background-color:#fff !important;
+	border: 1px solid #ccc;
+}
+.ali-title {
+	padding: 0 7px;
+	margin: 10px 0;
+	border-left:1px solid #666666;
+	border-left-width:5px;
+	float:left;
+	font: 12px/20px Microsoft Yahei;
+	width:100%;
+}
+.ali-title:after{
+	clear:both;
+	content: '';
+	display:table;
+}
+
+.ali-title a,.ali-title a:hover{
+	float:left;
+	color: #666666;
+}
+
+.ali-title div{
+	float:right;
+}
+.ali-title-info{
+	border-left-color:#1b809e;
+}
+
+.ali-title-warning{
+	border-left-color:#aa6708;
+}
+.ali-title-success{
+	border-left-color:#5cb85c;
+}
+.ali-title-danger{
+	border-left-color:#d9534f;
+}
+.sign{
+	color:red;
+}
+.error_reminded{
+	border-color:red;
+}
+.max-width {
+	width:750px;
+}
+.center-width{
+	width:330px;
+}
+.min-width{
+	width:190px;
+}
+.select-width{
+	width:680px;
+}
+.iv-btn{
+	padding:7px;	
+}
+.btn-text:hover{
+	color: #fff;
+}
+.btn-padding{
+	padding:10px 25px;
+}
+.short-input {
+	width:80px;
+}
+.input-spacing{
+	margin: 10px 0;
+}
+.left-spacing-s{
+	margin-left:5px !important;
+}
+.left-spacing-m{
+	margin-left:10px !important;
+}
+.left-spacing-l{
+	margin-left:20px !important;
+}
+.right-spacing-m{
+	margin-right:10px;
+}
+.right-spacing-l{
+	margin-right:20px;
+}
+.label-spacing{
+	margin-left:20px;
+}
+.label-inline{
+	text-align:right;
+	width: 110px;
+}
+.label-left{
+	text-align:right;
+	width:80px;
+}
+.user-defined-box{
+	background-color:#F2F2F2;
+	width:621px;
+	height:auto;
+	min-height:50px;
+	display:inline-block;
+	vertical-align:top;
+	border-radius:5px;
+	margin-left:15px;
+}
+.cate_list{
+	position: absolute;
+    width: 100%;
+    height: 360px;
+    background: white;
+    z-index: 2;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+}
+.cate_search_ul{
+    border-top: 1px solid #ccc;
+    padding: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 310px;
+    color: #666A72;
+}
+.cate_search_ul li{
+	border-radius: 5px;
+}
+.cate_search_ul li a{
+	width:100%;
+	color: #666A72;
+}
+.cate_search_ul li:hover{
+	background-color:#eee;
+}
+
+.nav_box{
+	border: 1px solid #DDDDDD;
+	border-radius: 5px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	margin-left: 3px;
+	width: 222px;
+	float: left;
+	padding:10px 0;
+}
+.cate-nav{
+	width: 210px;
+	height: 300px; 
+	margin-left:10px;
+}
+
+.cate-nav a,.cate-nav a:hover{
+	color:#666A72;
+	width: 190px;
+}
+
+.cate-nav .active a{
+	/*background-color: #DDDDDD;*/
+	width:190px;
+	color: white;
+}
+.search{
+	padding-left:20px;
+	background: url('/images/icon-post-cate-filter.png') 3px center no-repeat;
+}
+.strong{
+	font-weight:bold;
+}
+
+.modal-footer,.modal-bottom{
+	text-align:center;
+	border:0;
+	padding:15px;
+}
+.btn-white{
+	color:#666666;
+	background-color:white;
+	border:1px solid #666666;
+}
+.btn-white:hover{
+	color:black;
+	border:1px solid black;
+}
+.btn-light{
+    background-color: #2ecc71;
+	color:#fff !important;
+	padding:10px 12px;
+}
+.btn-light:hover{
+	background-color: rgb(0,222,95);
+    border-color: rgb(0,222,95);
+}
+
+.remove-btn{
+	color: #0066FF;
+	cursor: pointer;
+	vertical-align: center;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select: none;      /* IE 10+ */  
+	user-select: none;  
+}
+.click-btn{
+	color: #0066FF !important;
+	cursor: pointer;
+	vertical-align: center;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	padding:5px;
+}
+.not{
+	pointer-events: none;
+	background-color: rgba(0, 0, 0, 0.14);
+	border-color: rgba(102, 102, 102, 0.52);
+	cursor: not-allowed;
+}
+
+.bottom_btn{
+	position:fixed;
+	bottom:0;		
+	left:0;
+	background-color:#f5f5f5;
+	height:50px;
+	width:100%;
+	z-index:100;
+}
+.bottom_btn div{
+	width:40%;
+	height:50px;
+	margin: 0 auto;
+	line-height: 50px;
+	vertical-align: middle;	
+	text-align:center;
+}
+.bottom_btn div a{
+	padding: 5px 45px;
+	margin: 0 5px;
+}
+.error-tips{
+	background-color: #FED9E1;
+	border-radius: 5px;
+	padding:10px 8px;
+	font: 14px/15px Microsoft Yahei;
+}
+.error-tips span{
+	position:relative;
+	top:2px;
+}
+.group-list{
+	width:auto;
+	margin-right:10px;
+	text-align:center;
+	line-height: 20px;
+}
+.group-list input{
+	position:relative;
+	top:3px;
+}
+.pending{
+	min-height:30px;
+	max-width: 830px;
+	background-color:#F2F2F2;
+	margin-top: 10px;
+	padding:10px;
+	display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.text-left{
+	text-align:left;
+	padding-left: 0;
+}
+.mTop20{
+	margin-top:20px;
+}
+.img-area{
+	background-color:#F2F2F2;
+	width:900px;
+	height:320px;
+	/*margin-top:10px;*/
+}
+.image_btn{
+	padding-top:20px;
+	margin: 20px;
+}
+.iv-form.form-base > .form-group > .row > .input-control {
+    -webkit-flex: 0 0 830px;
+    flex: 0 0 830px;
+}
+.iv-radio{
+	height:26px;
+	vertical-align: middle;
+	background-color:#fff;
+	border: 1px solid #cdced0;
+	border-radius: 3px;
+	display:inline-block;
+	position:relative;
+	top:-2px;
+}
+.iv-select{
+	opacity: 1 !important;
+	line-height:1.5;
+	min-width:170px;
+	height:26px;
+	display:inline-block;
+	vertical-align: center;
+	background-color:#fff;
+	border: 1px solid #cdced0;
+	border-radius: 3px;
+}
+.iv-select:hover{
+	border-color: #666666;
+}
+
+.attr-box{
+	/*width:410px;*/
+	width:auto;
+	height:auto;
+	/*min-height:150px;*/
+	/*background-color:#F2F2F2;*/
+	display:block;
+    border-radius: 10px;
+}
+.attr-box ul{
+    width: 830px;
+   	border-radius:5px; 
+   	padding:10px;
+    background-color: #f5f5f5;
+    height: auto;
+
+}
+.attr-box ul:after{
+	clear:both;
+	content:'';
+	display:table;
+}
+
+
+.attr-box ul li{
+	float:left;
+	margin-right:15px;
+	margin-bottom:10px;
+}
+
+label.color{
+	width:14px;
+	height:14px;
+	padding:0;
+	border:1px solid #e4e4e4;
+	overflow:hidden;
+	text-indent:-999px;
+}
+
+.p-list{
+    width: 430px;
+    margin: 0 auto;
+    margin-top: 20px;
+    background-color: white;
+    height: 100px;
+}
+.s-list{
+	width: 430px;
+    margin: 0 auto;
+    margin-top: 20px;
+    background-color: white;
+    height: 70px;
+}
+.s-table{
+	width:350px;
+	margin:10px auto;
+}
+.s-table table th,.s-table table td{
+	text-align: center;
+	height:36px;
+}
+.s-table table, .s-table table tr{
+	border:1px solid #ccc;
+	padding: 3px 5px;
+	height:36px;
+}
+.p-list li,.s-list li{
+	float:left;
+	margin-left:15px;
+	margin-top:10px;
+}
+.table-box{
+	width:450px;
+	margin: 10px auto 10px 0px;
+}
+.table-box table th,.table-box table td{
+	text-align:center;
+	height:36px;
+}
+.table-box table , .table-box table tr{
+	border: 1px solid #ccc;
+	padding:3px 5px;
+	height:30px;
+}
+
+.table-box table input{
+	width:100px;
+}
+.color-771{
+	background-color:#F8F7E7;
+}
+.color-193{
+	background-color:#000;
+}
+.color-173{
+	background-color:#0080FF;
+}
+.color-1254{
+	background-color:#1eddff;
+}
+.color-365458{
+	background-color:#8d6468;
+}
+.color-350850{
+	background-color:#FFD700;
+}
+.color-691{
+	background-color:#999;
+}
+.color-200004890{
+	background-color:#666;
+}
+.color-175{
+	background-color:#007000;
+}
+.color-200004889{
+	background-color:#7c8c30;
+}
+.color-200002130{
+	background-color:#fdfde8;
+}
+.color-200001438{
+	background-color:#dac9b9;
+}
+.color-350686{
+	background-color:Brown;
+}
+.color-350852{
+	background-color:#FFA500;
+}
+.color-1052{
+	background-color:#FFC0CB;
+}
+.color-496{
+	background-color:#6c3365;
+}
+.color-200004891{
+	background-color:#dda0dd;
+}
+.color-10{
+	background-color:red;
+}
+.color-350853{
+	background-color:#ccc;
+}
+.color-29{
+	background-color:#fff;
+}
+.color-366{
+	background-color:#ff0;
+}
+.color-200003699{
+	background:url('/images/aliexpress/multicolor.gif') no-repeat 0 0;
+}
+.color-200002984{
+	background-color: #BE000A ;
+}
+.color-200006153{
+	background-color: LightYellow;
+}
+.color-201440977{
+	background-color: rgba(240, 230, 140, 0.58);
+}
+.color-200006154{
+	background-color: darkKhaki;
+}
+.color-200000195{
+	background-color: Chocolate;
+}
+.color-200006156{
+	background-color:Plum;
+}
+.color-200006152{
+	background-color:LightGreen;
+}
+.color-200004870{
+	background-color:DarkBlue;
+}
+.color-200006151{
+	background-color:LightGrey;
+}
+.color-200001951{
+	background-color:#d5b489;
+}
+.color-100018786{
+	background-color:transparent;
+}
+.btn-hidden{
+	position: relative;
+	cursor:pointer;
+}
+
+.btn-hidden input{
+	position:absolute;
+	top:0;
+	left:0;
+	opacity: 0;
+	width:100%;
+	height:100%;
+}
+
+.img_show div{
+	display:inline-block;
+	vertical-align:middle;
+}
+
+.place-box{
+	display:inline-block;
+	vertical-align: top;
+	margin-left:20px;
+}
+.o-list {
+	width:530px;
+}
+.o-list li{
+	float: left;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+.no-spacing{
+	margin: 0;
+    position: relative;
+    top: 2px;
+}
+.product-box {
+	width:700px;
+	/*margin-left: 105px;*/
+}
+.product-box table th,.product-box table td{
+	/*border:1px solid #ccc !important;*/
+	background-color: white !important;
+	text-align:center;
+}
+.product-box table,.product-box table tr{
+	border:1px solid #ccc;
+}
+.product-box a{
+	background-color:white !important;
+}
+.attr-value{
+	display: inline-block;
+    vertical-align: top;
+    margin-top: -6px;
+}
+.attr-value ul{
+	width:485px;
+}
+.attr-value ul:after{
+	display:table;
+	content:'';
+	clear:both;
+}
+.attr-value ul li{
+	float:left;
+	margin-left:0px;
+	margin-right:10px;
+	margin-bottom:10px;
+}
+.attr-value input[type="text"]{
+	width:330px;
+}
+
+.show-list{
+	text-align: left;
+    overflow-y: auto;
+    padding-left: 20px;
+    border: 1px solid #ccc;
+	width: 300px;
+    height: 200px;
+    margin: 0 auto;
+}
+.show-list label{
+	position: relative;
+}
+
+.logistics_service_info_box{
+	background-color: #f5f5f5;
+    padding: 10px;
+    width: 570px;
+    border-radius: 5px;
+}
+.right_menu{
+	position:fixed;
+	top:110px;
+	right:20px;
+	width:100px;
+}
+.left_pannel {
+    height: auto;
+    float: left;
+    background: url(/images/ebay/listing/profile_menu_bg1.png) -23px 0 repeat-y;
+    position: fixed;
+}
+.left_pannel>p {
+    margin: 50px 0;
+    background: url(/images/ebay/listing/profile_menu_bg.png) 0 -41px no-repeat;
+    padding-left: 16px;
+}
+.left_pannel>p a{
+	color: rgb(51, 51, 51);
+}
+.left_pannel .active{
+	color:rgb(165, 202, 246);
+}
+.left_pannel_first {
+    float: left;
+    background: url(/images/ebay/listing/profile_menu_bg.png) 0 -6px no-repeat;
+    margin-bottom: 55px;
+    height: 12px;
+    padding-left: 12px;
+}
+.left_pannel_last {
+    float: left;
+    background: url(/images/ebay/listing/profile_menu_bg.png) 0 -6px no-repeat;
+    margin-top: 5px;
+    height: 12px;
+    padding-left: 12px;
+}

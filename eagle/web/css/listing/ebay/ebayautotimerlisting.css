@@ -1,0 +1,117 @@
+@CHARSET "UTF-8";
+/**
+ * 表格设置
+ * 1-边框-宽度-颜色-背景
+ * 2-宽度
+ * 3-
+ */
+.table_listing {
+    width: 100%;
+    border:1px solid #ccc;
+    line-height: 22px;
+/*     width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    line-height: 22px;
+    border:1px solid #ccc; */
+}
+.table_listing tbody > tr  > td{
+/*     text-align: left;
+    vertical-align: top; */
+}
+.table_listing > thead > tr > th {
+    background-color: #d9effc;
+    font: bold 13px SimSun,Arial;
+    text-align: center;
+    padding: 7px;
+    /* min-width: 110px; */
+/*     padding: 7px;
+    background-color: #d9effc;
+    font: bold 13px SimSun,Arial;
+    text-align: center;
+    font-weight: bold;
+    color: #374655;
+    white-space: nowrap; */
+}
+.table_listing  tbody{
+    /* font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; */
+    /* font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; */
+}
+.table_listing tr td {
+/*     text-align: left; */
+    /* vertical-align: top; */
+    text-align: center;
+    border:1px solid #ccc;
+    font-size: 13px;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.table_listing > tbody > tr:hover{
+    /* background-color: #f4f9fc; */
+}
+
+.e_m0{
+    margin: 0;
+}
+.e_color{
+    color: #AAAAAA;
+}
+
+.squareSpan{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: green;
+    color: #fff;
+    text-align: center;
+    line-height: 20px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+
+.table_listing .subtable_var{
+    width: 100%;
+
+}
+.table_listing .subtable_var tr td{
+    border:0px solid #ccc;
+}
+/* .subtable_var  tr td{
+    border-bottom:1px solid #ccc;
+    text-align: center;
+    padding: 7px;
+} */
+.batchOperation{
+    padding: 7px;
+}
+.summary {
+    padding: 7px;
+    /* padding: 10px 0px; */
+    font-size: 14px;
+    color: #000;
+}
+.summary > b{
+    color: #2AB9D4;
+}
+
+.table,.table-striped,.table-bordered{
+    padding: 7px;
+}
+.table,.table-striped,.table-bordered tr {
+    border:1px solid #ccc;
+}
+
+.table,.table-striped,.table-bordered tr td{
+    text-align: center;
+    font-size: 13px;
+    vertical-align: middle !important;
+}
+
+.table,.table-striped,.table-bordered tr th{
+    text-align: center;
+    /* vertical-align:middle; */
+}

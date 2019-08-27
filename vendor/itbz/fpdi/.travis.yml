@@ -1,0 +1,18 @@
+sudo: false
+
+language: php
+
+php:
+    - 7.0
+    - 5.6
+    - 5.5
+    - 5.4
+    - 5.3
+    - hhvm
+
+before_script:
+    - composer remove --dev hanneskod/classtools
+    - composer install --dev
+
+script:
+    - phpunit --bootstrap=vendor/autoload.php tests

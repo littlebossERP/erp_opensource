@@ -1,0 +1,156 @@
+@import "compass/css3";
+
+// 标准色
+$bgColor:(
+	'default':#f5f5f5,
+	'title':#374655,
+	'hover':#e6e6e6,
+	'border':#d9d9d9,
+);
+
+$textColor:(
+	'default':#666666,
+	'title':#333333,
+	'icon':#999999,
+	'tab':#999999,
+	'info':#2ecc71,
+);
+
+$borderColor:(
+	'default':#d1d2d4,
+	'active':#ff9700,
+	'input':#cdced0,
+	'input_hover':#666666,
+);
+
+$alertColor:(
+	'green':tint(green,85)
+);
+
+$activeColor: 	#01bdf0 !default;
+
+// 垂直居中mixin
+@mixin vertical-align($direction){
+	@include display-flex;
+	@include align-items($direction);
+}
+@mixin fixed-center(){
+	top:0;
+	right:0;
+	left:0;
+	bottom:0;
+	margin:auto;
+}
+
+
+$colors:(
+	'warn':(
+		'main':#ff0033,
+		'sub':#FFFFFF
+	),
+	'remind':(
+		'main':#FFFBE1,
+		'sub':#8a6d3b
+	),
+	'active':(
+		'main':#01bdf0,
+		'sub':#FFFFFF
+	),
+	'important':(
+		'main':#ff9900,
+		'sub':#FFFFFF
+	),
+	'success':(
+		'main':#2ecc71,
+		'sub':#FFFFFF
+	),
+	'title':(
+		'main':#333333,
+		'sub':#FFFFFF
+	),
+	'text':(
+		'main':#666666,
+		'sub':#FFFFFF
+	),
+	'icon':(
+		'main':#999999,
+		'sub':#FFFFFF
+	),
+	'background':(
+		'main':#f5f5f5,
+		'sub':#000000
+	),
+	'none':(
+		'main':#FFFFFF,
+		'sub':#000000
+	)
+);
+
+
+@each $key,$value in $colors{
+	.text-#{$key}{
+		color:map-get($value,'main');
+	}
+	.text-rever-#{$key}{
+		color:map-get($value,'sub');
+		background-color:map-get($value,'main');
+		padding:5px 5px;
+	}
+	.btn-#{$key}{
+		background-color:map-get($value,'main');
+		color:map-get($value,'sub');
+		&:hover:not([disabled]),
+		&:focus:not([disabled]){
+			background-color:shade(map-get($value,'main'),10);
+			color:map-get($value,'sub');
+		}
+		&[disabled]{
+			cursor:not-allowed;
+			background-color:lighten(map-get($value,'main'),30%);
+		}
+		&.btn-outer-border{
+			background-color:map-get($value,'sub');
+			color:map-get($value,'main');
+			border:1px solid map-get($value,'main');
+		}
+	}
+	.tips-#{$key}{
+		background-color:map-get($value,'main');
+		color:map-get($value,'sub');
+	}
+}
+
+.iv-tips{
+	position: fixed;
+	top:49px;
+	left:0;
+	width:100%;
+	line-height:40px;
+	font-weight:normal;
+	cursor:pointer;
+	font-size:14px;
+	text-align:center;
+	display:none;
+	// @include opacity(0);
+	p{
+		margin:0 auto;
+		padding:5px 20px;
+		font-size: 20px;
+		@include inline-block;
+		@include border-bottom-radius(4px);
+	}
+	span.iconfont{
+		font-size:32px;
+		margin-right:10px;
+	}
+	.tips-close{
+		margin-left:30px;
+	}
+}
+
+
+
+
+
+
+

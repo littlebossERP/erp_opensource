@@ -1,0 +1,65 @@
+/*
+*  modal
+*/
+
+*{
+	margin:0px;
+	padding:0px;
+	font-size:13px;
+	font-family:微软雅黑;
+}
+.modal-title{
+	font-size:18px;
+}
+.modal-close{
+	display:none;
+}
+.modal-content{
+	margin:0px;
+	padding:0px;
+	width:679px;
+	height:423px;
+	overflow-y:none;
+}
+.box{
+	width:520px;
+	height:370px;
+	margin:0 auto;
+	padding:0px;
+	margin-top:30px;
+	font-size:15px;
+	color:#333333;
+}
+
+#sel{
+	width:415px;
+	height:22px;
+}
+.comment-content{
+	margin-top:20px;
+}
+
+.kuang1{
+	width:415px;
+	height:188px;
+	margin-top:20px;
+	margin-left:93px;
+}
+.kuang2{
+	width:415px;
+	height:188px;
+	margin-top:20px;
+	margin-left:93px;
+	display:none;	
+}
+.kuang3{
+	width:415px;
+	height:188px;
+	margin-top:20px;
+	margin-left:93px;
+	display:none;
+}
+.sure-button{
+	margin-top:20px;
+}
+

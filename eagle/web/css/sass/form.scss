@@ -1,0 +1,649 @@
+@import "variable";
+@import "compass/css3";
+
+.filter-bar{
+	> *{
+		margin-top:5px;
+		margin-bottom:5px;
+		vertical-align: middle;
+	}
+	.advance-search{
+		@include inline-block;
+		.iconfont{
+			font-size:12px;
+		}
+	}
+}
+
+.iv-input,
+.iv-textarea{
+	border:1px solid map-get($borderColor,'input');
+	background-color:#FFFFFF;
+	padding:3px 5px;
+	height:26px;
+	line-height:20px;
+	position:relative;
+	@include border-radius(3px);
+	@include inline-block;
+	&:hover{
+		border-color:map-get($borderColor,'input_hover');
+	}
+}
+
+.input-group{
+	&.iv-input{
+		padding:0;
+		.iv-input{
+			border:none;
+			padding-left:2px;
+			padding-right:2px;
+			height:24px;
+		}
+	}
+	// btn
+	.iv-btn{
+		height:100%;
+		line-height: 100%;
+		@include border-radius(0);
+	}
+	:last-child,
+	:first-child{
+		&.iv-btn{
+			margin-top:-1px;
+			height:26px;
+		}
+	}
+	:last-child{
+		&.iv-btn{
+			float:right;
+			margin-right:-1px;
+			@include border-right-radius(3px);
+		}
+	}
+	:first-child{
+		&.iv-btn{
+			float:left;
+			margin-left:-1px;
+			@include border-left-radius(3px);
+		}
+	}
+
+}
+
+.iv-input{
+	// @include appearance(none); 	// 去除浏览器默认样式
+	@include input-placeholder{
+		line-height: 16px;
+		// background-color:#ffffff;
+	}
+	&:focus{
+		outline:none;
+	}
+	 > option{
+	 	&:hover{
+	 		background-color: green;
+	 	}
+	 }
+	 > select + span{
+	 	min-width:100% !important;
+	 }
+}
+
+.iv-select{
+	padding:0;
+	// background-color:#FFFFFF;
+	// select{
+	// 	border:0;
+	// 	min-width:100%;
+	// 	background-color:#FFFFFF;
+	// 	padding:2px 14px 2px 2px;
+	// 	// @include appearance(none); 	// 去除浏览器默认样式
+	// 	&:focus{
+	// 		outline:none;
+	// 	}
+	// 	+ .icon-control-arr{
+	// 		position:absolute;
+	// 		right:2px;
+	// 	}
+	// }
+}
+
+.iv-textarea{
+	width:100%;
+	height:auto;
+	line-height:1.5em;
+	// @include appearance(none); 	// 去除浏览器默认样式
+	
+}
+
+.iv-editor{
+	width:100%;
+	height:auto;
+}
+
+
+// 定义表单宽度
+
+$form-input-width:330px;
+$form-control-width:580px;
+
+$form-type:(
+	'base':'',
+	'horizontal':'',
+	'inline':''
+);
+
+// 定义 flex 行
+@mixin iv-flex-row{
+	margin-left:0;
+	margin-right:0;
+	@include flex-basis(100%);
+	@include display-flex;
+	@include align-content(space-between);
+	@include align-items(center);
+}
+
+// flex 列
+@mixin iv-flex-item{
+
+}
+
+
+.iv-form{
+	width:100%;
+	position:relative;
+	padding-top:10px;
+	padding-bottom:10px;
+	.input-area{
+		background-color:map-get($bgColor,'default');
+		padding:10px;
+		@include border-radius(4px);
+	}
+
+	.input-validate{
+		padding:0 10px;
+	}
+	label.row{
+		i{
+			color:#f00;
+			margin-left:3px;
+		}
+	}
+	.add-column{
+		&,
+		a{
+			font-size:14px;
+		}
+	}
+
+	@each $k,$v in $form-type{
+		&.form-#{$k}{
+			.form-group{
+				 > input{
+
+				 }
+				.input-group{
+				 	
+				 	.input-group-addon{
+				 		&,
+				 		&:first-child,
+				 		&:last-child{
+				 			background-color:inherit;
+				 			border:0;
+				 			font-size:inherit;
+				 			color:inherit;
+				 			@include border-radius(0px);
+				 		}
+				 		&:first-child{
+				 			padding-left:0;
+				 		}
+				 		&:last-child{
+				 			padding-right:0;
+				 		}
+				 	}
+				 	.iv-input{
+				 		display: table-cell;
+				 		width:100%;
+				 	}
+				}
+			}
+		}
+	}
+
+	&.form-base{
+		> .form-group{
+			width:100%;
+			@include display-flex;
+			@include flex-wrap(wrap);
+			align-content: space-between;
+			> .row{
+				margin-bottom:10px;
+				@include iv-flex-row;
+
+				> .input-control{
+					@include flex(0 0 $form-control-width);
+					.input-group,
+					 > .iv-input,
+					 > .iv-select{
+						width:$form-input-width;
+					}
+					.text-help{
+						float:right;
+						line-height: 26px;
+					}
+				}
+			}
+			
+		}
+	}
+	&.form-horizontal{
+		> .form-group{
+			margin-left:0;
+			margin-right:0;
+			@include iv-flex-row;
+			@include align-items(center);
+			margin-bottom:15px;
+
+			> label.row{
+				flex:0 0 80px;
+			}
+			> div.row{
+				@include display-flex;
+				// display: flex;
+			}
+			> .row{
+				margin-left:10px;
+				margin-right:10px;
+				@include align-items(center);
+				.input-group,
+				 > .iv-input{
+				 	width:150px;
+				 }
+			}
+		}
+	}
+
+	
+
+}
+
+.form-action{
+	text-align:center;
+
+
+
+	.iv-btn{
+		font-size:14px;
+		width:20%;
+		margin:0 5px;
+	}
+
+}
+
+
+.anchor-list{
+	position:fixed;
+	top:150px;
+	right:80px;
+	background-color:#fff;
+	z-index:1;
+	li{
+		border-left:1px solid #ccc;
+		padding:10px;
+		width:100px;
+		height:4em;
+		position:relative;
+		line-height: 16px;
+		&:last-child{
+			border-left:none;
+		}
+		a{
+			position:absolute;
+			left:0;
+			display: list-item;
+			list-style-type:disc;
+			top:-1em;
+			margin-left:11px;
+			.iconfont{
+				position:absolute;
+				left:-20px;
+				background-color:#ffffff;
+			}
+		}
+
+	}
+}
+
+// upload
+.iv-upload{
+	width:80px;
+	height:100px;
+	float:left;
+	margin-left:4px;
+	margin-right:4px;
+	.view,
+	.choose{
+		width:80px;
+		height:80px;
+		position:relative;
+	}
+	.view{
+		border:1px solid transparent;
+		background-position:center;
+		background-size:cover;
+		display: none;
+
+		&:hover{
+			.remove,
+			.icon-shanchu{
+				display: block;
+			}
+		}
+		.remove{
+			display: none;
+			background-color:#000;
+			width:100%;
+			height:100%;
+			position:absolute;
+			top:0;
+			left:0;
+			text-align: center;
+			@include opacity(.3);
+		}
+		.icon-shanchu{
+			display: none;
+			position:absolute;
+			cursor: pointer;
+			font-size:20px;
+			color:#fff;
+			z-index: 1;
+			width:20px;
+			height:20px;
+			@include fixed-center;
+		}
+	}
+	.choose{
+		border:1px dashed #ccc;
+		background-color:#fff;
+		&:hover{
+			border-color:red;
+			border-weight:2px;
+		}
+		.placeholder{
+			z-index:0;
+			position:absolute;
+			top:0;
+			left:0;
+			width:100%;
+			height:100%;
+			color:map-get($textColor,'icon');
+			text-align:center;
+			p{
+				margin:20px auto 10px;
+			}
+			.iconfont{
+				font-size:20px;
+			}
+		}
+	}
+	p.src{
+		line-height: 20px;
+		width:100%;
+		height: 20px;
+		overflow: hidden;
+		text-align: right;
+	}
+	input[type=file]{
+		width:100%;
+		height:100%;
+		opacity: 0;
+		z-index: 1;
+		cursor: pointer;
+		position:absolute;
+		top:0;
+		left:0;
+	}
+}
+
+
+
+*[iv-template]{
+	display:none;
+}
+
+// 图片库选择
+.iv-image-body{
+	margin:10px 0;
+	.iv-image-box{
+		width:120px;
+		height:170px;
+		border:2px dashed transparent;
+		margin-right:15px;
+		margin-bottom:10px;
+		float:left;
+		&.ui-sortable-helper{
+			border-color:red;
+		}
+		.iv-image-box-header,
+		.iv-image-box-footer{
+			@include display-flex;
+			@include align-items(center);
+			@include justify-content(space-between);
+		}
+		.iv-image-box-header{
+			height:16px;
+			line-height: 16px;
+			padding:0;
+			input[type="checkbox"]{
+				margin-left:0;
+			}
+			.primary{
+				input{
+					display: none;
+					&:checked + span + a{
+						display: none;
+					}
+					&:checked + span{
+						display: inline;
+					}
+					 + span{
+					 	display: none;
+					 }
+				}
+			}
+		}
+		.iv-image-box-body{
+			position:relative;
+			overflow: hidden;
+			margin-top:2px;
+			width:100%;
+			height:120px;
+			img{
+				width:100%;
+				height:100%;
+			}
+			.iv-image-box-cover,
+			.iv-image-box-cover2{
+				position: absolute;
+				top:120px;
+				left:0;
+				width: 100%;
+				height: 100%;
+				// display: none;
+			}
+			.iv-image-box-cover{
+				@include opacity(.3);
+				background-color:#111;
+			}
+			.iv-image-box-cover2{
+				color:white;
+				word-wrap: break-word;
+				height: 110px;
+				padding:5px;
+				.copy-url{
+					margin-bottom:5px;
+				}
+				.cover-close{
+					font-size:10px;
+					position:absolute;
+					top: 5px;
+					right: 5px;
+					&,
+					&:hover{
+						color:white;
+					}
+				}
+				p{
+					height:90px;
+					overflow: hidden;
+				}
+			}
+		}
+		.iv-image-box-footer{
+			height:22px;
+			margin-top:4px;
+			.iconfont{
+				width:24px;
+				height:24px;
+				text-align: center;
+				line-height: 24px;
+				background-color:#ccc;
+				color:#fff;
+				font-size:16px;
+			}
+		}
+	}
+
+}
+
+.iv-select-img-lib{
+	width:840px;
+	padding:15px;
+
+	.iv-select-img-lib-header{
+		padding-bottom:30px;
+		margin-bottom:30px;
+		border-bottom:1px solid #ededed;
+		.iv-select-img-lib-search{
+			width:370px;
+			padding-right:10px;
+			.iv-input{
+				margin-bottom:15px;
+			}
+		}
+		.iv-select-img-lib-info{
+			background-color:#f3f3f3;
+			width:440px;
+			height:70px;
+			table{
+				float:left;
+				td{
+					line-height: 35px;
+					font-size:16px;
+					width:170px;
+					padding:0 15px;
+				}
+			}
+			.iv-select-img-lib-add-storage{
+				width:100px;
+				height:100%;
+				line-height:70px;
+				text-align: center;
+				color:white;
+				font-size:18px;
+				background-color:rgb(251,153,40);
+			}
+		}
+	}
+	.iv-select-img-lib-body{
+
+		.iv-select-img-lib-item{
+			float:left;
+			margin-right:15px;
+			margin-bottom:20px;
+			width:120px;
+			height:170px;
+			.iv-select-item-header{
+				width:100%;
+				height:20px;
+				line-height: 20px;
+				color:#fff;
+				background-color: #a0a0a0;
+				margin-bottom:3px;
+				p{
+					width:100px;
+					margin:0 auto;
+					overflow: hidden;
+					line-height: 20px;
+				}
+			}
+			.iv-select-item-body{
+				margin-bottom:3px;
+				position: relative;
+				overflow: hidden;
+				input{
+					position:absolute;
+					top:2px;
+					left:0px;
+				}
+				img{
+					width:120px;
+					height:120px;
+				}
+				.iv-select-item-cover{
+					// @include opacity(.3);
+					background-color:rgba(0,0,0,.3);
+					position:absolute;
+					top:120px;
+					left:0;
+					width:100%;
+					color:white;
+					word-wrap: break-word;
+					height: 120px;
+					padding:5px;
+					.copy-url{
+						margin-bottom:5px;
+					}
+					.cover-close{
+						font-size:10px;
+						position:absolute;
+						top: 5px;
+						right: 5px;
+						&,
+						&:hover{
+							color:white;
+						}
+					}
+					p{
+						height:90px;
+						overflow: hidden;
+					}
+				}
+			}
+			.iv-select-item-footer{
+				@include display-flex;
+				@include justify-content(space-between);
+				@include align-items(center);
+				height:22px;
+				.iconfont{
+					width:24px;
+					height:24px;
+					text-align: center;
+					line-height: 24px;
+					background-color:#a0a0a0;
+					color:#fff;
+					font-size:16px;
+				}
+			}
+		}
+		.ajax-page-bar{
+			width:100%;
+			text-align: center;
+		}
+	}
+	.iv-select-img-lib-footer{
+		text-align: center;
+		margin-top:30px;
+	}
+}
+

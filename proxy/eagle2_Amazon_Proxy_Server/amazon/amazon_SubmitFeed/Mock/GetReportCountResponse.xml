@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GetReportCountResponse xmlns="http://mws.amazonaws.com/doc/2009-01-01/">
+  <GetReportCountResult>
+    <Count>100</Count>
+  </GetReportCountResult>
+  <ResponseMetadata>
+    <RequestId>string</RequestId>
+  </ResponseMetadata>
+</GetReportCountResponse>

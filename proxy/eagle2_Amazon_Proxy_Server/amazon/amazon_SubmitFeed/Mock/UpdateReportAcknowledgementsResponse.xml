@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UpdateReportAcknowledgementsResponse xmlns="http://mws.amazonaws.com/doc/2009-01-01/">
+  <UpdateReportAcknowledgementsResult>
+    <Count>100</Count>
+    <!--1 or more repetitions:-->
+    <ReportInfo>
+      <ReportId>string</ReportId>
+      <ReportType>string</ReportType>
+      <!--Optional:-->
+      <ReportRequestId>string</ReportRequestId>
+      <AvailableDate>2008-09-28T18:49:45</AvailableDate>
+      <Acknowledged>true</Acknowledged>
+      <AcknowledgedDate>2004-02-14T10:44:14</AcknowledgedDate>
+    </ReportInfo>
+  </UpdateReportAcknowledgementsResult>
+  <ResponseMetadata>
+    <RequestId>string</RequestId>
+  </ResponseMetadata>
+</UpdateReportAcknowledgementsResponse>

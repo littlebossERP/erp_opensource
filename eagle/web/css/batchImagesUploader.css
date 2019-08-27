@@ -1,0 +1,75 @@
+@CHARSET "UTF-8";
+
+p > span.lnk-del-input{
+	cursor: pointer;
+	margin-left: 10px;
+}
+p > input[type="file"]#product_photo_file_1 , p > input[type="file"]#product_photo_file_2 ,
+p > input[type="file"]#product_photo_file_3 , p > input[type="file"]#product_photo_file_4 ,
+p > input[type="file"]#product_photo_file_5 , p > input[type="file"]#product_photo_file_6{
+	display: inline-block;
+}
+div[role=image-uploader-container]{
+	margin: 30px 0;
+}
+#image-list.row{
+	padding-top: 30px;
+}
+#image-list .image-item .close{
+	color: red;
+	position: absolute;
+	right: 5px;
+	top: 0px;
+}
+#image-list .image-item > .thumbnail{
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle;
+	overflow: hidden;
+	position: relative;
+	text-decoration: none;
+}
+#image-list .image-item > .thumbnai > font{
+	max-width: 100px;
+	max-height: 100px;
+}
+#image-list li.image-item > p > img{
+	max-width: 100px;
+	max-height: 100px;
+}
+/*
+#image-list li.image-item{
+	border: 1px solid #CCC;
+	float: left;
+	margin: 5px;
+	display: inline;
+	width: 100px;
+	height: 100px;
+	background-color: #FFF;
+	text-align: right;
+	overflow: hidden;
+	position: relative;
+}
+
+#image-list li.image-item > .close{
+	color: red;
+	position: absolute;
+	right: 5px;
+	top: 0px;
+}
+#image-list li.image-item > p{
+	text-align: center;
+	width: 100px;
+	height: 100px;
+	line-height: 100px;
+	display: table-cell;
+	vertical-align: middle;
+	overflow: hidden;
+}
+#image-list li.image-item > p > img{
+	max-width: 100px;
+	max-height: 100px;
+}
+
+*/
+

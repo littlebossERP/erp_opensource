@@ -1,0 +1,15 @@
+<div class="iv-image-box-header">
+	<input type="checkbox" name="${name}[]" value="${src}" checked="checked" {{if checkbox==false}}style="display: none;"{{/if}} >
+	<input type="hidden" name="${name}_thumb[]" value="${thumb}" >
+</div>
+<div class="iv-image-box-body">
+	<img width="100%" height="100%" src="${thumb}" title="${title}">
+	<div class="iv-image-box-cover"></div>
+	<div class="iv-image-box-cover2">
+		<a class="iv-btn btn-none copy-url" style="padding:2px 5px;" data-clipboard-text="${src}">复制地址</a>
+		<a class="cover-close iconfont icon-guanbi"></a>
+		<p>${src}</p>
+	</div>
+</div>
+<div class="iv-image-box-footer">
+</div>

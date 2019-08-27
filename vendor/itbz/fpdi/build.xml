@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="fpdi" basedir="." default="build">
+    <property name="APP_NAME" value="${phing.project.name}"/>
+    <property name="APP_ROOT" value="${project.basedir}"/>
+    <property name="SRC_DIR" value="${APP_ROOT}/src"/>
+    <property name="TEST_DIR" value="${APP_ROOT}/tests"/>
+    <property name="VENDOR_DIR" value="${APP_ROOT}/vendor"/>
+    <property name="FPDI_DIR" value="${APP_ROOT}/fpdi.source"/>
+    <property name="TEMP_DIR" value="/tmp"/>
+    <property name="FPDI_URL" value="https://www.setasign.com/supra/kon2_dl/103845/FPDI-1.6.1.zip"/>
+
+    <target name="build" depends="convert,test,cleanup">
+    </target>
+
+    <target name="convert" depends="getfpdi,install">
+        <delete>
+            <fileset dir="${SRC_DIR}">
+                <include name="*.php"/>
+            </fileset>
+        </delete>
+        <exec
+            command="php dev/convert.php ${FPDI_DIR} ${SRC_DIR}"
+            dir="${APP_ROOT}"
+            checkreturn="true"
+            passthru="true"
+            />
+        <delete dir="${FPDI_DIR}"/>
+    </target>
+
+    <target name="getfpdi">
+        <delete dir="${FPDI_DIR}"/>
+        <exec command="wget -O ${TEMP_DIR}/fpdi.zip ${FPDI_URL}" dir="${APP_ROOT}"/>
+        <unzip file="${TEMP_DIR}/fpdi.zip" todir="${FPDI_DIR}"/>
+        <delete file="${TEMP_DIR}/fpdi.zip"/>
+    </target>
+
+    <target name="test" depends="install">
+        <exec
+            command="${VENDOR_DIR}/bin/phpunit --bootstrap=vendor/autoload.php ${TEST_DIR}"
+            dir="${APP_ROOT}"
+            checkreturn="true"
+            passthru="true"
+            />
+    </target>
+
+    <target name="cleanup">
+        <delete file="${TEST_DIR}/FPDF_AA.pdf"/>
+        <delete file="${TEST_DIR}/TCPDF_AA.pdf"/>
+    </target>
+
+    <target name="install">
+        <if>
+            <available file="${VENDOR_DIR}"/>
+            <else>
+                <exec
+                    command="composer install --dev"
+                    dir="${APP_ROOT}"
+                    checkreturn="true"
+                    passthru="true"
+                    />
+            </else>
+        </if>
+    </target>
+</project>

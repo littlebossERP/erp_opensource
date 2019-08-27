@@ -1,0 +1,46 @@
+/* The Impromptzoo theme by Trent Richardson, based on http://stammtec.de/work/upload-dialog/ */
+.impromptu-lock{overflow:hidden}
+/* layout */
+.jqifade{ position: absolute; background-color: #000; }
+div.jqi{ width: 300px !important;font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; position: absolute; background-color: #ffffff; font-size: 11px; text-align: left; 
+	border: solid 2px #333; border-radius: 0; -moz-border-radius: 0; -webkit-border-radius: 0 }
+
+/* container */
+div.jqi .jqicontainer{ background-color: #5b6776; }
+div.jqi .jqiclose{ position: absolute; top: 0; right: 8px; width: 20px; padding: 2px 0 2px 0; text-align: center; cursor: pointer; color: #fff; font-weight: bold; text-shadow: 1px 1px 1px #333;
+	background-color: #d4797b; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#d4797b), to(#b34b4d)); background-image: -webkit-linear-gradient(top, #d4797b, #b34b4d); background-image: -moz-linear-gradient(top, #d4797b, #b34b4d); background-image: -ms-linear-gradient(top, #d4797b, #b34b4d); background-image: -o-linear-gradient(top, #d4797b, #b34b4d);
+	border: solid 1px #555; border-top: none; border-radius: 0 0 5px 5px; -moz-border-radius: 0 0 5px 5px; -webkit-border-radius: 0 0 5px 5px;}
+div.jqi .jqiclose:hover{text-shadow: 1px 1px 2px #000;color:#fff}
+div.jqi .jqititle{ padding: 10px 10px; font-size: 14px; color: #333; line-height: 20px; text-align: center; text-shadow: 1px 1px 1px #999; letter-spacing: 1px;
+	background-color: #f0f0f0; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f0f0f0), to(#dbdbdb)); background-image: -webkit-linear-gradient(top, #f0f0f0, #dbdbdb); background-image: -moz-linear-gradient(top, #f0f0f0, #dbdbdb); background-image: -ms-linear-gradient(top, #f0f0f0, #dbdbdb); background-image: -o-linear-gradient(top, #f0f0f0, #dbdbdb);
+	border-bottom: solid 1px #949494; border-radius: 0; -moz-border-radius: 0; -webkit-border-radius: 0; }
+div.jqi .jqimessage{ padding: 10px; line-height: 20px; color: #444444; background-color: #fff;
+	border-bottom: solid 1px #333; border-radius: 0; -moz-border-radius: 0; -webkit-border-radius: 0 ;height: 500px !important;overflow: auto;}
+
+/* buttons */
+div.jqi .jqibuttons{ text-align: right; padding: 6px 0 6px 0;
+	background-color: #5b6776; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#5b6776), to(#303940)); background-image: -webkit-linear-gradient(top, #5b6776, #303940); background-image: -moz-linear-gradient(top, #5b6776, #303940); background-image: -ms-linear-gradient(top, #5b6776, #303940); background-image: -o-linear-gradient(top, #5b6776, #303940);
+	border-radius: 0; -moz-border-radius: 0; -webkit-border-radius: 0}
+div.jqi button{ padding: 5px 15px; margin: 0 10px; background-color: #f5f5f5; color: #ffffff; font-weight: bold; font-size: 12px; text-shadow: 1px 1px 1px #333;
+	background-color: #f5f5f5;
+	/* yellow background-color: #dab150;  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#dab150), to(#c49629)); background-image: -webkit-linear-gradient(top, #dab150, #c49629); background-image: -moz-linear-gradient(top, #dab150, #c49629); background-image: -ms-linear-gradient(top, #dab150, #c49629); background-image: -o-linear-gradient(top, #dab150, #c49629); */
+	border: solid 1px #192432; border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; }
+div.jqi button:hover{ color: #fff; text-shadow: 1px 1px 2px #000}
+div.jqi button:active{ color: #fff; text-shadow: 1px 1px 1px #000; padding-left:11px;padding-right:9px}
+div.jqi button.jqidefaultbutton{ background-color: #d4797b; background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#d4797b), to(#b34b4d)); background-image: -webkit-linear-gradient(top, #d4797b, #b34b4d); background-image: -moz-linear-gradient(top, #d4797b, #b34b4d); background-image: -ms-linear-gradient(top, #d4797b, #b34b4d); background-image: -o-linear-gradient(top, #d4797b, #b34b4d); }
+.jqiwarning .jqi .jqibuttons button{ border-color: #dab150; }
+
+/* arrows */
+.jqi .jqiarrow{ position: absolute; height: 0; width:0; line-height: 0; font-size: 0; border: solid 10px transparent; }
+.jqi .jqiarrowtl{ left: 10px; top: -20px; border-bottom-color: #333; }
+.jqi .jqiarrowtc{ left: 50%; top: -20px; border-bottom-color: #333; margin-left: -10px; }
+.jqi .jqiarrowtr{ right: 10px; top: -20px; border-bottom-color: #333; }
+.jqi .jqiarrowbl{ left: 10px; bottom: -20px; border-top-color: #333; }
+.jqi .jqiarrowbc{ left: 50%; bottom: -20px; border-top-color: #333; margin-left: -10px; }
+.jqi .jqiarrowbr{ right: 10px; bottom: -20px; border-top-color: #333; }
+.jqi .jqiarrowlt{ left: -20px; top: 10px; border-right-color: #333; }
+.jqi .jqiarrowlm{ left: -20px; top: 50%; border-right-color: #333; margin-top: -10px; }
+.jqi .jqiarrowlb{ left: -20px; bottom: 10px; border-right-color: #333; }
+.jqi .jqiarrowrt{ right: -20px; top: 10px; border-left-color: #333; }
+.jqi .jqiarrowrm{ right: -20px; top: 50%; border-left-color: #333; margin-top: -10px; }
+.jqi .jqiarrowrb{ right: -20px; bottom: 10px; border-left-color: #333; }

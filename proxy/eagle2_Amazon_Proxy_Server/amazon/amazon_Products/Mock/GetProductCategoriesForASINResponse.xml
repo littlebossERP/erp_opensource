@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GetProductCategoriesForASINResponse xmlns="http://mws.amazonservices.com/schema/Products/2011-10-01">
+   <GetProductCategoriesForASINResult>
+        <Self>
+            <ProductCategoryId>String</ProductCategoryId>
+            <ProductCategoryName>String</ProductCategoryName>
+            <Parent>
+                <ProductCategoryId>String</ProductCategoryId>
+                <ProductCategoryName>String</ProductCategoryName>
+                
+            </Parent>
+        </Self>
+    </GetProductCategoriesForASINResult>
+   <ResponseMetadata>
+        <RequestId>String</RequestId>
+    </ResponseMetadata>
+</GetProductCategoriesForASINResponse>

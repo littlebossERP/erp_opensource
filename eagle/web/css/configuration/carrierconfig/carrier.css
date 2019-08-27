@@ -1,0 +1,186 @@
+ul,li {
+	margin:0px;
+	padding:0px;
+}
+#jindutiao {
+	width:1100px;
+	height:38px;
+	text-align: center;
+	overflow: hidden;
+	margin:0 auto;
+}
+
+#jindutiao a {
+	height:38px;
+	width:207px;
+	color:#fff;
+	display:block;
+	text-decoration: none;
+}
+
+#jindutiao td {
+	width:207px;
+	height:38px;
+	color:#fff;
+	text-align: center;
+	font:bold 14px/38px 宋体;
+	background-repeat:no-repeat; 
+}
+
+#jindutiao .othercolor a {
+	color:#333;
+}
+
+/* 订单上传界面 */
+
+.getOrderNo_title {
+	width:100%;
+	height:40px;
+	background-color:#7AB5D7;
+	border-radius: 5px 5px 5px 5px;
+}
+.getOrderNo_title ul li{
+	float:left;
+	width:260px;
+	text-align: center;
+	list-style: none;
+	color:#000;
+	font:bold 12px/40px 宋体;
+}
+.getOrderNo_title ul li:nth-child(4){
+	width:370px;
+}
+.getOrderNo_title ul li:first-child{
+	width:150px;
+}
+.getOrderNo_order{
+	margin-top:10px;
+	width:100%;
+	background-color:#D9EFFC;
+	clear:both;
+}
+.getOrderNo_order ul li{
+	float:left;
+	height:40px;
+	width:260px;
+	text-align: center;
+	list-style: none;
+	color:#666;
+	font:bold 12px 宋体;
+}
+.getOrderNo_order ul li:nth-child(4){
+	width:370px;
+}
+.getOrderNo_order ul li:first-child{
+	width:150px;
+}
+
+.getOrderNo_row1 {
+	font:bold 12px/50px 宋体;
+	border:1px solid #D9EFFC;
+	margin-top:8px;
+}
+.getOrderNo_row1 input {
+	line-height: normal;
+}
+.getOrderNo_ul1 {
+	/*height:50px;*/
+	width:100%;
+	background-color: #fff;
+	border-bottom:1px solid #D9EFFC;
+}
+.getOrderNo_ul1 li {
+	margin-left:40px;
+	height:50px;
+	color:#333;
+	float:left;
+	list-style: none;
+}
+
+.getOrderNo_ul2 {
+	clear:both;
+	width:100%;
+	display: block;
+}
+.cleardiv {
+	clear:both;
+}
+.getOrderNo_ul2 li {
+	list-style: none;
+	height:50px;
+	float:left;
+	margin-left:50px;
+}
+.message {
+	font-size:12px;
+	color:#FF9900;
+	width:30em;
+	overflow: hidden;
+    line-height:normal;
+    height:40px;
+}
+.getOrderNo_order .message2 {
+	color:#FF9900;
+	height:auto;
+	line-height:normal;
+	display:block;
+}
+ .orderUploadSuccess {
+	color:#01BB50;
+	font-size:13px;
+}
+ .glyphicon-ok {
+	font-size:20px;
+	margin-right:5px;
+}
+.star {
+	font-size: 12px;
+	color:red;
+}
+.success_order_title {
+	font:bold 12px/40px 宋体;
+	color:#000;
+	width:100%;
+	background-color:#7AB5D7;
+	height:40px;
+	padding-left: 20px;
+	margin-top:50px;
+}
+
+
+/*  carrieroperate (2015-07-18 by huaqingfeng)  */
+.lb-grid th{
+	text-align: left;
+}
+.carrier-operate-action{
+	margin:10px 0;
+}
+.lb-grid-toggle,
+.lb-grid-toggle-all{
+	cursor: pointer;
+	background-color:#7AB5D7;
+}
+.lb-grid-select,
+.lb-grid-select-all{
+	width:20px;
+}
+/*.lb-grid tr:nth-of-type(odd){
+	transition: all 0.5s ease 0.5s;
+}*/
+
+.lb-grid dl{
+	margin: 0;
+}
+.lb-grid dt,
+.lb-grid dd{
+	background-color: #fff;
+	padding:0 10px;
+	border-bottom:1px solid #D9EFFC;
+}
+.lb-grid h5{
+	margin-top:0;
+	padding-top:5px;
+}
+.lb-grid .form-group{
+	margin-right:40px;
+}

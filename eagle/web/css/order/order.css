@@ -1,0 +1,219 @@
+.largebox .modal-dialog{
+	width: 800px;
+}
+
+.order-nav{
+	display:inline-block;
+	width:100%;
+}
+.rectangle-content {
+    background-color: #f5f5f5;
+    float: left;
+    height: 36px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 12px;
+    
+	width: 90%;
+}
+.p-rectangle-content{
+	margin: 9px 0 0 0;
+}
+.rectangle-content.active{
+	background-color: #ff9900;
+	color: rgb(51, 51, 51);
+}
+
+.rectangle-content>.p-rectangle-content>a{
+	text-decoration:none;
+	color: rgb(153, 153, 153);
+}
+
+.triangle-right.active{
+	border-left: 15px solid #ff9900;
+}
+
+.triangle-right {
+    width: 0;
+    height: 0;
+    border-top: 18px solid transparent;
+    border-left: 15px solid #f5f5f5;
+    border-bottom: 18px solid transparent;
+    float: left;
+}
+.a_disable {
+	color: #afafaf!important;	
+	cursor: default!important;	
+	text-decoration:none!important;	
+	outline:0 none!important;	
+}
+
+#dash-board-enter{
+	position: fixed;
+	bottom: 30px;
+	left: 0px;
+	width: 34px;
+	height: 56px;
+	padding: 3px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 0px 5px 5px 0px;	
+	cursor: pointer;
+}
+
+.nav.nav-pills li span.click-to-tip{
+	position: absolute!important;
+	right: 0px!important;
+}
+.qtip.qtip-default.basic-qtip.nopadding.qtip-pos-tc.qtip-focus{
+	border-radius:5px!important;
+}
+.left_menu_red_new{
+    background-color: red;
+    color: white;
+    border-radius: 10px;
+    height: 14px;
+    position: absolute;
+    line-height: 1;
+    top: 11px;
+    padding: 0 5px;
+    text-align: center;	
+}
+
+/* ebay 状态与异常状态 css  */ 
+
+.sprite_pay_0,.sprite_pay_1,.sprite_pay_2,.sprite_pay_3,.sprite_shipped_0,.sprite_shipped_1,.sprite_check_1,.sprite_check_0
+{
+	display:block;
+	background-image:url(/images/MyEbaySprite.png);
+	overflow:hidden;
+	float:left;
+	width:20px;
+	height:20px;
+	text-indent:20px;
+}
+.sprite_pay_0
+{
+	background-position:0px -92px;
+}
+.sprite_pay_1
+{
+	background-position:-50px -92px;
+}
+.sprite_pay_2
+{
+	background-position:-95px -92px;
+}
+.sprite_pay_3
+{
+	background-position:-120px -92px;
+}
+.sprite_shipped_0
+{
+	background-position:0px -67px;
+}
+.sprite_shipped_1
+{
+	background-position:-50px -67px;
+}
+.sprite_check_1
+{
+	background-position:-100px -15px;
+}
+.sprite_check_0
+{
+	background-position:-77px -15px;
+}
+.exception_201,.exception_202,.exception_221,.exception_210,.exception_222,.exception_223,.exception_299{
+	display:block;
+	background-image:url(/images/icon-yichang-eBay.png);
+	overflow:hidden;
+	float:left;
+	width:30px;
+	height:15px;
+	text-indent:20px;
+}
+.exception_201{
+	background-position:-3px -10px;
+}
+.exception_202{
+	background-position:-26px -10px;
+}
+.exception_221{
+	background-position:-55px -10px;
+	width:50px;
+}
+.exception_210{
+	background-position:-107px -10px;
+}
+.exception_222{
+	background-position:-135px -10px;
+}
+.exception_223{
+	background-position:-170px -10px;
+}
+.exception_299{
+	background-position:-199px -10px;
+}
+
+
+.translate-btn{
+	height: 27px;
+	line-height: 27px;
+	webkit-transition: max-width ease-in-out 400ms;
+	-moz-transition: max-width ease-in-out 400ms;
+	-o-transition: max-width ease-in-out 400ms;
+	transition: max-width ease-in-out 400ms;
+	max-width: 150px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	min-width: 0;
+	padding: 0 8px;
+	font-size: 12px;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	background-color: #f5f5f5;
+	background-image: -webkit-linear-gradient(top,#f5f5f5,#f1f1f1);
+	background-image: -moz-linear-gradient(top,#f5f5f5,#f1f1f1);
+	background-image: -ms-linear-gradient(top,#f5f5f5,#f1f1f1);
+	background-image: -o-linear-gradient(top,#f5f5f5,#f1f1f1);
+	background-image: linear-gradient(top,#f5f5f5,#f1f1f1);
+	color: #444;
+	border: 1px solid #dcdcdc;
+	border: 1px solid rgba(0,0,0,0.1);
+	margin-right: 0px;
+	-moz-border-radius-topright: 0;
+	-moz-border-radius-bottomright: 0;
+	-webkit-border-top-right-radius: 0;
+	-webkit-border-bottom-right-radius: 0;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+.translate-btn:hover{
+	-webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    background-color: #f8f8f8;
+    background-image: -webkit-linear-gradient(top,#f8f8f8,#f1f1f1);
+    background-image: -moz-linear-gradient(top,#f8f8f8,#f1f1f1);
+    background-image: -ms-linear-gradient(top,#f8f8f8,#f1f1f1);
+    background-image: -o-linear-gradient(top,#f8f8f8,#f1f1f1);
+    background-image: linear-gradient(top,#f8f8f8,#f1f1f1);
+    border: 1px solid #c6c6c6;
+    color: #333;
+}
+.translate-btn.translate-btn-checked
+{
+	-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+    -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+    background-color: #eee;
+    background-image: -webkit-linear-gradient(top,#eee,#e0e0e0);
+    background-image: -moz-linear-gradient(top,#eee,#e0e0e0);
+    background-image: -ms-linear-gradient(top,#eee,#e0e0e0);
+    background-image: -o-linear-gradient(top,#eee,#e0e0e0);
+    background-image: linear-gradient(top,#eee,#e0e0e0);
+    border: 1px solid #ccc;
+    color: #333;
+}

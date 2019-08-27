@@ -1,0 +1,120 @@
+@CHARSET "UTF-8";
+
+.float_left{
+	float:left;
+}
+
+.float_right{
+	float:right;
+}
+.content_left{
+	width:15%;
+	vertical-align: top;
+}
+
+.content_right{
+	width:83%;
+	vertical-align: top;
+}
+
+.menu_lev2{
+	padding: 3px 40px !important;
+	white-space: nowrap;
+	font-size: small;
+}
+
+.status_label{
+	padding: .6em .9em .6em !important;
+	font-size: 90% !important;
+	font-weight: 100 !important;
+}
+table td a{
+cursor: pointer;
+}
+
+.bg_loading{
+background-image: url(/../images/loading.gif);
+background-repeat: no-repeat;
+background-position: center;
+}
+
+.noBottom{
+margin-bottom: 0px!important;
+}
+
+
+.import_excelFormatText_dialog .modal-dialog{
+	width: 450px;
+	max-height: 900px;
+	overflow: auto;
+}
+.import_excelFormatText_dialog .modal-body{
+	width:100%;
+	float:left;
+	clear:both;
+}
+.import_excelFormatText_dialog .modal-footer{
+	text-align: center;
+}
+/*
+#purchase_list_operation_tb >tbody >tr >td{
+	padding: 0px;
+	border: 0px;
+	vertical-align: middle;
+}
+*/
+table >tbody >tr >td,th{
+	padding: 4px;
+	border: 1px solid rgb(202,202,202);
+	vertical-align: middle !important;
+}
+
+.blue-tips{
+	color:blue;
+}
+.red-tips{
+	color:red;
+}
+
+.ui-autocomplete {
+z-index: 2000 !important;
+overflow-y: scroll;
+max-height: 400px;
+}
+/*
+.ui-combobox .ui-combobox-input {
+	width:80%;
+}
+*/
+.input-group-btn > button {
+padding: 0px;
+height: 28px;
+width: 30px;
+border-radius: 0px;
+border: 1px solid #b9d6e8;
+}
+
+.div-input-group {
+width: 150px;
+display: inline-block;
+vertical-align: middle;
+margin-top: 1px;
+}
+
+.div-input-group>.input-group>input {
+height: 28px;
+}
+
+.table-hover tr:hover {
+background-color: #afd9ff !important;
+}
+.eagle-form-control[disabled], .eagle-form-control[readonly]{
+cursor: not-allowed;
+background-color: #eee;
+opacity: 1;
+}
+.has-error .eagle-form-control {
+border-color: #a94442;
+-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}

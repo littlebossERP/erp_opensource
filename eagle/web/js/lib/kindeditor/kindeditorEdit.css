@@ -1,0 +1,125 @@
+/*
+	2015.4.11 add by fuyi
+	imgBank 图片银行
+	infoModule 模板
+*/
+.ke-icon-imgBank {
+        background-image: url(themes/default/smt-icons.png);
+        background-position: 0px -504px;
+        width: 16px;
+        height: 16px;
+}
+.ke-icon-infoModule {
+        background-image: url(themes/default/smt-icons.png);
+        background-position: 0px -522px;
+        width: 16px;
+        height: 16px;
+}
+.ke-icon-selectall {
+	 	background-image: url(themes/default/smt-icons.png);
+        background-position: 0px -342px;
+        width: 16px;
+        height: 16px;
+}
+.ke-icon-removeformat {
+	 	background-image: url(themes/default/smt-icons.png);
+        background-position: 0px -360px;
+        width: 16px;
+        height: 16px;
+}
+.ke-icon-undo {
+	 	background-image: url(themes/default/smt-icons.png);
+        background-position: 0px -378px;
+        width: 16px;
+        height: 16px;
+}
+.ke-icon-redo {
+	 	background-image: url(themes/default/smt-icons.png);
+        background-position: 0px -396px;
+        width: 16px;
+        height: 16px;
+}
+.ke-icon-cut {
+	 	background-image: url(themes/default/smt-icons.png);
+        background-position: 0px -252px;
+        width: 16px;
+        height: 16px;
+}
+.ke-icon-copy {
+	 	background-image: url(themes/default/smt-icons.png);
+        background-position: 0px -270px;
+        width: 16px;
+        height: 16px;
+}
+.ke-icon-paste {
+	 	background-image: url(themes/default/smt-icons.png);
+        background-position: 0px -288px;
+        width: 16px;
+        height: 16px;
+}
+.ke-icon-plainpaste {
+	 	background-image: url(themes/default/smt-icons.png);
+        background-position: 0px -306px;
+        width: 16px;
+        height: 16px;
+}
+.ke-icon-wordpaste {
+	 	background-image: url(themes/default/smt-icons.png);
+        background-position: 0px -324px;
+        width: 16px;
+        height: 16px;
+}
+.ke-icon-link {
+	 	background-image: url(themes/default/smt-icons.png);
+        background-position: 0px -450px;
+        width: 16px;
+        height: 16px;
+}
+.ke-icon-unlink {
+	 	background-image: url(themes/default/smt-icons.png);
+        background-position: 0px -468px;
+        width: 16px;
+        height: 16px;
+}
+.ke-icon-image {
+	 	background-image: url(themes/default/smt-icons.png);
+        background-position: 0px -486px;
+        width: 16px;
+        height: 16px;
+}
+.ke-icon-fullscreen {
+	 	background-image: url(themes/default/smt-icons.png);
+        background-position: 0px -558px;
+        width: 16px;
+        height: 16px;
+}
+.ke-icon-source {
+	 	background-image: url(themes/default/smt-icons.png);
+        background-position: 0px -630px;
+        width: 16px;
+        height: 16px;
+}
+.ke-icon-imgSpace {
+	 	background-image: url(themes/default/txt.png);
+        background-position: 0px 0px;
+        width: 48px;
+        height: 16px;
+}
+.ke-icon-lazadaImgSpace {
+	 	background-image: url(themes/default/txt.png);
+        background-position: 0px 0px;
+        width: 48px;
+        height: 16px;
+}
+.ke-icon-quotePic {
+	 	background-image: url(themes/default/txt.png);
+        background-position: 0px -23px;
+        width: 72px;
+        height: 16px;
+}
+.ke-icon-moreImage {
+	 	background-image: url(themes/default/smt-icons.png);
+        background-position: 0px -486px;
+        width: 16px;
+        height: 16px;
+}

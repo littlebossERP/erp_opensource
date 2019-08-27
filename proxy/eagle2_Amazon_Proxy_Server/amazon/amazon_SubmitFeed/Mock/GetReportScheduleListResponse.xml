@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GetReportScheduleListResponse xmlns="http://mws.amazonaws.com/doc/2009-01-01/">
+  <GetReportScheduleListResult>
+    <NextToken>string</NextToken>
+    <HasNext>false</HasNext>
+    <!--1 or more repetitions:-->
+    <ReportSchedule>
+      <ReportType>string</ReportType>
+      <Schedule>string</Schedule>
+      <ScheduledDate>2007-10-25T23:36:28</ScheduledDate>
+    </ReportSchedule>
+  </GetReportScheduleListResult>
+  <ResponseMetadata>
+    <RequestId>string</RequestId>
+  </ResponseMetadata>
+</GetReportScheduleListResponse>

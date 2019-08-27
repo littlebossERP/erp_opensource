@@ -1,0 +1,565 @@
+/*default button style*/
+.btn_00{BORDER:#7b9ebd 1px solid;FONT-SIZE:12px;COLOR:black;margin-right:5px}
+.btn_00:hover{COLOR:#7b9ebd}
+.btn_00:disabled{COLOR:gray}
+.btn_01{border-radius:2px;BORDER:#555 1px solid;text-shadow:0 1px 1px rgba(0,0,0,.3);box-shadow:0 1px 2px rgba(0,0,0,.2);font-family:Arial,Helvetica,sans-serif;FONT-SIZE:12px;min-width:6em;height:25px;COLOR:#e9e9e9;background-color:#6e6e6e}
+.btn_01:hover{BORDER:#777 1px solid;color:#fff;background-color:#616161}
+.btn_01_disabled{border-radius:2px;BORDER:#555 1px solid;font-family:Arial,Helvetica,sans-serif;text-shadow:0 1px 1px rgba(0,0,0,.3);box-shadow:0 1px 2px rgba(0,0,0,.2);FONT-SIZE:12px;min-width:6em;height:25px;COLOR:gray}
+.btn_02{BORDER:#7b9ebd 1px solid;FONT-SIZE:12px;COLOR:black;margin-right:5px}
+.btn_02:hover{COLOR:#7b9ebd}
+.btn_02:disabled{COLOR:gray}
+
+/*global box*/
+body{font-family:Arial,Helvetica,sans-serif;FONT-SIZE:10px;padding-top:10px;padding-left:10px;padding-right:10px}
+table.block0,div.block0{font:12px Arial,Helvetica,sans-serif;border-collapse:collapse;margin:0 auto;width:auto;BORDER:#bbb 1px solid}
+table.block9,div.block9{font:12px Arial,Helvetica,sans-serif;border-collapse:collapse;margin:0 auto;width:100%}
+table.block1,div.block1{margin:0 auto;width:auto}
+table.block2,div.block2{margin:0 auto;width:1200px}
+table.block3,div.block3{margin:0 auto;width:950px}
+table.smallscreen,div.smallscreen,form.smallscreen{width:950px;margin:0 auto}
+div.content{display:none}
+.stdList01{FONT-SIZE:11px}
+.textbox_style01{FONT-SIZE:12px}
+.list_style01{FONT-SIZE:11px}
+.list_style02{FONT-SIZE:15px;COLOR:red}
+.textMLabel{FONT-SIZE:12px;FONT-FAMILY:COURIER NEW;font-weight:bold}
+.textMBarcode{FONT-SIZE:10px;font-family:IDAutomationSC39M}
+.float-right{float:right}
+.page-title{font-size:20px;padding-bottom:10px;margin:0 auto;width:640px;text-align:center}
+.child-select-wrapper{padding-left:20px;background-image:url('/images/ebay/template/imgSubCatsArrow.gif');background-repeat:no-repeat;background-position:6px 8px}
+.search-wrapper{padding:5px;border-top:#bbb 1px solid;border-left:#bbb 2px solid}
+.search-result-wrapper{padding-left:20px;}
+.pipespace{background:none repeat scroll 0 0 rgba(0,0,0,0);height:45%;margin:0 3px auto;padding-right:7px;border-right:1px solid #ccc}
+
+/*global input*/
+/*form select{max-width:150px}*/
+a.action-link {text-decoration:none;display:inline-block;font-size:12px;font-family:Arial,sans-serif;color:#0654ba;cursor:pointer}
+th a.action-link {color:#f5f5f5;text-decoration:underline}
+
+/*global page title*/
+.areaTitleBox{border-bottom:1px solid #999;margin-bottom:15px;margin-left:auto;margin-right:auto;padding-bottom:5px;padding-top:10px}
+.areaTitleBox .areaTitle{float:left}
+.areaTitleBox .areaTitle h1{color:#333;font:x-large Trebuchet,"Trebuchet MS";margin:0}
+.areaTitleBox .areaCtl{float:right;margin-top:10px}
+.areaTitleBox .clr{clear:both}
+.areaCtl a{text-decoration:none;display:inline-block;font-size:12px;font-family:Arial,sans-serif;color:#0654ba;padding-left:0}
+.areaCtl a:hover{text-decoration:underline}
+
+/*page top menu*/
+div.menu-wrapper{font-size:12px;display:block;position:fixed;left:0;right:0;top:0;min-width:480px;width:100%;border-bottom:1px solid #555;z-index:100;padding:0;background-color:#fff;box-shadow:0 1px 3px rgba(0,0,0,0.5),0 -1px 0 rgba(0,0,0,0.1) inset}
+div.menu-wrapper li.menu-item{float:left;line-height:24px;display:block;border-left:1px solid #555;color:#f5f5f5;position:relative}
+div.menu-wrapper li.menu-item:first-of-type{border-left:0 solid #555}
+div.menu-wrapper li.menu-item a{padding:0 10px;display:block;color:#dedede;text-decoration:none;cursor:pointer}
+div.menu-wrapper li.menu-item a:hover{background-color:#ffde00;color:#000}
+div.menu-wrapper li.menu-item a.logo{background-image:url(/images/ebay/template/logo.png);width:100px;background-repeat:no-repeat}
+div.menu-wrapper li.menu-item a.highlight{background-color:#ffde00;color:#000}
+div.menu-wrapper ul.dropdown{display:none;color:#000;background-color:#fafafa;border-bottom:1px solid rgba(35,35,35,0.2);border-top:1px solid #333;box-shadow:4px 4px 0 0 rgba(35,35,35,0.1);padding:0;position:absolute;top:24px;left:0;width:160px;z-index:9999}
+div.menu-wrapper ul.dropdown a{color:#333}
+div.menu-wrapper .menu-logo .logo-product{min-height:32px;float:right;background-image:url("/images/ebay/template/banner/powered_by_inside.png");background-repeat:no-repeat;background-position:right center;padding-right:230px}
+div.menu-wrapper .menu-logo .logo-qq-chi{cursor: pointer;min-height:32px;float:right;background-image:url("/images/ebay/template/customer_service_chi_01.png");background-repeat:no-repeat;background-position:right center;padding-right:130px}
+div.menu-wrapper .menu-logo .logo-qq-eng{cursor: pointer;min-height:32px;float:right;background-image:url("/images/ebay/template/customer_service_eng_01.png");background-repeat:no-repeat;background-position:right center;padding-right:130px}
+div.menu-wrapper .menu-logo .logo-client{cursor: pointer;max-width: 400px; min-height:32px;background-image:url("/images/ebay/template/banner/SoldEazy_V2_System_header_banner_inside.png");background-repeat:no-repeat;background-position:0 0;padding-left:40px}
+div.menu-wrapper .menu-logo span{display:inline-block;line-height:32px;font-size:16px;font-weight:bold;color:#aaa}
+div.menu-wrapper .menu-logo{min-height:32px}
+div.menu-wrapper .menu-bar{background-image:url(/images/ebay/template/menu-bg.png);background-repeat:repeat-x;background-position:center top}
+
+/*page top banner*/
+div.breadcrumb{color:#555;margin-top:50px;margin-bottom:5px}
+.notice_div{border:solid 2px #c30;border-radius:4px;padding:10px;text-align:left;font-size:20px;color:#c30;margin:2px 15px;line-height:15px}
+p.notice_p:before{content:"";height:48px;width:48px;display:inline-block;background-image:url('/images/ebay/template/reminder-icon.gif');background-repeat:no-repeat;background-size:100%;vertical-align:top;margin-right:10px}
+p.notice_p a.btn-dismiss{margin-left:20px;font-size:15px;text-decoration:underline;cursor:pointer;vertical-align:top}
+
+/*page bottom icons*/
+div.footer-wrapper{text-align:center;margin:10px auto;padding:0;border-top:1px dotted #ababab;overflow:hidden}
+div.footer-wrapper .footer-icons{text-align:center;border:0 solid #fff;width:730px;background-color:#f5f5f5 transparent;margin:10px auto;padding:0}
+div.footer-wrapper span.icon{margin-left:10px;background-color:#fff;border:0;display:inline-block;line-height:0}
+div.footer-wrapper span img.logo{border:1px solid #ddd;padding:2px}
+div.footer-wrapper div.footer-links{font-size:11px}
+
+/*datatable*/
+table.datatable,table.listingtable{border-collapse:collapse;width:100%;table-layout:auto}
+table.datatable.smallscreen,table.listingtable.smallscreen,div.navigation.smallscreen{width:950px;margin:0 auto}
+table.datatable tr:nth-of-type(1n),table.listingtable tr:nth-of-type(1n){background:#fff}
+table.datatable tr:nth-of-type(2n),table.listingtable tr:nth-of-type(2n){background:#f2f2f2}
+table.datatable th,table.listingtable th{background-color:#333;font-weight:normal;FONT-SIZE:12px;font-family: Helvetica, sans-serif;color:#e9e9e9;text-align:center;VERTICAL-ALIGN:middle;LINE-HEIGHT:18px;BORDER:1px solid #bbb;PADDING:1px 6px}
+table.datatable tfoot td,table.listingtable tfoot td{background-color:#ccc;font-weight:bold;FONT-SIZE:12px;color:#222;text-align:center;VERTICAL-ALIGN:middle;LINE-HEIGHT:18px;BORDER:1px solid #e0e0e0;PADDING:1px 6px}
+table.datatable tfoot td.bulk-actions,table.listingtable tfoot td.bulk-actions{text-align:left}
+table.datatable td,table.listingtable td{FONT-SIZE:12px;text-align:center;VERTICAL-ALIGN:top;LINE-HEIGHT:18px;BORDER:1px solid #e0e0e0;PADDING:1px 6px}
+table.datatable input.align-right{text-align:right}
+table.datatable tbody tr.highlight,table.listingtable tbody tr.highlight{background-color:#ffffcb}
+table.datatable th,table.listingtable th{WHITE-SPACE:nowrap;text-overflow:ellipsis;overflow:hidden}
+table.datatable td,table.listingtable td{WHITE-SPACE:nowrap;text-overflow:ellipsis;overflow:hidden}
+table.datatable td div.checkbox-wrapper{WHITE-SPACE:normal}
+table.datatable td div.checkbox-wrapper label{display:inline-block}
+table.datatable.detail{table-layout:fixed}
+table.datatable th.detail-header{width:200px}
+table.datatable input.edit-text{width:100%;border:0;background-color:rgba(20,20,0,0.2);padding:0}
+table.datatable select,table.datatable option{width:100%;border:0;background-color:#ccc;padding:0}
+table.datatable input.detail-text{width:100%;border:0;background-color:transparent;padding:0}
+table.datatable .action-btn{background-repeat:no-repeat;border:0 solid #e4e4e4;cursor:pointer;display:inline-block;line-height:16px;text-indent:-9999px;width:16px}
+table.datatable .bulk-action-btn{background-repeat:no-repeat;border:0 solid #e4e4e4;cursor:pointer;display:inline-block;line-height:16px;text-indent:-9999px;width:16px;margin-right:5px}
+table.datatable .action-btn.edit{background-image:url("/images/ebay/template/edit.png")}
+table.datatable .action-btn.delete{background-image:url("/images/ebay/template/delete.png")}
+table.datatable .action-btn.detail{background-image:url("/images/ebay/template/detail.png")}
+table.datatable .action-btn.create{background-image:url("/images/ebay/template/create.png")}
+table.datatable .bulk-action-btn.clone{background-image:url("/images/ebay/template/clone.png")}
+table.datatable .bulk-action-btn.export{background-image:url("/images/ebay/template/export.png")}
+table.datatable .bulk-action-btn.delete{background-image:url("/images/ebay/template/delete.png")}
+table.datatable .input-btn{background-repeat:no-repeat;border:0 solid #e4e4e4;cursor:pointer;display:inline-block;line-height:16px;text-indent:-9999px;width:16px;margin-right:5px}
+table.datatable .input-btn.update{background-image:url("/images/ebay/template/update.png")}
+table.datatable .btn_00 , table.listingtable .btn_00 {height:22px; width: 22px; BORDER: #7b9ebd 1px solid; font-family:Arial,Helvetica,sans-serif;FONT-SIZE: 10px; COLOR: black; margin:1px;padding:1px;border-radius:2px;cursor:pointer}
+table.datatable .btn_00:hover  ,table.listingtable .btn_00:hover {COLOR: #7b9ebd}
+table.datatable .btn_00:disabled ,table.listingtable .btn_00:disabled{COLOR: gray; cursor:default}
+div.navigation a.nav-btn{display:inline-block;line-height:20px;padding:1px 4px;margin-left:1px;font-size:12px;color:#eee;background-color:#333;cursor:pointer}
+.dsheet-var-detail:hover{background-color:#EEE}
+table td.align-left{text-align:left}
+table td.align-right{text-align:right}
+
+/*table filters*/
+div.filter-wrap {border-bottom: 1px dotted #999; padding:10px; margin-bottom:3px;background-color:#f5f5f5}
+div.filter-wrap .filter-table {font-size: 12px;margin-bottom:8px}
+div.filter-wrap .filter-table td{padding: 1px 2px}
+div.filter-wrap .filter-table td.filter-label{padding-right: 5px}
+div.filter-wrap .filter-table td.filter-input{min-width:50px;max-width:100px}
+div.filter-wrap .filter-action {}
+div.filter-wrap .filter-action .filter-link {color: #0654ba; text-decoration: none;cursor:pointer;font-size: 12px;display: inline-block;line-height: 25px; min-width: 5em;text-align:center}
+div.filter-wrap .filter-action .filter-btn {border-radius:2px;BORDER:1px solid #46a3e6;FONT-SIZE:12px;min-width:6em;height:25px;COLOR:#fbfbfb;background-color:#46a3e6}
+div.filter-wrap .filter-action .filter-btn:hover {BORDER:1px solid #2292e2;COLOR:#fff;background-color:#2292e2}
+div.filter-wrap .filter-text,div.filter-wrap .filter-list {min-width:50px;width:100%;margin: 1px 0;outline: outline: 0 none;border: 1px solid #DADADA;box-shadow: inset 0px 1px 4px #ECECEC}
+div.filter-wrap .filter-tip {cursor:pointer;display:inline-block;white-space: nowrap;}
+div.filter-wrap .filter-highlight {color:grey;display:inline-block;margin:0 0 0 2px}
+div.filter-wrap .filter-checkbox-wrapper{border:1px solid #DADADA; padding-right:4px; border-radius:2px; display: inline-block;vertical-align: middle;background-color:#fff}
+div.hidden-box {display:none}
+
+/*view tab of search result*/
+div.view-tab{font-size: 12px;border-bottom:1px solid #555;text-shadow:0 1px 1px rgba(33,33,33,.2);margin:0}
+div.view-tab span{display:inline-block;line-height:24px;border:1px solid #ccc;border-bottom-width:0;border-left-width:0;color:#fff;background-color:#ddd}
+div.view-tab a{color:#888;padding:0 2em;display:inline-block}
+div.view-tab a:hover{color:#e9e9e9;background-color:#616161;cursor:pointer}
+div.view-tab span:first-child{border-left-width:1px}
+div.view-tab span.select{border-left-width:1px;border-color:#555;color:#000;background-color:#f5f5f5;text-shadow:0 1px 1px rgba(33,33,33,.5)}
+div.view-tab span.select a{color:#666;display:inline-block;background-color:#f5f5f5;position:relative;top:1px;padding:0 2em}
+div.view-tab span.select a:hover{color:#333;background-color:#f5f5f5;cursor:pointer}
+div.view-tab span.hide-filter a{color:#000}
+div.view-tab span.hide-filter a:hover{color:#000;background-color:#ddd}
+
+/*pagination*/
+div.pagination {padding:2px 0}
+div.pagination > ul{float:right}
+div.pagination li{display:inline-block}
+div.pagination a{display:inline-block;line-height:18px;padding:1px 3px;text-decoration:none;border:1px solid #fff;border-radius:2px}
+div.pagination a.btn_goto{cursor:pointer}
+div.pagination a.btn_goto:hover{background-color:#eee;border:1px solid #aaa}
+div.pagination a.next,div.pagination a.prev{background-color:#f5f5f5;border:1px solid #aaa}
+div.pagination a.active{background-color:#cdcdcd;border:1px solid #aaa}
+div.pagination a.disabled{color:#ccc;border:1px solid #fff;background-color:#fff}
+div.pagination select{padding: 2px;border: 1px solid #ccc;margin:0}
+div.pagination .page-limit{vertical-align:bottom}
+
+/*listing common*/
+table.listingtable tr.commonU_END{background-color:#333;color:white}
+table.listingtable tr.commonV_END{background-color:#fcf;color:black}
+table.listingtable tr.commonWhite{background-color:#fff;color:black}
+table.listingtable tr.commonGrey{background-color:#f2f2f2;color:black}
+table.listingtable tr.commonV_END{background-color:#fcf;color:black}
+table.block3 td{vertical-align:middle}
+
+/*revise message*/
+.revise-message{max-width:950px;margin:2px auto;border:1px solid;line-height:22px;text-align:center}
+.fail{border-color:#c00;background-color:rgba(200,0,0,0.2)}
+.success{border-color:#0c0;background-color:rgba(0,200,0,0.2)}
+.errorblock{background-color:rgba(200,0,0,0.2);width:520px;margin:2px auto;margin-bottom:15px;border:1px solid #c00;line-height:22px;text-align:center;color:#c00}
+.infoblock{background-color:rgba(0,200,0,0.2);width:520px;margin:2px auto;margin-bottom:15px;border:1px solid #0c0;line-height:22px;text-align:center;color:#0c0}
+
+/*footer*/
+div.backToTop{display:none;WIDTH:45px;height:37px;position:fixed;right:40px;bottom:40px;cursor:pointer;opacity:.7;filter:Alpha(opacity=70);text-indent:-9999px}
+div.tops{background:url(/images/ebay/template/back-to-top.png) no-repeat top center}
+div.tops:hover{background:url(/images/ebay/template/back-to-top.png) no-repeat center -38px}
+
+/*login form*/
+div.wrapper-main{padding:0 44px;padding-top:100px}
+div.main-desc{margin-right:400px}
+div.main-login{float:right;border:1px solid #878787;width:355px;background-color:#ededed}
+.login-fail{color:red}
+
+/*ebay ac setting*/
+table.info{margin:5px auto;border:2px solid;border-radius:12px;-moz-border-radius:12px;width:700px;-webkit-border-radius:12px;border-collapse:separate;border-color:#dedede;padding:5Px 5Px 5Px 5Px}
+table.info3 th{font-weight:bold;text-align:left;padding:2px 0 6px 0}
+table.info4{margin:5px auto;border:2px solid;border-radius:12px;-moz-border-radius:12px;width:500px;-webkit-border-radius:12px;border-collapse:separate;border-color:#dedede;padding:5Px 5Px 5Px 5Px}
+table.info4 th{font-weight:bold;text-align:left;padding:2px 0 6px 0}
+table.info th{font-weight:bold;text-align:left;padding:2px 0 6px 0}
+table.info2{margin:5px auto;border:2px solid;border-radius:12px;-moz-border-radius:12px;width:460px;-webkit-border-radius:12px;border-collapse:separate;border-color:#dedede;padding:5Px 5Px 5Px 5Px}
+table.info2 td{text-align:center;height:20px;border:1px solid;vertical-align:middle}
+table.tablename,div.table-label{width:460px;margin:0 auto}
+.name150{width:150px;text-align:right}
+.name100{width:100px;padding-left:30}
+.top{position:relative;font-weight:bold;margin:5px 0 0 0;padding:5Px 0 5Px 2Px}
+.center{text-align:center;line-height:35px}
+.Qa{background-image:url("/images/ebay/template/Help-symbol.png");width:16px;height:16px;top:4px;position:relative;border:0;display:inline-block}
+.DLimg{background-image:url("/images/ebay/template/computer.png");background-size:20px 20px;width:20px;height:20px;top:4px;position:relative;border:0;display:inline-block}
+.cancelimg{background-image:url("/images/ebay/template/Close.png");width:23px;height:23px;top:4px;position:relative;border:0;display:inline-block;float:right;top:-6px}
+.menubar{background-image:url("/images/ebay/template/Display.png");width:16px;height:16px;top:4px;position:relative;border:0;display:inline-block}
+.preview{background-image:url("/images/ebay/template/sinchronize.png");background-size:16px 16px;width:16px;height:16px;top:4px;position:relative;border:0;display:inline-block}
+.preview_updload{background-image:url("/images/ebay/template/Go-forward.png");width:16px;height:16px;top:4px;position:relative;border:0;display:inline-block}
+.menupreview{background-image:url("/images/ebay/template/sinchronize.png");background-size:16px 16px;width:16px;height:16px;top:4px;position:relative;border:0;display:inline-block}
+.button_reset{background-image:url("/images/ebay/template/button_reset.png");width:52px;height:23px;top:4px;position:relative;border:0;display:inline-block}
+.layout_select{background-image:url("/images/ebay/template/folder-26.png");background-size:16px 16px;width:16px;height:16px;cursor:pointer;top:4px;position:relative;border:0;display:inline-block}
+#id_layout_select{margin-bottom:3px;background-image:url("/images/ebay/template/icon_change_layout_01.png");background-size:36px 28px;width:36px;height:28px;cursor:pointer;border:0;display:inline-block}
+.folder26{border:0 !important;margin-right:0 !important;background:transparent !important;background-image:url("/images/ebay/template/folder-26.png") !important;background-size:16px 16px !important;width:16px;height:16px;cursor:pointer;top:4px;position:relative;border:0;display:inline-block}
+.upload26{border:0 !important;margin-right:0 !important;background:transparent !important;background-image:url("/images/ebay/template/upload-26.png") !important;background-size:16px 16px !important;width:16px;height:16px;cursor:pointer;top:4px;position:relative;border:0;display:inline-block}
+.btn_del{border:0 !important;margin-right:0 !important;background:transparent !important;background-image:url("/images/ebay/template/delete-26.png") !important;background-size:16px 16px !important;width:16px;height:16px;cursor:pointer;top:4px;position:relative;border:0;display:inline-block}
+.inbtn_del{border:0 !important;margin-right:0 !important;background:transparent !important;background-image:url("/images/ebay/template/delete-26.png") !important;background-size:16px 16px !important;width:16px;height:16px;cursor:pointer;top:4px;position:relative;border:0;display:inline-block}
+.tipdiv{z-index:9999}
+
+/*datainput*/
+.datainput input.input-content{width:100%;border:1px solid transparent;padding:5px;background-color:transparent;color:#555;font-size:12px;font-family:Arial,Helvetica,sans-serif}
+.datainput input.input-edit{width:100%;border:1px solid #ccc;padding:5px;background-color:transparent;color:#555;font-size:12px;font-family:Arial,Helvetica,sans-serif}
+.datainput select{max-width:none;width:100%;border:1px solid #ccc;background-color:transparent;padding:5px}
+.datainput input[name][disabled],.datainput select[disabled]{background-color:#f8f8f8}
+
+/*dataform*/
+div.dataform div.section{background-color:#f2f2f2}
+div.dataform div.section h2{font-size:18px;padding:4px 14px}
+div.dataform>table,div.dataform>div{width:1200px;margin:0 auto}
+div.dataform>table td{padding:5px 20px 5px 0}
+div.dataform span.input-error{color:#e00}
+.action-btn{background-repeat:no-repeat;border:0 solid #e4e4e4;cursor:pointer;display:inline-block;line-height:16px;text-indent:-9999px;width:16px}
+.action-btn.add-icon{background-image:url("/images/ebay/template/add.png")}
+div.dataform .action-btn.add_biz_pro{position: relative;top: 8px;left: 16px;float: right;}
+div.dataform .action-btn.search-cat{background-image:url("/images/ebay/template/search-16.png")}
+div.dataform .action-btn.pic-upload{background-image:url("/images/ebay/template/upload-16.png")}
+div.dataform .action-btn.more-filters{background-image:url("/images/ebay/template/iconDownDoubleArrow.png")}
+div.dataform .action-btn.less-filters{background-image:url("/images/ebay/template/iconUpDoubleArrow.png")}
+div.dataform .action-btn.del-icon,.action-btn.del-spec,.action-btn.del-desc,.action-btn.del-receive,.action-btn.del-ship-ser,.action-btn.del-intl-ship-ser{background-image:url("/images/ebay/template/del.png")}
+div#add-spec a.add-spec{background-image:url("/images/ebay/template/add.png");height:16px;clear:none}
+div#item_specific .del-var a{background-image:url("/images/ebay/template/del.png");height:16px}
+
+/*online listing, to hide advanced filters*/
+.more-filters{background-image:url("/images/ebay/template/iconDownDoubleArrow.png")}
+.less-filters{background-image:url("/images/ebay/template/iconUpDoubleArrow.png")}
+
+/*webpage layout*/
+.webpage-title{float:left}
+.webpage-filter{float:right}
+.section-header{font-size:24px;line-height:30px;padding-bottom:15px}
+
+/*reply message*/
+.reply-text{width:800px;height:200px}
+#FootNotes,#FootNotes div{padding-top:30px}
+star{font-size:200%}
+star[disabled]{display:none}
+star.Mandatory{color:red}
+star.SiteDependent{color:green}
+.opacity{opacity:.4;filter:alpha(opacity=40)}
+.dsheet-tabs a,.dsheet-tabs-prev img,.dsheet-tabs-next img{cursor:pointer}
+.dsheet-tabs-prev img{float:left}
+.dsheet-tabs-next img{float:right}
+#divDAlignTips{display:none;position:absolute;width:400px;border:black 1px solid;background-color:white;opacity:.8;filter:alpha(opacity=80)}
+input[type=radio]:checked+span{font-weight:bold}
+table.section_descs tr:not(:first-child) td:first-child{padding-left:20px}
+.dsheet_actual_desc_icon img{width:40px;height:40px}
+#dsheet_photo_preview_btn img{width:25px;height:25px}
+
+/* Icon remarks */
+/* #divIconRemarks{float:left;position:relative;top:-22px;left:250px;height:0px;} */
+#divIconRemarks{margin:auto;height:0px;text-align: center;}
+#divIconRemarks span{padding-right:30px;}
+
+/* Bulk Edit Options */
+.tblEditingOptions{width:100%;}
+.tblEditingOptions td:first-child{width:30%}
+.tblEditingOptions td{vertical-align:middle;height:30px}
+.tblEditingOptions input,.tblEditingOptions select{width:100%}
+#divEditingOptions{display:none}
+
+div.iphone_switch{height:17px;width:56px;background-image:url('/images/ebay/template/iphone_switch_small.png');background-position:0px;cursor:pointer;border-radius:3px;border: 1px outset #DDD;}
+#dsheet_gallery_checker{display:none}
+.number_only{width:60px;}
+.hidden{display:none}
+table.datasheet-section td[disabled]{color:gray}
+
+/* EagleGallery */
+#lblMoreFilters,#lblLessFilters{cursor:pointer}
+#tblAutoPrompt,#tblAutoPrompt input,#tblAutoPrompt select{width:100%}
+#tblAutoPrompt td{width:10%}
+#tblAutoPrompt a.action-btn{background-repeat:no-repeat;border:0 solid #e4e4e4;cursor:pointer;display:inline-block;line-height:16px;text-indent:-9999px;width:16px}
+#Applytableout{background:white;width:780px;padding:8px;border-radius:10px}
+#Applytable{width:600px;background-color:white}
+#aapplyto{text-decoration:none}
+.needs{font-size:18px}
+.gallerysettingtabel{-moz-box-shadow:4px 4px 12px -2px rgba(20%,20%,40%,0.5);-webkit-box-shadow:4px 4px 12px -2px rgba(20%,20%,40%,0.5);box-shadow:4px 4px 12px -2px rgba(20%,20%,40%,0.5);border-radius:10px;border-width:1px;border-style:solid;padding:5px}
+.gallerysettingtabel table{width:750px;margin-left:8px}
+.gallerysettingtabel table .initial{width:120px}
+.gallerysettingtabel table .siteno{width:120px}
+.gallerysettingtabel table .buttonset{float:right}
+.gallerysettingtabel{margin:5px}
+.gallerysettingtabel tr{height:28px}
+.gallerysettingtabel table td{vertical-align:middle}
+.name{font-size:16px;width:200px}
+.bannershow,#Custom_label,.gallerysettingtext td{font-size:16px}
+.section-header{text-shadow:1px 1px 2px rgba(150,150,150,1);font-size:30px}
+.mPreview{text-shadow:1px 1px 2px rgba(150,150,150,1)}
+#layoutshow{padding-top:10px}
+table.dataTable thead .sorting,table.dataTable thead .sorting_asc,table.dataTable thead .sorting_desc{background-color:#333}
+#gallery-content select{width:60px}
+
+/***************** Business Profile View ******************/
+div.divProfileView{max-height:500px;overflow:auto}
+div.divProfileView table{width:740px}
+div.divProfileView table input,div.divProfileView table textarea{width:100%;border:0}
+div.divProfileView table td:first-child{width:1%;white-space:nowrap;vertical-align:middle;padding-right:2px}
+div.divProfileView table td:nth-child(2){border:1px solid #ccc}
+div.divProfileView table th{font-weight:bold;padding-top:10px}
+div.divProfileView table th hr{margin:0}
+
+/***************** Liang editing  ******************/
+/*
+#tool_tab>ul{background-color: white;height: 52px;line-height: 12px;margin: 0px;padding: 0px;width: 250px;border: 0px;}
+*/
+#bigb.ui-draggable{opacity: 0.98;border-radius: 2px;background-color: #ffffff;border: 1px solid #ccc;}
+#bigb #body1 table{padding: 0px;margin: 0px;}
+#bigb #body1 table #id_layout_select{
+	background-image: url(/images/ebay/template/icon_change_layout_01.png);height: 16px;width: 16px;background-repeat: no-repeat;background-size: 16px;
+	}
+#bigb #body1 table td div {text-align: center;padding: 10px 10px;}
+
+
+li.ui-tabs-active {background: #61c6ce;}
+li.ui-state-active {background: #61c6ce;}
+.ui-widget select{-webkit-border-radius: 10px;}
+.ui-widget select option{background-color: #61c6ce}
+
+
+#form_upload.dropzone .dz-default.dz-message{
+/*background-image: url(/images/ebay/template/click_here_01_214.png);*/
+width: 260px;
+-webkit-background-size: 210px 30px;
+margin-top: -14.5px;
+margin-left: -100px;
+}
+/*#SNBanner  select{-webkit-border-radius: 10px;}*/
+#SNBanner  select option{background-color: #61c6ce}
+
+div.jqi button.jqidefaultbutton{background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#2ecc71), to(#2ecc71)); background-image: -webkit-linear-gradient(top, #2ecc71, #2ecc71); background-image: -moz-linear-gradient(top, #2ecc71, #2ecc71); background-image: -ms-linear-gradient(top, #2ecc71, #2ecc71); background-image: -o-linear-gradient(top, #2ecc71, #2ecc71); }
+div.jqi button.jqidefaultbutton{background-color: #2ecc71 !important;width:85px;height:30px;}
+div.jqi div.jqibuttons{background-color: #424443;}
+div.jqi div.jqibuttons{background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#424443), to(#424443)); background-image: -webkit-linear-gradient(top, #424443, #424443); background-image: -moz-linear-gradient(top, #424443, #424443); background-image: -ms-linear-gradient(top, #424443, #424443); background-image: -o-linear-gradient(top, #424443, #424443); }
+/*div.jqi select{-webkit-border-radius: 10px;}
+*/div.jqi select option{background-color: #61c6ce}
+
+/*table.table_d {background-color: #f6f6f6;}*/
+div.desc_details li{list-style-type: none;}
+
+
+
+button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-only{-webkit-border-radius: 0px;background-color: #ee4254;background-image: none;}
+button.ui-state-hover{background-color: #61c6ce;background-image: none;}
+
+.ui-state-active{background-color: #61c6ce !important;}
+.ui-state-hover{background-color: #61c6ce !important;}
+/*
+div#tool_tab>ul li a{margin: 0px;border: 0px;background-color: #58afb9;padding: 9px 4px;}
+li.ui-tabs-active{background-color: #61c6ce;}
+li.ui-state-active{background-color: #61c6ce;}
+
+
+*/
+#branch::-webkit-scrollbar {
+    width: 12px;
+	height: 12px;
+}
+#branch::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+#branch::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
+#branch1::-webkit-scrollbar {
+    width: 12px;
+	height: 12px;
+}
+#branch1::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+#branch1::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
+#branch2::-webkit-scrollbar {
+    width: 12px;
+	height: 12px;
+}
+#branch2::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+#branch2::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+#branch4::-webkit-scrollbar {
+    width: 12px;
+	height: 12px;
+}
+#branch4::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+#branch4::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+#T_Mobile::-webkit-scrollbar {
+    width: 12px;
+	height: 12px;
+}
+#T_Mobile::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+#T_Mobile::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+.jqimessage::-webkit-scrollbar {
+    width: 12px;
+	height: 12px;
+}
+.jqimessage::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+.jqimessage::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
+#infodetail::-webkit-scrollbar {
+    width: 12px;
+	height: 12px;
+}
+#infodetail::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+#infodetail::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
+.iosSwitch{
+  -webkit-appearance:none;
+  display: inline-block;
+  cursor: pointer;
+  padding-right: 40px;
+  transition: all ease 0.2s;
+  -webkit-transition: all ease 0.2s;
+  border-radius: 25px;
+  box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.5);
+}
+.iosSwitch:focus{
+	outline: none;
+}
+.iosSwitch:before {
+  display: block;
+  content: '';
+  width: 25px;
+  height: 25px;
+  border-radius: 25px;
+  background: white;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+.iosSwitch:checked{
+  padding-right: 0;
+  padding-left: 40px;
+  background: #00e970;
+  box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.5), inset 0 0 40px #00e079;
+  -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.5), inset 0 0 40px #00e079;
+}
+
+.main-tab {
+  width: 100%;
+  border-bottom: 1px solid #d1d2d5;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+/* line 9, ../sass/tab.scss */
+.main-tab li {
+  border-bottom: 3px solid transparent;
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+  padding: 5px 0;
+  margin-right: 40px;
+  margin-bottom: -1px;
+}
+/* line 11, ../sass/tab.scss */
+.main-tab li.active {
+  border-bottom: 3px solid #01bdf0;
+}
+/* line 13, ../sass/tab.scss */
+.main-tab li.active a {
+  color: #01bdf0;
+  font-weight: bold;
+}
+/* line 18, ../sass/tab.scss */
+.main-tab li:not(.active) a {
+  color: #999999;
+}
+/* line 20, ../sass/tab.scss */
+.main-tab li:not(.active) a:hover {
+  color: #666666;
+}
+
+*[tab-view] {
+  display: none;
+}
+/* line 38, ../sass/tab.scss */
+*[tab-view].active {
+  display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

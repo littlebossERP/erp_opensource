@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ManageReportScheduleResponse xmlns="http://mws.amazonaws.com/doc/2009-01-01/">
+  <ManageReportScheduleResult>
+    <Count>100</Count>
+    <!--1 or more repetitions:-->
+    <ReportSchedule>
+      <ReportType>string</ReportType>
+      <Schedule>string</Schedule>
+      <ScheduledDate>2008-09-28T18:49:45</ScheduledDate>
+    </ReportSchedule>
+  </ManageReportScheduleResult>
+  <ResponseMetadata>
+    <RequestId>string</RequestId>
+  </ResponseMetadata>
+</ManageReportScheduleResponse>

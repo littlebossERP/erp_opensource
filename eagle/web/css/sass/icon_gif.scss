@@ -1,0 +1,19 @@
+@import "compass/css3";
+@import "variable";
+
+
+@include keyframes(rotate){
+	0%{
+		@include rotate(0deg);
+	}
+	100%{
+		@include rotate(360deg);
+	}
+};
+
+.iconfont{
+	&.rotate{
+		@include animation(rotate 1s infinite linear);
+	}
+
+}

@@ -1,0 +1,36 @@
+@import "compass/css3";
+
+
+.flex-row{
+	@include flex-direction(row);
+	&.center{
+		@include align-items(center);
+	}
+
+}
+.flex-column{
+	@include flex-direction(column);
+	&.middle{
+		@include align-items(center);
+	}
+}
+.flex,
+.flex-row,
+.flex-column{
+	@include display-flex;
+}
+.space-between{
+	@include flex-wrap(warp);
+	@include justify-content(space-between);
+}
+
+
+.flex-0{
+	flex:0;
+}
+.flex-1{
+	flex:1;
+}
+.flex-2{
+	flex:2;
+}
