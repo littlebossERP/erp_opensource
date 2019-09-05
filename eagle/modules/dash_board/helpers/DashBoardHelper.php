@@ -40,7 +40,7 @@ class DashBoardHelper{
 		'EBAY'=>'/order/ebay-order/list?order_status=200&pay_order_type=all',
 		'AMAZON'=>'/order/amazon-order/list?order_status=200&pay_order_type=all',
 		'ALIEXPRESS'=>'/order/aliexpressorder/aliexpresslist?order_status=200&pay_order_type=all',
-		'WISH'=>'http:/order/wish-order/list?order_status=200',
+		'WISH'=>'/order/wish-order/list?order_status=200',
 		'DHGATE'=>'/order/dhgate-order/list?order_status=200',
 		'CDISCOUNT'=>'/order/cdiscount-order/list?order_status=200',
 		'LAZADA'=>'/order/lazada-order/list?order_status=200&pay_order_type=all',

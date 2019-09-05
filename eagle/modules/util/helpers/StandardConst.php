@@ -812,7 +812,7 @@ class StandardConst {
 	//货币对应符号
 	public static $CurrencyInfo = array(
 		'EUR'=>array('country'=>'欧盟','CN_name'=>'欧元','EN_name'=>'euro','符号'=>'€','标准符号'=>'EUR','html'=>'&#8364;'),
-		'HKD'=>array('country'=>'中国香港','CN_name'=>'港元','EN_name'=>'HongKong Dollars','符号'=>'HK$','标准符号'=>'HKD','html'=>'HK&#35;'),
+		'HKD'=>array('country'=>'中国香港','CN_name'=>'港元','EN_name'=>'HongKong Dollars','符号'=>'HK$','标准符号'=>'HKD','html'=>'HK$'),
 		'MOP'=>array('country'=>'中国澳门','CN_name'=>'澳门元','EN_name'=>'Macao Pataca','符号'=>'P.','标准符号'=>'MOP','html'=>'MOP'),
 		'CNY'=>array('country'=>'中国','CN_name'=>'人民币元','EN_name'=>'Renminbi Yuan','符号'=>'RMB￥','标准符号'=>'CNY','html'=>'RMB&#165;'),
 		'KPW'=>array('country'=>'朝鲜','CN_name'=>'圆','EN_name'=>'Korean Won','符号'=>'','标准符号'=>'KPW','html'=>'KPW'),
@@ -822,7 +822,7 @@ class StandardConst {
 		'SUR'=>array('country'=>'俄罗斯','CN_name'=>'卢布','EN_name'=>'Russian Ruble','符号'=>'Rbl.','标准符号'=>'SUR','html'=>'SUR'),
 		'GBP'=>array('country'=>'英国','CN_name'=>'英镑','EN_name'=>'Pound','符号'=>'￡','标准符号'=>'GBP','html'=>'&#163;'),
 		'CAD'=>array('country'=>'加拿大','CN_name'=>'加元','EN_name'=>'Canadian Dollar','符号'=>'Can.$','标准符号'=>'CAD','html'=>'CAD'),
-		'USD'=>array('country'=>'美国','CN_name'=>'美元','EN_name'=>'U.S.Dollar','符号'=>'$','标准符号'=>'USD','html'=>'&#35;'),
+		'USD'=>array('country'=>'美国','CN_name'=>'美元','EN_name'=>'U.S.Dollar','符号'=>'$','标准符号'=>'USD','html'=>'$'),
 	);
 	
 	public static function getCurrencyInfoByCode($currency){

@@ -931,27 +931,23 @@ class OrderListV3Helper{
 	public static function getDisplayOrderAmountInfoHTML($order){
 		$tmp_html = '';
 		
+		$currencySing = $order->currency;
+		$currencyInfo = StandardConst::getCurrencyInfoByCode($currencySing);
+		if(!empty($currencyInfo) && !empty($currencyInfo['html'])){
+		    $currencySing = $currencyInfo['html'];
+		}
+		
 		switch (true){
 			case in_array($order->order_source,['cdiscount']):
-				$currencySing = $order->currency;
-				$currencyInfo = StandardConst::getCurrencyInfoByCode($currencySing);
-				if(!empty($currencyInfo) && !empty($currencyInfo['html'])){
-					$currencySing = $currencyInfo['html'];
-				}
 				$tmp_html = '<span>产品+'.$order->subtotal.' '.$currencySing.'</span>'.
 					'<span class="list_order_span_7">佣金-'.(!empty($order->commission_total)?$order->commission_total:$order->discount_amount).' '.$currencySing.'</span>'.
 					'<span class="list_order_span_7">运费+'.$order->shipping_cost.' '.$currencySing.'</span>'.
 					'<span class="list_order_span_7">合计='.$order->grand_total.' '.$currencySing.'</span>';
 				break;
-				case in_array($order->order_source,['priceminister']):
-					$currencySing = $order->currency;
-					$currencyInfo = StandardConst::getCurrencyInfoByCode($currencySing);
-					if(!empty($currencyInfo) && !empty($currencyInfo['html'])){
-						$currencySing = $currencyInfo['html'];
-					}
-					$tmp_html = '<span>产品+'.$order->subtotal.' '.$currencySing.'</span>'.
-// 						'<span class="list_order_span_7">运费+'.$order->shipping_cost.' '.$currencySing.'</span>'.
-						'<span class="list_order_span_7">合计='.$order->grand_total.' '.$currencySing.'</span>';
+			case in_array($order->order_source,['priceminister']):
+				$tmp_html = '<span>产品+'.$order->subtotal.' '.$currencySing.'</span>'.
+// 					'<span class="list_order_span_7">运费+'.$order->shipping_cost.' '.$currencySing.'</span>'.
+					'<span class="list_order_span_7">合计='.$order->grand_total.' '.$currencySing.'</span>';
 				break;
 			case in_array($order->order_source,['ebay']):
 				if (!empty($order->addi_info)){
@@ -988,6 +984,14 @@ class OrderListV3Helper{
 					$tmp_html .= '<span qtipkey="order_amount_to_USD"></span>」</span>';
 				}
 				break;
+				
+			case in_array($order->order_source,['wish']):
+			    $tmp_html = '<span>产品+'.$order->subtotal.' '.$currencySing.'</span>'.
+			            '<span class="list_order_span_7">运费+'.$order->shipping_cost.' '.$currencySing.'</span>'.
+			            '<span class="list_order_span_7">合计='.$order->grand_total.' '.$currencySing.'</span>'.
+			            '<span class="list_order_span_7">佣金: '.((!empty($order->commission_total)?$order->commission_total:0)).' '.$currencySing.'</span>';
+			
+			    break;
 			case in_array($order->order_source,['shopee']):
 				$currencySing = $order->currency;
 			
