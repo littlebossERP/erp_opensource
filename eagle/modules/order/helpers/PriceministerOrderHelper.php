@@ -326,12 +326,6 @@ class PriceministerOrderHelper {
 	public static function cronAutoFetchRecentOrderList($job_id,$the_day=''){
 		echo "\n entry cronAutoFetchRecentOrderList. ";
 		try {
-			$puids_live_recent_3days = UserLastActionTimeHelper::getPuidArrByInterval(3*24);
-			foreach ($puids_live_recent_3days as $i=>&$v){
-				$v = (int)$v;
-			}
-			if(count($puids_live_recent_3days)==1)
-				$puids_live_recent_3days = $puids_live_recent_3days[0];
 			
 			$half_hours_ago = date('Y-m-d H:i:s',strtotime('-30 minutes'));
 			//update the new accounts first
@@ -345,10 +339,6 @@ class PriceministerOrderHelper {
 				;
 				
 			$currentTime = date("H");
-			if( $currentTime>=6 ){
-				$saas_query->andWhere(['uid'=>$puids_live_recent_3days]);
-			}
-			
 			$account_count = $saas_query->orderBy("last_order_success_retrieve_time asc")->count();
 				
 			$handled_account_count = 0;

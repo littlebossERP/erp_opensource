@@ -449,6 +449,7 @@ class LB_BANTOUYANCarrierAPI extends BaseCarrierAPI{
              $result = json_decode($track_no_result, true);
              if(!empty($result['success']) && !empty($result['code']) && $result['code'] == 200){//验证POST数据是否成功
                  $track_no = null;
+                 $trackOrder = null;
                  if(!empty($result['data']['list'])){
                      $trackOrder = $result['data']['list'][0]['orderInfo'];
                      $track_no = empty($trackOrder['sendCode'])?null:$trackOrder['sendCode'];
@@ -471,7 +472,11 @@ class LB_BANTOUYANCarrierAPI extends BaseCarrierAPI{
                      return BaseCarrierAPI::getResult(0, '', '获取物流号成功！物流号：'.(($is_new == true) ? '旧的跟踪号:'.$old_track_no.'.新的跟踪号:'.$track_no : $track_no));
                      
                  } else {//没有跟踪号
-                    throw new CarrierException('暂时没有跟踪号');
+                     if(!empty($trackOrder) && !empty($trackOrder['errorMsg'])){
+                         throw new CarrierException($trackOrder['errorMsg']);
+                     }else{
+                         throw new CarrierException('暂时没有跟踪号');
+                     }
                  }
    
              }else{

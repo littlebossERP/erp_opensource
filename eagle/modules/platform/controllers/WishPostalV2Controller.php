@@ -64,9 +64,11 @@ class WishPostalV2Controller extends \eagle\components\Controller
 					$Parameters['code']= $_REQUEST['code'];
 					$Parameters['redirect_uri']= self::$redirect_uri;
 					$Parameters['client_id']= self::$client_id;
-
-
+					$Parameters['client_secret']= self::$client_secret;
+					
+					\Yii::info("actionGetWishPostalAuthorizationCode Parameters:".json_encode($Parameters), "file");
 					$response = Helper_Curl::post('https://www.wishpost.cn/api/v3/access_token',http_build_query($Parameters),$header);
+					\Yii::info("actionGetWishPostalAuthorizationCode response:".$response, "file");
 					$result= json_decode( $response,true );
 					if( isset( $result['code'] ) && $result['code']==0  ){
 						$wish_account_id = Yii::$app->session['carrierid'];

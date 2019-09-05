@@ -961,7 +961,7 @@ SoapDocument;
 			$xml = <<<SoapDocument
 			<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
     <s:Body>
-        <GetAllowedCategoryTree xmlns="http://www.cdiscount.com">
+        <GetAllAllowedCategoryTree xmlns="http://www.cdiscount.com">
             <headerMessage xmlns:a="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
                 <a:Context>
                     <a:CatalogID>1</a:CatalogID>
@@ -984,7 +984,7 @@ SoapDocument;
                 </a:Security>
                 <a:Version>1.0</a:Version>
             </headerMessage>
-        </GetAllowedCategoryTree>
+        </GetAllAllowedCategoryTree>
     </s:Body>
 </s:Envelope>
 SoapDocument;

@@ -1627,6 +1627,12 @@ class OrderHelper {
 			}
 		}
 		
+		// dzt20190826 客户反映从8月20号之后的所有金额方面的数字都不准，发现wish有返回货币字段，而我们默认设置了USD
+		// 所以对原来同步回来不一样的currency进行覆盖
+		if($odorder->order_source =='wish' && $odorder->currency != $attributes['currency']){
+		    $attrs += ['currency'];
+		}
+		
 		if($odorder->order_source =='priceminister'){
 			$attrs =
 			[
