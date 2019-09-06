@@ -1390,6 +1390,12 @@ class OrderListV3Helper{
 		
 				$product_name_url = $tmpurl;
 				break;
+				
+			case 'wish':
+			    // dzt20190906 wish邮上传订单要求product_url 产品网页链接(必填)
+			    // 格式 https://www.wish.com/c/575d15bb51127360e5c56921 猜测后面这部分是订单获取到的product id
+			    $product_name_url = "https://www.wish.com/c/".$item->order_source_itemid;
+			    break;
 			default:
 				$product_name_url = $item->product_url;
 		}

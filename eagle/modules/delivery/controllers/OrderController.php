@@ -314,8 +314,8 @@ class OrderController extends \eagle\components\Controller{
         				}
         				
         				foreach($tmporders->items as $item){
-        					$tmp_platform_itme_id = \eagle\modules\order\helpers\OrderGetDataHelper::getOrderItemSouceItemID($tmporders->order_source , $item);
-        					$order_items_info[] = array('platform_type'=>$tmporders->order_source, 'order_status'=>$tmporders->order_status, 'xlb_item'=>$item->order_item_id,'sku'=>$item->sku, 'root_sku'=>$item->root_sku, 'itemID'=>$tmp_platform_itme_id, 'declaration'=>json_decode($item->declaration,true));
+        					$tmp_platform_item_id = \eagle\modules\order\helpers\OrderGetDataHelper::getOrderItemSouceItemID($tmporders->order_source , $item);
+        					$order_items_info[] = array('platform_type'=>$tmporders->order_source, 'order_status'=>$tmporders->order_status, 'xlb_item'=>$item->order_item_id,'sku'=>$item->sku, 'root_sku'=>$item->root_sku, 'itemID'=>$tmp_platform_item_id, 'declaration'=>json_decode($item->declaration,true));
         				}
         				CarrierOpenHelper::getCustomsDeclarationSumInfo($tmporders, $order_products);
         			}

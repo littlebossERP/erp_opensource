@@ -6301,7 +6301,7 @@ class CarrierOpenHelper {
 	}
 	
 	/**
-	 * 获取物流Viwe的items params data
+	 * 获取物流View的items params data
 	 * 
 	 * @param $carrier_code
 	 * @param $carrier_param_key
