@@ -87,9 +87,9 @@ use Qiniu\json_decode;
 						<img src="<?=$row['photo_primary']?>" style="width:50px ! important;height:50px ! important">
 					</div>
 					<div>
-						<?= (empty($row['purchase_link']) ? $row['sku'] : '<a href="'.$row['purchase_link'].'" target="_blank">'.$row['sku'].'</a>') ?>
+						<?= (empty($row['purchase_link']) ? \yii\helpers\Html::encode($row['sku']) : '<a href="'.$row['purchase_link'].'" target="_blank">'.\yii\helpers\Html::encode($row['sku']).'</a>') ?>
 						</br>
-						<?=$row['name']?>
+						<?=\yii\helpers\Html::encode($row['name'])?>
 					</div>
 				</td>
 				<?php foreach($edit_col_name as $col_en => $col_cn){?>
@@ -116,7 +116,7 @@ use Qiniu\json_decode;
   					?>
   					></textarea>
 					<?php }else{?>
-					<textarea name="<?= "item[$index][".$col_en."]" ?>" data-content="<?=$row[$col_en]?>"><?= $row[$col_en] ?></textarea>
+					<textarea name="<?= "item[$index][".$col_en."]" ?>" data-content="<?=\yii\helpers\Html::encode($row[$col_en])?>"><?= \yii\helpers\Html::encode($row[$col_en]) ?></textarea>
 					<?php }?>
 				</td>
 				<?php }?>

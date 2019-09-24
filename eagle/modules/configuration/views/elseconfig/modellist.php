@@ -47,10 +47,10 @@ if(!\eagle\modules\permission\apihelpers\UserApiHelper::checkSettingModulePermis
 	$item_arr=array();
 	if (count($models)):foreach($models as $model):?>
 	<tr>
-		<td><?=$model->name?></td>
+		<td><?=\yii\helpers\Html::encode($model->name)?></td>
 		<td>
 		<?php 
-			$content_arr = explode(',',$model->content);
+			$content_arr = explode(',',\yii\helpers\Html::encode($model->content));
 			foreach ($content_arr as $b):
 			$a_arr=explode(':',$b);
 			if(isset($all[$a_arr[0]]) || strstr($a_arr[0],'-custom-')!=false){

@@ -43,6 +43,11 @@ function showMsg(){
 	}
 }
 function checkReq(){
+	if (! $('#moduleFORM').formValidation('form_validate')){
+		bootbox.alert(Translator.t('有必填项未填或格式不正确!'));
+		return false;
+	}
+	
 	send = true;
 	str = $("#sizeList").val();
 	if(str == 'customSize'){
@@ -59,4 +64,9 @@ function checkReq(){
 	}
 	if(send)
 		$('#moduleFORM').submit();
+}
+
+function initCarrierCustomSettingValidateInput(){
+	$("#moduleFORM").find('input[type="text"]').formValidation({validType:['trim', 'safeForHtml'],tipPosition:'right'});
+	
 }

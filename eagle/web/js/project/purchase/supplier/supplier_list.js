@@ -121,7 +121,7 @@ supplier.list = {
 	'initFormValidateInput' : function(){
 		$('#supplier_model_form #name').formValidation({validType:['trim','length[2,30]','safeForHtml'],tipPosition:'left',required:true});
 		$('#supplier_model_form #comment,#supplier_model_form #address_street').formValidation({validType:['trim','length[0,255]','safeForHtml'],tipPosition:'left'});
-		$("#supplier_model_form #address_state,#supplier_model_form #address_city,#supplier_model_form #phone_number,#supplier_model_form #fax_number,#supplier_model_form #mobile_number,#supplier_model_form #qq,#supplier_model_form #ali_wanwan,#supplier_model_form #msn,#supplier_model_form #email,#supplier_model_form #payment_mode,#supplier_model_form #payment_account")
+		$("#supplier_model_form #address_state,#supplier_model_form #address_city,#supplier_model_form #phone_number,#supplier_model_form #fax_number,#supplier_model_form #mobile_number,#supplier_model_form #qq,#supplier_model_form #ali_wanwan,#supplier_model_form #msn,#supplier_model_form #email,#supplier_model_form #payment_mode,#supplier_model_form #payment_account,#supplier_model_form #post_code,#supplier_model_form #contact_name")
 		.formValidation({validType:['trim','length[0,100]','safeForHtml'],tipPosition:'left'});
 		$('#supplier_model_form #url').formValidation({validType:['trim','length[0,1000]','url'],tipPosition:'left'});
 		$("select[name='address_nation']").combobox({removeIfInvalid:true});

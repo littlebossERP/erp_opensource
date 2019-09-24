@@ -3,7 +3,7 @@ use eagle\modules\util\helpers\TranslateHelper;
 use yii\bootstrap\Dropdown;
 use eagle\helpers\HtmlHelper;
 $baseUrl = \Yii::$app->urlManager->baseUrl . '/';
-$tmp_js_version = '2.11';
+$tmp_js_version = '2.12';
 $this->registerJsFile($baseUrl."js/project/configuration/carrierconfig/carrier.js?v=".$tmp_js_version);
 $this->registerJsFile($baseUrl."js/project/configuration/carrierconfig/shipping.js?v=".$tmp_js_version);
 $this->registerJsFile($baseUrl."js/project/configuration/carrierconfig/index.js?v=".$tmp_js_version, ['depends' => ['yii\jui\JuiAsset','yii\bootstrap\BootstrapPluginAsset']]);

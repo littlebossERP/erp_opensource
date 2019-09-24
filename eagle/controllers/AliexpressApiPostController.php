@@ -227,4 +227,12 @@ class AliexpressApiPostController extends \yii\web\Controller
 	public function actionTaobaotmcusercancel(){
 		return AliexpressApiPostHelper::AliexpressPost(__FUNCTION__, '12');
 	}
+	
+	// 自定义场景接口，交易订单列表查询
+	public function actionCustomgetorder(){
+	    return AliexpressApiPostHelper::AliexpressPost(__FUNCTION__, '12');
+	}
+	
+	
+	
 }

@@ -3058,7 +3058,7 @@ jumiaListing ={
 			$.ajax({
 				async: false,
 				type: "post",
-				url: "/listing/lazada-listing/get-brands",
+				url: "/listing/jumia-listing/get-brands",
 				data: { lazada_uid : $("#lazadaUid").val(),name : $('[cid="Brand"]>.secondTd>input').val() , mode:'eq'},
 				dataType:'json',
 				success:function(data){

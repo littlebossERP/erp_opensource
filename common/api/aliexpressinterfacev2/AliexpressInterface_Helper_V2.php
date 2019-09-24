@@ -324,7 +324,11 @@ class AliexpressInterface_Helper_V2{
 				}elseif (in_array($OrderById['order_status'], array('WAIT_BUYER_ACCEPT_GOODS','FUND_PROCESSING','WAIT_SELLER_EXAMINE_MONEY'))){
 					$order_status = 500;//去掉已发货流程，直接到已完成
 				}elseif (in_array($OrderById['order_status'], array('FINISH'))){
+                    if(!empty($OrderById['refund_info'])){// dzt20190909 买家取消但状态不是IN_CANCEL
+                        $order_status = 600;
+                    }else{
 					$order_status = 500;
+                    }
 				}elseif (in_array($OrderById['order_status'], array('IN_ISSUE','IN_FROZEN'))){//需要挂起的订单
 					//挂起，需要及时处理的订单，可能不需要发货
 					$is_manual_order = 1;

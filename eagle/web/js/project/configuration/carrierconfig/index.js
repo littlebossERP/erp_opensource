@@ -499,6 +499,11 @@ function createoreditDeclare(type,id,ck){
 }
 //保存常用报关信息
 function saveDeclare(type){
+	if (! $('#EditFORM').formValidation('form_validate')){
+		bootbox.alert(Translator.t('有必填项未填或格式不正确!'));
+		return false;
+	}
+	
 	$formdata = $('#EditFORM').serialize();
 	var Url=global.baseUrl +'configuration/carrierconfig/save-declare?type='+type;
 
@@ -518,6 +523,11 @@ function saveDeclare(type){
 	        }
         }
     });
+}
+
+function initDeclareValidateInput(){
+	$("#EditFORM").find('input[type="text"]').formValidation({validType:['trim', 'safeForHtml'],tipPosition:'right'});
+	
 }
 
 function ResetDeclare(){

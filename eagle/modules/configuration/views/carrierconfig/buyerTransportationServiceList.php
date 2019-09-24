@@ -71,6 +71,9 @@ use yii\helpers\Html;
 			<li role="presentation" class="self" id='linio_platform_li'>
 				<a class='tablist_class index_li_a' value='self' href="#linio_platform" role="tab" data-toggle="tab" data="linio_platform"><label>linio</label><span class="badge country_count"></span></a>
 			</li>
+			<li role="presentation" class="self" id='jumia_platform_li'>
+				<a class='tablist_class index_li_a' value='self' href="#jumia_platform" role="tab" data-toggle="tab" data="jumia_platform"><label>jumia</label><span class="badge country_count"></span></a>
+			</li>
 		</ul>
 		<!-- Tab panes -->
 		<div class="tab-content">
@@ -212,6 +215,26 @@ use yii\helpers\Html;
 				?>
 				<div class="platform_label_div two_column_50" >
 					<label><input type="checkbox" value="<?=$tmp_platformKey ?>" name='[linio]' onclick="buyer_transportation_service_click(this)" ><?=$tmp_platformVal ?></label>
+				</div>
+				<?php
+					}
+				?>
+				</div>
+			</div>
+			<!-- jumia -->
+			<div role="tabpanel" class="tab-pane" id="jumia_platform">
+				<div>
+					<div class="all_select_platform_service_div">
+						<label><input type="checkbox" value="jumia_platform_selected" onclick="all_platform_service_ck_click(this)" >全选</label>
+					</div>
+				</div>
+				<hr style='margin: 5px 0px;'>
+				<div id='jumia_platform_selected' class='platform_selected'>
+				<?php
+					foreach ($jumia_services as $tmp_platformKey => $tmp_platformVal){
+				?>
+				<div class="platform_label_div two_column_50" >
+					<label><input type="checkbox" value="<?=$tmp_platformKey ?>" name='[jumia]' onclick="buyer_transportation_service_click(this)" ><?=$tmp_platformVal ?></label>
 				</div>
 				<?php
 					}

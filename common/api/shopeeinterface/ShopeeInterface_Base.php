@@ -74,6 +74,8 @@ class ShopeeInterface_Base
         
         $headers[] = "Content-Type: application/json";
         $headers[] = "Authorization: ".$sign;
+        Helper_Curl::$timeout = 60;
+        Helper_Curl::$connecttimeout = 10;
         $response = Helper_Curl::post($this->hosturl.$api_path, $param_request, $headers);
         $result = $this->response($response);
         

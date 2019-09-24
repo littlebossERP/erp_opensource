@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+$this->registerJs("initEditAddressValidateInput();" , \yii\web\View::POS_READY);
+
 $country = $add_data['country'];
 $province = $add_data['province'];
 $city = $add_data['city'];

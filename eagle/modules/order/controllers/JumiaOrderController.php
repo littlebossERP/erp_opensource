@@ -810,6 +810,60 @@ class JumiaOrderController extends \eagle\components\Controller{
 		}
 	}
 	
+	
+	//更新jumia proxy的图片缓存
+	// /order/jumia-order/update-image
+	public function actionUpdateImage(){
+	    AppTrackerApiHelper::actionLog("Oms-lazada", "/order/jumia/updateimage");
+	    if(!isset($_POST['order_id'])){
+	        return ResultHelper::getResult(400, "", "异常操作！");
+	    }
+	
+	    $order = OdOrder::findOne($_POST['order_id']);
+	    if(empty($order)){
+	        return ResultHelper::getResult(400, "", "订单不存在！");
+	    }
+	
+	    $lazadaUsers = SaasLazadaUser::find()->where(['platform_userid'=>$order->selleruserid,'lazada_site'=>strtolower($order->order_source_site_id)])->andWhere('status <> 3')->one();
+	    if(empty($lazadaUsers)){
+	        return ResultHelper::getResult(400, "", "订单所属账号不存在！");
+	    }
+	
+	    $config = array(
+	            "userId"=>$lazadaUsers->platform_userid,
+	            "apiKey"=>$lazadaUsers->token,
+	            "countryCode"=>$lazadaUsers->lazada_site,
+	    );
+	    $msg = array();
+	    foreach ($order->items as $item){
+	        $response = LazadaInterface_Helper::getOrderItemImage($config,array('ShopSku'=>$item->order_source_itemid,'SellerSku'=>$item->sku,'purge'=>true));
+	        if($response['success']){
+	            if(isset($response['response']['SmallImageUrl'])){
+	                $db = OdOrderItem::getDb();
+	                try{
+	                    $r = $db->createCommand()->update(
+	                            OdOrderItem::tableName(),
+	                            ['photo_primary'=>$response['response']['SmallImageUrl']],
+	                            ['order_source_itemid'=>$item->order_source_itemid]
+	                    )->execute();
+	                }catch (\Exception $e){
+	                    $msg[] = 'order_id:'.$order->order_id.' ,order_item_id:'.$item->order_source_itemid.' 保存到数据库时失败';
+	                }
+	            }else{
+	                $msg[] = 'order_id:'.$order->order_id.' ,order_item_id:'.$item->order_source_itemid.' call API error.';
+	            }
+	        }else{
+	            $msg[] = 'order_id:'.$order->order_id.' ,order_item_id:'.$item->order_source_itemid.' has error .'.$response['response']['message'];
+	        }
+	    }
+	
+	    if(!empty($msg)){
+	        return ResultHelper::getResult(400, "", implode(';', $msg));
+	    }else{
+	        return ResultHelper::getResult(200, "", "更新成功");
+	    }
+	}
+	
 }
 
 

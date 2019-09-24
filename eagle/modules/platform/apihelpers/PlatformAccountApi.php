@@ -687,6 +687,7 @@ class PlatformAccountApi {
 		$neweggServicesList = NeweggApiHelper::getNeweggOrderCustomerShippingServiceCode();
 		
 		$linio_services = LazadaApiHelper::getBuyerShippingServices('linio');
+		$jumia_services = LazadaApiHelper::getBuyerShippingServices('jumia');
 		
 		return array(
 				'ebay'=>$eabyServices,
@@ -696,6 +697,7 @@ class PlatformAccountApi {
 				'aliexpress'=>$aliexpressServices,
 				'newegg'=>$neweggServicesList,
 				'linio'=>$linio_services,
+				'jumia'=>$jumia_services,
 		);
 	}
 	

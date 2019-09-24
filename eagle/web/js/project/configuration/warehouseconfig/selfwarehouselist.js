@@ -296,6 +296,11 @@ function btn_search_warehouse_shipping(){
 
 function enble_or_crate_warehouse(){
 //	alert('b');
+	if (! $('#warehouse_enable_or_create_from').formValidation('form_validate')){
+		bootbox.alert(Translator.t('有必填项未填或格式不正确!'));
+		return false;
+	}
+	
 	$formdata = $('#warehouse_enable_or_create_from').serialize();
 	
 	$.ajax({
@@ -313,6 +318,11 @@ function enble_or_crate_warehouse(){
 	        }
         }
     });
+}
+
+function initCreateWarehouseValidateInput(){
+	$("#warehouse_enable_or_create_from").find('[name="new_warehouse_name"]').formValidation({validType:['trim', 'safeForHtml'],tipPosition:'right',required:true});
+	
 }
 
 //关闭仓库
@@ -349,6 +359,12 @@ function closeWarehouse(warehouse_id){
 
 //修改仓库信息
 function editWarehouseInfo(){
+	
+	if (! $('#address_form').formValidation('form_validate')){
+		bootbox.alert(Translator.t('有必填项未填或格式不正确!'));
+		return false;
+	}
+	
 	var save_val = $('#address_form').serialize();
 	
 	//当关闭仓库时，判断是否存在库存，存在则弹出提示
@@ -386,6 +402,12 @@ function editWarehouseInfo(){
 	else{
 		saveWarehouse(save_val);
 	}
+}
+
+function initEditWarehouseValidateInput(){
+	$("#address_form").find('input[type="text"]').formValidation({validType:['trim', 'safeForHtml'],tipPosition:'right'});
+//	$("#address_form").find('[name="warehouse_name"],[name="warehouse_name"]').formValidation({validType:['trim', 'safeForHtml'],tipPosition:'right',required:true});
+	
 }
 
 function saveWarehouse(val){

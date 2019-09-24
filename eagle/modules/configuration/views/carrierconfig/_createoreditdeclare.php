@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-
+$this->registerJs("initDeclareValidateInput();" , \yii\web\View::POS_READY);
 ?>
 <style>
 	.drop{

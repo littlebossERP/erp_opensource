@@ -357,6 +357,21 @@ class LazadaLinioJumiaProductFeedHelper
             $lazadaFeedList->process_status = ProductListingProcessStatus::STATUS_FAIL;
             $lazadaFeedList->save(false);
             self::localLog("feedstatusResponseErrorDigest end feedId:$lazadaFeedList->Feed STATUS_FAIL save $errorMessage");
+           
+            $lazadaFeedList->refresh();
+            // 重试次数过多标记失败
+            if($lazadaFeedList->error_times >= 10){
+                if ($lazadaFeedList->type == self::PRODUCT_CREATE or $lazadaFeedList->type == self::PRODUCT_UPDATE) {
+                    self::createAndUpdateStatusCallback($lazadaFeedList, array(), array());
+                    return;
+                }
+                if ($lazadaFeedList->type == self::PRODUCT_IMAGE_UPLOAD) {
+                    self::imageuploadStatusCallback($lazadaFeedList, array(), array(), $nowTime);
+                    return;
+                }
+            }
+           
+            
             return false;
         }
         return true;
@@ -980,6 +995,12 @@ class LazadaLinioJumiaProductFeedHelper
             $reqParams["failReport"] = $reqErrors;
         }
 
+        // dzt20190911 报错过多中止回写
+        if(empty($reqParams["failReport"]) && $lazadaFeedList->FailedRecords == 0 && empty($singleFeedDetail) 
+                && !empty($lazadaFeedList->message) && $lazadaFeedList->error_times >= 10){
+            $reqParams["failReport"] = $lazadaFeedList->message;
+        }
+
         if ($lazadaFeedList->type == self::PRODUCT_CREATE) {
             self::localLog("createAndUpdateStatusCallback start feedId:$lazadaFeedList->Feed reqParams:" . print_r($reqParams, true));
             $ret = LazadaCallbackHelper::productCreate($reqParams);
@@ -997,7 +1018,7 @@ class LazadaLinioJumiaProductFeedHelper
             self::localLog("feedId:$lazadaFeedList->Feed STATUS_CHECKED_CALLED");
             $lazadaFeedList->save(false);
         } else {
-            $lazadaFeedList->message = "LazadaCallbackHelper::productCreate";
+            $lazadaFeedList->message .= "createAndUpdateStatusCallback false.";
             $lazadaFeedList->error_times = $lazadaFeedList->error_times + 1;
             $lazadaFeedList->process_status = ProductListingProcessStatus::STATUS_FAIL;
             $lazadaFeedList->save(false);
@@ -1025,6 +1046,11 @@ class LazadaLinioJumiaProductFeedHelper
             $reqParams["failReport"] = $reqErrors;
         }
 
+        if(empty($reqParams["failReport"]) && $lazadaFeedList->FailedRecords == 0 && empty($singleFeedDetail)
+                && !empty($lazadaFeedList->message) && $lazadaFeedList->error_times >= 10){
+            $reqParams["failReport"] = $lazadaFeedList->message;
+        }
+        
         //(2)图片upload成功的话，回调函数调用
         self::localLog("imageuploadStatusCallback start reqParams:" . print_r($reqParams, true));
         list($ret, $sellerSkus) = LazadaCallbackHelper::imageUpload($reqParams);

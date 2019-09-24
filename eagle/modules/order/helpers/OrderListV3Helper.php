@@ -21,7 +21,7 @@ use eagle\modules\statistics\helpers\ProfitHelper;
 use eagle\modules\catalog\helpers\ProductSuppliersHelper;
 
 class OrderListV3Helper{
-	public static $OrderCommonJSV3 = '1.241';
+	public static $OrderCommonJSV3 = '1.242';
 	
 	//根据传进来的order_models进行解释
 	public static function getOrderListInfoByOrderModels($order_models, $warehouses, $non17Track, $current_order_status, $skuListInfo, $current_exception_status = '', $special_selleruserids = '',$is_vip=false){
@@ -108,7 +108,6 @@ class OrderListV3Helper{
 		//统一获取报关信息
 		$result_item_declared_info = CarrierDeclaredHelper::getOrderDeclaredInfoBatch($order_items_info, true);
 // 		print_r($result_item_declared_info);
-		
 		
 		if(count($order_models) > 0){
 			foreach ($order_models as $order){
@@ -513,6 +512,7 @@ class OrderListV3Helper{
 						case 'jumia':
 							$do_operation_list_one += ['invoiced' => '发票'];
 							$do_operation_list_one += ['InvoiceDoprint' => 'Jumia官方发票打印'];
+							$do_operation_list_one += ['updateImage' => '更新图片缓存'];
 							break;
 						case 'newegg':
 							$do_operation_list_one += ['invoiced' => '发票'];
@@ -720,7 +720,32 @@ class OrderListV3Helper{
 						'group_order_md5' => $group_order_md5,
 						'to_deal_with' => $tmp_to_deal_with,	//货代处理号
 				);
-			 
+
+				// dzt20190830 按客户要求修改成显示USD，连带修改几个数据
+				$currencySing = "USD";
+				if($order->order_source == 'wish'){
+				    $subtotal = $order->subtotal;
+    			    $shipping_cost = $order->shipping_cost;
+    			    $grand_total = $order->grand_total;
+    			    $commission_total = !empty($order->commission_total)?$order->commission_total:0;
+				    
+				    $subtotal = \common\helpers\Helper_Currency::convertThisCurrencyToUSDFromDay($order->currency, $subtotal);
+				    $shipping_cost = \common\helpers\Helper_Currency::convertThisCurrencyToUSDFromDay($order->currency, $shipping_cost);
+				    $grand_total = \common\helpers\Helper_Currency::convertThisCurrencyToUSDFromDay($order->currency, $grand_total);
+				    $commission_total = \common\helpers\Helper_Currency::convertThisCurrencyToUSDFromDay($order->currency, $commission_total);
+				    
+				    $subtotal = sprintf("%.2f", $subtotal);
+				    $shipping_cost = sprintf("%.2f", $shipping_cost);
+				    $grand_total = sprintf("%.2f", $grand_total);
+				    $commission_total = sprintf("%.2f", $commission_total);
+				    
+				    $orderInfos[$order->order_id]['subtotal'] = $subtotal;
+				    $orderInfos[$order->order_id]['shipping_cost'] = $shipping_cost;
+				    $orderInfos[$order->order_id]['grand_total'] = $grand_total;
+				    $orderInfos[$order->order_id]['commission_total'] = $commission_total;
+				    $orderInfos[$order->order_id]['currency'] = $currencySing;
+				}
+				
 				$orderInfos[$order->order_id]['items'] = array();
 				
 				if(count($order->getItemsPT()) > 0){
@@ -734,6 +759,14 @@ class OrderListV3Helper{
 						if($order->order_source == 'cdiscount'){
 							$nonDeliverySku = \eagle\modules\order\helpers\CdiscountOrderInterface::getNonDeliverySku();
 							if(empty($item->sku) or in_array(strtoupper($item->sku),$nonDeliverySku) ) continue;
+						}
+						
+						// dzt20190807 shopee 展示父sku
+						if($order->order_source == 'shopee' && !empty($addi_info_item) && !empty($addi_info_item['item_sku'])){
+						    if(empty($item->sku)) 
+						        $item->sku = $addi_info_item['item_sku'];
+						    else 
+						        $item->sku .= '('.$addi_info_item['item_sku'].' '.$addi_info_item['variation_name'].')';
 						}
 						
 						//产品URL
@@ -879,6 +912,15 @@ class OrderListV3Helper{
 						else if($order->order_source == 'wish'){
 						    if(!empty($item['order_source_itemid']))
 							    $tmp_platform_source_item_id = '<span aria-hidden="true" data-toggle="tooltip" data-placement="top" data-html="true" data-original-title="ItemID" title="" >'.$item['order_source_itemid'].'</span>';
+						
+						    // dzt20190830 按客户要求修改成显示USD 
+						    if($order->currency != $currencySing){
+						        $itemPrice = $orderInfos[$order->order_id]['items'][$key]['price'];
+						        $itemPrice = \common\helpers\Helper_Currency::convertThisCurrencyToUSDFromDay($order->currency, $itemPrice);
+						        $itemPrice = sprintf("%.2f", $itemPrice);
+						        
+						        $orderInfos[$order->order_id]['items'][$key]['price'] = $itemPrice;
+						    }
 						}
 						else if($order->order_source == 'jumia'){
 							if (!empty($item->platform_status)){
@@ -984,12 +1026,35 @@ class OrderListV3Helper{
 					$tmp_html .= '<span qtipkey="order_amount_to_USD"></span>」</span>';
 				}
 				break;
-				
 			case in_array($order->order_source,['wish']):
-			    $tmp_html = '<span>产品+'.$order->subtotal.' '.$currencySing.'</span>'.
-			            '<span class="list_order_span_7">运费+'.$order->shipping_cost.' '.$currencySing.'</span>'.
-			            '<span class="list_order_span_7">合计='.$order->grand_total.' '.$currencySing.'</span>'.
-			            '<span class="list_order_span_7">佣金: '.((!empty($order->commission_total)?$order->commission_total:0)).' '.$currencySing.'</span>';
+			    $subtotal = $order->subtotal;
+			    $shipping_cost = $order->shipping_cost;
+			    $grand_total = $order->grand_total;
+			    $commission_total = !empty($order->commission_total)?$order->commission_total:0;
+				
+			    // dzt20190830 按客户要求改成显示USD
+			    $currencySing = "USD";
+			    if($order->currency != $currencySing){
+//     			    $subtotal = \common\helpers\Helper_Currency::convert($subtotal, $currencySing, $order->currency, 2);
+//     			    $shipping_cost = \common\helpers\Helper_Currency::convert($shipping_cost, $currencySing, $order->currency, 2);
+//     			    $grand_total = \common\helpers\Helper_Currency::convert($grand_total, $currencySing, $order->currency, 2);
+//     			    $commission_total = \common\helpers\Helper_Currency::convert($commission_total, $currencySing, $order->currency, 2);
+			        
+			        $subtotal = \common\helpers\Helper_Currency::convertThisCurrencyToUSDFromDay($order->currency, $subtotal);
+			        $shipping_cost = \common\helpers\Helper_Currency::convertThisCurrencyToUSDFromDay($order->currency, $shipping_cost);
+			        $grand_total = \common\helpers\Helper_Currency::convertThisCurrencyToUSDFromDay($order->currency, $grand_total);
+			        $commission_total = \common\helpers\Helper_Currency::convertThisCurrencyToUSDFromDay($order->currency, $commission_total);
+			         
+			        $subtotal = sprintf("%.2f", $subtotal);
+			        $shipping_cost = sprintf("%.2f", $shipping_cost);
+			        $grand_total = sprintf("%.2f", $grand_total);
+			        $commission_total = sprintf("%.2f", $commission_total);
+			    }
+			    
+			    $tmp_html = '<span>产品+'.$subtotal.' '.$currencySing.'</span>'.
+			            '<span class="list_order_span_7">运费+'.$shipping_cost.' '.$currencySing.'</span>'.
+			            '<span class="list_order_span_7">合计='.$grand_total.' '.$currencySing.'</span>'.
+			            '<span class="list_order_span_7">佣金: '.($commission_total).' '.$currencySing.'</span>';
 			
 			    break;
 			case in_array($order->order_source,['shopee']):

@@ -720,9 +720,11 @@ CLASS OrderGetDataHelper{
 
 					if (isset($AccountList['data'])){
 						if (!empty($AccountList['data'])){
-							if (in_array($filed_value,['amazon','cdiscount','priceminister','rumall','customized','newegg', 'shopee']) ){
+							if (in_array($filed_value,['amazon','cdiscount','priceminister','rumall','customized','newegg']) ){
 									
 								$tmpAccount = array_flip($AccountList['data']);
+							}elseif (in_array($filed_value,['shopee']) ){// dzt20190821 未知原因shopee客户出现了 store_name重复， array_flip导致key覆盖
+								$tmpAccount = array_keys($AccountList['data']);
 							}else{
 								$tmpAccount = $AccountList['data'];
 							}
@@ -730,7 +732,6 @@ CLASS OrderGetDataHelper{
 							//账号全部解绑
 							$tmpAccount = [];
 						}
-						
 						$query->andWhere(['in','selleruserid',$tmpAccount]);
 					}
 						
@@ -1342,7 +1343,11 @@ CLASS OrderGetDataHelper{
 	 	//已完成订单，并且利润不为空，有付款时间才计算
 	 	$query->andWhere("profit is not null and order_status=500 and paid_time>0");
 	 	//速卖通需要存在跟踪号才计算
-	 	$query->andWhere("(order_source='aliexpress' and tracking_number is not null and tracking_number!='') or order_source!='aliexpress'");
+	 	// dzt20190902 这里和合并订单的逻辑有冲突，合并订单标记发货信息只写回原始订单上面，合并订单没有记录，导致这里速卖通的合并订单不显示
+	 	// 即使修改逻辑显示，跟踪号也缺失，需要另外获取
+// 	 	$query->andWhere("(order_source='aliexpress' and tracking_number is not null and tracking_number!='') or order_source!='aliexpress'");
+	 	$query->andWhere("(order_source='aliexpress' and (tracking_number is not null and tracking_number!='' and order_relation!='sm' or order_relation='sm')) or order_source!='aliexpress'");
+	 	
 	 	
 	 	//只显示已绑定的账号的信息
 	 	$bind_stores = '';

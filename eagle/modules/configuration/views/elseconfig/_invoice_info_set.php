@@ -11,6 +11,8 @@ use eagle\modules\util\helpers\CountryHelper;
 <?php 
 $uid = \Yii::$app->user->id;
 
+$this->registerJs("initFormValidateInput();" , \yii\web\View::POS_READY);
+
 ?>
 
 <div>
@@ -121,8 +123,12 @@ $uid = \Yii::$app->user->id;
 					}
 					?>
 					<?php foreach ($amzStoreMappingMk as $store=>$mkArr){?>
+					<?php 
+					   $amzAccount = SaasAmazonUser::find()->where(['merchant_id'=>$store])->one();
+					   if(empty($amzAccount)) continue;
+					?>
 						<tr style="border:2px #D9EFFC solid">
-							<?php $amzAccount = SaasAmazonUser::find()->where(['merchant_id'=>$store])->one();?>
+							<?php ?>
 							<td><?=$amzAccount->store_name ?> : </td>
 							<td>
 								<?php if(!empty($selectedAmzArr[$store])):

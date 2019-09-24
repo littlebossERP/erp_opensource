@@ -505,7 +505,7 @@ class WarehouseconfigController extends \eagle\components\Controller
     	
     	$carrierOverseaList = CarrierOpenHelper::getNotOpenCarrierArr(1, 2 ,1);
     	
-    	return $this->renderPartial('warehouse_enable_or_create',['type'=>$_GET['type'], 'notWarehouseIdNameMap'=>$notWarehouseIdNameMap,'carrierOverseaList'=>$carrierOverseaList]);
+    	return $this->renderAjax('warehouse_enable_or_create',['type'=>$_GET['type'], 'notWarehouseIdNameMap'=>$notWarehouseIdNameMap,'carrierOverseaList'=>$carrierOverseaList]);
     }
     
     /**
@@ -1010,7 +1010,7 @@ class WarehouseconfigController extends \eagle\components\Controller
     	//获取国家代码
     	$countryComboBox = WarehouseHelper::countryComboBoxData();
     	
-    	return $this->renderPartial('editWarehouseInfo',['warehouseOneInfo'=>$warehouseOneInfo, 'countryComboBox'=>$countryComboBox]);
+    	return $this->renderAjax('editWarehouseInfo',['warehouseOneInfo'=>$warehouseOneInfo, 'countryComboBox'=>$countryComboBox]);
     }
     
     public function actionGetOverseaWarehouseInfo(){

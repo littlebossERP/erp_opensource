@@ -88,6 +88,10 @@ class LazadaApiHelper
     	"Skypostal"=>"Skypostal",
     );
     
+    public static $JUMIA_BUYER_SHIPPING_SERVICES = array(
+        "MA-Clevy-Station"=>"MA-Clevy-Station",
+        "NG-Clevy-Station"=>"NG-Clevy-Station",
+    );
     
     // lazada 图片上传在UserBackgroundJobControll 里面的job name
     const IMAGE_UPLOAD_BGJ_NAME = "lazada_image_upload";
@@ -182,7 +186,7 @@ class LazadaApiHelper
             return self::$LINIO_BUYER_SHIPPING_SERVICES;
         
         if ($platform == 'jumia')
-            return array();
+            return self::$JUMIA_BUYER_SHIPPING_SERVICES;
         
         if ($platform == 'lazada')
             return array();
@@ -1580,17 +1584,15 @@ class LazadaApiHelper
         }
     }
 
-    // 更新数据库缓存的lazada ,linio,jumia品牌
+    // 更新数据库缓存的linio,jumia品牌
     // 由于站点品牌返回内容比较多，所以更新失败不删除，以免客户自动拉取太慢。
     public static function refreshBrands()
     {
         $toUpBrands = array();
-        // 好像是为了确保站点有账号可以拉取信息 不用LazadaBrand而是这样列出来的，不过好像没啥用。后面可以改回LazadaBrand foreach 更新
-        $userSites = SaasLazadaUser::find()->where(['status' => 1])->groupBy('lazada_site')->asArray()->all();
+        // 好像是为了确保站点的有账号可以拉取信息 不用LazadaBrand而是这样列出来的，不过好像没啥用。后面可以改回LazadaBrand foreach 更新
+        $userSites = SaasLazadaUser::find()->where(['status' => 1,'platform'=>["linio", "jumia"]])->groupBy('lazada_site')->asArray()->all();
         foreach ($userSites as $userSite) {
-            if(!array_key_exists($userSite['lazada_site'], LazadaApiHelper::getLazadaCountryCodeSiteMapping())){//只更新linio jumia的站点
-                $toUpBrands[] = array('site' => $userSite['lazada_site']);
-            }
+            $toUpBrands[] = array('site' => $userSite['lazada_site']);
         }
 
 

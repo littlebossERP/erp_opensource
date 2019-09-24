@@ -140,8 +140,10 @@ class SaasNeweggAutoFetchApiHelper{
 			// 3600*24*2 时间太长，导致新单任务两天不运行，修改为2小时
 			if($type==1){
 				$unFinishJob = SaasNeweggAutosync::find()->where(['is_active'=>1,'status'=>[0,1],'site_id'=>$row['site_id'] ])->andWhere("type<>1 and last_finish_time > ".(time()-3600*2) )->asArray()->all();
-				if(count($unFinishJob)>0)
+				if(count($unFinishJob)>0){
+				    echo "skip until other job done stie_id=".$row['site_id'].".\n";
 					continue;
+				}
 			}
 			// 先判断是否真的抢到待处理的autoSync记录
 			echo "++++++++_lockNeweggAutoSync stie_id=".$row['site_id']." type $type \n";
@@ -242,7 +244,10 @@ class SaasNeweggAutoFetchApiHelper{
 			try{
 				$ret = self::_getOrderListAndSaveToEagle($token, $SAA_obj->uid, $reqParams);
 			}catch (\Exception $e){
-				$SAA_autoSync->message = print_r($e->getMessage());
+				print_r($e);
+                $errorMessage = "file:" . $e->getFile() . " line:" . $e->getLine() . " message:" . $e->getMessage();
+				echo $errorMessage.PHP_EOL ;
+				$SAA_autoSync->message = $e->getMessage();
 				$SAA_autoSync->error_times=$SAA_autoSync->error_times+1;
 				$SAA_autoSync->status=3;
 				$SAA_autoSync->last_start_time=$nowTime;//上一次运行时间

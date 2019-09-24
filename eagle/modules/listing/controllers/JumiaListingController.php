@@ -639,6 +639,11 @@ class JumiaListingController extends \eagle\components\Controller {
 				"countryCode"=>$jumiaUser->lazada_site
 		);
 		
+		// dzt20190807 KE站点品牌获取不到问题，跳过品牌检查 ，dzt20190814 还是有客户提出，改成全站点不检查
+// 		if("ke" == strtolower($jumiaUser->lazada_site))
+		return ResultHelper::getResult(200, [$_POST['name']], "");
+		
+		
 		if(!empty($_POST['mode']) && 'eq' == $_POST['mode']){
 			$mode = $_POST['mode'];
 		}else{

@@ -1441,7 +1441,7 @@ linioListing ={
 				$.showLoading();
 				$.ajax({
 					type:'GET',
-					url:'/listing/lazada/manual-sync',
+					url:'/listing/linio/manual-sync',
 					data:$('#Sync-product').serialize(),
 					dataType:'json',
 					success:function(data){

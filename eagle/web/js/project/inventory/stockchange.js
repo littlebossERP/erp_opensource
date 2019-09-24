@@ -182,6 +182,10 @@ inventory.stockIn = {
 	
 	'initFormValidation':function(){
 		$('input[name$="[stock_in_qty]"]').formValidation({validType:['trim','length[1,11]','amount'],tipPosition:'left',required:true});
+		$('input[name$="[location_grid]').formValidation({validType:['trim', 'safeForHtml'],tipPosition:'left'});
+		$('textarea[name="comment"]').formValidation({validType:['trim', 'safeForHtml'],tipPosition:'left'});
+		$('[name="stock_change_id"]').formValidation({validType:['trim', 'safeForHtml'],tipPosition:'right',required:true});
+
 	},
 	
 	'create_stockIn':function(){
@@ -683,6 +687,10 @@ inventory.stockOut = {
 	
 	'initFormValidation':function(){
 		$('input[name$="[stock_out_qty]"]').formValidation({validType:['trim','length[1,11]','amount'],tipPosition:'left',required:true});
+		$('input[name$="[location_grid]').formValidation({validType:['trim', 'safeForHtml'],tipPosition:'left'});
+		$('textarea[name="comment"]').formValidation({validType:['trim', 'safeForHtml'],tipPosition:'left'});
+		$('[name="stock_change_id"]').formValidation({validType:['trim', 'safeForHtml'],tipPosition:'right',required:true});
+		
 	},
 	
 	'create_stockOut':function(){

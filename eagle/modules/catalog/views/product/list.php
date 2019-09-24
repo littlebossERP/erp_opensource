@@ -478,7 +478,7 @@ $sort = new Sort(['attributes' => ['sku','name','type','class_id','status','purc
     				</div></td>
     			<td nowrap>
     			    <p>
-    			        <?=$row['sku'] ?>
+    			        <?=\yii\helpers\Html::encode($row['sku']) ?>
     			        <?php if($row['type']=='B'){?>
     			            <a href="javascript:void(0);" value="tip_<?=base64_encode($row['sku'])?>" class ="as_sku_tip" style="width:100%;text-align:center;clear:both;">&nbsp(捆绑)</a>
     			        <?php }?>
@@ -490,7 +490,7 @@ $sort = new Sort(['attributes' => ['sku','name','type','class_id','status','purc
     			    <p style="color:#bbb!important;"><?=str_replace(':', ': ', trim($other_attributes)) ?></p>
     			    <?php }?>
     			</td>
-    			<td name='chk_product_name'><?=$row['name'] ?></td>
+    			<td name='chk_product_name'><?=\yii\helpers\Html::encode($row['name']); ?></td>
     			
     			<td><?=$row['class_name'] ?></td>
     			<td><?=(empty($typeMapping[$row['type']])?$row['type']:$typeMapping[$row['type']]) ?></td>

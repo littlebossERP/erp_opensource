@@ -160,8 +160,8 @@ classificationSetting={
 		
 		//编辑失去焦点
 		$('input[name=edittext]').blur(function(){
-			var newname = $(this).val().replace(/(^\s*)|(\s*$)/g, "");
-			var oldname = $(this).attr('old_val').replace(/(^\s*)|(\s*$)/g, "");
+			var newname = $(this).val().replace(/[^a-zA-Z0-9-_+xX*#\u4e00-\u9fa5]*/g,'');
+			var oldname = $(this).attr('old_val').replace(/[^a-zA-Z0-9-_+xX*#\u4e00-\u9fa5]*/g,'');
 			if(newname == oldname){
 				$(this).parent().html(newname);
 			}

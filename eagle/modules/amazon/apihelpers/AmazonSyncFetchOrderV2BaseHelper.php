@@ -97,6 +97,7 @@ class AmazonSyncFetchOrderV2BaseHelper{
 		'AAHKV2X7AFYLW'=>"CN",
 		'A1AM78C64UM0Y8'=>"MX",
 		'A39IBJ37TRP1C6'=>"AU",
+	        
 		'A2Q3Y263D00KWC'=>"BR",
         'A2VIGQ35RCS4UG'=>"AE",
         'A33AVAJ2PDY3EV'=>"TR",
@@ -297,7 +298,7 @@ class AmazonSyncFetchOrderV2BaseHelper{
 		if ($api_result["success"]===true and $api_result["response"]["success"]===false  )  {
 			if (isset($api_result["response"]["order"])){
 				if (count($api_result["response"]["order"])>200){
-					return array(false,-3,$getResultTime." "."he gets too much orders");
+					return array(false,-3,$getResultTime." "."he gets too much orders 2");
 				}
 			}
 		}
@@ -541,18 +542,26 @@ class AmazonSyncFetchOrderV2BaseHelper{
 				$SAA_objone->err_msg =$message;
 				$SAA_objone->process_status = 3;
 				$SAA_objone->err_cnt += 1;
-				$SAA_objone->slip_window_size=24*3600;
+				if(!empty($SAA_objone->slip_window_size)){// 设置了化窗依然报错，折半再减
+				    if($SAA_objone->slip_window_size <= 3600){// 一个小时的订单依然过多的话 要人工特殊处理
+				    }else{
+				        $SAA_objone->slip_window_size = round($SAA_objone->slip_window_size / 2);
+				    }
+				}else{
+					$SAA_objone->slip_window_size=24*3600;
+				}
+				
 				$SAA_objone->save(false);
-				continue;
+			}else{
+				$SAA_objone->err_msg = $message;
+				$SAA_objone->process_status = 3;
+				if (strpos($message,"RequestThrottled")===false){
+				    $SAA_objone->err_cnt += 1;
+				}else{//访问超限---需要控制下次访问的时间
+				    $SAA_objone->next_execute_time+=300;
+				}
+				$SAA_objone->save(false);
 			}
-			$SAA_objone->err_msg = $message;
-			$SAA_objone->process_status = 3;
-			if (strpos($message,"RequestThrottled")===false){
-			    $SAA_objone->err_cnt += 1;
-			}else{//访问超限---需要控制下次访问的时间
-			    $SAA_objone->next_execute_time+=300;
-			}
-			$SAA_objone->save(false);
 		}
 
 	}//end listSaveSAASamzAutosync

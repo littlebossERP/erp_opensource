@@ -77,9 +77,11 @@ class LazadaCallbackHelper
                     } else {
                         $errorInfo[$oneVariant['SellerSku']] = $params['failReport'][$oneVariant['SellerSku']];
                     }
-                } else if (!empty($params['failReport']) && is_string($params['failReport']) && "lazada api error" == $params['failReport']) {// dzt20160122 lazada api 原因导致全部失败，需重新操作
+                } else if (!empty($params['failReport']) && is_string($params['failReport'])) {// dzt20160122 lazada api 原因导致全部失败，需重新操作
+                    // 去除条件 && "lazada api error" == $params['failReport'] 
+                    // dzt20190911 jumia比较频繁出现 E012: Invalid Feed ID，导致刊登任务停在feed检查，这里要设置一下允许返回。
                     $hasError = true;
-                    $errorInfo = array('平台接口问题导致操作失败，请重新发布此商品。');//一个$publishListing 只要记录一个结果就ok 
+                    $errorInfo = array('平台接口问题导致操作失败，请重新发布此商品。'.$params['failReport']);//一个$publishListing 只要记录一个结果就ok 
                 } else {
                     $uploadedProductSkus[] = $oneVariant['SellerSku'];
                 }
@@ -378,10 +380,11 @@ class LazadaCallbackHelper
         }
 
         // dzt20160122
-        if (!empty($params['failReport']) && is_string($params['failReport']) && "lazada api error" == $params['failReport']) {
+        if (!empty($params['failReport']) && is_string($params['failReport'])) {
+            // dzt20190911  && "lazada api error" == $params['failReport']
             $hasError = true;
             LLJHelper::changePublishListState($publishListing->id, LazadaApiHelper::PUBLISH_LISTING_STATE_FAIL,
-                LazadaApiHelper::$PUBLISH_LISTING_STATES_STATUS_MAP[LazadaApiHelper::PUBLISH_LISTING_STATE_FAIL][5], "平台接口问题导致操作失败，请重新发布此商品。");
+                LazadaApiHelper::$PUBLISH_LISTING_STATES_STATUS_MAP[LazadaApiHelper::PUBLISH_LISTING_STATE_FAIL][5], "平台接口问题导致操作失败，请重新发布此商品。".$params['failReport']);
         }
 
         if($hasError){
@@ -715,10 +718,11 @@ class LazadaCallbackHelper
 // 		}
 
         // dzt20160122 lazada api 原因导致全部失败，需重新操作
-        if (!empty($params['failReport']) && is_string($params['failReport']) && "lazada api error" == $params['failReport']) {
+        if (!empty($params['failReport']) && is_string($params['failReport'])) {
+            // dzt20190911 && "lazada api error" == $params['failReport']
             $update = array();
             // 修改状态
-            $update['error_message'] = "平台接口问题导致操作失败，请重新发布此商品。";
+            $update['error_message'] = "平台接口问题导致操作失败，请重新发布此商品。".$params['failReport'];
             $update['is_editing'] = 0;
             $update['update_time'] = $nowTime;
             $affectRows = LazadaListing::updateAll($update, ['feed_id' => $params['feedId']]);

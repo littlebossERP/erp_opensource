@@ -151,7 +151,7 @@ class ElseconfigController extends \eagle\components\Controller
 		}else{
 			$template = new EbayFeedbackTemplate();
 		}
-		return $this->renderPartial('create',['template'=>$template]);
+		return $this->renderAjax('create',['template'=>$template]);
 	}
 	
 	/**
@@ -422,6 +422,8 @@ class ElseconfigController extends \eagle\components\Controller
 		$name=$_POST['name'];
 		$val=$_POST['val'];
 		$ordername=$_POST['ordername'];
+		$name = \yii\helpers\Html::decode($name);
+		$name = \yii\helpers\Html::encode($name);
 		return $this->renderPartial('_editcontent',[
 				'name'=>$name,
 				'val'=>$val,

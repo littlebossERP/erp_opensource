@@ -112,7 +112,8 @@ class MatchingHelper {
     	
     	//查询Item信息
     	$query = self::GetCheckItemInfo($orders, $params);
-    	
+//     	$tmpCommand = $query->createCommand();
+//         echo "<br>".$tmpCommand->getRawSql();
     	$pagination = new Pagination([
     	        'page' => $params['page'],
     			'pageSize' => $params['per-page'],
@@ -320,6 +321,7 @@ class MatchingHelper {
     	$query = OdOrderItem::find()->select(['order_id', 'sku', 'root_sku', 'product_name', 'quantity', 'price', 'order_item_id', 'order_source_itemid', 'product_attributes', 'photo_primary', 'product_url', 'addi_info'])
     		->where(['order_id' => $order_ids]);
     	foreach ($params as $key=>$value){
+    	    $value = trim($value);
     		if($value=='')
     			continue;
     		switch ($key){
@@ -342,19 +344,24 @@ class MatchingHelper {
     				break;
     			case 'matching_searchval':
     			    if(!empty($params['matching_searchval_type']) && $params['matching_searchval_type'] == 'title'){
-    			        $query->andWhere("product_name like '%".trim($value)."%'");
+    			        // $query->andWhere("product_name like '%".trim($value)."%'");
+    			        $query->andWhere(['like','product_name', $value]);
     			    }
     			    else if(!empty($params['matching_searchval_type']) && $params['matching_searchval_type'] == 'root_sku'){
-    			        $query->andWhere("root_sku like '%".trim($value)."%'");
+    			        // $query->andWhere("root_sku like '%".trim($value)."%'");
+    			        $query->andWhere(['like','root_sku', $value]);
     			    }
     			    else if(!empty($params['matching_searchval_type']) && $params['matching_searchval_type'] == 'order_id'){
-    			        $query->andWhere("order_id=".trim($value));
+    			        // $query->andWhere("order_id=".trim($value));
+    			        $query->andWhere(['order_id'=>$value]);
     			    }
     			    else if(!empty($params['matching_searchval_type']) && $params['matching_searchval_type'] == 'order_source_order_id'){
-    			        $query->andWhere("order_source_order_id='".trim($value)."'");
+    			        // $query->andWhere("order_source_order_id='".trim($value)."'");
+    			        $query->andWhere(['order_source_order_id'=>$value]);
     			    }
     			    else{
-    			        $query->andWhere("sku like '%".trim($value)."%'");
+    			        // $query->andWhere("sku like '%".trim($value)."%'");
+    			        $query->andWhere(['like','sku', $value]);
     			    }
     			    break;
     			case 'is_not_matching':

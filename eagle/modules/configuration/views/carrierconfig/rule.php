@@ -5,7 +5,7 @@ use yii\bootstrap\Dropdown;
 use eagle\helpers\HtmlHelper;
 use yii\data\Sort;
 $baseUrl = \Yii::$app->urlManager->baseUrl . '/';
-$tmp_js_version = '2.21';
+$tmp_js_version = '2.22';
 
 $this->registerJsFile($baseUrl."js/project/configuration/carrierconfig/shippingRules.js?v=".$tmp_js_version);
 $this->registerJsFile($baseUrl."js/project/configuration/carrierconfig/rule/rule.js?v=".$tmp_js_version, ['depends' => ['yii\jui\JuiAsset','yii\bootstrap\BootstrapPluginAsset']]);

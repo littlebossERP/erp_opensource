@@ -40,13 +40,18 @@ if(!\eagle\modules\permission\apihelpers\UserApiHelper::checkSettingModulePermis
 <?php if (count($lists)):foreach ($lists as $list):?>
 <tr>
 	<td><?=EbayFeedbackTemplate::$typeval[EbayFeedbackTemplate::$type[$list->template_type]]?></td>
-	<td><?=$list->template?></td>
+	<td><?=\yii\helpers\Html::encode($list->template)?></td>
 	<td>
 		<a 
 			class=""
-			href="/configuration/elseconfig/create?id=<?=$list->id?>" 
-			target="_modal"
-			title="编辑 范本"
+			onclick="$.modal(
+	{url:'/configuration/elseconfig/create?id=<?=$list->id?>',method:'get',data:{}},
+	'创建 好评范本'
+	).done(function($modal){
+		$modal.on('modal.action.resolve',function(){
+			SaveFeedbackTemplate();
+		});
+	});"
 		>编辑</a>
 		<a href="#" onclick="javascript:dodelete('<?=$list->id?>')">删除</a>
 	</td>
@@ -55,6 +60,12 @@ if(!\eagle\modules\permission\apihelpers\UserApiHelper::checkSettingModulePermis
 </table>
 <script>
 	function SaveFeedbackTemplate(){
+
+		if (! $('#FeedbackTemplateFORM').formValidation('form_validate')){
+			bootbox.alert(Translator.t('有必填项未填或格式不正确!'));
+			return false;
+		}
+		
 		var Url='<?=Url::to(['/configuration/elseconfig/save-feedback-template'])?>';
 		$.ajax({
 	        type : 'post',
@@ -88,5 +99,10 @@ if(!\eagle\modules\permission\apihelpers\UserApiHelper::checkSettingModulePermis
 				}
 			});
 		});
+	}
+
+	function initFeedbackFormValidateInput(){
+		$("#FeedbackTemplateFORM").find('[name="feedbackval"]').formValidation({validType:['trim', 'safeForHtml'],tipPosition:'right',required:true});
+		
 	}
 </script>

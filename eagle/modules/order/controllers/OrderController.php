@@ -2669,7 +2669,7 @@ class OrderController extends \eagle\components\Controller{
 				foreach ($items as $itemsone){
 					$result=OrderUpdateHelper::setOrderItemDeclaration($itemsone->order_item_id,$NameCN_temp,$NameEN_temp,$Price_temp,$Weight_temp,$code_temp,'Y');
 					if(isset($result['ack']) && $result['ack']==false){
-						$err.=$itemsone->order_id.':'.$result['message']." err1;";
+						$msg.=$itemsone->order_id.':'.$result['message']." err1;";
 						$success=false;
 					}
 				}
@@ -2688,7 +2688,7 @@ class OrderController extends \eagle\components\Controller{
 					);
 					$result=CarrierDeclaredHelper::setOrderSkuDeclaredInfoBatch($declared_params);
 					if($result==false){
-						$err.=$itemsone->order_id.':'."保存失败err2;";
+						$msg.=$itemsone->order_id.':'."保存失败err2;";
 						$success=false;
 					}
 				
@@ -2702,7 +2702,7 @@ class OrderController extends \eagle\components\Controller{
 						);
 						$rt = \eagle\modules\catalog\helpers\ProductApiHelper::modifyProductInfo($item->root_sku,$info);
 						if($rt['success']==false){
-							$err.='商品报关信息保存失败:'.$rt['message']." err3;";
+							$msg.='商品报关信息保存失败:'.$rt['message']." err3;";
 							$success=false;
 						}
 					}

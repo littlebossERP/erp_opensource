@@ -61,7 +61,7 @@ if(isset($warehouseOneInfo['addi_info']['address_nation'])){
 				foreach ($warehouseList['data'] as $warehouseListOne){
 		?>
 		<tr <?=$warehouseListOne['is_active'] == 'N' ? "style=background-color:#ADADAD;" : '' ?>>
-			<td><?=$warehouseListOne['name'] ?></td>
+			<td><?=\yii\helpers\Html::encode($warehouseListOne['name']) ?></td>
 			<td><?=$warehouseListOne['address_street'] ?></td>
 			<td><?=$warehouseListOne['is_active'] == 'Y' ? '开启' : '关闭' ?></td>
 			<td><?=$warehouseListOne['comment'] ?></td>

@@ -1809,6 +1809,7 @@ Good day.";
 			$status='na';
 			$query->andWhere(['like','status','na']);
 		}
+		
 		$Rules = $query->orderBy('priority ASC')
 			->asArray()
 			->all();
@@ -2053,6 +2054,8 @@ Good day.";
 		$addi_info['ship_status'] =  Tracking::getChineseStatus('',true);
 		
 		$addi_info['ship_status']['na'] = '所有状态';
+		// dzt20190912
+		$addi_info['ship_status']['paidandunship'] = '已付款未发货';
 		 
 		//模块数据
 		$templateData = MsgTemplate::find()->asArray()->all();

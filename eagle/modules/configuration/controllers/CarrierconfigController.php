@@ -909,7 +909,7 @@ class CarrierconfigController extends \eagle\components\Controller
     	//认证参数解释
     	$qtipKeyArr= LabelTip::find()->asArray()->all();
     	
-    	return $this->renderPartial('_editaccount',[
+    	return $this->renderAjax('_editaccount',[
     			'account'=>$account,
     			'carrier_code'=>$code,
     			'accountcount'=>$account_count,
@@ -1188,7 +1188,7 @@ class CarrierconfigController extends \eagle\components\Controller
     	//特殊情况
     	$add_data = self::getSpecialAddress($v['codes']);
     	
-    	return $this->renderPartial('_address',[
+    	return $this->renderAjax('_address',[
     			'address'=>$address,
     			'add_List'=>$add_List,
     			'add_data'=>$add_data,
@@ -1327,7 +1327,7 @@ class CarrierconfigController extends \eagle\components\Controller
     	}else{
     		$serviceUserById = CarrierOpenHelper::getCarrierShippingServiceUserById($_GET['id'],$_GET['code'],-1,$shipcode,'',1);
     	}
-//     	print_r($serviceUserById['response']['data']['print_params']);die;
+//     	print_r($serviceUserById['response']['data']['carrierParams']);die;
     	$param_set_count=0;
     	if(isset($serviceUserById['response']['data']['carrierParams'])){
 	    	foreach ($serviceUserById['response']['data']['carrierParams'] as $carrierParams){
@@ -2239,7 +2239,7 @@ class CarrierconfigController extends \eagle\components\Controller
     		$commonDeclaredInfo=$commonDeclaredInfo[0];
     	}
     	//print_r($commonDeclaredInfo);die;
-    	return $this->renderPartial('_createoreditdeclare',[
+    	return $this->renderAjax('_createoreditdeclare',[
     			'type'=>$type,
     			'commonDeclaredInfo'=>$commonDeclaredInfo,
     			]);
@@ -2425,6 +2425,7 @@ class CarrierconfigController extends \eagle\components\Controller
     	$priceminister_services = $buyer_transportation_services['priceminister'];
     	$newegg_services = $buyer_transportation_services['newegg'];
     	$linio_services = $buyer_transportation_services['linio'];
+    	$jumia_services = $buyer_transportation_services['jumia'];
     	
     	//ebay站点
     	$ebay_services_site = array();
@@ -2436,7 +2437,7 @@ class CarrierconfigController extends \eagle\components\Controller
     	return $this->renderPartial('buyerTransportationServiceList' , ['selectedServiceArr'=>$selectedServiceArr, 
     			'aliexpress_services'=>$aliexpress_services,'ebay_services'=>$ebay_services, 'ebay_services_site'=>$ebay_services_site,
     			'amazon_services'=>$amazon_services, 'cdiscount_services'=>$cdiscount_services, 'priceminister_services'=>$priceminister_services, 'newegg_services'=>$newegg_services,
-    			'linio_services'=>$linio_services,
+    			'linio_services'=>$linio_services,'jumia_services'=>$jumia_services,
     			]);
     }
     
@@ -2496,6 +2497,10 @@ class CarrierconfigController extends \eagle\components\Controller
 			$template->template_height = empty($sysTemplateOne['template_height']) ? '100' : $sysTemplateOne['template_height'];
 			$template->template_content = empty($sysTemplateOne['template_content']) ? '' : $sysTemplateOne['template_content'];
 		}else{
+		    $_GET['template_name'] = @\yii\helpers\Html::encode(@$_GET['template_name']);
+		    $_GET['width'] = (int)$_GET['width'];
+		    $_GET['height'] = (int)$_GET['height'];
+		    
 			$template = CarrierOpenHelper::getCarrierTemplateById(0,$id,$_GET);
 		}
     	

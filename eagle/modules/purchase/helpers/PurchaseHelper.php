@@ -539,6 +539,7 @@ class PurchaseHelper {
 
 		$comment = (isset($data['comment']))?trim($data['comment']):'';
 		if ($comment<>"") {
+		    $comment = \yii\helpers\Html::encode($comment);
 			$comment = "<font color=blue>".\Yii::$app->user->identity->getFullName()." @ ".TimeUtil::getNow().TranslateHelper::t("添加备注：")."<br>".$comment."</font><br>".$model->comment;
 			$data['comment']=$comment;
 		}else {
@@ -586,6 +587,7 @@ class PurchaseHelper {
 		*/
 		if(isset($productsInfo)){
 			foreach($productsInfo as &$productInfo) {
+			    $productInfo['remark'] = \yii\helpers\Html::encode($productInfo['remark']);
 				$productInfo['sku']=(string)trim($productInfo['sku']);
 				$itemModel=PurchaseItems::findOne(['purchase_id'=>$purchaseId,'sku'=>$productInfo['sku']]);
 				if(empty($itemModel)){

@@ -232,17 +232,29 @@ class LB_YANWENCarrierAPI extends BaseCarrierAPI
 					'Insure'=>$carrier_params['Insure'],
 					'Receiver'=>array(
 							'Userid'=>$userid,
-							'Name'=>'<![CDATA['.$order->consignee.']]>',
-							'Phone'=>'<![CDATA['.$order->consignee_phone.']]>',
-					        'Mobile'=>'<![CDATA['.$order->consignee_mobile.']]>',
-							'Email'=>'<![CDATA['.$order->consignee_email.']]>',
-							'Company'=>'<![CDATA['.$order->consignee_company.']]>',
-							'Country'=>'<![CDATA['.$countryCode.']]>',
-							'Postcode'=>'<![CDATA['.$order->consignee_postal_code.']]>',
-							'State'=>'<![CDATA['.$tmpConsigneeProvince.']]>',
-							'City'=>'<![CDATA['.$order->consignee_city.']]>',
-							'Address1'=>'<![CDATA['.$addressAndPhone['address_line1'].']]>',
-							'Address2'=>'<![CDATA['.$addressAndPhone['address_line2'].']]>',
+					        // dzt20190918 客户上传创建订单失败，燕文那边要求去掉CDATA
+// 							'Name'=>'<![CDATA['.$order->consignee.']]>',
+// 							'Phone'=>'<![CDATA['.$order->consignee_phone.']]>',
+// 					        'Mobile'=>'<![CDATA['.$order->consignee_mobile.']]>',
+// 							'Email'=>'<![CDATA['.$order->consignee_email.']]>',
+// 							'Company'=>'<![CDATA['.$order->consignee_company.']]>',
+// 							'Country'=>'<![CDATA['.$countryCode.']]>',
+// 							'Postcode'=>'<![CDATA['.$order->consignee_postal_code.']]>',
+// 							'State'=>'<![CDATA['.$tmpConsigneeProvince.']]>',
+// 							'City'=>'<![CDATA['.$order->consignee_city.']]>',
+// 							'Address1'=>'<![CDATA['.$addressAndPhone['address_line1'].']]>',
+// 							'Address2'=>'<![CDATA['.$addressAndPhone['address_line2'].']]>',
+					        'Name'=>$order->consignee,
+					        'Phone'=>$order->consignee_phone,
+					        'Mobile'=>$order->consignee_mobile,
+					        'Email'=>$order->consignee_email,
+					        'Company'=>$order->consignee_company,
+					        'Country'=>$countryCode,
+					        'Postcode'=>$order->consignee_postal_code,
+					        'State'=>$tmpConsigneeProvince,
+					        'City'=>$order->consignee_city,
+					        'Address1'=>$addressAndPhone['address_line1'],
+					        'Address2'=>$addressAndPhone['address_line2'],
 					),
 					'Memo'=>$data['orderNote'],
 			        'MRP'=>$data['MRP'],//申请建议零售价
@@ -250,13 +262,16 @@ class LB_YANWENCarrierAPI extends BaseCarrierAPI
 					'Quantity'=>$quantity,
 					'GoodsName'=>array(
 							'Userid'=>$userid,
-							'NameCh'=>'<![CDATA['.$product['NameCh'].']]>',
-							'NameEn'=>'<![CDATA['.$product['NameEn'].']]>',
+// 							'NameCh'=>'<![CDATA['.$product['NameCh'].']]>',
+// 							'NameEn'=>'<![CDATA['.$product['NameEn'].']]>',
+					        'NameCh'=>$product['NameCh'],
+					        'NameEn'=>$product['NameEn'],
 							'Weight'=>$product['Weight'],
 							'DeclaredValue'=>$product['DeclaredValue'],
 							'DeclaredCurrency'=>$product['DeclaredCurrency'],
 // 					        'DeclaredCurrency'=>'USD',
-							'MoreGoodsName'=>'<![CDATA['.$MoreGoodsName.']]>',
+// 					        'MoreGoodsName'=>'<![CDATA['.$MoreGoodsName.']]>',
+							'MoreGoodsName'=>$MoreGoodsName,
     					    'ProductBrand'=>$product['ProductBrand'],
     					    'ProductSize'=>$product['ProductSize'],
     					    'ProductColor'=>$product['ProductColor'],
@@ -279,7 +294,7 @@ class LB_YANWENCarrierAPI extends BaseCarrierAPI
 	        $this->setRequestBody($_paramsArray);
 	        $response=$this->sendRequest(0);
 	        //记录返回数据到log文件
-	        \Yii::info(print_r($response,true));
+	        \Yii::info('YANWEN response,puid:'.$puid.',result,orderId:'.$order->order_source_order_id.':'.print_r($response,true),"carrier_api");
 	        //这个是非正常的返回 当数据不全的时候会出现这样的报错 所以给用户这样一个提示 
 	        if(isset($response['head']) && isset($response['body'])){
 	            \Yii::info('YANWEN error1,puid:'.$puid.',result,orderId:'.$order->order_source_order_id.' '.json_encode($response),"carrier_api");

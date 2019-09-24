@@ -447,6 +447,13 @@ Shipping
 				$msgDetailsContent .= $counterOfferTr->eq(3)->text();
 				$msgDetailsContent .= $counterOfferTr->eq(5)->text();
 // 				print_r('6');
+			}else if(phpQuery::pq('table#bodyContainer table.mobWrapperTemplate')->length() != 0){//dzt20190819 添加抓取站内信信息 eBay Customer Service , ebay sender :eBay
+				$bodyContainerTables = phpQuery::pq('table#bodyContainer table.mobWrapperTemplate');
+				
+				$msgDetailsContent .= $bodyContainerTables->eq(0)->text();
+				$msgDetailsContent .= $bodyContainerTables->eq(1)->text();
+				$msgDetailsContent .= $bodyContainerTables->eq(2)->text();
+// 				print_r('8');
 			}else if(phpQuery::pq('p.cs95E872D0')->length() != 0){// eBay Customer Service , ebay sender :eBay CS Support
 				$msgDetailsContent .= phpQuery::pq('p.cs95E872D0')->text();
 // 				print_r('7');

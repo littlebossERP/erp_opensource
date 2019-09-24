@@ -116,6 +116,7 @@ class AliexpressApiPostHelper {
 // 		else{
 // 			$data = $api->findorderbyid($api_param);
 // 		}
+		
 		// dzt20190606 测试过后全部转接口
 		$data = $api->findorderbyidV2($api_param);
 		
@@ -141,6 +142,7 @@ class AliexpressApiPostHelper {
 		if(empty($param['param1'])){
 			return self::$ret_type([], false, '101', 'can not find param [param1]');
 		}
+		
 		//判断是否使用新列表查询接口
 		if(isset($param['param1']['buyer_login_id']) && $param['param1']['buyer_login_id'] == 'new'){
 			$param_v2 = array();
@@ -210,7 +212,64 @@ class AliexpressApiPostHelper {
 		
 		//清除多余的层
 		$data = self::assembleOrderDetail($data);
+		return self::$ret_type($data, true, '', '');
+	}
+	
+	// 交易订单列表查询
+	public  static function Customgetorder($api, $param, $ret_type){
+	    if(empty($param['param1'])){
+	        return self::$ret_type([], false, '101', 'can not find param [param1]');
+	    }
 		
+	    // dzt20190725 for 自定义场景接口字段保存时候的类型总是保存失败，不是struct[]，所以这里做一下转换
+	    $param = ['param1' => json_decode($param['param1'], true)];
+	    
+	    $param_v2 = array();
+	    if(!empty($param['param1']['create_date_start'])){
+	        $param_v2['create_date_start'] = date("Y-m-d H:i:s", strtotime($param['param1']['create_date_start']));
+	    }
+	    if(!empty($param['param1']['create_date_end'])){
+	        $param_v2['create_date_end'] = date("Y-m-d H:i:s", strtotime($param['param1']['create_date_end']));
+	    }
+	    if(!empty($param['param1']['modified_date_start'])){
+	        $param_v2['modified_date_start'] = date("Y-m-d H:i:s", strtotime($param['param1']['modified_date_start']));
+	    }
+	    if(!empty($param['param1']['modified_date_end'])){
+	        $param_v2['modified_date_end'] = date("Y-m-d H:i:s", strtotime($param['param1']['modified_date_end']));
+	    }
+	    if(!empty($param['param1']['page'])){
+	        $param_v2['current_page'] = $param['param1']['page'];
+	    }
+	    if(!empty($param['param1']['page_size'])){
+	        $param_v2['page_size'] = $param['param1']['page_size'];
+	    }
+	    $res = $api->getOrderList(['param_aeop_order_query' => json_encode($param_v2)]);
+	    if(!empty($res['error_message']) && strpos($res['error_message'], '操作成功') === false){
+	        \Yii::info('Customgetorder, error, '.json_encode($res),"file");
+	    
+	        return self::$ret_type($res, false, $res['error_code'], $res['error_message']);
+	    }
+	    else if(!isset($res['total_count'])){
+	        \Yii::info('Customgetorder, error, '.json_encode($res),"file");
+	    
+	        return self::$ret_type($res, false, '105', 'total_item is null');
+	    }
+	    else if($res['total_count'] > 0 && !isset($res['target_list'])){
+	        \Yii::info('Customgetorder, error, '.json_encode($res),"file");
+	    
+	        return self::$ret_type($res, false, '105', 'target_list is null');
+	    }
+	    
+	    $data = [
+	            'result_success' => true,
+	            'error_message' => '',
+	            'error_code' => 0,
+	            'total_item' => $res['total_count'],
+	            'order_list' => empty($res['target_list']) ? [] : $res['target_list'],
+	    ];
+	
+	    //清除多余的层
+	    $data = self::assembleOrderDetail($data);
 		return self::$ret_type($data, true, '', '');
 	}
 	

@@ -37,8 +37,15 @@ purchaseOrder.create={
 		$('select#delivery_method').parent().find('input:eq(0)').formValidation({validType:['trim','safeForHtml'],tipPosition:'left',required:true});
 		$('select#delivery_method').parent().find('input:eq(0)').css('width','90%');
 		
+		$('#purchase_order_id').formValidation({validType:['trim','safeForHtml'],tipPosition:'right',required:true});
+		$('#delivery_fee').formValidation({validType:['trim','amount'],tipPosition:'right'});
+		$('#comment').formValidation({validType:['trim','safeForHtml'],tipPosition:'right'});
+		$('#delivery_number').formValidation({validType:['trim','safeForHtml'],tipPosition:'right'});
+		$('#purchase_source_id').formValidation({validType:['trim','safeForHtml'],tipPosition:'right'});
+		
 		$('input[name$="[qty]"]').formValidation({validType:['trim','amount'],tipPosition:'left',required:true});
 		$('input[name$="[price]"]').formValidation({validType:['trim','amount'],tipPosition:'left',required:true});
+		$('input[name$="[remark]"]').formValidation({validType:['trim','safeForHtml'],tipPosition:'left'});
 		
 		$('input#pay_date').datepicker({dateFormat:"yy-mm-dd 00:00:00",//datepicker 显示及editable折中方案
 										beforeShow:function(input,inst){

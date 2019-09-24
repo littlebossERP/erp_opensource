@@ -202,6 +202,10 @@ class OrderTrackingMessageHelper
 			//因为暂时还是用tracker的匹配规则，status暂时设置为空已应对所有tracker状态
 			$tmp_status = '';
 			
+			// dzt20190912 有速卖通客户要求匹配已付款未发货订单 发送站内信来确认收货地址。
+			if($order['order_status'] == 200)
+			    $tmp_status = "paidandunship";
+			
 			$role = MessageHelper::getTopTrackerAuotRule($tmp_platform, $account_id, $tmp_to_nation, $tmp_status);
 			if (!empty($role['name']))
 				$roleName = $role['name'];
@@ -791,6 +795,12 @@ class OrderTrackingMessageHelper
 	
 		$MenuArr = array();
 	
+		$MenuArr['发货确认'] = array(
+		        'url'=>$url.'/order/od-lt-message/list-tracking-message?platform='.$platform.'&pos=PNSHP&is_send=N',
+		        'qtipkey'=>'oms_tracking_request_shipping',
+		        'target'=>'_norefresh'
+		);
+		
 		$MenuArr['启运通知'] = array(
 				'url'=>$url.'/order/od-lt-message/list-tracking-message?platform='.$platform.'&pos=RSHP&is_send=N',
 				'qtipkey'=>'oms_tracking_request_shipping',

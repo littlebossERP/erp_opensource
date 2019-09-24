@@ -264,7 +264,7 @@ class LB_SEKOCarrierAPI extends BaseCarrierAPI{
 	        }
 	        
 	        if(empty($channelStr)){
-	            return self::getResult(1, '', '');
+	            return self::getResult(1, '', '没有找到可以匹配这个运输服务的Jumia账号，请确保Jumia账号已经绑定并且该账号已经向Jumia开通该运输方式。');
 	        }else{
 	            return self::getResult(0, $channelStr, '');
 	        }

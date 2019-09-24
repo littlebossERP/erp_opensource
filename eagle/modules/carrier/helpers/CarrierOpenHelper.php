@@ -7211,6 +7211,9 @@ class CarrierOpenHelper {
 				'lb_chuangyu'=>array('pickupAddress'=>'揽收城市，广州，深圳，郑州','telContact'=>'18675837801','qq'=>'2880522688','qqtype'=>'0'),
 				'lb_xiangda'=>array('pickupAddress'=>'揽收城市，福州，莆田，泉州，厦门','telContact'=>'18150015666','qq'=>'1029381712','qqtype'=>'0'),
 				'lb_xinding'=>array('pickupAddress'=>'','telContact'=>'18203687670','qq'=>'3359721522','qqtype'=>'0'),
+				'lb_bantouyan'=>array('pickupAddress'=>'','telContact'=>'','qq'=>'3005655427','qqtype'=>'0'),
+		        'lb_huayangtong'=>array('pickupAddress'=>'深圳','telContact'=>'','qq'=>'13613019656','qqtype'=>'0'),
+		        
 // 				''=>array('pickupAddress'=>'','telContact'=>'','qq'=>'','qqtype'=>'0'),
 		);
 				

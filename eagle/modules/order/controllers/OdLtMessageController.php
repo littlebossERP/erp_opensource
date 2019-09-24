@@ -114,6 +114,16 @@ class OdLtMessageController extends \eagle\components\Controller
 		}
 		//提醒类型
 		if (!empty($_REQUEST['pos'])){
+		    // dzt20190912 
+		    //PPSHP=>发货确认（付款未发货）
+		    if($_REQUEST['pos']=='PNSHP'){
+	            $params['order_status']=[200];
+	            if(!empty($is_send))
+	                $params['shipping_notified'] = $is_send;
+	            else
+	                $params['shipping_notified'] = ['Y','N'];
+		    }
+		    
 			//RSHP=>启运通知,
 			if($_REQUEST['pos']=='RSHP'){
 				if($platform!=='ebay')

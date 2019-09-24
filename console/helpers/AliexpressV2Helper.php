@@ -192,19 +192,37 @@ class AliexpressV2Helper
     		$order_ids = [];
     		$total_item = 0;
     		//$api_types = ['create', 'modified'];
-    		$api_types = ['create', 'create_v2', 'modified_v2'];
 
+			// dzt20190606 测试过后全部转接口
+    		$api_types = ['create_v2', 'modified_v2', 'modified_finish'];
+    		
+    		// $api_types = ['create', 'create_v2', 'modified_v2'];
+    	 
     		foreach($api_types as $api_type){
     			$page = 1;
 	    		do {
 	    			$api_time = time();//接口调用时间
 	    			// 接口传入参数
-	    			if(strpos($api_type, '_v2') !== false){
-		    			$param = ['id' => $sellerloginid, 'param1' => json_encode(['page' => $page, 'page_size' => $pageSize, rtrim($api_type, '_v2').'_date_start' => $format_start_time, rtrim($api_type, '_v2').'_date_end' => $format_end_time, 'buyer_login_id' => 'new'])];
+// 	    			if(strpos($api_type, '_v2') !== false){
+// 	    			    $param = ['id' => $sellerloginid, 'param1' => json_encode(['page' => $page, 'page_size' => $pageSize, rtrim($api_type, '_v2').'_date_start' => $format_start_time, rtrim($api_type, '_v2').'_date_end' => $format_end_time, 'buyer_login_id' => 'new'])];
+// 	    			}
+// 	    			else{
+// 	    				$param = ['id' => $sellerloginid, 'param1' => json_encode(['page' => $page, 'page_size' => $pageSize, $api_type.'_date_start' => $format_start_time, $api_type.'_date_end' => $format_end_time])];
+// 	    			}
+
+	    			$param1 = ['page' => $page, 'page_size' => $pageSize, 'buyer_login_id' => 'new'];
+	    			// dzt20190909 FINISH:已结束的订单，需单独查询
+	    			if($api_type == 'modified_finish'){
+	    			    $param1['order_status'] = "FINISH";
+	    			    $param1['modified_date_start'] = $format_start_time;
+	    			    $param1['modified_date_end'] = $format_end_time;
+	    			}else{
+	    			    $param1[rtrim($api_type, '_v2').'_date_start'] = $format_start_time;
+	    			    $param1[rtrim($api_type, '_v2').'_date_end'] = $format_end_time;
 	    			}
-	    			else{
-	    				$param = ['id' => $sellerloginid, 'param1' => json_encode(['page' => $page, 'page_size' => $pageSize, $api_type.'_date_start' => $format_start_time, $api_type.'_date_end' => $format_end_time])];
-	    			}
+	    			
+	    			$param = ['id' => $sellerloginid, 'param1' => json_encode($param1)];
+	    			
 					echo json_encode($param);
 	    			// 调用接口获取订单列表
 	    			$result = $api->findOrderListQuery($param);
@@ -379,7 +397,7 @@ class AliexpressV2Helper
     			echo date('Y-m-d H:i:s') . ' time script end ' . self::$cronJobId . PHP_EOL;
     			
     			$SAA_obj->message .= isset($result['error_message']) ? $result['error_message'] : '接口返回结果错误V2';
-    			echo " puid=$puid,sellerloginid=$sellerloginid,getOrderListByTime err".print_r($result).PHP_EOL;
+    			echo " puid=$puid,sellerloginid=$sellerloginid,getOrderListByTime err".print_r($result, true).PHP_EOL;
     				
     			$SAA_obj->status = 3;
     			$SAA_obj->times += 1;
@@ -1390,13 +1408,13 @@ class AliexpressV2Helper
 	    			// 判断是否有订单
 	    			if (!isset ($result['total_item'])) {
 	    				$success = false;
-	    				echo "getOrderListManualByUid--findOrderListQuery--$api_type--err--".PHP_EOL;
+	    				echo PHP_EOL."getOrderListByTime--findOrderListQuery--$api_type--err1--".PHP_EOL;
 	    				echo json_encode($result).PHP_EOL;
 	    				break;
 	    			}
 	    			else if($result['total_item'] > 0 && empty($result['order_list'])) {
 	    				$success = false;
-	    				echo "getOrderListByTime--findOrderListQuery--$api_type--err--".PHP_EOL;
+	    				echo PHP_EOL."getOrderListByTime--findOrderListQuery--$api_type--err2--".PHP_EOL;
 	    				echo json_encode($result).PHP_EOL;
 	    				break;
 	    			}

@@ -1270,7 +1270,11 @@ class WishOrderHelper {
 		    }
 		}
 		
-		$importOrderData['currency'] = 'USD'; //货币
+		if(!empty($wishOrderData['currency_code'])){
+		    $importOrderData['currency'] = $wishOrderData['currency_code']; //货币
+		}else{
+			$importOrderData['currency'] = 'USD'; //货币
+		}
 		
 		if (isset($wishOrderData['state']))
 		$item['sent_quantity'] = ((strtoupper($wishOrderData['state']) == 'SHIPPED')?$item['quantity']:0);	

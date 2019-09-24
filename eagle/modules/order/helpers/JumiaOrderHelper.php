@@ -55,7 +55,7 @@ class JumiaOrderHelper{
 		}
 		if ($type =='s'){
 			$OpList += ['invoiced' => '发票'];
-// 			$OpList += ['updateImage' => '更新图片缓存'];
+			$OpList += ['updateImage' => '更新图片缓存'];
 // 			$OpList += ['updateShipping' => '更新平台物流服务'];
 		}
 		//var_dump($OpList);

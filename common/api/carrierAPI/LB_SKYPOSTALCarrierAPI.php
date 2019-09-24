@@ -165,6 +165,9 @@ class LB_SKYPOSTALCarrierAPI extends BaseCarrierAPI{
 			//记录账号和站点
 			$lazada_account_site = array();
 		
+			//记录返回的base64字符串
+			$tmp_base64_str_a = array();
+			
 			foreach ($data as $key => $value){
 				$order = $value['order'];
 				 
@@ -181,24 +184,14 @@ class LB_SKYPOSTALCarrierAPI extends BaseCarrierAPI{
 					$lazada_account_site[$order->selleruserid][strtolower($order->order_source_site_id)] = '';
 				}
 				 
-				$tmp_item_ids = $lazada_account_site[$order->selleruserid][strtolower($order->order_source_site_id)];
+				$tmp_item_ids = "";
 				 
 				foreach($order->items as $item){
 					$tmp_item_ids .= empty($tmp_item_ids) ? $item->order_source_order_item_id : ','.$item->order_source_order_item_id;
 				}
 				 
-				$lazada_account_site[$order->selleruserid][strtolower($order->order_source_site_id)] = $tmp_item_ids;
-			}
-			
-			\Yii::info('lb_mailamericaslinio,puid:'.$puid.'，order_id:'.$order->order_id.' '.json_encode($lazada_account_site),"carrier_api");
-		
-			//记录返回的base64字符串
-			$tmp_base64_str_a = array();
-			
-			//循环获取lazada返回的数据
-			foreach ($lazada_account_site as $lazada_account_key => $lazada_account_val){
-
-				foreach ($lazada_account_val as $lazada_site_key => $lazada_site_val){
+				$lazada_account_key = $order->selleruserid;
+				$lazada_site_key = strtolower($order->order_source_site_id);
 					$SLU = SaasLazadaUser::findOne(['platform_userid' => $lazada_account_key, 'lazada_site' => $lazada_site_key]);
 		
 					if (empty($SLU)) {
@@ -212,20 +205,22 @@ class LB_SKYPOSTALCarrierAPI extends BaseCarrierAPI{
 					);
 		
 					$lazada_appParams = array(
-							'OrderItemIds' => $lazada_site_val,
+				        'OrderItemIds' => $tmp_item_ids,
 					        'DocumentType' => 'shippingParcel',
 					);
 					$result = LazadaInterface_Helper::getOrderShippingLabel($lazada_config, $lazada_appParams);
 
+				\Yii::info('lb_mailamericaslinio,puid:'.$puid.'，order_id:'.$order->order_id.',account:'.$lazada_account_key.',site:'.$lazada_account_key.',items:'.$tmp_item_ids,"carrier_api");
+				
 					if ($result['success'] && $result['response']['success'] == true) { // 成功
+				    	
 						$tmp_base64_str_a[] = $result["response"]["body"]["Body"]['Documents']["Document"]["File"];
 
 					} else {
 						return self::getResult(1, '', '打印失败原因：'.$result['message']);
 					}
+				
 				}
-			}
-
 
 
 			foreach ($tmp_base64_str_a as $tmp_base64_val){

@@ -1172,11 +1172,10 @@ class OrderController extends \eagle\components\Controller{
 			DeliveryApiHelper::formatFileLog("delivery-order-get-data:puid:".\Yii::$app->user->identity->getParentUid().",使用运输方式:".$shippingService_obj->shipping_method_name.',Y_order_id:'.$odOrder_obj->order_id.":",$timeLogArr);
 			return json_encode($result);
 		}catch(\Exception $e){
-			if(\Yii::$app->user->identity->getParentUid() == 1){
-				$tmp_error = $e->getMessage().$e->getFile().' '.$e->getLine();
-			}else{
+		    $log_error = $e->getMessage().$e->getFile().' '.$e->getLine();
+		    \Yii::info($log_error, "carrier_api");
+		    
 				$tmp_error = $e->getMessage();
-			}
 			$tmp_error .= ' t'.time().\Yii::$app->user->identity->getParentUid();
 			
 			$odOrder_obj->carrier_error = $tmp_error;

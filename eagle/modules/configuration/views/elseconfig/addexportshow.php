@@ -126,7 +126,7 @@ table.excl td {
 <div class="col-xs-12 p0" style="margin-top: -8px;">
 	<div class="col-xs-1 p0" style="width:100px;padding-top:8px;margin-top: 8px;" >自定义范本名：</div>
 	<div class="col-xs-4 p0">
-		<input id="templateName" type="text" class="form-control" value="<?php echo empty($model->name)?'':$model->name; ?>">
+		<input id="templateName" type="text" class="form-control" value="<?php echo empty($model->name)?'':\yii\helpers\Html::encode($model->name); ?>">
 	</div>
 	<span qtipkey="excel_order_model" class="topleft"></span>
 	<!-- <div class="col-xs-4 p0" id="vipDiv" style="margin-left: 20px ;margin-top: 9px;">
@@ -146,7 +146,7 @@ $items=array();  //读取字段
 $temp1=array();  //需要变样式的字段
 $content_items=array();  //字段分组
 if(!empty($model->content)){
-	$showselect_key = explode(',',$model->content);
+	$showselect_key = explode(',',htmlentities($model->content));
 	foreach ($showselect_key as $item){
 			$item_arr=explode(':',$item);
 			if(isset($content[$item_arr[0]]) || strstr($item_arr[0],'-custom-')!=false){

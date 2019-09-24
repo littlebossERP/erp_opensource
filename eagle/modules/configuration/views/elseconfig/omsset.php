@@ -197,8 +197,13 @@ if(!\eagle\modules\permission\apihelpers\UserApiHelper::checkSettingModulePermis
 </div>
 
 <script>
-$('#table_Stores_Info').hide();
+
 function saveInvoiceInfo(){
+	if (! $('#seller_invoice_info_form').formValidation('form_validate')){
+		bootbox.alert(Translator.t('有必填项未填或格式不正确!'));
+		return false;
+	}
+	
 	$.showLoading();
 	$.ajax({
 		type:"GET",
@@ -307,5 +312,20 @@ function onchangeAvailablestock(obj){
 		}
 	});
 }
+
+function initFormValidateInput(){
+	$("#seller_invoice_info_form").find('[name="company"],[name="address"]').formValidation({validType:['trim', 'safeForHtml'],tipPosition:'right',required:true});
+	$("#seller_invoice_info_form").find('[name="tax_rate"]').formValidation({validType:['trim', 'amount'],tipPosition:'right'});
+	
+	$("#seller_invoice_info_form").find('[name="vat"],[name="phone"],[name="email"]')
+	.formValidation({validType:['trim', 'safeForHtml'],tipPosition:'right'});
+	
+	$('#seller_invoice_info_form [name="autographurl"]').formValidation({validType:['trim','url'],tipPosition:'right'});
+	
+
+}
+
+
+
 
 </script>

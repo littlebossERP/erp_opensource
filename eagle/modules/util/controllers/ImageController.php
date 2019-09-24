@@ -777,7 +777,7 @@ class ImageController extends \eagle\components\Controller {
         }
          
         $timeMS2 = TimeUtil::getCurrentTimestampMS();
-        \Yii::info("上传原图 $ossFileName size=".round($originSize/1024)."K 到阿里云服务器  butcketName:$bucket 。 耗时".($timeMS2-$timeMS1)."（毫秒）","info");
+        \Yii::info("上传原图 $ossFileName size=".round($originSize/1024)."K 到阿里云服务器  butcketName:$bucket 。 耗时".($timeMS2-$timeMS1)."（毫秒）","file");
          
         //4. 获取最终原图和缩略图的url
         $imageUrl = "http://".$ossDomain.$ossFileName;

@@ -52,6 +52,7 @@ class AmazonApiHelper{
 			'AAHKV2X7AFYLW'=>"CN",
 			'A1AM78C64UM0Y8'=>"MX",
 			'A39IBJ37TRP1C6'=>"AU",
+	        
 			'A2Q3Y263D00KWC'=>"BR",
 			'A2VIGQ35RCS4UG'=>"AE",
 			'A33AVAJ2PDY3EV'=>"TR",
@@ -70,7 +71,10 @@ class AmazonApiHelper{
 			"JP"=>'www.amazon.co.jp',
 			"CN"=>'www.amazon.cn',
 			"MX"=>'www.amazon.com.mx',
-			"AU"=>'www.amazon.com.au'
+			"AU"=>'www.amazon.com.au',
+	        "BR"=>'www.amazon.com.br',
+	        "TR"=>'www.amazon.com.tr',
+	        "AE"=>'www.amazon.ae',
 	);
 	
 	public static $AWS_DOMAIN_CONFIG = array(
@@ -87,6 +91,9 @@ class AmazonApiHelper{
 	        "CN"=>'cn',
 	        "MX"=>'com.mx',
 	        "AU"=>'com.au',
+	        "BR"=>'com.br',
+	        "TR"=>'com.tr',
+	        "AE"=>'ae',
 	);
 	
 	// aws账号 self::getBrowseNode 用到
@@ -750,7 +757,6 @@ class AmazonApiHelper{
 // 		    $ret['message'].= 'amazon账号secret_access_key遗漏！';
 // 		    $log.='amazon account secret_access_key missed;';
 // 		}
-
 		// dzt20190619 amazon要求去掉旧授权调用，否则开发者账号会降权
 		// if(empty($account_info['access_key_id']) && empty($account_info['secret_access_key']) && empty($account_info['mws_auth_token'])){
 		if(empty($account_info['mws_auth_token'])){
@@ -1317,6 +1323,7 @@ class AmazonApiHelper{
 		$oneRequest = AmazonReportRequset::find()
 			->where(['process_status'=>['RS','GF']])//RS未获取,GF上次获取失败 只有这两种状态才会尝试获取
 			->andWhere(' get_report_id_count<10 ')//获取重试次数超过10次就不再获取
+			->andWhere(' next_get_report_id_time<'.date('Y-m-d H:i:s'))//dzt20190730 添加for get_report_id 调整间隔重试，不然很快试完10次，report就获取不到了 
 			->orderBy("next_get_report_id_time ASC")
 			->one();
 		
@@ -2463,7 +2470,7 @@ class AmazonApiHelper{
 				$msg .= $mt . 'ItemError--Orderid:' . $vs['order_id'] . '--type:' . $vs['type'] . '--process_status:' . $vs['process_status'] . '--' . '--PUID:' . $vs['puid'] . ',最后更新时间-- ' . date("Y-m-d H:i:s",$vs['update_time']) . ',Amazon Merchant Id -- ' . $merchantId . ',Market Place Short --  '.$marketPlaceShort  . PHP_EOL;
 			}
 			echo $msg;
-			$sendto_email = ["619902089@qq.com"];//,"156038530@qq.com","1241423221@qq.com"
+			$sendto_email = ["xxx@qq.com"];//,"xxx@qq.com"
 			$subject = 'Amazon Order Items拉取问题';
 			$result = LazadaApiHelper::sendEmail($sendto_email, $subject, $msg);
 			if ($result === false) {
@@ -2487,13 +2494,36 @@ class AmazonApiHelper{
  * @return   [type]                   [description]
  */
 	public static function warnGetOrderItemAbnormalStatus2(){
-		$connection = Yii::$app->db;
+	    $msg = "";
+		$nowTime = time();
+		
+		// 3小时前依然在处理中的，或者之前出现changedb失败的，重置process_status 状态
+	    $count = AmazonTempOrderidQueueHighpriority::find()
+	    ->where('process_status=1 and update_time <'.($nowTime + 3*3600))
+	    ->count();
+	    if($count>0){
+	        $updated = AmazonTempOrderidQueueHighpriority::updateAll(['process_status'=>0], 
+	                'process_status=1 and update_time <'.($nowTime + 3*3600));
+	        $msg .= '<br/>Warning 当前有'.$count.'个订单拉取了3小时仍然未完成，'.$updated.'个订单重置状态';
+	    }
+	    
+	    $count = AmazonTempOrderidQueueHighpriority::find()
+	    ->where('process_status=4 and error_message like "%changeUserDataBase false%"')
+	    ->count();
+	    if($count>0){
+	        $updated = AmazonTempOrderidQueueHighpriority::updateAll(['process_status'=>0],
+	                'process_status=4 and error_message like "%changeUserDataBase false%"');
+	        
+	        // 一般出现数据库切换问题，两个对列都处理一下
+	        $updated2 = AmazonTempOrderidQueueLowpriority::updateAll(['process_status'=>0],
+	                'process_status=4 and error_message like "%changeUserDataBase false%"');
+	        $msg .= '<br/>Warning 当前订单拉因为数据库切换问题停止拉取，'.($updated + $updated2).'个订单重置状态';
+	    }
+	    
 		$result = AmazonTempOrderidQueueHighpriority::find()
 		->where('(process_status=0 or process_status =3) and error_count<30')->count();
-		$msg = "";
-
 		if ($result > 1000) {
-			$msg = 'Warning 当前有'.$result.'个订单待拉取，请留意拉取Job的情况';
+			$msg .= '<br/>Warning 当前有'.$result.'个订单待拉取，请留意拉取Job的情况';
 			echo $msg;
 			return array(false,$msg);
 		} else {

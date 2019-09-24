@@ -235,10 +235,12 @@ class AllCustomerController extends \eagle\components\Controller{
         //
         $pages = new Pagination(['totalCount' =>$query->andWhere($where)->count(), 'defaultPageSize'=>20 , 'pageSizeLimit'=>[5,200] , 'params'=>$_REQUEST]);//defaultPageSize默认页数,'params'=>$_REQUEST带参过滤
         $query->andWhere($where);
+        $query->offset($pages->offset)->limit($pages->limit);
         //测试 排序sql
         //$tmpCommand = $query->createCommand();
         //echo "<br>".$tmpCommand->getRawSql();
-        $customers = $query->offset($pages->offset)->limit($pages->limit)->asArray()->all();
+//         exit();
+        $customers = $query->asArray()->all();
         
         //$account=Customer::find()->distinct('seller_id')->select('seller_id')->where(['in','seller_id',$allPlatformArr['aliexpress']+$allPlatformArr['ebay']+$allPlatformArr['wish']+$allPlatformArr['dhgate']])->all();//平台帐号
         $account_query=Customer::find()->distinct('seller_id,platform_source')->select('seller_id,platform_source')->where($authorize_query);
@@ -1550,6 +1552,8 @@ like '%$search%' or content like '%$search%' )";
 	    if(!empty($_GET['tr_num'])&&!empty($_GET['language'])){
 	        $data = CustomerMsgTemplate::find()->where(['id'=>$_GET['tr_num']])->asArray()->one();
 	        $template_details = CustomerMsgTemplateDetail::find()->where(['template_id'=>$_GET['tr_num'],'lang'=>$_GET['language'],])->asArray()->all();
+	    }else{
+	        return "";
 	    }
 	    //行刷新
 	    if(!empty($_GET['tr_num'])&&!empty($_GET['update_one'])){

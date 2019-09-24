@@ -60,7 +60,7 @@ class ShopeeOrderController extends \eagle\components\Controller{
 		ConfigHelper::setPageLastOpenedSize($page_url, $pageSize);
 
 		$data = OdOrder::find();
-		$data->andWhere(['order_source'=>'shopee']);
+// 		$data->andWhere(['order_source'=>'shopee']);
 		
 		$showsearch=0;
 		$op_code = '';
@@ -91,12 +91,12 @@ class ShopeeOrderController extends \eagle\components\Controller{
 			}
 			
 			//不显示 解绑的账号的订单
-			$data->andWhere(['selleruserid' => $shopeeAccountList]);
+// 			$data->andWhere(['selleruserid' => $shopeeAccountList]);
 		}
 		
 		$addi_condition = ['order_source' => 'shopee'];
 		$addi_condition['sys_uid'] = \Yii::$app->user->id;
-		$addi_condition['selleruserid_tmp'] = $shopeeAccountList;
+		$addi_condition['selleruserid'] = $shopeeAccountList;
 		
 		$tmp_REQUEST_text['where']=empty($data->where)?Array():$data->where;
 		$tmp_REQUEST_text['orderBy']=empty($data->orderBy)?Array():$data->orderBy;
@@ -115,6 +115,10 @@ class ShopeeOrderController extends \eagle\components\Controller{
 			'pageSizeLimit'=>[5,200],//每页显示条数范围
 			'params'=>$_REQUEST,
 		]);
+		
+// 		$tmpCommand = $data->createCommand();
+// 		echo $tmpCommand->getRawSql();
+		
 	    $models = $data->offset($pages->offset)
 	        ->limit($pages->limit)
 	        ->all();

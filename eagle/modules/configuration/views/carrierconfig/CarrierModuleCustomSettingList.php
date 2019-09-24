@@ -6,6 +6,7 @@ use eagle\helpers\HtmlHelper;
 $baseUrl = \Yii::$app->urlManager->baseUrl . '/';
 $this->registerJsFile($baseUrl."js/project/configuration/carrierconfig/CarrierModuleCustomSettingList/CarrierModuleCustomSettingList.js", ['depends' => ['yii\jui\JuiAsset','yii\bootstrap\BootstrapPluginAsset']]);
 
+$this->registerJs("initCarrierCustomSettingValidateInput();" , \yii\web\View::POS_READY);
 ?>
 
 <style>

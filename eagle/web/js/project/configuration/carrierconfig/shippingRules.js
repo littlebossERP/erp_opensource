@@ -359,7 +359,7 @@ function set_buyer_transportation_service_div(tmp_service_code, tmp_service, tmp
 		is_add_div = true;
 	}else{
 		$('#buyer_transportation_service_div').find('div').each(function(){
-			if(tmp_service_code == $(this).find('label').find('input').val()){
+			if(tmp_service_code == $(this).find('label').find('input[name="'+tmp_service_attr_name+'"]').val()){
 				is_add_div = false;
 			}
 		});

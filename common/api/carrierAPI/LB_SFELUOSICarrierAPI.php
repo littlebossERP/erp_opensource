@@ -98,6 +98,9 @@ class LB_SFELUOSICarrierAPI extends BaseCarrierAPI
             $account = $info['account'];// 客户相关信息
             $service = $info['service'];// 运输服务相关信息
 
+            // dzt20190923 客户要求添加
+            $tmp_is_use_mailno = empty($service['carrier_params']['is_use_mailno']) ? '' : $service['carrier_params']['is_use_mailno'];
+            
             if(empty($info['senderAddressInfo']['shippingfrom'])){
             	return self::getResult(1,'','地址信息没有设置好，请到相关的货代设置地址信息');
             }
@@ -108,8 +111,11 @@ class LB_SFELUOSICarrierAPI extends BaseCarrierAPI
             $account_api_params = $account->api_params;//获取到帐号中的认证参数
             $shippingfrom_address = $info['senderAddressInfo']['shippingfrom'];//获取“发货地址"的信息)
 
-            $config = CarrierOpenHelper::getCommonCarrierConfig();
-            $highCopyPrint_senderAddress = $config['address']['shippingfrom_en'];
+            // dzt20190820 顺丰客户发货常用地址不在这里获取
+//             $config = CarrierOpenHelper::getCommonCarrierConfig();
+//             $highCopyPrint_senderAddress = $config['address']['shippingfrom_en'];
+            
+            $highCopyPrint_senderAddress = $shippingfrom_address;
 
             //认证参数
             $this->clientCode = isset($account_api_params['clientCode']) ? trim($account_api_params['clientCode']):'';//接入編碼
@@ -246,17 +252,25 @@ class LB_SFELUOSICarrierAPI extends BaseCarrierAPI
             $xml_to_str = simplexml_load_string($responseXML);
             $responseArr = json_decode(json_encode($xml_to_str),TRUE);
 
-            \Yii::info(print_r($responseXML,true),"file");// 先记下结果，记下refrence_no，这个返回应该与上面提交refrence_no一样。
+            \Yii::info("LB_SFELUOSICarrierAPI sfKtsService result:".print_r($responseXML,true), "carrier_api");// 先记下结果，记下refrence_no，这个返回应该与上面提交refrence_no一样。
             $track_num_message = '';
             $tracking_number = '';
             if($responseArr['Head'] == 'OK'){
-                if(isset($responseArr['Body'][0]['@attributes']['agent_mailno']) && !empty($responseArr['Body'][0]['@attributes']['agent_mailno'])){
-                    $tracking_number = $responseArr['Body'][0]['@attributes']['agent_mailno'];
+                // dzt20190923 客户要求添加“提交平台用顺丰单号”
+                $response = $responseArr['Body'][0]['@attributes'];
+                
+                //判断跟踪号是用服务商单号，还是顺丰单号
+                $tracking_number = $tmp_is_use_mailno=='Y' ? $response['mailno'] : $response['agent_mailno'];
+                
+                //当没有跟踪号返回时，以顺丰单号为跟踪号
+                $tracking_number = empty($tracking_number) ? $response['mailno'] : $tracking_number;
                     $track_num_message = '<br>服务商跟踪号：'.$tracking_number;
-                }
+                
+//                 if(isset($responseArr['Body'][0]['@attributes']['agent_mailno']) && !empty($responseArr['Body'][0]['@attributes']['agent_mailno'])){
+//                     $tracking_number = $responseArr['Body'][0]['@attributes']['agent_mailno'];
+//                     $track_num_message = '<br>服务商跟踪号：'.$tracking_number;
+//                 }
                 // else{$tracking_number = $responseArr['Body'][0]['@attributes']['mailno'];}
-
-
 
                 $r = CarrierApiHelper::orderSuccess( $order , $service , $responseArr['Body'][0]['@attributes']['mailno'] , OdOrder::CARRIER_WAITING_PRINT , $tracking_number);
                 return  self::getResult(0,$r, "操作成功! 顺丰单号：".$responseArr['Body'][0]['@attributes']['mailno'] .$track_num_message);

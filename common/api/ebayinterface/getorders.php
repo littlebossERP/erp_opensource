@@ -842,6 +842,9 @@ class getorders extends base{
 			$MT['finalvaluefee_currency']=$MT['currency'];
 		}
 		$MT->save(false);
+		// dzt20190905 重新绑账号出现重复订单/item为空，发现srn为空，导致item插入失败，
+		// 但对应的od_ebay_transaction记录则有数据，尝试reload看看数据能否载入
+		$MT->refresh();
 		return $MT;
 	}
 
@@ -958,10 +961,10 @@ class getorders extends base{
 			}
 		}
 		
+		
 // 		if ($MMO->order_status > 200) {
 // 			return $MMO;
 // 		}
-
 		$order_status = '';
  		if($MMO->isNewRecord||$MMO->order_status<=200||$isNew==true){
 			$isNew=true;
@@ -988,6 +991,9 @@ class getorders extends base{
 				'saas_platform_user_id'=>$MEO->ebay_uid,
 			);
 // 		}
+			
+			
+			
 			
 		$AMMO+=array(
 			'order_source_order_id'=>$MEO['ebay_orderid'],
@@ -1018,6 +1024,9 @@ class getorders extends base{
 			$AMMO['pay_status']=0;
 		}
 		
+		
+		
+		
 		///////////////////////////////////////////////////////////////////////////////////////
 		//发货状态 ,是否已经发货 
 		$AMMO['shipping_status']=0;
@@ -1036,9 +1045,7 @@ class getorders extends base{
 			}else{
 			    $AMMO['delivery_time'] = $shipTime;
 			}
-			
 		}
-		
 		///////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		//testkh20160810 追查ebay 订单金额为0
@@ -1137,6 +1144,7 @@ class getorders extends base{
 			$AMMO['payment_type']=$MEO['paymentmethod'];
 		}
 		
+
 		Helper_Array::removeEmpty($AMMO);
 
 		//var_dump($AMMO);

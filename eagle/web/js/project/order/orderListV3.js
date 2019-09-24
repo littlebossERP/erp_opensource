@@ -465,6 +465,41 @@ orderCommonV3 = {
 				 			});
 						 }
 				    });
+				}else if(order_source == 'jumia'){
+					$.showLoading();
+					var orderid = '';
+					$.each(thisOrderList,function(index,value){
+						orderid=value;
+					});
+					var Url = global.baseUrl +'order/jumia-order/update-image';
+					$.ajax({
+				        type : 'post',
+				        data : {order_id:orderid},
+						url: Url,
+						dataType : 'json',
+				        success:function(response) {
+				        	$.hideLoading();
+				        	if(response.code == 200){
+								$e = $.alert(response.message,'success');
+				        	}else if(response.code == 400){
+				        		$e = $.alert(response.message,'danger');
+				        	}else{
+				        		$e = $.alert('异常','danger');
+				        	}
+				        	$e.then(function(){
+				        		if(response.code == 200){
+									location.reload();
+				        		}
+				        	});
+				        },
+				        error: function () {
+							$.hideLoading();
+							$e = $.alert('网络错误！','danger');
+							$e.then(function(){
+								location.reload();
+				 			});
+						 }
+				    });
 				}else if(order_source == 'newegg'){
 					$.showLoading();
 					var orderid = '';

@@ -178,7 +178,7 @@ tbale th,td{
 		  			<tr><th colspan="4"  style="vertical-align: middle;"><?=TranslateHelper::t('商品基本信息') ?></th></tr>
 		  			<tr>
 		  				<td style="width: 20%;"><div class="content_right">sku<span style="color:red;font-size:14px;font-weight:bolder;">*</span></div></td>
-		  				<td style="width: 30%;"><div class="content_lfet"><input type="text" class="form-control" id="Product_sku" name="Product[sku]" 
+		  				<td style="width: 30%;"><div class="content_lfet"><input type="text" class="form-control" id="Product_sku" name="Product[sku]" placeholder="仅支持字母、数字和-_、+、*、x、#" onkeyup="value=value.replace(/[^a-zA-Z0-9-_+xX*#]*/g,'');"
 		  					value="<?php echo $proudctInfo['sku'];
 		  					if(isset($_GET['type'])){
 		  						if($fromSku!=='' && $_GET['type']=='C') echo "_C";

@@ -20,6 +20,12 @@ function saveAccount($code,$id){
 	$params = new Array();
 	$i = 0;
 	$req = false;
+	
+	if (! $('#accountEditFORM').formValidation('form_validate')){
+		bootbox.alert(Translator.t('有必填项未填或格式不正确!'));
+		return false;
+	}
+	
 //	判断必填字段是否为空
 	$('.required').each(function(){
 		if($(this).val().trim() == ""){//为空则提示并返回
@@ -187,6 +193,13 @@ function saveAccount($code,$id){
 	    });
 	}
 };
+
+
+function initEditCarrierAccountValidateInput(){
+	$('#accountEditFORM input[type="text"]').formValidation({validType:['trim', 'safeForHtml'],tipPosition:'right',required:true});
+}
+
+
 //开启物流商中的创建新账号，成功则调用开启物流商的function
 function createAccount($obj){
 	$.maskLayer(true);

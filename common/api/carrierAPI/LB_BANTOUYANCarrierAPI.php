@@ -346,7 +346,9 @@ class LB_BANTOUYANCarrierAPI extends BaseCarrierAPI{
                          $returnNo = [];
                          $returnNo['waybillCode'] = $res['waybillCode'];
                          $returnNo['anxOrderCode'] = $res['anxOrderCode'];
-                         $track_no = $res['waybillCode'];// waybillCode是面单号，不是尾程号（我们要的跟踪号），但斑头雁这边强烈要求加进去，后面再获取跟踪号覆盖
+                         // dzt20190918 斑头雁添加返回callBack参数判断 是否需要获取尾程号（我们要的跟踪号），但waybillCode 依然需要用来打印面单，所以不用改。
+                         // waybillCode是面单号，不是尾程号（我们要的跟踪号），但斑头雁这边强烈要求加进去，因为客户需要用来打印面单，后面再获取跟踪号覆盖
+                         $track_no = $res['waybillCode'];
                          $r = CarrierAPIHelper::orderSuccess($order, $Service, $res['custOrderCode'], OdOrder::CARRIER_WAITING_GETCODE, $track_no, $returnNo);
                          return  BaseCarrierAPI::getResult(0,$r,'操作成功!订单号'.$res['custOrderCode']);
                      }else{
@@ -355,7 +357,6 @@ class LB_BANTOUYANCarrierAPI extends BaseCarrierAPI{
                          }else {
                              throw new CarrierException("上传订单失败");
                          }
-                         
                      }
                  }
              }else{
@@ -445,7 +446,6 @@ class LB_BANTOUYANCarrierAPI extends BaseCarrierAPI{
              \Yii::info("LB_BANTOUYANCarrierAPI getTrackingNO result:".$track_no_result.PHP_EOL."post info:".
                      print_r(Helper_Curl::$last_post_info, true), "carrier_api");
               
-             
              $result = json_decode($track_no_result, true);
              if(!empty($result['success']) && !empty($result['code']) && $result['code'] == 200){//验证POST数据是否成功
                  $track_no = null;

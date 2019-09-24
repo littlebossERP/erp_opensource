@@ -137,7 +137,7 @@ if(!\eagle\modules\permission\apihelpers\UserApiHelper::checkSettingModulePermis
 			    </tr>
 		        <?php foreach($templates as $template):?>
 		        <tr>
-		            <td class="text-nowrap"><?=$template->template_name ?></td>
+		            <td class="text-nowrap"><?=\yii\helpers\Html::encode($template->template_name) ?></td>
 		            <td class="text-nowrap"><?=date('Y-m-d H:i:s',$template->update_time) ?></td>
 		            <td class="text-nowrap"><?=$template->template_type ?></td>
 		            <td class="text-nowrap">

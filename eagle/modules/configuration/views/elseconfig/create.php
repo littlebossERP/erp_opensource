@@ -1,6 +1,9 @@
 <?php 
 use yii\helpers\Html;
 use yii\helpers\Url;
+
+
+$this->registerJs("initFeedbackFormValidateInput();" , \yii\web\View::POS_READY);
 ?>
 <form id="FeedbackTemplateFORM">
 

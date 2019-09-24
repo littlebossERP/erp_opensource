@@ -104,9 +104,9 @@ class ShopeeHelper{
 			
 			//*************Step 1, 检测是否活跃用户，如不活跃，则放到晚上执行新订单的同步，减少白天负载
 			if(!self::isActiveUser($puid)){
-				$next_time = data('G');
+				$next_time = date('G');
 				if($next_time < 23 && $next_time > 8){
-					$next_time = strtotime(data('Y-m-d 23:20:00'));
+					$next_time = strtotime(date('Y-m-d 23:20:00'));
 					$SAA_obj->next_time = $next_time;
 					$SAA_obj->last_time = time();
 					$SAA_obj->status = 2;
@@ -209,20 +209,31 @@ class ShopeeHelper{
 		$connection = Yii::$app->db_queue;
 		$now = time();
 		$hasGetRecord = false;
+		
+		// 一个小时前 status依然是1的 重置状态
+		$affectRows = $connection->createCommand("update queue_shopee_getorder set status=3, update_time=".time().", next_time=".(time() + 300)." where status=1 and update_time<".(time()-3600) )->execute();
+		echo self::getTime()." fix status 1 records:$affectRows ,".self::$cronJobId.PHP_EOL;
+		
+		
 		//查询需同步同步详情的订单
-		$sql = "select id from queue_shopee_getorder where is_active=1 and status<>1 and times<10 and next_time<".time().' limit 100';
+		$sql = "select id from queue_shopee_getorder where is_active=1 and status<>1 and times<10 and next_time<{$now} limit 100";
+		
+// 		$sql = "select id from queue_shopee_getorder where is_active=1 and status=3 and times<10 and next_time<{$now} and message like '%批量获取订单明细失%' limit 100 ";
+		
 		$dataReader = $connection->createCommand($sql)->query();
-		echo self::getTime().' select count '.$dataReader->count().PHP_EOL;
+		echo self::getTime().' select count '.$dataReader->count().",sql:$sql".PHP_EOL;
+		
 		$queue_ids = array();   //抢到的记录
 		while(false !== ($row = $dataReader->read())){
 		    $now = time();
 		    $timeMS1 = timeutil::getCurrentTimestampMS();
 		    //判断是否能抢到记录，单条记录，没5分钟只执行一次
-		    $affectRows = $connection->createCommand("update queue_shopee_getorder set status=2, update_time=".time().", next_time=".(time() + 300)." where id=".$row['id']." and status<>1")->execute();
-		    if($affectRows > 0){
-		        //抢到记录
+// 		    $affectRows = $connection->createCommand("update queue_shopee_getorder set status=1, update_time=".time().", next_time=".(time() + 300)." where id=".$row['id']." and status<>1")->execute();
+// 		    if($affectRows > 0){
+// 		        //抢到记录
+// 		        $queue_ids[] = $row['id'];
+// 		    }
 		        $queue_ids[] = $row['id'];
-		    }
 		}
 		//当没有抢到记录时，跳出
 		if(empty($queue_ids)){
@@ -234,20 +245,18 @@ class ShopeeHelper{
 		foreach($rows as $row){
 			$key = $row['shopee_uid'];
 			$count = 0;
-			//根据shop_id拆分订单组，并单次最多20张订单批量获取
-			while(true){
-				if(array_key_exists($key, $shop_orders) && count($shop_orders[$key]) >= 20){
-					$key .= '_';
-				}
-				else{
-					break;
-				}
-				$count++;
-				if($count > 5){
-					break;
-				}
+			//根据shop_id拆分订单组，并单次最多20张订单批量获取，接口说明是50个上限
+			// dzt20190829 最近获取20个经常出现获取不到的情况，改为上限5个，抢占记录改成分组时才抢记录
+			if(array_key_exists($key, $shop_orders) && count($shop_orders[$key]) >= 5){
+			    continue;
 			}
-			$shop_orders[$key][] = $row['orderid'];
+			
+			//判断是否能抢到记录，单条记录，没5分钟只执行一次
+			$affectRows = $connection->createCommand("update queue_shopee_getorder set status=1, update_time=".time().", next_time=".(time() + 300)." where id=".$row['id']." and status<>1")->execute();
+			if($affectRows > 0){
+			    //抢到记录
+			    $shop_orders[$key][] = $row['orderid'];
+			}
 		}
 		
 		foreach($shop_orders as $shopee_uid => $one){
@@ -284,6 +293,8 @@ class ShopeeHelper{
 		                if(!$mode->save(false)){
 		                	echo "QueueShopeeGetorder save : ".var_export($QAG_obj->errors, true).PHP_EOL;
 		                }
+		                
+		                echo self::getTime().' GetorderERR, shopee_uid='.$shopee_uid.', order_id='.$order_id.",msg:$msg".PHP_EOL;
 		            }
 		        }
 		    }

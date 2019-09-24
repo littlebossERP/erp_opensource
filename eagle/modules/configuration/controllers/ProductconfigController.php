@@ -48,6 +48,13 @@ class ProductconfigController extends \eagle\components\Controller{
             );
         }
         
+        foreach ($skurule['keyword'] as $index=>$keyword){
+            $skurule['keyword'][$index] = \yii\helpers\Html::encode($keyword);
+        }
+        
+        $skurule['firstChar'] = \yii\helpers\Html::encode($skurule['firstChar']);
+        $skurule['secondChar'] = \yii\helpers\Html::encode($skurule['secondChar']);
+        
         //是否开启sku 解释
         $isActive = ConfigHelper::getConfig('configuration/productconfig/analysis_rule_active');
         

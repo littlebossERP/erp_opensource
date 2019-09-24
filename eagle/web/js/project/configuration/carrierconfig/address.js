@@ -58,6 +58,12 @@ function bind_all(){
 	}
 	//保存地址
 	function SaveAddress($id,$carrier_code,$type){
+		
+		if (! $('#address_form').formValidation('form_validate')){
+			bootbox.alert(Translator.t('有必填项未填或格式不正确!'));
+			return false;
+		}
+		
 		tip = true;
 		//CNE不要控制寄件人地址信息必填
 		if($carrier_code != 'lb_CNE'){
@@ -112,6 +118,11 @@ function bind_all(){
 		    });
 		}
 	};
+	
+	function initEditAddressValidateInput(){
+		$('#address_form input[type="text"]').formValidation({validType:['trim', 'safeForHtml'],tipPosition:'right'});
+	}
+	
 	//设置默认地址
 	function setDefaultAddress($id,$obj){
 		var Url=global.baseUrl +'configuration/carrierconfig/setdefaultaddress';

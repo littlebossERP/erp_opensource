@@ -13,6 +13,7 @@ use Qiniu\json_decode;
 use eagle\models\CarrierUserLabel;
 use common\api\shopeeinterface\ShopeeInterface_Api;
 use common\helpers\Helper_Curl;
+use eagle\modules\util\helpers\TimeUtil;
 
 /**
  * Shopee线上发货
@@ -208,6 +209,8 @@ class LB_SHOPEEONLINEDELIVERYCarrierAPI extends BaseCarrierAPI{
 	 **/
 	public function doPrint($data){
 		try{
+		    $t1 = TimeUtil::getCurrentTimestampMS();
+		    
 			$pdf = new PDFMerger();
 			$user=\Yii::$app->user->identity;
 			if(empty($user)) return  BaseCarrierAPI::getResult(1, '', '用户登陆信息缺失,请重新登陆');
@@ -218,6 +221,7 @@ class LB_SHOPEEONLINEDELIVERYCarrierAPI extends BaseCarrierAPI{
 			$info = CarrierAPIHelper::getAllInfo($order);
 			$account = $info['account'];
 		
+			$t2 = TimeUtil::getCurrentTimestampMS();
 			$tmpPath = array();
 			$order_lists = [];
 			foreach ($data as $k => $v) {
@@ -239,17 +243,30 @@ class LB_SHOPEEONLINEDELIVERYCarrierAPI extends BaseCarrierAPI{
 			//批量获取标签信息
 			foreach($order_lists as $shop_id => $order_list){
 				$shop_id = rtrim($shop_id, '_');
+				
+				$t21 = TimeUtil::getCurrentTimestampMS();
 				$api = new ShopeeInterface_Api($shop_id);
 				$ret = $api->GetAirwayBill(['ordersn_list' => $order_list]);
+
+				$t22 = TimeUtil::getCurrentTimestampMS();
+				
+				\Yii::info('LB_SHOPEEONLINEDELIVERYCarrierAPI doPrint test log,shop_id:'.$shop_id.',t='.($t22-$t21).',ret:'.json_encode($ret),"carrier_api");
+					
+				
 				if(!empty($ret['result']['errors'])){
-					return  self::getResult(1, '', $ret['result']['errors'][0].' 等订单返回标签失败！');
+				    if(is_array($ret['result']['errors'][0])){
+				        return  self::getResult(1, '', $ret['result']['errors'][0]['error_description'].' 订单返回标签失败e1！');
+				    }else{
+				        return  self::getResult(1, '', $ret['result']['errors'][0].' 订单返回标签失败e2！');
+				    }
 				}
 				if(empty($ret['result']['airway_bills'])){
 					return  self::getResult(1, '', '返回标签格式失败！');
 				}
 				foreach($ret['result']['airway_bills'] as $one){
 				    $responsePdf = Helper_Curl::get($one['airway_bill']);
-				    if( strlen( $responsePdf) < 1000){
+				    // dzt20190819 出现少于1000的pdf ，改成100
+				    if( strlen( $responsePdf) < 100){
 				        return  self::getResult(1, '', '接口返回内容不是一个有效的PDF！');
 				    }
 				    
@@ -257,6 +274,9 @@ class LB_SHOPEEONLINEDELIVERYCarrierAPI extends BaseCarrierAPI{
 					$pdf->addPDF( $pdfUrl['filePath'], 'all');
 				}
 			}
+			
+			$t3 = TimeUtil::getCurrentTimestampMS();
+			\Yii::info('LB_SHOPEEONLINEDELIVERYCarrierAPI doPrint test log,t0='.($t3-$t1).',t1='.($t2-$t1).',t2='.($t3-$t2),"carrier_api");
 			
 			if(isset($pdfUrl)){
 			    $pdf->merge('file', $pdfUrl['filePath']);

@@ -43,13 +43,13 @@ $menu = [
 	TranslateHelper::t('订单业务流程')=>[
 		'icon'=>'icon-stroe',
 		'items'=>[
-			/*TranslateHelper::t('未付款')=>[
+			TranslateHelper::t('未付款')=>[
 					'url'=>Url::to(['/order/shopee-order/list','order_status'=>OdOrder::STATUS_NOPAY]),
 					 'tabbar'=>empty($counter[OdOrder::STATUS_NOPAY])?0:$counter[OdOrder::STATUS_NOPAY],
-					],*/
+			],
 			TranslateHelper::t('已付款')=>[
 					'url'=>Url::to(['/order/shopee-order/list','order_status'=>OdOrder::STATUS_PAY , 'pay_order_type'=>'all']),
-					//'tabbar'=>empty($counter[OdOrder::STATUS_PAY])?0:$counter[OdOrder::STATUS_PAY],
+				'tabbar'=>empty($counter[OdOrder::STATUS_PAY])?0:$counter[OdOrder::STATUS_PAY],
 				],		
 			TranslateHelper::t('发货中')=>[
 					//'url'=>DeliveryHelper::getDeliveryModuleUrl('shopee'),

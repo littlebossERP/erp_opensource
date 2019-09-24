@@ -8,6 +8,9 @@ StationLetter.NationMapping=<?= json_encode($addi_info['country_mapping'])?>;
 <?php 
 //array_unshift($addi_info['ship_status'],'N/A');
 $tmp_shipStatus_arr = array('na'=>'所有状态');
+
+// dzt20190912 有速卖通客户要求匹配已付款未发货订单 发送站内信来确认收货地址。所以加个未发货状态在这里帮助匹配
+$tmp_shipStatus_arr['paidandunship'] = "已付款未发货";
 $tmp_shipStatus_arr += $addi_info['ship_status'];
 $addi_info['ship_status'] = $tmp_shipStatus_arr;
 ?>

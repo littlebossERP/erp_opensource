@@ -1,5 +1,7 @@
 <?php
 use yii\helpers\Html;
+
+$this->registerJs("initCreateWarehouseValidateInput();" , \yii\web\View::POS_READY);
 ?>
 
 <style>

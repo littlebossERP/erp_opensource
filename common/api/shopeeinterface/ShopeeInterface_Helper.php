@@ -178,7 +178,7 @@ class ShopeeInterface_Helper{
 				$orderitem_arr = array();   //商品明细
 				foreach($order['items'] as $item){
 					$item_res = $api->GetItemDetail(['item_id' => $item['item_id']]);
-					if(empty($item_res['item'])){
+					if(empty($item_res['item'])){// sHopee接口不稳定有时候返回null 重试即可
 						$is_get_item_status = false;
 						break;
 					}
@@ -310,7 +310,7 @@ class ShopeeInterface_Helper{
 					'consignee_province' => empty($order['recipient_address']['state']) ? '' : $order['recipient_address']['state'],
 					'consignee_address_line1' => $address,
 					//'consignee_address_line2' => '',
-					'paid_time' => self::transLaStrTimetoTimestamp($order['create_time']),
+					'paid_time' => empty($order['pay_time'])?0:self::transLaStrTimetoTimestamp($order['pay_time']),
 					'payment_type' => $order['payment_method'],
 					//'delivery_time' => '',
 					'user_message' => $order['message_to_seller'],
@@ -318,6 +318,7 @@ class ShopeeInterface_Helper{
 					'orderShipped' => $orderShipped,
 					'items' => $orderitem_arr,
 				);
+				
 				$myorder_arr[$user->puid] = array_merge(OrderHelper::$order_demo, $order_arr);
 				
 				//插入订单信息到user db

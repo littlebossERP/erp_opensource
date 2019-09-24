@@ -4,7 +4,7 @@ use yii\helpers\Url;
 use eagle\modules\app\apihelpers\AppApiHelper;
 use eagle\modules\permission\apihelpers\UserApiHelper;
 
-$this->registerJsFile(\Yii::getAlias('@web').'/js/project/dashboard/dash_board.js?v=1.10',['depends' => ['eagle\assets\PublicAsset']]);
+$this->registerJsFile(\Yii::getAlias('@web').'/js/project/dashboard/dash_board.js?v=1.13',['depends' => ['eagle\assets\PublicAsset']]);
 $this->registerJsFile(\Yii::getAlias('@web').'js/jquery.json-2.4.js', ['depends' => ['yii\jui\JuiAsset','yii\bootstrap\BootstrapPluginAsset']]);
  
 $uid = \Yii::$app->user->id;

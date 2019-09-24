@@ -179,4 +179,12 @@ class AliexpressInterface_Api_Qimen extends AliexpressInterface_Base_Qimen{
     	return $this->request('confirm', $param, 1, self::$taobao_tmc_messages, 'custom');
     }
     
+    
+    /**
+     * 测试的自定义接口 拉单
+     */
+    function customGetOrders($param=null){
+        return $this->request('', $param, 1, "custom.get.orders", 'custom');
+    }
+    
 }

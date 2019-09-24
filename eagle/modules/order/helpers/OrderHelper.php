@@ -1070,9 +1070,9 @@ class OrderHelper {
 									}
 							}
 						} catch (\Exception $ex) {
-							echo "\n".(__function__).' failure to insert, Error Message:' . $ex->getMessage () ." Line no ".$ex->getLine(). "\n";
+							echo "\n".(__function__).' failure to insert, Error Message:' . $ex->getMessage () ." File:".$ex->getFile()." Line no ".$ex->getLine(). "\n";
 							$result['success'] = 1;
-							$result['message'] = 'E021  插入订单异常！ line no:'.$ex->getLine()." and message:".$ex->getMessage();
+							$result['message'] = 'E021  插入订单异常！file: '.$ex->getFile().'line no:'.$ex->getLine()." and message:".$ex->getMessage();
 							//return $result;
 						}
 						
@@ -1630,7 +1630,7 @@ class OrderHelper {
 		// dzt20190826 客户反映从8月20号之后的所有金额方面的数字都不准，发现wish有返回货币字段，而我们默认设置了USD
 		// 所以对原来同步回来不一样的currency进行覆盖
 		if($odorder->order_source =='wish' && $odorder->currency != $attributes['currency']){
-		    $attrs += ['currency'];
+		    $attrs = array_merge($attrs, ['currency']);
 		}
 		
 		if($odorder->order_source =='priceminister'){

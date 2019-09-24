@@ -2269,7 +2269,7 @@ class QueueAutoShippedHelper {
 			$api->partner_id = $user->partner_id;
 			$api->secret_key = $user->secret_key;
 			
-			
+			$puid = $user->puid;
 			echo 'ShopeeShipped, shop_id='.$user->shop_id.', order_id='.$queueSyncShippedObj->order_source_order_id.', tracking_number='.$queueSyncShippedObj->tracking_number.PHP_EOL;
 			
 			$osObj = OdOrderShipped::findOne($queueSyncShippedObj->osid);

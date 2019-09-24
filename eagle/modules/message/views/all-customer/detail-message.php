@@ -124,9 +124,9 @@ $this->registerJs("$.initQtip();" , \yii\web\View::POS_READY);
     		<textarea rows="3" cols="30" id="add_<?=$product_list['order_id'] ?>_desc" style="display:none">
     		
     		</textarea>
-    		<input type="button" class="btn_xs btn-success" id="addDesc_<?=$product_list['order_id'] ?>_btn" onclick="addDesc('<?=$product_list['order_id'] ?>')" value="添加备注 ">
-    		<input type="button" class="btn_xs btn-success" id="saveDesc_<?=$product_list['order_id'] ?>_btn" onclick="saveDesc('<?=$product_list['order_id'] ?>')" style="display:none" value="添加">
-    		<input type="button" class="btn_xs btn-success" id="cancleAddDesc_<?=$product_list['order_id'] ?>_btn" onclick="cancleAddDesc('<?=$product_list['order_id'] ?>')" style="display:none" value="取消">
+    		<input type="button" class="btn btn_xs btn-success" id="addDesc_<?=$product_list['order_id'] ?>_btn" onclick="addDesc('<?=$product_list['order_id'] ?>')" value="添加备注 ">
+    		<input type="button" class="btn btn_xs btn-success" id="saveDesc_<?=$product_list['order_id'] ?>_btn" onclick="saveDesc('<?=$product_list['order_id'] ?>')" style="display:none" value="添加">
+    		<input type="button" class="btn btn_xs btn-success" id="cancleAddDesc_<?=$product_list['order_id'] ?>_btn" onclick="cancleAddDesc('<?=$product_list['order_id'] ?>')" style="display:none" value="取消">
     	</div>
     
     </div>
