@@ -50,6 +50,7 @@ use Stripe\Order;
 use eagle\modules\util\helpers\MailHelper;
 use eagle\modules\permission\helpers\UserHelper;
 use eagle\modules\platform\apihelpers\PlatformAccountApi;
+use eagle\modules\catalog\models\ProductAliases;
 /**
  +------------------------------------------------------------------------------
  * 订单模块业务逻辑类
@@ -7733,6 +7734,7 @@ class OrderHelper {
 					}
 				}
 			}
+			
 			unset($items_list_arr);
 			unset($content);
 				
@@ -7844,6 +7846,15 @@ class OrderHelper {
 										$hasProduct=0;
 									else
 										$hasProduct=1;
+									
+									$productAlias = [];
+									if($hasProduct){
+									    $productAliasList = ProductAliases::find()->where(['sku'=>$item_obj['root_sku']])->asArray()->all();
+									    foreach ($productAliasList as $alias){
+									        $productAlias[$alias['alias_sku']] = $alias;
+									    }
+									}
+									
 									if($isMaster!=2){
 										//按订单导出==============================================================================================
 										$photo_primary='';
@@ -7948,6 +7959,28 @@ class OrderHelper {
 												}
 												else
 													$tmp_arr['declaration_value_currency'] = (empty($tmp_arr['declaration_value_currency'])?'':$tmp_arr['declaration_value_currency']).$enter_key;
+											}elseif($column == 'product_comment'){// dzt20190925 add
+												if($disable==0){
+													if ($hasProduct){
+														$tmp_arr['product_comment'] = (empty($tmp_arr['product_comment'])?'':$tmp_arr['product_comment']).$product['comment'].$enter_key;
+													}else{
+														$tmp_arr['product_comment'] = (empty($tmp_arr['product_comment'])?'':$tmp_arr['product_comment']).$enter_key;
+													}
+													$tmp_arr_deleteener_column[]=$column;
+												}
+												else
+													$tmp_arr['product_comment'] = (empty($tmp_arr['product_comment'])?'':$tmp_arr['product_comment']).$enter_key;
+											}elseif($column == 'alias_comment'){// dzt20190925 add
+												if($disable==0){
+													if ($hasProduct && !empty($productAlias[$item_obj['sku']])){
+														$tmp_arr['alias_comment'] = (empty($tmp_arr['alias_comment'])?'':$tmp_arr['alias_comment']).$productAlias[$item_obj['sku']]['comment'].$enter_key;
+													}else{
+														$tmp_arr['alias_comment'] = (empty($tmp_arr['alias_comment'])?'':$tmp_arr['alias_comment']).$enter_key;
+													}
+													$tmp_arr_deleteener_column[]=$column;
+												}
+												else
+													$tmp_arr['alias_comment'] = (empty($tmp_arr['alias_comment'])?'':$tmp_arr['alias_comment']).$enter_key;
 											}elseif($column == 'price' || $column == 'sku' || $column == 'quantity' || $column == 'product_name' || $column == 'seller_weight' || $column == 'default_warehouse_id'){
 												if($disable==0){
 													$temp= isset($order_objone->$column)?$order_objone->$column:(isset($item_obj[$column])?$item_obj[$column]:'');
@@ -8153,6 +8186,20 @@ class OrderHelper {
 												}else{
 													$tmp_arr['declaration_value_currency'] = '';
 												}
+											}elseif($column == 'product_comment'){// dzt20190925 add
+											    if ($hasProduct && $disable==0){
+											        $tmp_arr['product_comment'] = $product['comment'];
+											    }else{
+											        $tmp_arr['product_comment'] = '';
+											    }
+											}elseif($column == 'alias_comment'){// dzt20190925 add
+											    // Alias有时能获取到root sku的列。所以加个别名备注非空判断
+											    if ($hasProduct && $disable==0 && !empty($productAlias[$item_obj['sku']]) && !empty($productAlias[$item_obj['sku']]['comment'])){
+											        $tmp_arr['alias_comment'] = $productAlias[$item_obj['sku']]['comment'];
+											        // $tmp_arr['product_comment'] = '';// dzt20190926要求 有别名备注则不显示商品备注
+											    }else{
+											        $tmp_arr['alias_comment'] = '';
+											    }
 											}elseif($column == 'order_manual_id'){
 												//不做data conversion 的情况下 沿用 之前的order_manual_id 这个 字段
 												$tmp_arr[$column]=OrderTagHelper::getAllTagStrByOrderId($order_objone->order_id);

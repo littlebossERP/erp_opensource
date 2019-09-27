@@ -111,9 +111,9 @@ class LinioController extends Controller {
             $rtn = SaasLazadaAutoFetchApiHelper::getOrderListOldFirst(array('linio','jumia'));
             //如果没有需要handle的request了，sleep 10s后再试
           	if ($rtn===false){
-        	   	echo "$logIDStr jobid=$cronJobId sleep10 \n";
-        	   	\Yii::info("$logIDStr jobid=$cronJobId sleep10");
-        	   	sleep(10);
+        	   	echo "$logIDStr jobid=$cronJobId sleep30 \n";
+        	   	\Yii::info("$logIDStr jobid=$cronJobId sleep30");
+        	   	sleep(30);
          	}
         }while (time() < $startRunTime+3600);
         echo "$logIDStr jobid=$cronJobId end \n";
@@ -230,7 +230,7 @@ class LinioController extends Controller {
     public static function actionAutoUploadImages() {
         // lazada 三兄弟共用一个 优雅退出key，所以第六个参数是lazada
         CommonHelper::startJob("eagle.modules.listing.helpers.LazadaLinioJumiaProductFeedHelper.ImageUpload", 
-                10, "auto-upload-images", "1.0", self::$nativeVersion, "linio", array('linio','jumia'));
+                30, "auto-upload-images", "1.0", self::$nativeVersion, "linio", array('linio','jumia'));
         
     }
     
@@ -240,7 +240,7 @@ class LinioController extends Controller {
      */
     function actionGetUpdatedListing() {
         CommonHelper::startJob("eagle.modules.listing.helpers.LazadaAutoFetchListingHelperV2.getUpdatedisting",
-                10, "get-updated-listing", "1.0", self::$nativeVersion, "linio", array('linio','jumia'));
+                30, "get-updated-listing", "1.0", self::$nativeVersion, "linio", array('linio','jumia'));
         
     }
     

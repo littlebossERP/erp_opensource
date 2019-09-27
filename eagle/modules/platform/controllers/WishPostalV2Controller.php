@@ -26,6 +26,8 @@ class WishPostalV2Controller extends \eagle\components\Controller
 
     	if (!empty($_REQUEST['wish_account_id']))
     	{
+    	    // dzt20190924 客户绑定wish 返回获取不到session内容，发现绑定授权跳出的网站没有www，wish邮返回的回调有www，所以读取不到session。
+    	    // 跟换成读redis或这个controller修改session域
     		Yii::$app->session['carrierid'] = $_REQUEST['wish_account_id'];
     	}
 

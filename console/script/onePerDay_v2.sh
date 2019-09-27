@@ -59,13 +59,13 @@ checkprocess ../../yii aliexpress/cron-aliexpress-order-summary
 checkprocess ../../yii bonanza/user-bonanza-order-daily-summary
 
 # 更新linio,jumia目录树
-checkprocess ../../yii lazada/refresh-all-site-category-tree
+checkprocess ../../yii linio/refresh-all-site-category-tree
 	
 # 更新linio,jumia目录属性
-checkprocess ../../yii lazada/refresh-category-attrs
+checkprocess ../../yii linio/refresh-category-attrs
 
 # 更新linio,jumia品牌
-checkprocess ../../yii lazada/refresh-site-brands
+checkprocess ../../yii linio/refresh-site-brands
 
 # 更新更新lazada,linio,jumia客户运输方式
 checkprocess ../../yii lazada/refresh-shipment-providers

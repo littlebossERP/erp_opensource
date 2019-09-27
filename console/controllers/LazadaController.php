@@ -374,7 +374,7 @@ class LazadaController extends Controller
      */
     function actionGetUpdatedListingV2()
     {
-        CommonHelper::startJob("eagle.modules.listing.helpers.LazadaAutoFetchListingHelperV3.getUpdatedistingV2", 10, "get-updated-listing-v2", "1.0", self::$nativeVersion, "lazada", array("lazada"));
+        CommonHelper::startJob("eagle.modules.listing.helpers.LazadaAutoFetchListingHelperV3.getUpdatedistingV2", 30, "get-updated-listing-v2", "1.0", self::$nativeVersion, "lazada", array("lazada"));
     }
 
 

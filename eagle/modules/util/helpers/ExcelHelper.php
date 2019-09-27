@@ -142,6 +142,8 @@ class ExcelHelper
 			'declaration_value_currency'=>'商品报关货币',
 			'photo_primary'=>'商品主图',
 			'photo_url'=>'商品主图URL',
+	        'product_comment'=>'商品备注',
+	        'alias_comment'=>'商品别名备注',
 			'order_source_itemid'=>'平台商品itemId',
 // 			'order_source_order_item_id'=>'订单商品编号 /交易编号',
 			'sku_quantity'=>'多品名',
