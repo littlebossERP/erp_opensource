@@ -41,7 +41,7 @@ class PriceministerAccountsHelper
 			return array(false,TranslateHelper::t("Priceminister平台账号、token都不能为空"));
 		}
 		//username为平台唯一
-		$filteData=SaasPriceministerUser::find()->where(array('username' => $params['username']))->andwhere(['not',['site_id'=>$params['priceminister_id']]])->one();
+		$filteData = SaasPriceministerUser::find()->where(array('username' => $params['username']))->andwhere(['not',['site_id'=>$params['priceminister_id']]])->one();
 		if ($filteData!==null){
 			return array(false,TranslateHelper::t("Priceminister平台账号 已存在（不区分大小写），不能重复使用!"));
 		}
@@ -50,7 +50,7 @@ class PriceministerAccountsHelper
     		return array(false,TranslateHelper::t("自定义店铺名  不能为空"));
     	}
 		//store_name为用户唯一
-		$filteData = SaasCdiscountUser::find()->where(['store_name' => $params['store_name'],'uid'=>$saasId])->andwhere(['not',['site_id'=>$params['priceminister_id']]])->one();
+		$filteData = SaasPriceministerUser::find()->where(['store_name' => $params['store_name'],'uid'=>$saasId])->andwhere(['not',['site_id'=>$params['priceminister_id']]])->one();
 		if ($filteData!==null){
 			return array(false,TranslateHelper::t("store_name 已存在（不区分大小写），不能重复使用!"));
 		}

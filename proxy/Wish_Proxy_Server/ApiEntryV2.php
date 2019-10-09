@@ -73,7 +73,7 @@ foreach (  $_POST  as $key => $value ){
 				$get_params['grant_type'] = 'authorization_code';
 				$results = WishService::call_WISH_api('GetAccessToken',$get_params );
 			}
-		}catch(Exception $e){
+		}catch(ServiceResponseException $e){
 			$results['success'] = false;	  		
   			$results['message'] = $e->getErrorMessage()." Client Id:".$data['client_id'];
   			write_log("error:".$data['client_id']." got Access Token: " , "info");
@@ -105,7 +105,7 @@ foreach (  $_POST  as $key => $value ){
 				
 				$results = WishService::call_WISH_api('RefreshAccessToken',$get_params );
 			}
-		}catch(Exception $e){
+		}catch(ServiceResponseException $e){
 			$results['success'] = false;	  		
   			$results['message'] = $e->getErrorMessage()." Client Id:".$data['client_id'];
   			write_log("error:".$data['client_id']." refresh Access Token: " , "info");
@@ -122,7 +122,7 @@ foreach (  $_POST  as $key => $value ){
 			else
 				$get_params['access_token'] = '';
 			$results = WishService::call_WISH_api('authTest',$get_params );
-		}catch(Exception $e){
+		}catch(ServiceResponseException $e){
 			$results['success'] = false;	  		
   			$results['message'] = $e->getErrorMessage()." Client Id:".$data['client_id'];
   			write_log("error:".$parms['access_token']." Auth Test: " , "info");
@@ -170,7 +170,7 @@ foreach (  $_POST  as $key => $value ){
 			$results['wishReturn'] = $client->updateProduct($product ); //ystest $product1 is testing
 			write_log("info: Got return:".print_r($results['wishReturn'],true) , "info");
 			$results['success'] = true;		
-		}catch(Exception $e){ //ServiceResponsException
+		}catch(ServiceResponseException $e){ //ServiceResponsException
 	  		$results['success'] = false;	  		
   			$results['message'] = $e->getErrorMessage()." Product Id:".$data['wish_product_id'];
   			write_log("error: got product id returned: ".$product->id." PRODUCT:".print_r($product,true) , "info");
@@ -217,7 +217,7 @@ foreach (  $_POST  as $key => $value ){
   	$prod_var = $client->createProductVariation($product_var);
   	print_r($prod_var);
 */
-		}catch(Exception $e){ //ServiceResponsException
+		}catch(ServiceResponseException $e){ //ServiceResponsException
 			write_log("failed to CreateProduct for : " .print_r($product,true) . $e->getErrorMessage()  , "info");
 	  		$results['success'] = false;	  		
   			$results['message'] = $e->getErrorMessage();
@@ -254,7 +254,7 @@ foreach (  $_POST  as $key => $value ){
 				$results['wishReturn']['parent_product_id'] = $var->product_id;
 				$results['wishReturn']['variance_product_id'] = $var->id;
 				$results['wishReturn']['variance_sku'] = $var->sku;
-			}catch(Exception $e){ //ServiceResponsException
+			}catch(ServiceResponseException $e){ //ServiceResponsException
 				$results['success'] = false;
 				$results['message'] = $e->getErrorMessage();
 			}
@@ -282,7 +282,7 @@ foreach (  $_POST  as $key => $value ){
 				$results['wishReturn']['variance_product_id'] = $var->id;
 				$results['wishReturn']['variance_sku'] = $var->sku;
 				
-			}catch(Exception $e){ //ServiceResponsException
+			}catch(ServiceResponseException $e){ //ServiceResponsException
 				$results['success'] = false;
 				$results['message'] = $e->getErrorMessage();
 			}
@@ -294,7 +294,7 @@ foreach (  $_POST  as $key => $value ){
 			try {
 				$client->enableProductVariationBySKU($sku);
 				$results['success'] = true;
-			}catch(Exception $e){ //ServiceResponsException
+			}catch(ServiceResponseException $e){ //ServiceResponsException
 				$results['success'] = false;
 				$results['message'] = $e->getErrorMessage();
 			}	
@@ -304,7 +304,7 @@ foreach (  $_POST  as $key => $value ){
 			try {
 				$client->disableProductVariationBySKU($sku);
 				$results['success'] = true;
-			}catch(Exception $e){ //ServiceResponsException
+			}catch(ServiceResponseException $e){ //ServiceResponsException
 				$results['success'] = false;
 				$results['message'] = $e->getErrorMessage();
 			}	
@@ -457,7 +457,7 @@ if (strtolower($action) == strtolower("getAllChangedOrdersSince")) {
 		$results['wishReturn'] = $orders;
 		write_log("info: start to get all change orders since: ".$parms['dateSince']." orders:".print_r($orders,true) , "info");
 		$results['success'] = true;		
-	}catch(Exception $e){ //ServiceResponsException
+	}catch(ServiceResponseException $e){ //ServiceResponsException
 		$results['success'] = false;	  		
 		$results['message'] = $e->getErrorMessage();
 		if (!empty ($dateSince))
@@ -485,7 +485,7 @@ if (strtolower($action) == strtolower("getAllUnfulfilledOrdersSince")) {
 		$results['wishReturn'] = $orders;
 		write_log("info: start to get all Unfulfilled orders since: ".$dateSince." orders:".print_r($orders,true) , "info");
 		$results['success'] = true;		
-	}catch(Exception $e){ //ServiceResponsException
+	}catch(ServiceResponseException $e){ //ServiceResponsException
 		$results['success'] = false;	  		
 		$results['message'] = $e->getErrorMessage();
 		if (!empty ($dateSince))
@@ -600,7 +600,7 @@ if (strtolower($action) == strtolower("fulfillOrderById")) {
 		$results['params'] = $get_params;
 		$results['success'] = true;		
 		*/
-	}catch(Exception $e){ //ServiceResponsException
+	}catch(ServiceResponseException $e){ //ServiceResponsException
 		$results['success'] = false;	  		
 		$results['message'] = $e->getErrorMessage()." order id : ".$parms['order_id'];
 		write_log("error: start to fulfill order by id: ".$parms['order_id']." delivery info : tracking provider ".$parms['tracking_provider']." and tracking number ".$tracking_number ." and ship note".$ship_note , "info");
@@ -655,7 +655,7 @@ if (strtolower($action) == strtolower("updateTrackingInfoById")) {
 		$results['params'] = $get_params;
 		$results['success'] = true;	
 		 */	
-	}catch(Exception $e){ //ServiceResponsException
+	}catch(ServiceResponseException $e){ //ServiceResponsException
 		$results['success'] = false;	  		
 		$results['message'] = $e->getErrorMessage()."  order id : ".$parms['order_id'];
 		write_log("error: start to Modify Tracking of a Shipped Order  by id: ".$parms['order_id']." delivery info : tracking provider ".$parms['tracking_provider']." and tracking number ".$tracking_number ." and ship note".$ship_note  , "info");
@@ -705,7 +705,7 @@ if (strtolower($action) == strtolower("refundOrderById")) {
 		$results['wishReturn'] = $orders;
 		write_log("info: start to Refund/Cancel order by id: ".$parms['order_id']." Refund/Cancel info : reason code ".$parms['reason_code']." andreason ".$wish_reason_mapping[$parms['reason_code']]." and reason note : $reason_note", "info");
 		$results['success'] = true;		
-	}catch(Exception $e){ //ServiceResponsException
+	}catch(ServiceResponseException $e){ //ServiceResponsException
 		$results['success'] = false;	  		
 		$results['message'] = $e->getErrorMessage()."  order id : ".$parms['order_id'];
 		write_log("error: Refund/Cancel order by id: ".$parms['order_id']." Refund/Cancel info : reason code ".$parms['reason_code']." andreason ".$wish_reason_mapping[$parms['reason_code']]." and reason note : $reason_note", "info");
@@ -777,7 +777,7 @@ if (strtolower($action) == strtolower("getAllTicketsAwaiting")) {
 		write_log("info: start to List all Tickets Awaiting You" , "info");
 		$results = WishService::call_WISH_api('getAwaitingTickets',$get_params );
 // 		$results['success'] = true;
-	}catch(Exception $e){ //ServiceResponsException
+	}catch(ServiceResponseException $e){ //ServiceResponsException
 		$results['success'] = false;
 		$results['message'] = $e->getErrorMessage();
 		write_log("error: start to List all Tickets Awaiting You" , "info");
@@ -827,7 +827,7 @@ if (strtolower($action) == strtolower("replyOneTickets")) {
 		write_log("info: start Reply to a Ticket" , "info");
 		$results = WishService::call_WISH_api('replyTickets',$get_params,$get_params );
 // 		$results['success'] = true;
-	}catch(Exception $e){ //ServiceResponsException
+	}catch(ServiceResponseException $e){ //ServiceResponsException
 		$results['success'] = false;
 		$results['message'] = $e->getErrorMessage();
 		write_log("error: start Reply to a Ticket" , "info");
@@ -872,7 +872,7 @@ if (strtolower($action) == strtolower("closeOneTickets")) {
 		write_log("info: start Close a Ticket" , "info");
 		$results = WishService::call_WISH_api('closeTicket',$get_params );
 // 		$results['success'] = true;
-	}catch(Exception $e){ //ServiceResponsException
+	}catch(ServiceResponseException $e){ //ServiceResponsException
 		$results['success'] = false;
 		$results['message'] = $e->getErrorMessage();
 		write_log("error: start Close a Ticket" , "info");
