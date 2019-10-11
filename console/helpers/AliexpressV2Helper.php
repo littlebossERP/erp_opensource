@@ -744,7 +744,7 @@ class AliexpressV2Helper
 	    		do {
 	    			$api_time = time();//接口调用时间
 	    			// 接口传入参数	    			
-	    			$param = ['id' => $SAA_obj->sellerloginid, 'param1' => json_encode(['page' => $page, 'page_size' => $pageSize, 'create_date_start' => $format_start_time, 'create_date_end' => $format_end_time, 'order_status_list' => $order_status_list ])];
+	    			$param = ['id' => $SAA_obj->sellerloginid, 'param1' => json_encode(['page' => $page, 'page_size' => $pageSize, 'create_date_start' => $format_start_time, 'create_date_end' => $format_end_time, 'order_status_list' => $order_status_list, 'buyer_login_id' => 'new' ])];
 	    			// 调用接口获取订单列表
 	    			$result = $api->findOrderListQuery($param);
 	    			\Yii::info("getOrderListByDay120--findOrderListQuery--".json_encode($result), "file");

@@ -17,6 +17,8 @@ class AliexpressInterface_Base_Qimen
     protected $hosturl_officialApi = '';
     protected $hosturl_customApi = '';
 
+    protected static $goproxy = 0;
+    
     public function __get($name){
         if ('access_token' === $name) {
             return $this->access_token;
@@ -177,21 +179,44 @@ class AliexpressInterface_Base_Qimen
     	$bodyUrl = substr($bodyUrl, 0, -1);
     	 
     	$url_name = 'hosturl_'.$api_type.'Api';
-    	$response = Helper_Curl::post($this->$url_name.'?'.$bodyUrl, $api_param);
+//     	$response = Helper_Curl::post($this->$url_name.'?'.$bodyUrl, $api_param);
+    	$response = self::curl($this->$url_name.'?', $bodyUrl, $api_param);
     	 
     	$r = $this->response($response, $apiName);
     
     	return $r;
     }
 
-    public function curl($url, $bodyUrl)
+    public function curl($url, $bodyUrl, $requestBody=array())
     {
+        // dzt20191008 添加proxy逻辑
+        if(!empty(self::$goproxy)){
+            try {
+                $content = array();
+                $content['realurl'] = $url.$bodyUrl;
+                $content['content'] = json_encode($requestBody);
+                \Yii::info("ali proxy content:".print_r($content, true), "file");
+                $response = aliexpress_api_proxy::post($url.$bodyUrl, $requestBody);
+            }catch(\Exception $e){
+                \Yii::error($e->getMessage().PHP_EOL.$e->getTraceAsString(), "file");
+                return false;
+            }
+            
+            return $response;
+        }
+        
     	$ch = curl_init();
     	curl_setopt($ch, CURLOPT_URL, $url.$bodyUrl);
     	curl_setopt($ch, CURLOPT_FAILONERROR, false);
     	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     	curl_setopt($ch, CURLOPT_TIMEOUT, 500);
     	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 60);
+    	
+    	if(!empty($requestBody)){
+    	    curl_setopt($ch, CURLOPT_POST, 1);
+    	    curl_setopt($ch, CURLOPT_POSTFIELDS, $requestBody);
+    	}
+    	
     	//curl_setopt ( $ch, CURLOPT_USERAGENT, "top-sdk-php" );
     	//https 请求
     	if(strlen($url) > 5 && strtolower(substr($url,0,5)) == "https" ) {
@@ -203,7 +228,7 @@ class AliexpressInterface_Base_Qimen
     	$error = curl_error($ch);
     	curl_close($ch);
     	if ($error){
-    		$e = 'curl_error:'.(print_r($error, true)).'URL:'.$url.'DATA:'.$requestBody;
+    		$e = 'curl_error:'.(print_r($error, true)).'URL:'.$url.'DATA:'.json_encode($requestBody);
     		\Yii::error($e, "file");
     		return false;
     	}

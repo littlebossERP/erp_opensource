@@ -70,7 +70,15 @@ class TestController extends Controller {
     }
     
     
-    
+    // ./yii test/refresh-aliexpressv2-version
+    public function actionRefreshAliexpressv2Version(){
+        // aliexpress-v2里面的任务都用这个任务key
+        $currentAliexpressGetOrderListVersion = \eagle\modules\util\helpers\ConfigHelper::getGlobalConfig("Order/aliexpressGetOrderListV2Version", 'NO_CACHE');
+        var_dump($currentAliexpressGetOrderListVersion);
+        \eagle\modules\util\helpers\ConfigHelper::setGlobalConfig("Order/aliexpressGetOrderListV2Version", time());
+        $currentAliexpressGetOrderListVersion = \eagle\modules\util\helpers\ConfigHelper::getGlobalConfig("Order/aliexpressGetOrderListV2Version", 'NO_CACHE');
+        var_dump($currentAliexpressGetOrderListVersion);
+    }
     
     
     
@@ -100,12 +108,6 @@ class TestController extends Controller {
         $rtn = \eagle\modules\message\apihelpers\MessageApiHelper::insertEdmQueue($Mdata);
         print_r($rtn);
     }
-    
-    
-    
-    
-    
-    
     
     
     
