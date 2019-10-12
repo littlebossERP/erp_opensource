@@ -335,7 +335,9 @@ table{
 						</strong>
 						 
 						<a class="btn btn-success btn-sm" style="text-decoration: none;" href="javascript:void(0)" onclick="authorizationUser(1, 1)"><?= TranslateHelper::t('添加授权(新版)') ?></a>
-						 
+						
+						<a class="btn btn-primary btn-sm hidden" style="text-decoration: none;" href="javascript:void(0)" onclick="getOpenSourceAuth()"><?= TranslateHelper::t('获取授权信息') ?></a>
+						
 						<a class="btn btn-info btn-sm" style="text-decoration: none;" href="<?=SysBaseInfoHelper::getHelpdocumentUrl('word_list_247_510.html')?>" target="_blank"><?= TranslateHelper::t('查看授权帮助') ?></a>
 					</div>
 					<table id="dg" class="table table-hover">
@@ -404,6 +406,8 @@ table{
 						-->
 						 
 						<a class="btn btn-success btn-sm" style="text-decoration: none;" href="javascript:void(0)" onclick="platform.WishAccountsList.addWishAccount()"><?= TranslateHelper::t('添加授权') ?></a>
+						
+						<a class="btn btn-primary btn-sm" style="text-decoration: none;" href="javascript:void(0)" onclick="wishgetOpenSourceAuth()"><?= TranslateHelper::t('获取授权信息') ?></a> 
 						 
 						<a class="btn btn-info btn-sm" style="text-decoration: none;" href="<?=SysBaseInfoHelper::getHelpdocumentUrl('word_list_247_276.html')?>" target="_blank"><?= TranslateHelper::t('查看授权帮助') ?></a>
 					</div>

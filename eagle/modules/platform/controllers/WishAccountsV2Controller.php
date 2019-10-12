@@ -12,8 +12,14 @@ use eagle\modules\listing\helpers\WishProxyConnectHelper;
 use eagle\modules\listing\helpers\WishHelper;
 use eagle\modules\message\apihelpers\MessageApiHelper;
 use eagle\modules\platform\apihelpers\PlatformAccountApi;
+use eagle\modules\util\helpers\ResultHelper;
+use common\helpers\Helper_Curl;
+
 class WishAccountsV2Controller extends \eagle\components\Controller{
-		
+	
+    // dzt20191012通过小老板授权开关
+    public static $goproxy = 0;
+    
 	public function actionTest(){
 		echo "action is ok ";
 	}
@@ -50,8 +56,20 @@ class WishAccountsV2Controller extends \eagle\components\Controller{
 		}
 			
 		$_SESSION['puid'] = \Yii::$app->subdb->getCurrentPuid();
-		// TODO proxy dev account @XXX@
-		$url = "https://merchant.wish.com/oauth/authorize?client_id=@XXX@";
+		
+		if(empty(self::$goproxy)){
+		    // TODO proxy dev account @XXX@
+		    $url = "https://merchant.wish.com/oauth/authorize?client_id=@XXX@";
+		}else{
+		    if (!empty($_SESSION['site_id'])){
+		        $model = SaasWishUser::findOne(['site_id'=>$_SESSION['site_id']]);
+		        unset($_SESSION['site_id']);
+		        $_SESSION['store_name'] = $model->store_name;
+		    }
+		    
+		    $url = "https://auth.littleboss.com/platform/wish-accounts-v2/open-auth1?account=".$_SESSION['store_name'];
+		}
+		
 		$this->redirect($url);
 	}
 	
@@ -256,5 +274,89 @@ class WishAccountsV2Controller extends \eagle\components\Controller{
 			return json_encode(['success'=>false , 'message'=>TranslateHelper::t('找不到相关的账号信息')]);
 		}
 	}
+	
+	/**
+	 +----------------------------------------------------------
+	 * 获取Lazada授权信息view层显示
+	 +----------------------------------------------------------
+	 * @access public
+	 +----------------------------------------------------------
+	 * log			name			date			note
+	 * @author		dzt				2019/10/11		初始化
+	 +----------------------------------------------------------
+	 **/
+	public function actionGetAuthInfoWindow() {
+	    return $this->renderAjax('getAuthInfoWindow');
+	}
+	
+	/**
+	 * 从小老板获取授权信息，添加账号
+	 */
+	function actionAuth4(){
+	
+	    if(empty($_POST['account'])){
+	        return ResultHelper::getResult(400, "", "请输入wish卖家账号邮箱。");
+	    }
+	    
+	    $uid = \Yii::$app->subdb->getCurrentPuid();
+	    $model = SaasWishUser::findOne(['uid'=>$uid , 'store_name'=>$_POST['account']]);
+        if(empty($model)){
+            return ResultHelper::getResult(400, "", $_POST['account']."wish卖家账号不存在。");
+        }
+	    
+	    try {
+	
+	        
+	        $ip = \eagle\helpers\IndexHelper::getClientIP();
+	        $param = array('account'=>$_POST['account'], 'ip'=>$ip, 'host'=>\Yii::$app->request->hostInfo);
+	        $rtn = Helper_Curl::post("https://auth.littleboss.com/platform/wish-accounts-v2/open-auth2", $param);
+	
+	        //             echo $rtn;
+	        \Yii::info("wish actionAuth4:rtn:".$rtn, "file");
+	        if(empty($rtn))
+	            return ResultHelper::getResult(400, "", "获取数据失败。");
+	
+	        $result = json_decode($rtn, true);
+	        if($result['code'] != 200)
+	            return ResultHelper::getResult(400, "", "获取数据失败：".$result['message']);
+	
+	        $wishReturn = $result['data'];
+	        if(empty($wishReturn['proxyResponse']['wishReturn']['data']['access_token'])){
+	            return ResultHelper::getResult(400, "", "获取授权数据失败：".$result['data']['message']);
+	        }
+	
+	        
+	        
+	        // 获取卖家账号基本信息，检查账号是否已经授权
+	        $tmpRT = $wishReturn['proxyResponse']['wishReturn'];
+            if (!empty($model->merchant_id) && !empty( $tmpRT['data']['merchant_id']) && $model->merchant_id != $tmpRT['data']['merchant_id']){
+                return ResultHelper::getResult(400, "", '授权失败e2：新授权的账号与当前账号不相符');
+            }
+            if (isset($tmpRT['data']['merchant_id'])){
+                $model->merchant_id = @$tmpRT['data']['merchant_id'];
+            }
+        
+//             if (isset($tmpRT['data']['merchant_username'])){
+//                 $model->merchant_username = @$tmpRT['data']['merchant_username'];
+//             }
+            if (isset($tmpRT['data']['merchant_user_id'])){
+                $model->merchant_username = @$tmpRT['data']['merchant_user_id'];
+            }
+	        $result = WishAccountsV2Helper::saveWishToken($model, $wishReturn);
+	        WishHelper::autoSyncFanbenInfo(); //添加同步队列信息
+	        //绑定账号时，将拉取站内信的app数据一并生成
+	        $rtn = MessageApiHelper::setSaasMsgAutosync($saasId, $model->site_id, $model->store_name, 'wish');
+	        
+	        return ResultHelper::getResult(200, "", "绑定成功");
+	    }catch(\Exception $ex){
+	        \Yii::error('file:'.$ex->getFile().'line:'.$ex->getLine()." ".$ex->getMessage(),"file");
+	
+	        return ResultHelper::getResult(400, "", '获取数据失败e。'.$ex->getMessage());
+	    }
+	
+	}
+	
+	
+	
 	
 }

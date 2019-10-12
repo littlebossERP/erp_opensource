@@ -274,3 +274,36 @@ function setWishAccountSync(val,usr,sel){
 		}
 	});
 }
+
+function wishGetOpenSourceAuth(){
+	var handle= $.openModal(global.baseUrl+"platform/wish-accounts-v2/get-auth-info-window",{},'获取授权信息','post');  // 打开窗口命令
+	handle.done(function($window){
+     // 窗口载入完毕事件
+		
+	 $window.find("#btn_ok").on('click',function(){
+		 btnObj = $(this);
+		 btnObj.prop('disabled','disabled');
+		  $.ajax({
+				type: "POST",
+				dataType: 'json',
+				url:'/platform/wish-accounts-v2/auth4', 
+				data: $('#platform-WishGetAuthInfo-form').serialize(),
+				success: function (result) {
+					if (result.code == 200){
+						$.alert(Translator.t('操作成功'));
+						$window.close(); 
+						window.location.reload();
+					}else{
+						$.alert(result.message);
+						btnObj.prop('disabled','');
+					}
+				}
+				 
+			 });
+		 
+     })
+     $window.find("#btn_cancel").on('click',function(){
+            $window.close();       // 关闭当前模态框
+     })
+});
+}

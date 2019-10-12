@@ -371,21 +371,22 @@ class WishAccountsV2Helper
 							if (!empty($wishReturn['data']['expiry_time']))
 								$model->expiry_time = date('Y-m-d H:i:s',$wishReturn['data']['expiry_time']);
 							
+							// dzt20191012 这段逻辑没有用了
 							//20170814 验证access token 与当前的账号信息是否一致
-							if (!empty($wishReturn['data']['access_token'])){
-								$tmpRT = self::getWishAccountInfo($wishReturn['data']['access_token']);
-								\Yii::info(" file=".__file__.' line='.__line__." result=".json_encode($tmpRT),"file");
-								if (!empty($model->merchant_id) && !empty( $tmpRT['data']['merchant_id']) && $model->merchant_id != $tmpRT['data']['merchant_id']){
-									return ['success'=>false, 'message'=>'授权失败：新授权的账号与当前账号不相符'];
-								}
-								if (isset($tmpRT['data']['merchant_id'])){
-									$model->merchant_id = @$tmpRT['data']['merchant_id'];
-								}
+// 							if (!empty($wishReturn['data']['access_token'])){
+// 								$tmpRT = self::getWishAccountInfo($wishReturn['data']['access_token']);
+// 								\Yii::info(" file=".__file__.' line='.__line__." result=".json_encode($tmpRT),"file");
+// 								if (!empty($model->merchant_id) && !empty( $tmpRT['data']['merchant_id']) && $model->merchant_id != $tmpRT['data']['merchant_id']){
+// 									return ['success'=>false, 'message'=>'授权失败：新授权的账号与当前账号不相符'];
+// 								}
+// 								if (isset($tmpRT['data']['merchant_id'])){
+// 									$model->merchant_id = @$tmpRT['data']['merchant_id'];
+// 								}
 								
-								if (isset($tmpRT['data']['merchant_username'])){
-									$model->merchant_username = @$tmpRT['data']['merchant_username'];
-								}
-							}
+// 								if (isset($tmpRT['data']['merchant_username'])){
+// 									$model->merchant_username = @$tmpRT['data']['merchant_username'];
+// 								}
+// 							}
 							
 							if (! $model->save()) {
 								
