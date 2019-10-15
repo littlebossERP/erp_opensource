@@ -332,6 +332,11 @@ class WishAccountsV2Controller extends \eagle\components\Controller{
             if (!empty($model->merchant_id) && !empty( $tmpRT['data']['merchant_id']) && $model->merchant_id != $tmpRT['data']['merchant_id']){
                 return ResultHelper::getResult(400, "", '授权失败e2：新授权的账号与当前账号不相符');
             }
+            
+            if (isset($tmpRT['data']['AuthorizationCode'])){
+                $model->code = @$tmpRT['data']['AuthorizationCode'];
+            }
+            
             if (isset($tmpRT['data']['merchant_id'])){
                 $model->merchant_id = @$tmpRT['data']['merchant_id'];
             }

@@ -12,7 +12,7 @@ $this->registerCssFile($baseUrl."css/tracking/tracking.css");
 $this->registerJsFile($baseUrl."js/project/platform/ebayAccountsList.js?v=1.01");
 $this->registerJsFile($baseUrl."js/project/platform/amazonAccountsList.js");
 $this->registerJsFile($baseUrl."js/project/platform/aliexpressAccountList.js?v=1.04");
-$this->registerJsFile($baseUrl."js/project/platform/WishAccountsList.js?v=1.01");
+$this->registerJsFile($baseUrl."js/project/platform/WishAccountsList.js?v=1.02");
 $this->registerJsFile($baseUrl."js/project/platform/dhgateAccountList.js");
 $this->registerJsFile($baseUrl."js/project/platform/CdiscountAccountsList.js");
 $this->registerJsFile($baseUrl."js/project/platform/LazadaAccountsList.js");
@@ -24,7 +24,7 @@ $this->registerJsFile($baseUrl."js/project/platform/neweggAccountList.js");
 $this->registerJsFile($baseUrl."js/project/platform/PaypalAccounts.js");
 $this->registerJsFile($baseUrl."js/project/platform/customizedAccounts.js");
 $this->registerJsFile($baseUrl."js/project/platform/Al1688AccountList.js?v=1.04");
-$this->registerJsFile($baseUrl."js/project/platform/ShopeeAccountsList.js?v=1.01");
+$this->registerJsFile($baseUrl."js/project/platform/ShopeeAccountsList.js?v=1.02");
 $this->registerJs("$.initQtip();" , \yii\web\View::POS_READY);
 $uid=\Yii::$app->subdb->getCurrentPuid();
  
@@ -407,7 +407,7 @@ table{
 						 
 						<a class="btn btn-success btn-sm" style="text-decoration: none;" href="javascript:void(0)" onclick="platform.WishAccountsList.addWishAccount()"><?= TranslateHelper::t('添加授权') ?></a>
 						
-						<a class="btn btn-primary btn-sm" style="text-decoration: none;" href="javascript:void(0)" onclick="wishgetOpenSourceAuth()"><?= TranslateHelper::t('获取授权信息') ?></a> 
+						<a class="btn btn-primary btn-sm" style="text-decoration: none;" href="javascript:void(0)" onclick="wishGetOpenSourceAuth()"><?= TranslateHelper::t('获取授权信息') ?></a> 
 						 
 						<a class="btn btn-info btn-sm" style="text-decoration: none;" href="<?=SysBaseInfoHelper::getHelpdocumentUrl('word_list_247_276.html')?>" target="_blank"><?= TranslateHelper::t('查看授权帮助') ?></a>
 					</div>
@@ -1165,6 +1165,8 @@ table{
 						 
 						<a class="btn btn-success btn-sm" style="text-decoration: none;" href="javascript:void(0)" onclick="platform.ShopeeAccountsList.authorizationUser()"><?= TranslateHelper::t('添加授权') ?></a>
 			 
+			            <a class="btn btn-primary btn-sm" style="text-decoration: none;" href="javascript:void(0)" onclick="platform.ShopeeAccountsList.getOpenSourceAuth()"><?= TranslateHelper::t('获取授权信息') ?></a> 
+						 
 						<a class="btn btn-info btn-sm" style="text-decoration: none;" href="<?=SysBaseInfoHelper::getHelpdocumentUrl('word_list_247_515.html')?>" target="_blank"><?= TranslateHelper::t('查看授权帮助') ?></a>
 					</div>
 				    <table class="table table-hover">

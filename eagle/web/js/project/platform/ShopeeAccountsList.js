@@ -142,6 +142,43 @@ platform.ShopeeAccountsList = {
 		var left = Math.floor((Math.random()*$(window).width()/2)+1);
 		window.open (global.baseUrl+"platform/shopee-accounts/auth1",'newwindow', 'height=750,width=1136,top=100,left='+left+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
 	},
+	
+	'authorizationUser' : function(){
+		var left = Math.floor((Math.random()*$(window).width()/2)+1);
+		window.open (global.baseUrl+"platform/shopee-accounts/auth1",'newwindow', 'height=750,width=1136,top=100,left='+left+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+	},
+	
+	
+	'getOpenSourceAuth' : function (){
+		var handle= $.openModal(global.baseUrl+"platform/shopee-accounts/get-auth-info-window",{},'获取授权信息','post');  // 打开窗口命令
+		handle.done(function($window){
+	     // 窗口载入完毕事件
+			
+		 $window.find("#btn_ok").on('click',function(){
+			 btnObj = $(this);
+			 btnObj.prop('disabled','disabled');
+			  $.ajax({
+					type: "POST",
+					dataType: 'json',
+					url:'/platform/shopee-accounts/auth4', 
+					data: $('#platform-ShopeeGetAuthInfo-form').serialize(),
+					success: function (result) {
+						if (result.code == 200){
+							$.alert(Translator.t('操作成功'));
+							$window.close(); 
+							window.location.reload();
+						}else{
+							$.alert(result.message);
+							btnObj.prop('disabled','');
+						}
+					}
+				 });
+     	})
+	    $window.find("#btn_cancel").on('click',function(){
+            $window.close();       // 关闭当前模态框
+	    })
+		});
+	}
 
 };
 

@@ -9,9 +9,13 @@ use eagle\modules\util\helpers\RedisHelper;
 
 class ShopeeInterface_Base
 {
+    // 请求走proxy
+    static $goproxy = 0;
+    
     // TODO shopee dev account @XXX@
     protected $partner_id = '@XXX@';
     protected $secret_key = '@XXX@';
+   
     protected $Shop_id = '';
     protected $host;
     protected $hosturl = '';
@@ -29,7 +33,7 @@ class ShopeeInterface_Base
      */
     function _config($shop_id){
         $this->hosturl = 'https://partner.shopeemobile.com/api/v1/';
-    	//$this->hosturl = 'https://partner.uat.shopeemobile.com/api/v1/';
+//     	$this->hosturl = 'https://partner.uat.shopeemobile.com/api/v1/';
     	
         //初始授权信息
         if(!empty($shop_id)){
@@ -68,15 +72,27 @@ class ShopeeInterface_Base
         }
         //Helper_Array::removeEmpty($param);
         
-        $param_request = json_encode($param);
-        //签名
-        $sign = hash_hmac("sha256", $this->hosturl.$api_path.'|'.$param_request, $this->secret_key);
         
-        $headers[] = "Content-Type: application/json";
-        $headers[] = "Authorization: ".$sign;
-        Helper_Curl::$timeout = 60;
-        Helper_Curl::$connecttimeout = 10;
-        $response = Helper_Curl::post($this->hosturl.$api_path, $param_request, $headers);
+        // dzt20191012 shopee丢包严重，改走proxy
+        if(empty(self::$goproxy)){
+            $param_request = json_encode($param);
+            //签名
+            $sign = hash_hmac("sha256", $this->hosturl.$api_path.'|'.$param_request, $this->secret_key);
+            
+            $headers[] = "Content-Type: application/json";
+            $headers[] = "Authorization: ".$sign;
+            Helper_Curl::$timeout = 60;
+            Helper_Curl::$connecttimeout = 10;
+            $response = Helper_Curl::post($this->hosturl.$api_path, $param_request, $headers);
+        }else{
+            $param['secret_key'] = $this->secret_key;
+            $param_request = json_encode($param);
+            shopee_api_proxy::$timeout = 60;
+            shopee_api_proxy::$connecttimeout = 10;
+            $response = shopee_api_proxy::post($this->hosturl.$api_path, $param_request);
+            
+        }
+        
         $result = $this->response($response);
         
         return $result;

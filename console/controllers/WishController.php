@@ -140,7 +140,7 @@ class WishController extends Controller {
     public function actionDoApiQueueRequestOrderEagle2() {
     	$start_time = date('Y-m-d H:i:s');
     	$comment = "cron service runnning for Wish DoQueueReqeustOrder at $start_time";
-    	echo $comment;
+    	echo PHP_EOL.$comment;
     	\Yii::info(['Wish',__CLASS__,__FUNCTION__,'Background',$comment],"edb\global");
     	do{
     	$rtn = WishOrderHelper::cronQueueHandlerExecuteWishOrderOp();
@@ -160,7 +160,7 @@ class WishController extends Controller {
     	$memUsed = floor (memory_get_usage() / 1024 / 1024);
     	$comment =  "cron service stops for Wish DoQueueReqeustOrder at ".date('Y-m-d H:i:s');
     	$comment .= " - RAM Used: ".$memUsed."M";
-    	echo $comment;
+    	echo PHP_EOL.$comment;
         \Yii::info(['Wish',__CLASS__,__FUNCTION__,'Background',$comment],"edb\global");
     }//end of function actionDo17TrackQuery
     
@@ -219,7 +219,7 @@ class WishController extends Controller {
     public function actionFetchNewAccountOrdersEagle2() {
     	 
     	 $start_time = date('Y-m-d H:i:s');
-    	echo "cron service runnning for Wish FetchNewAccountOrders at $start_time";
+    	echo PHP_EOL."cron service runnning for Wish FetchNewAccountOrders at $start_time";
     	 
     	$rtn = WishOrderHelper::cronAutoFetchNewAccountOrderList();
     	 
@@ -227,7 +227,7 @@ class WishController extends Controller {
     	$memUsed = floor (memory_get_usage() / 1024 / 1024);
     	$comment =  "cron service stops for Wish FetchNewAccountOrders at ".date('Y-m-d H:i:s');
     	$comment .= " - RAM Used: ".$memUsed."M";
-    	echo $comment;
+    	echo PHP_EOL.$comment;
     	\Yii::info(['Wish',__CLASS__,__FUNCTION__,'Background',$comment],"file");
     	 
     }//end of function actionDo17TrackQuery
@@ -251,7 +251,7 @@ class WishController extends Controller {
      **/
     public function actionFetchRecentChangedOrdersEagle20() {
     	$start_time = date('Y-m-d H:i:s');
-    	$comment = "cron service runnning for Wish cronAutoFetchUnFulfilledOrderList at $start_time";
+    	$comment = PHP_EOL."cron service runnning for Wish cronAutoFetchUnFulfilledOrderList at $start_time";
     	echo $comment;
     	//\Yii::info(['Wish',__CLASS__,__FUNCTION__,'Background',$comment],"edb\global");
     	
@@ -261,7 +261,7 @@ class WishController extends Controller {
     	$memUsed = floor (memory_get_usage() / 1024 / 1024);
     	$comment =  "cron service stops for Wish cronAutoFetchUnFulfilledOrderList at ".date('Y-m-d H:i:s');
     			$comment .= " - RAM Used: ".$memUsed."M";
-    			echo $comment;
+    			echo PHP_EOL.$comment;
         //\Yii::info(['Wish',__CLASS__,__FUNCTION__,'Background',$comment],"edb\global");
     }//end of function actionFetchRecentChangedOrdersEagle20
     
