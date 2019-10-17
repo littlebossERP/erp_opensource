@@ -72,5 +72,9 @@ use eagle\modules\util\helpers\TranslateHelper;
     <td><?php echo TranslateHelper::t('土耳其');?></td>
     <td>A33AVAJ2PDY3EV</td>
 </tr>
+<tr>
+    <td><?php echo TranslateHelper::t('新加坡');?></td>
+    <td>A19VAU5U5O7RUS</td>
+</tr>
 </table>
  </div>

@@ -22,6 +22,7 @@ class AmazonAPI{
         'BR'=>"https://mws.amazonservices.com",
         'AE'=>"https://mws.amazonservices.ae",
         'TR'=>"https://mws-eu.amazonservices.com",
+		'SG'=>"https://mws-fe.amazonservices.com",
 	);
 			
 	
@@ -41,6 +42,7 @@ class AmazonAPI{
         'BR'=>"https://mws.amazonservices.com",
         'AE'=>"https://mws.amazonservices.ae",
         'TR'=>"https://mws-eu.amazonservices.com",
+		'SG'=>"https://mws-fe.amazonservices.com",
 	);	
 	
 	
@@ -60,6 +62,7 @@ class AmazonAPI{
         'A2Q3Y263D00KWC'=>"BR",
         'A2VIGQ35RCS4UG'=>"AE",
         'A33AVAJ2PDY3EV'=>"TR",
+		'A19VAU5U5O7RUS'=>"SG",
 	);	
 	
 	
@@ -79,6 +82,7 @@ class AmazonAPI{
         'BR'=>"iso-8859-1",
         'AE'=>"iso-8859-1",
         'TR'=>"iso-8859-1",
+		'SG'=>"iso-8859-1",
 	);
 	/*	'orderurl' => "https://mws-eu.amazonservices.com/Orders/2011-01-01",
 		'sumitfeedurl' => "https://mws.amazonservices.de",
@@ -140,7 +144,7 @@ class AmazonAPI{
 				// TODO proxy dev account @XXX@ 
 				self::$AMAZON_ACCESS_KEY_ID = "@XXX@";
 		        self::$AMAZON_SECRET_ACCESS_KEY = "@XXX@";
-		    }elseif(in_array(self::$AMAZON_REGION, array('JP', 'AU'))){
+		    }elseif(in_array(self::$AMAZON_REGION, array('JP', 'AU', 'SG'))){
 				// TODO proxy dev account @XXX@ 
 				self::$AMAZON_ACCESS_KEY_ID = "@XXX@";
 		        self::$AMAZON_SECRET_ACCESS_KEY = "@XXX@";

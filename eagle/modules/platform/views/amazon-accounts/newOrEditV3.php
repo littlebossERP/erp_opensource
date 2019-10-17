@@ -27,6 +27,7 @@ $mp_arry=[
             "JP"=>["JP"=>"日本"],
             "CN"=>["CN"=>"中国"],
             "AU"=>["AU"=>"澳大利亚"],
+			"SG"=>["SG"=>"新加坡"],
             "BR"=>["BR"=>"巴西"],
             "TR"=>["TR"=>"土耳其"],
             "AE"=>["AE"=>"阿联酋"],
@@ -105,6 +106,7 @@ $this->registerJs('platform.amazonAccountsNeworedit.initWidget();', \yii\web\Vie
             <option value="JP">日本</option>
             <option value="CN">中国</option>
             <option value="AU">澳大利亚</option>
+			<option value="SG">新加坡</option>
         </select>
     </div>
   </div>

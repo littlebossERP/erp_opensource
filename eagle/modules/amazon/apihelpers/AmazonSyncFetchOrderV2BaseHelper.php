@@ -101,6 +101,8 @@ class AmazonSyncFetchOrderV2BaseHelper{
 		'A2Q3Y263D00KWC'=>"BR",
         'A2VIGQ35RCS4UG'=>"AE",
         'A33AVAJ2PDY3EV'=>"TR",
+		
+		'A19VAU5U5O7RUS'=>"SG",
     );
 	/**
 	 * [listGetOrderHeaderFromAmazonAndSave description]

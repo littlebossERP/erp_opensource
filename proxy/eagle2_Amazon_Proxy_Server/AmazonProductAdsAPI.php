@@ -31,6 +31,7 @@ class AmazonProductAdsAPI{
         'AU'=>"webservices.amazon.com.au", 
 		'AE'=>"webservices.amazon.ae",
 		'TR'=>"webservices.amazon.com.tr", 
+		'SG'=>"webservices.amazon.sg", // ping 不通 还没出
 	);	
 		 
 	static $AMAZON_MARKETPLACE_REGION_CONFIG = array(
@@ -49,6 +50,7 @@ class AmazonProductAdsAPI{
 		'A2Q3Y263D00KWC'=>"BR",
 		'A2VIGQ35RCS4UG'=>"AE",
 		'A33AVAJ2PDY3EV'=>"TR",
+		'A19VAU5U5O7RUS'=>"SG",
 	);	
 	
 	// 广告联盟接口与 associates.amazon不同站点的Tracking ID之间的关联在这个AssociateTag
@@ -67,6 +69,7 @@ class AmazonProductAdsAPI{
 			'AAHKV2X7AFYLW'=>"",
 			'A1AM78C64UM0Y8'=>"",
             'A39IBJ37TRP1C6'=>"",
+			'A19VAU5U5O7RUS'=>"",
 	);
 	
 	private static function _productAdsApiRequest($marketplaceId,$params){

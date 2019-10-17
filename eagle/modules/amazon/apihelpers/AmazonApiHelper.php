@@ -56,6 +56,8 @@ class AmazonApiHelper{
 			'A2Q3Y263D00KWC'=>"BR",
 			'A2VIGQ35RCS4UG'=>"AE",
 			'A33AVAJ2PDY3EV'=>"TR",
+			
+			'A19VAU5U5O7RUS'=>"SG",
 	);
 	
 	public static $AMAZON_MARKETPLACE_DOMAIN_CONFIG = array(
@@ -75,6 +77,7 @@ class AmazonApiHelper{
 	        "BR"=>'www.amazon.com.br',
 	        "TR"=>'www.amazon.com.tr',
 	        "AE"=>'www.amazon.ae',
+			"SG"=>'www.amazon.sg',
 	);
 	
 	public static $AWS_DOMAIN_CONFIG = array(
@@ -94,6 +97,7 @@ class AmazonApiHelper{
 	        "BR"=>'com.br',
 	        "TR"=>'com.tr',
 	        "AE"=>'ae',
+			"SG"=>'sg',
 	);
 	
 	// aws账号 self::getBrowseNode 用到

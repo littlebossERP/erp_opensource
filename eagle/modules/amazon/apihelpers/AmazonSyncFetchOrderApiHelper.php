@@ -80,10 +80,11 @@ class AmazonSyncFetchOrderApiHelper{
 		'A2Q3Y263D00KWC'=>"BR",
         'A2VIGQ35RCS4UG'=>"AE",
         'A33AVAJ2PDY3EV'=>"TR",
+		'A19VAU5U5O7RUS'=>"SG",
     );
 	
 	public static $COUNTRYCODE_NAME_MAP=array("US"=>"美国","CA"=>"加拿大","DE"=>"德国","ES"=>"西班牙","FR"=>"法国","IN"=>"印度","IT"=>"意大利",
-	"UK"=>"英国","JP"=>"日本","CN"=>"中国","MX"=>"墨西哥","AU"=>"澳大利亚","BR"=>"巴西","TR"=>"土耳其","AE"=>"阿联酋");
+	"UK"=>"英国","JP"=>"日本","CN"=>"中国","MX"=>"墨西哥","AU"=>"澳大利亚","BR"=>"巴西","TR"=>"土耳其","AE"=>"阿联酋","SG"=>"新加坡");
 	
 	const EAGLE_UNSHIPPED=0;
 	const EAGLE_PARTIALSHIPPED=1;
