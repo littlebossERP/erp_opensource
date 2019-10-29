@@ -23,7 +23,7 @@ $this->registerJsFile($baseUrl."js/project/platform/RumallAccountsList.js");
 $this->registerJsFile($baseUrl."js/project/platform/neweggAccountList.js");
 $this->registerJsFile($baseUrl."js/project/platform/PaypalAccounts.js");
 $this->registerJsFile($baseUrl."js/project/platform/customizedAccounts.js");
-$this->registerJsFile($baseUrl."js/project/platform/Al1688AccountList.js?v=1.04");
+$this->registerJsFile($baseUrl."js/project/platform/Al1688AccountList.js?v=1.05");
 $this->registerJsFile($baseUrl."js/project/platform/ShopeeAccountsList.js?v=1.02");
 $this->registerJs("$.initQtip();" , \yii\web\View::POS_READY);
 $uid=\Yii::$app->subdb->getCurrentPuid();
@@ -336,7 +336,7 @@ table{
 						 
 						<a class="btn btn-success btn-sm" style="text-decoration: none;" href="javascript:void(0)" onclick="authorizationUser(1, 1)"><?= TranslateHelper::t('添加授权(新版)') ?></a>
 						
-						<a class="btn btn-primary btn-sm hidden" style="text-decoration: none;" href="javascript:void(0)" onclick="getOpenSourceAuth()"><?= TranslateHelper::t('获取授权信息') ?></a>
+						<a class="btn btn-primary btn-sm" style="text-decoration: none;" href="javascript:void(0)" onclick="getOpenSourceAuth()"><?= TranslateHelper::t('获取授权信息') ?></a>
 						
 						<a class="btn btn-info btn-sm" style="text-decoration: none;" href="<?=SysBaseInfoHelper::getHelpdocumentUrl('word_list_247_510.html')?>" target="_blank"><?= TranslateHelper::t('查看授权帮助') ?></a>
 					</div>

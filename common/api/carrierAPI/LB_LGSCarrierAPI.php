@@ -203,17 +203,17 @@ class LB_LGSCarrierAPI extends BaseCarrierAPI{
     				$lazada_account_site[$order->selleruserid] = array();
     			}
     			
-    			if(!isset($lazada_account_site[$order->selleruserid][$code2CodeMap[$order->order_source_site_id]])){
-    				$lazada_account_site[$order->selleruserid][$code2CodeMap[$order->order_source_site_id]] = '';
+    			if(!isset($lazada_account_site[$order->selleruserid][strtolower($order->order_source_site_id)])){
+    				$lazada_account_site[$order->selleruserid][strtolower($order->order_source_site_id)] = '';
     			}
     			
-    			$tmp_item_ids = $lazada_account_site[$order->selleruserid][$code2CodeMap[$order->order_source_site_id]];
+    			$tmp_item_ids = $lazada_account_site[$order->selleruserid][strtolower($order->order_source_site_id)];
     			
     			foreach($order->items as $item){
     				$tmp_item_ids .= empty($tmp_item_ids) ? $item->order_source_order_item_id : ','.$item->order_source_order_item_id;
     			}
     			
-    			$lazada_account_site[$order->selleruserid][$code2CodeMap[$order->order_source_site_id]] = $tmp_item_ids;
+    			$lazada_account_site[$order->selleruserid][strtolower($order->order_source_site_id)] = $tmp_item_ids;
     		}
     		
     		//记录返回的base64字符串
@@ -224,23 +224,25 @@ class LB_LGSCarrierAPI extends BaseCarrierAPI{
     			foreach ($lazada_account_val as $lazada_site_key => $lazada_site_val){
     				$SLU = SaasLazadaUser::findOne(['platform_userid' => $lazada_account_key, 'lazada_site' => $lazada_site_key,'status' => 1]);
     				
+    				// dzt20190426 cb支持
     				if (empty($SLU)) {
-    				    if($lazada_site_key == "co.id" ||$lazada_site_key == "co.th"){//兼容之前的旧帐号
-    				        $newMap = ['co.id'=>'id','co.th'=>'th',];
-    				        $SLU = SaasLazadaUser::findOne(['platform_userid' => $lazada_account_key, 'lazada_site' => $newMap[$lazada_site_key],'status' => 1]);
-    				        if(empty($SLU)){
-    				            return self::getResult(1,'',$lazada_account_key . " 账号不存在" .' '. $newMap[$lazada_site_key].'站点不存在');
-    				        }
-    				    }else{
-    				        return self::getResult(1,'',$lazada_account_key . " 账号不存在" .' '. $lazada_site_key.'站点不存在');
+    				    $SLU = SaasLazadaUser::findOne(['platform_userid' => $lazada_account_key, 'lazada_site' => 'cb' ,'status'=>1]);
+    				    if(!empty($SLU)){
+    				        $lazadaSites = json_decode($SLU->country_user_info, true);
+    				        $lazadaSitesMap = Helper_Array::toHashmap($lazadaSites, 'country');
+    				        if(empty($lazadaSitesMap[strtolower($lazada_site_key)]))
+    				            $SLU = null;
     				    }
-    					
+    				}
+    				
+    				if (empty($SLU)) {
+				        return self::getResult(1,'',$lazada_account_key . " 账号不存在" .' '. $lazada_site_key.'站点不存在');
     				}
     				
     				$lazada_config = array(
     						"userId" => $SLU->platform_userid,
     						"apiKey" => $SLU->token,
-    						"countryCode" => $SLU->lazada_site
+    						"countryCode" => strtolower($lazada_site_key)
     				);
     				
     				$lazada_appParams = array(
@@ -248,23 +250,14 @@ class LB_LGSCarrierAPI extends BaseCarrierAPI{
     				);
     				
     				\Yii::info('LB_LGS,print,request,puid:'.$puid.' '.json_encode($lazada_config). ",appParams:" . json_encode($lazada_appParams), "carrier_api");
-    				if(!empty($SLU->version)){//新接口
-    				    $lazada_config['apiKey'] = $SLU->access_token;//新授权，用新的授权token
-    				    $result = LazadaInterface_Helper_V2::getOrderShippingLabel($lazada_config, $lazada_appParams);
-    				}else{//旧接口
-    				    $result = LazadaInterface_Helper::getOrderShippingLabel($lazada_config, $lazada_appParams);
-    				}
+    				$lazada_config['apiKey'] = $SLU->access_token;//新授权，用新的授权token
+    				$result = LazadaInterface_Helper_V2::getOrderShippingLabel($lazada_config, $lazada_appParams);
     				
     				\Yii::info("LB_LGS,print,result,puid:".$puid.' '. json_encode($result), "carrier_api");
     				
     				if ($result['success'] && $result['response']['success'] == true) { // 成功
 //     					$tmp_text = base64_decode($result["response"]["body"]["Body"]["Documents"]["Document"]["File"]);
-    				    if(!empty($SLU->version)){//新接口
-    				       $tmp_base64_str_a[] = $result["response"]["body"]["document"]["file"];
-    				    }else{//旧接口
-    				       $tmp_base64_str_a[] = $result["response"]["body"]["Body"]["Document"]["File"];
-    				    }
-    					
+				        $tmp_base64_str_a[] = $result["response"]["body"]["document"]["file"];
     				} else {
     					return self::getResult(1, '', '打印失败原因：'.$result['message']);
     				}

@@ -143,11 +143,6 @@ platform.ShopeeAccountsList = {
 		window.open (global.baseUrl+"platform/shopee-accounts/auth1",'newwindow', 'height=750,width=1136,top=100,left='+left+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
 	},
 	
-	'authorizationUser' : function(){
-		var left = Math.floor((Math.random()*$(window).width()/2)+1);
-		window.open (global.baseUrl+"platform/shopee-accounts/auth1",'newwindow', 'height=750,width=1136,top=100,left='+left+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
-	},
-	
 	
 	'getOpenSourceAuth' : function (){
 		var handle= $.openModal(global.baseUrl+"platform/shopee-accounts/get-auth-info-window",{},'获取授权信息','post');  // 打开窗口命令

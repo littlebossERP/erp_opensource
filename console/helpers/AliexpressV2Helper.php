@@ -284,9 +284,9 @@ class AliexpressV2Helper
 									'money_back3x' => $pl['money_back3x'],
 									'product_count' => $pl['product_count'],
 									'product_id' => $productid,
-									'product_img_url' => $pl['product_img_url'],
+									'product_img_url' => empty($pl['product_img_url'])?"":$pl['product_img_url'],//dzt20191018 最近有些产品没有图片，和URL
 									'product_name' => $pl['product_name'],
-									'product_snap_url' => $pl['product_snap_url'],
+									'product_snap_url' => empty($pl['product_snap_url'])?"":$pl['product_snap_url'],//dzt20191018
 									'product_unit' => $pl['product_unit'],
 									'product_unit_price' => empty($pl['product_unit_price']['cent_factor']) ? $pl['product_unit_price']['amount'] : $pl['product_unit_price']['cent'] / $pl['product_unit_price']['cent_factor'],
 									'product_unit_price_cur' => $pl['product_unit_price']['currency_code'],
@@ -802,9 +802,9 @@ class AliexpressV2Helper
 		    								'money_back3x' => $pl['money_back3x'],
 		    								'product_count' => $pl['product_count'],
 		    								'product_id' => $productid,
-		    								'product_img_url' => $pl['product_img_url'],
+		    								'product_img_url' => empty($pl['product_img_url'])?"":$pl['product_img_url'],//dzt20191018
 		    								'product_name' => $pl['product_name'],
-		    								'product_snap_url' => $pl['product_snap_url'],
+		    								'product_snap_url' => empty($pl['product_snap_url'])?"":$pl['product_snap_url'],//dzt20191018
 		    								'product_unit' => $pl['product_unit'],
 		    								'product_unit_price' => empty($pl['product_unit_price']['cent_factor']) ? $pl['product_unit_price']['amount'] : $pl['product_unit_price']['cent'] / $pl['product_unit_price']['cent_factor'],
 		    								'product_unit_price_cur' => $pl['product_unit_price']['currency_code'],
@@ -1031,8 +1031,17 @@ class AliexpressV2Helper
     						$nowTime = time();
     						foreach ($result ['aeop_a_e_product_display_d_t_o_list'] as $one) {
 								$gmtCreate = AliexpressInterface_Helper_Qimen::transLaStrTimetoTimestamp($one ['gmt_create']);
-	   							$gmtModified = AliexpressInterface_Helper_Qimen::transLaStrTimetoTimestamp($one ['gmt_modified']);
-	   							$WOD = AliexpressInterface_Helper_Qimen::transLaStrTimetoTimestamp($one ['ws_offline_date']);
+	   							if(empty($one['gmt_modified'])){
+	   							    $gmtModified = 0;
+	   							}else{
+	   								$gmtModified = AliexpressInterface_Helper_Qimen::transLaStrTimetoTimestamp($one ['gmt_modified']);
+	   							}
+	   							if(empty($one['ws_offline_date'])){
+	   							    $WOD = 0;
+	   							}else{
+	   								$WOD = AliexpressInterface_Helper_Qimen::transLaStrTimetoTimestamp($one ['ws_offline_date']);
+	   							}
+	   							
 	   							if ($one['image_u_r_ls']!= '') {
 	    							$photo_arr = explode( ';',$one['image_u_r_ls'] );
 	    							$photo_primary = $photo_arr[0];
@@ -1056,7 +1065,7 @@ class AliexpressV2Helper
 	    						$batchInsertData["selleruserid"] = $SAA_obj->sellerloginid;
 	    						$batchInsertData["ws_offline_date"] = $WOD;
 	    						$batchInsertData["product_min_price"] = $one['product_min_price'];
-	    						$batchInsertData["ws_display"] = $one['ws_display'];
+	    						$batchInsertData["ws_display"] = empty($one['ws_display'])?"":$one['ws_display'];
 	    						$batchInsertData["product_max_price"] = $one['product_max_price'];
 	    						$batchInsertData["gmt_modified"] = $gmtModified;
     							$batchInsertData["gmt_create"] = $gmtCreate;
@@ -1100,6 +1109,7 @@ class AliexpressV2Helper
     								}
     							}
     						}
+    						echo "insert listing count:".count($batchInsertDatas) . "\n";
     						SQLHelper::groupInsertToDb("aliexpress_listing", $batchInsertDatas);
    
     					}
@@ -1458,9 +1468,9 @@ class AliexpressV2Helper
 									'money_back3x' => $pl['money_back3x'],
 									'product_count' => $pl['product_count'],
 									'product_id' => $productid,
-									'product_img_url' => $pl['product_img_url'],
+									'product_img_url' => empty($pl['product_img_url'])?"":$pl['product_img_url'],//dzt20191018
 									'product_name' => $pl['product_name'],
-									'product_snap_url' => $pl['product_snap_url'],
+									'product_snap_url' => empty($pl['product_snap_url'])?"":$pl['product_snap_url'],//dzt20191018
 									'product_unit' => $pl['product_unit'],
 									'product_unit_price' => empty($pl['product_unit_price']['cent_factor']) ? $pl['product_unit_price']['amount'] : $pl['product_unit_price']['cent'] / $pl['product_unit_price']['cent_factor'],
 									'product_unit_price_cur' => $pl['product_unit_price']['currency_code'],
@@ -1894,9 +1904,9 @@ class AliexpressV2Helper
 									'money_back3x' => $pl['money_back3x'],
 									'product_count' => $pl['product_count'],
 									'product_id' => $productid,
-									'product_img_url' => $pl['product_img_url'],
+									'product_img_url' => empty($pl['product_img_url'])?"":$pl['product_img_url'],//dzt20191018
 									'product_name' => $pl['product_name'],
-									'product_snap_url' => $pl['product_snap_url'],
+									'product_snap_url' => empty($pl['product_snap_url'])?"":$pl['product_snap_url'],//dzt20191018
 									'product_unit' => $pl['product_unit'],
 									'product_unit_price' => empty($pl['product_unit_price']['cent_factor']) ? $pl['product_unit_price']['amount'] : $pl['product_unit_price']['cent'] / $pl['product_unit_price']['cent_factor'],
 									'product_unit_price_cur' => $pl['product_unit_price']['currency_code'],

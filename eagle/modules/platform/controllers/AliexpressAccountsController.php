@@ -484,4 +484,20 @@ class AliexpressAccountsController extends Controller
     	
     }
     
+    /**
+     +----------------------------------------------------------
+     * 获取速卖通授权信息view层显示
+     +----------------------------------------------------------
+     * @access public
+     +----------------------------------------------------------
+     * log			name			date			note
+     * @author		dzt				2019/10/10		初始化
+     +----------------------------------------------------------
+     **/
+    public function actionGetAuthInfoWindow() {
+        return $this->renderAjax('getAuthInfoWindow');
+    }
+    
+    
+    
 }

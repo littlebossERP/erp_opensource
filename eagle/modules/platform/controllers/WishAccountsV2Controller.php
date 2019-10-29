@@ -301,7 +301,7 @@ class WishAccountsV2Controller extends \eagle\components\Controller{
 	    $uid = \Yii::$app->subdb->getCurrentPuid();
 	    $model = SaasWishUser::findOne(['uid'=>$uid , 'store_name'=>$_POST['account']]);
         if(empty($model)){
-            return ResultHelper::getResult(400, "", $_POST['account']."wish卖家账号不存在。");
+            return ResultHelper::getResult(400, "", $_POST['account']."：wish卖家账号不存在。");
         }
 	    
 	    try {

@@ -99,16 +99,17 @@ function delUser(aliexpress_uid , sellerloginid){
  * dzt 2015-03-03
  */
 function authorizationUser(auth_type, is_refresh){
-	$.showLoading();
-	var left = Math.floor((Math.random()*$(window).width()/2)+1);
-	var newTab=window.open('about:blank','newwindow', 'height=500,width=600,top=100,left='+left+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');  
-	 
 	if(auth_type == 1){
-		newTab.location.href = global.baseUrl+"platform/aliexpress-accounts-v2/auth1/";
+		var url = global.baseUrl+"platform/aliexpress-accounts-v2/auth1/";
 	}
 	else{
-		newTab.location.href = global.baseUrl+"platform/aliexpress-accounts/auth1/";
+		var url = global.baseUrl+"platform/aliexpress-accounts/auth1/";
 	}
+	 
+	
+	var left = Math.floor((Math.random()*$(window).width()/2)+1);
+	window.open (url,'newwindow', 'height=750,width=1136,top=100,left='+left+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+
  
 	 
 	//物流跟踪助手设置弹窗
@@ -195,3 +196,37 @@ function setAliexpressAccountAlias(uid,sellerid){
      })
 });
 }
+
+function getOpenSourceAuth(){
+	var handle= $.openModal(global.baseUrl+"platform/aliexpress-accounts/get-auth-info-window",{},'获取授权信息','post');  // 打开窗口命令
+	handle.done(function($window){
+     // 窗口载入完毕事件
+		
+	 $window.find("#btn_ok").on('click',function(){
+		 btnObj = $(this);
+		 btnObj.prop('disabled','disabled');
+		  $.ajax({
+				type: "POST",
+				dataType: 'json',
+				url:'/platform/aliexpress-accounts-v2/auth4', 
+				data: $('#platform-AliexpressGetAuthInfo-form').serialize(),
+				success: function (result) {
+					if (result.code == 200){
+						$.alert(Translator.t('操作成功'));
+						$window.close(); 
+						window.location.reload();
+					}else{
+						$.alert(result.message);
+						btnObj.prop('disabled','');
+					}
+				}
+				 
+			 });
+		 
+     })
+     $window.find("#btn_cancel").on('click',function(){
+            $window.close();       // 关闭当前模态框
+     })
+});
+}
+

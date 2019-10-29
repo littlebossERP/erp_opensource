@@ -597,6 +597,8 @@ class LB_WISHYOUCarrierAPI extends BaseCarrierAPI
 
 			$response = Helper_Curl::post('https://www.wishpost.cn/api/v2/generate_label',$getorder_xml,$header);
 
+			\Yii::info("LB_WISHYOUCarrierAPI doPrint:".$puid.".".$order->order_id.".".$response,"carrier_api");
+			
 			$xml = simplexml_load_string($response);//将xml转化为对象
 			$xml = (array)$xml;
 
@@ -605,7 +607,18 @@ class LB_WISHYOUCarrierAPI extends BaseCarrierAPI
 			}
 
 			if($xml['status'] == 0){
-				return self::getResult(0,['pdfUrl'=>$xml['PDF_URL']],'连接已生成,请点击并打印');
+// 				return self::getResult(0,['pdfUrl'=>$xml['PDF_URL']],'连接已生成,请点击并打印');
+
+			    $response = Helper_Curl::get($xml['PDF_URL'],null,null,false,null,null,true);
+			    if($response === false)
+			        return self::getResult(1,'','Wish邮返回打印超时！');
+			     
+			    if(strlen($response)<1000){
+			        return self::getResult(1, '', '接口返回内容不是一个有效的PDF！');
+			    }
+			     
+			    $pdfUrl = CarrierAPIHelper::savePDF($response,$puid,$account->carrier_code.'_'.$order->customer_number, 0);
+			    return self::getResult(0,['pdfUrl'=>$pdfUrl['pdfUrl']],'连接已生成,请点击并打印');
 			}else
 			{
 				if( empty($xml['error_message']))
