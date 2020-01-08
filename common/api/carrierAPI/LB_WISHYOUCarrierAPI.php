@@ -334,13 +334,13 @@ class LB_WISHYOUCarrierAPI extends BaseCarrierAPI
 
 			//数据组织完成 准备发送
 			#########################################################################
-			\Yii::info("LB_WISHYOUCarrierAPI2.".$puid.".".$order->order_id.".".print_r($getorder_xml,1),"file");
+			\Yii::info("LB_WISHYOUCarrierAPI getOrderNO request:".$puid.".".$order->order_id.".".print_r($getorder_xml,1),"carrier_api");
 
 // 			print_r($getorder_xml);
 // 			exit;
 
 			$response = Helper_Curl::post('https://www.wishpost.cn/api/v2/create_order',$getorder_xml,$header);
-			\Yii::info("LB_WISHYOUCarrierAPI1.".$puid.".".$order->order_id.".".$response,"file");
+			\Yii::info("LB_WISHYOUCarrierAPI getOrderNO response:".$puid.".".$order->order_id.".".$response,"carrier_api");
 
 			$xml = simplexml_load_string($response);//将xml转化为对象
 			$xml = (array)$xml;

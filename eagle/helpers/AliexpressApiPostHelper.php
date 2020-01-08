@@ -10,7 +10,7 @@ class AliexpressApiPostHelper {
 
 	public  static function AliexpressPost($api_name, $ret_type = ''){
 		$api_name = ltrim($api_name, 'action');
-		$ret_type = 'getResuult'.$ret_type;
+		$ret_type = 'getResult'.$ret_type;
 		//Query参数
 		if(empty($_GET['id'])){
 			return self::$ret_type([], false, '101', 'can not find param [id]');
@@ -110,12 +110,6 @@ class AliexpressApiPostHelper {
 			return self::$ret_type([], false, '101', 'can not find param [param1]');
 		}
 		$api_param = ['param1' => json_encode($param['param1'])];
-// 		if(!empty($_GET['id']) && in_array($_GET['id'], ['cn1510671045', 'cn1512249397','cn1001633927', 'cn900867202', 'cn1520006787zlhg'])){
-//             $data = $api->findorderbyidV2($api_param);
-// 		}
-// 		else{
-// 			$data = $api->findorderbyid($api_param);
-// 		}
 		
 		// dzt20190606 测试过后全部转接口
 		$data = $api->findorderbyidV2($api_param);
@@ -157,6 +151,9 @@ class AliexpressApiPostHelper {
 			}
 			if(!empty($param['param1']['modified_date_end'])){
 				$param_v2['modified_date_end'] = date("Y-m-d H:i:s", strtotime($param['param1']['modified_date_end']));
+			}
+			if(!empty($param['param1']['order_status'])){
+			    $param_v2['order_status'] = $param['param1']['order_status'];
 			}
 			if(!empty($param['param1']['page'])){
 				$param_v2['current_page'] = $param['param1']['page'];
@@ -801,11 +798,55 @@ class AliexpressApiPostHelper {
 		return self::$ret_type([], $data['result_success'], $data['err_code'], $data['err_msg']);
 	}
 	
-	public static function getResuult($data, $success, $code, $msg){
+	
+	public  static function uploadimageforsdk($api, $param, $ret_type){
+	    if(empty($param['param1'])){
+	        return self::$ret_type([], false, '101', 'can not find param [param1]');
+	    }
+	    
+	    $param_v2 = array();
+	    if(!empty($param['param1']['fileName'])){
+	        $param_v2['fileName'] = $param['param1']['fileName'];
+	    }
+	    
+	    // 图片保存的图片组，groupId为空，则图片保存在Other组中。
+	    if(!empty($param['param1']['groupId'])){
+	        $param_v2['groupId'] = $param['param1']['groupId'];
+	    }
+	    
+	    // 图片文件的字节流图片大小限制：3MB。图片大小不能超过5000*5000。image_bytes	byte[]
+        if(!empty($param['param1']['imageSouce'])){
+            $img = @file_get_contents($param['param1']['imageSouce']);
+	        $param_v2['image_bytes'] = $img;
+	    }
+	    
+        $res = $api->uploadimageforsdk($param_v2);
+        \Yii::info(__FUNCTION__.', result:'.json_encode($res),"file");
+        
+        
+        if(!empty($res['error_response'])){
+            \Yii::info(__FUNCTION__.', error, '.json_encode($res),"file");
+            
+            $response = $res['error_response'];
+            return self::$ret_type($response, false, $response['sub_code'], $response['sub_msg']);
+        }
+        elseif(!empty($res['error_message']) && strpos($res['error_message'], '操作成功') === false){
+	        \Yii::info(__FUNCTION__.', error, '.json_encode($res),"file");
+	    
+	        return self::$ret_type($res, false, $res['error_code'], $res['error_message']);
+	    }
+        
+        $result = $res['aliexpress_photobank_redefining_uploadimageforsdk_response']['result'];
+	    
+	    //清除多余的层
+	    return self::$ret_type($result, true, '', '');
+	}
+	
+	public static function getResult($data, $success, $code, $msg){
 		return json_encode(['result_list' => $data, 'result_success' => $success, 'error_code' => $code, 'error_desc' => $msg ]);
 	}
 	
-	public static function getResuult2($data, $success, $code, $msg){
+	public static function getResult2($data, $success, $code, $msg){
 		if(empty($data)){
 			return json_encode(['result_success' => $success, 'error_code' => $code, 'error_message' => $msg ]);
 		}
@@ -814,55 +855,55 @@ class AliexpressApiPostHelper {
 		}
 	}
 	
-	public static function getResuult3($data, $success, $code, $msg, $official_website = ''){
+	public static function getResult3($data, $success, $code, $msg, $official_website = ''){
 		return json_encode(['details' => $data, 'result_success' => $success, 'error_code' => $code, 'error_desc' => $msg , 'official_website' => $official_website ]);
 	}
 	
-	public static function getResuult4($data, $success, $code, $msg){
+	public static function getResult4($data, $success, $code, $msg){
 		$data['success'] = $success;
 		$data['error_code'] = $code;
 		$data['error_desc'] = $msg;
 		return json_encode(['result' => $data]);
 	}
 	
-	public static function getResuult5($data, $success, $code, $msg){
+	public static function getResult5($data, $success, $code, $msg){
 		$data['result_success'] = $success;
 		$data['result_error_code'] = $code;
 		$data['error_desc'] = $msg;
 		return json_encode($data);
 	}
 	
-	public static function getResuult6($data, $success, $code, $msg){
+	public static function getResult6($data, $success, $code, $msg){
 		return json_encode(['result' => $data, 'result_success' => $success, 'error_code' => $code, 'error_desc' => $msg ]);
 	}
 	
-	public static function getResuult7($data, $success, $code, $msg){
+	public static function getResult7($data, $success, $code, $msg){
 		return json_encode(['result_success' => $success, 'result_error_code' => $code, 'result_error_desc' => $msg ]);
 	}
 	
-	public static function getResuult8($data, $success, $code, $msg){
+	public static function getResult8($data, $success, $code, $msg){
 		$data['success'] = $success;
 		$data['error_code'] = empty($code) ? 0 : $code;
 		$data['error_desc'] = $msg;
 		return json_encode(['result_success' => $success, 'result' => $data]);
 	}
 	
-	public static function getResuult9($data, $success, $code, $msg){
+	public static function getResult9($data, $success, $code, $msg){
 		$data['success'] = $success;
 		$data['error_code'] = $code;
 		$data['error_message'] = $msg;
 		return json_encode(['result' => $data]);
 	}
 	
-	public static function getResuult10($data, $success, $code, $msg){
+	public static function getResult10($data, $success, $code, $msg){
 		return json_encode(['channel_id' => $data, 'result_success' => $success, 'error_code' => $code, 'error_message' => $msg ]);
 	}
 	
-	public static function getResuult11($data, $success, $code, $msg){
+	public static function getResult11($data, $success, $code, $msg){
 		return json_encode(['result' => $data, 'result_success' => $success, 'error_code' => $code, 'error_message' => $msg ]);
 	}
 	
-	public static function getResuult12($data, $success, $code, $msg){
+	public static function getResult12($data, $success, $code, $msg){
 	    if(empty($data)){
 	        return json_encode(['result_success' => $success, 'err_code' => $code, 'err_msg' => $msg ]);
 	    }

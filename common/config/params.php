@@ -24,7 +24,8 @@ return [
 			'overtime'=>1800,  // 30分钟
 		],
 		'smt:push'=>[ 		// 没有自动操作
-			'function'=>['\eagle\modules\order\helpers\AliexpressOrderHelper','getOrderListManual'],   // 队列回调操作函数
+		    // dzt20191018 修改为AliexpressOrderV2Helper
+			'function'=>['\eagle\modules\order\helpers\AliexpressOrderV2Helper','getOrderListManual'],   // 队列回调操作函数
 			'overtime'=>1800,  // 30分钟
 		],
 		'smt:product'=>[ 	// 速卖通手工/自动同步

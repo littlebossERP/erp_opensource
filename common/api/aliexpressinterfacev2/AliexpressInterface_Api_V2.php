@@ -137,6 +137,14 @@ function uploadImage($param=null,$imageurl){
 }
 
 /**
+ * 上传图片到图片银行
+ */
+function uploadimageforsdk($param){
+    return $this->request2(__FUNCTION__,$param,1,self::$photobank_redefining);
+}
+
+
+/**
  * 查询图片银行分组信息
  */
 function listGroup($param=null){

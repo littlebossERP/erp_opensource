@@ -554,6 +554,7 @@ CREATE TABLE IF NOT EXISTS `queue_newegg_getorder` (
   `update_time` int(11) DEFAULT '0' COMMENT '更新时间',
   `last_start_time` int(11) DEFAULT '0' COMMENT '最后执行时间',
   `last_finish_time` int(11) DEFAULT '0' COMMENT '最后成功执行时间',
+  `next_execution_time` int(10) NOT NULL DEFAULT '0' COMMENT '下次更新时间',
   `error_times` tinyint(2) DEFAULT '0' COMMENT '错误次数',
   `message` text COMMENT '错误信息',
   `type` tinyint(1) DEFAULT '1' COMMENT '同步种类',
@@ -561,7 +562,7 @@ CREATE TABLE IF NOT EXISTS `queue_newegg_getorder` (
   PRIMARY KEY (`id`),
   KEY `uid` (`uid`,`sellerID`),
   KEY `order_source_order_id` (`order_source_order_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `queue_shopee_getorder` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',

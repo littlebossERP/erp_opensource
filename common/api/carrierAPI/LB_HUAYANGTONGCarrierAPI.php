@@ -562,6 +562,41 @@ class LB_HUAYANGTONGCarrierAPI extends BaseCarrierAPI{
 	    }catch(CarrierException $e){return self::getResult(1,'',$e->msg());}
 	 }
 	 
+	 //获取运输方式
+	 public function getCarrierShippingService(){
+	     try{
+	         $param = [];
+	         // 账号ApiToken
+	         
+// 	         $param['ApiToken'] = "8ad7256d5ff0afc7260c7f8d640879d5";
+	         $param['ApiToken'] = "c76803465c5841a5107d28afd433e492";// dzt20191104 华洋通通知更新token
+	          
+	         $header = array();
+	         $header[] = 'Content-type: application/json;charset=utf-8';
+	         $header[] = 'Accept: application/json';
+	 
+	         $url = self::$url.'/CustomerApi/getChannelCodeList';
+	 
+	         $result = Helper_Curl::post2($url, json_encode($param), $header);
+	         
+	         $resultObj = json_decode($result);
+	         $channelStr = "";
+	         if(!empty($resultObj->Status) && $resultObj->Status == "success"){//验证POST数据是否成功
+	             $serviceData = $resultObj->Result;
+	             foreach ($serviceData as $service){
+	                 $channelStr .= "{$service->Code}:{$service->Name};";
+	             }
+	         }
+	 
+	         if(empty($channelStr)){
+	             return self::getResult(1, '', '');
+	         }else{
+	             return self::getResult(0, $channelStr, '');
+	         }
+	     }catch(CarrierException $e){return self::getResult(1,'',$e->msg());}
+	 }
+	 
+	 
 	 // sign 签名 sign = MD5(custCode+apiKey+t)
 	 private function sign($param){
 	     return md5($param['custCode'].$param['apiKey'].$param['t']);

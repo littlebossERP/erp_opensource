@@ -10,6 +10,7 @@ use eagle\modules\lazada\apihelpers\LazadaApiHelper;
 use eagle\models\SaasLazadaUser;
 use common\api\lazadainterface\LazadaInterface_Helper;
 use common\api\lazadainterface\LazadaInterface_Helper_V2;
+use common\helpers\Helper_Array;
 
 class LB_LGSCarrierAPI extends BaseCarrierAPI{
     public function __construct(){}
@@ -190,6 +191,7 @@ class LB_LGSCarrierAPI extends BaseCarrierAPI{
     		//获取站点键值
     		$code2CodeMap = array_flip(LazadaApiHelper::$COUNTRYCODE_COUNTRYCode2_MAP);
     		
+    		
     		//记录账号和站点
     		$lazada_account_site = array();
     		
@@ -235,8 +237,18 @@ class LB_LGSCarrierAPI extends BaseCarrierAPI{
     				    }
     				}
     				
+    				
     				if (empty($SLU)) {
-				        return self::getResult(1,'',$lazada_account_key . " 账号不存在" .' '. $lazada_site_key.'站点不存在');
+    				    if($lazada_site_key == "co.id" ||$lazada_site_key == "co.th"){//兼容之前的旧帐号
+    				        $newMap = ['co.id'=>'id','co.th'=>'th'];
+    				        $SLU = SaasLazadaUser::findOne(['platform_userid' => $lazada_account_key, 'lazada_site' => $newMap[$lazada_site_key],'status' => 1]);
+    						if (empty($SLU)) {
+    				            return self::getResult(1,'',$lazada_account_key . " 账号不存在" .' '. $newMap[$lazada_site_key].'站点不存在');
+    				        }
+    				    }else{
+					        return self::getResult(1,'',$lazada_account_key . " 账号不存在" .' '. $lazada_site_key.'站点不存在');
+	    				}
+    				
     				}
     				
     				$lazada_config = array(

@@ -239,8 +239,8 @@ if(! empty($orderInfo['pagination'])):?>
     			</td>
     			<td style="text-align: center;">
     				<?php if(!empty($row['root_sku'])){
-    					echo '<a style="display:block" href="javascript:void(0);" onclick="matching.list.changge_matching(\''.$row['order_item_id'].'\',\''.$row['sku'].'\',\''.$row['root_sku'].'\')">更换配对</a>'
-							 .'<a style="display:block" href="javascript:void(0);" onclick="matching.list.delete_matching(\''.$row['order_item_id'].'\',\''.$row['sku'].'\',\''.$row['root_sku'].'\')">解除关系</a>';
+    					echo '<a style="display:block" href="javascript:void(0);" onclick="matching.list.changge_matching(\''.$row['order_item_id'].'\',\''.addslashes($row['sku']).'\',\''.addslashes($row['root_sku']).'\')">更换配对</a>'
+							 .'<a style="display:block" href="javascript:void(0);" onclick="matching.list.delete_matching(\''.$row['order_item_id'].'\',\''.addslashes($row['sku']).'\',\''.addslashes($row['root_sku']).'\')">解除关系</a>';
     				}else {
     					echo '<a href="javascript:void(0);" onclick="matching.list.changge_matching(\''.$row['order_item_id'].'\',\''.htmlentities($row['sku']).'\',\'\')">手动配对</a>';
     				}?>

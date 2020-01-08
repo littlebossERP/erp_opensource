@@ -1014,7 +1014,8 @@ class OrderListV3Helper{
 				$tmp_html = '<span>总价: '.$order->grand_total.' '.$order->currency.'</span> ';
 				*/
 				
-				$tmp_usd = \common\helpers\Helper_Currency::convertThisCurrencyToUSD($order->currency, $order->grand_total);
+// 				$tmp_usd = \common\helpers\Helper_Currency::convertThisCurrencyToUSD($order->currency, $order->grand_total);
+				$tmp_usd = \common\helpers\Helper_Currency::convertThisCurrencyToUSDFromDay($order->currency, $order->grand_total);
 				//获取最新汇率，转换USD
 				$EXCHANGE_RATE = ProfitHelper::GetExchangeRate($order->currency, "USD", true);
 				if(!empty($EXCHANGE_RATE)){
@@ -1062,6 +1063,7 @@ class OrderListV3Helper{
 			
 				$tmp_html = '<span>产品+'.$order->subtotal.' '.$currencySing.'</span>'.
 						'<span class="list_order_span_7">运费+'.$order->shipping_cost.' '.$currencySing.'</span>'.
+						'<span class="list_order_span_7">折扣-'.$order->discount_amount.$currencySing.'</span>'.
 						'<span class="list_order_span_7">合计='.$order->grand_total.' '.$currencySing.'</span>';
 			
 				$tmp_usd = \common\helpers\Helper_Currency::convertThisCurrencyToUSD($order->currency, $order->grand_total);

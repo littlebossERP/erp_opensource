@@ -49,4 +49,8 @@ function checkprocess() {
 checkprocess ../../yii auto-check/check-it-dashboard
 
 
+# ebay每小时拉取5小时前订单  
+checkprocess ../../yii queue/cron-request-order-for-five-hours
+
+
 

@@ -115,6 +115,79 @@ class SaasEbayAutosyncstatusHelper {
 		SaasEbayAutosyncstatus::updateAll(['status_process' => 0], 'type='.$type.' AND `status` = 1 AND `status_process` = 1 AND lastrequestedtime < :p', array(':p'=>time()-1800));
 	}
 
+	
+	/**
+	 +----------------------------------------------------------
+	 * 订单每小时同步5小时之前的订单
+	 +----------------------------------------------------------
+	 * @access static
+	 +----------------------------------------------------------
+	 * @param type		2: 刊登 ;借用
+	 +----------------------------------------------------------
+	 * @return			mixed
+	 +----------------------------------------------------------
+	 **/
+	static function AutoSyncOrder5Hours(){
+	    $type=2;
+	
+	    $queryTmp = SaasEbayAutosyncstatus::find()
+	    ->where("`type` = ".$type." AND `status` = 1 AND `status_process` <> 1  and lastrequestedtime <=".strtotime('-60 minutes'))
+	    ->orderBy("lastrequestedtime ASC")->limit(150);
+	    $Ms = $queryTmp->all();
+	
+	    echo PHP_EOL."autoSyncOrder5Hours ".date('Y-m-d H:i:s')." count =".count($Ms);
+  		echo PHP_EOL.$queryTmp->createCommand()->getRawSql();
+  		if(count($Ms)){
+  		    foreach($Ms as $M) {
+  		        $eu = SaasEbayUser::find()->where(['selleruserid'=>$M->selleruserid])->one();
+  		        if (empty($eu)){
+  		            echo 'no selleruserid!'.$M->selleruserid.",system will delete the sync of this account;\n";
+  		            SaasEbayAutosyncstatus::deleteAll(['selleruserid'=>$M->selleruserid]);
+  		            continue;
+  		        }
+  		        
+  		        $nowTime = time();
+  		        $M->lastrequestedtime = $nowTime;
+  		        $M->status_process = 1;
+  		        if (!$M->save()){
+  		            print_r($M->getErrors());
+  		        }
+  		        
+  		        // dzt20191105 今天很多客户说漏单，GetSellerTransactions 接口确实获取不到，但过几个小时能拿到，所以每次同步多同步5个小时
+  		        $ModTimeFrom = ($M->lastprocessedtime > 0) ? ($M->lastprocessedtime - 5*3600) : ($nowTime - 5*3600);
+
+  		        $default_ModTimeFrom = time() - 86400 * 29 - 10;
+  		        
+  		        if ($type=='1'){
+  		            //订单同步 最多 只能获取30天的订单
+  		            if ($ModTimeFrom < $default_ModTimeFrom) $ModTimeFrom = $default_ModTimeFrom;
+  		        }
+
+
+  		        echo "\n++++++++++++++++++++\n[".date('Ymd His')."]beginCron\nselleruserid:".$M->selleruserid." \n from:".date('Ymd His', $ModTimeFrom).'- to:'.date('Ymd His', time())." \n uid=".$eu->uid."\n";
+  		        $M->status_process = 0;
+  		        try{
+  		            $flag = false;
+  		            //执行block
+  		            // dzt20191106 添加$externalid = 5 让插入queue判断，如果不是插入的就不更新
+  		            $flag = \common\api\ebayinterface\getsellertransactions::cronInsertIntoQueueGetOrder($eu, 0, $ModTimeFrom, $nowTime, 5);
+  		            
+  		            if($flag) {
+  		                $M->lastprocessedtime = $nowTime;
+  		                $M->status_process = 2;
+  		            }
+  		        }catch(\Exception $ex){
+  		            echo "\n".(__function__).'Error Message:'.$ex->getMessage()." Line no :".$ex->getLine()."\n";
+  		        }
+  		        $M->save();
+  		    }
+  		}
+  		
+  		//半个小时都未处理完成的,状态 重置为0
+  		SaasEbayAutosyncstatus::updateAll(['status_process' => 0], 'type='.$type.' AND `status` = 1 AND `status_process` = 1 AND lastrequestedtime < :p', array(':p'=>time()-1800));
+	}
+	
+	
 	/**
 	 +----------------------------------------------------------
 	 * 同步订单数据(每个账号半小时同步一次)

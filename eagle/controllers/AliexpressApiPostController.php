@@ -233,6 +233,10 @@ class AliexpressApiPostController extends \yii\web\Controller
 	    return AliexpressApiPostHelper::AliexpressPost(__FUNCTION__, '12');
 	}
 	
+	// 自定义场景接口，交易订单列表查询
+	public function actionUploadimageforsdk(){
+	    return AliexpressApiPostHelper::AliexpressPost(__FUNCTION__, '12');
+	}
 	
 	
 }

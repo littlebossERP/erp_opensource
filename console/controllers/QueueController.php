@@ -313,7 +313,20 @@ class QueueController extends Controller {
 		sleep ( 5 );
 	}
 	
-	
+	/**
+	 * dzt20191106 GetSellerTransactions 漏单问题，添加的每小时跑一下拉5小时之前的订单。
+	 * 只插入queue不更新，释放正常同步任务每次同步5小时导致queue累积问题
+	 * ./yii queue/cron-request-order-for-five-hours
+	 */
+	public function actionCronRequestOrderForFiveHours() {
+	    try {
+	        SaasEbayAutosyncstatusHelper::AutoSyncOrder5Hours();
+	    } catch ( \Exception $ex ) {
+	        echo "\n".(__function__).' Error Message:' . $ex->getMessage () ." Line no ".$ex->getLine(). "\n";
+	    }
+	    echo "\n then sleep 5 s...";
+	    sleep ( 5 );
+	}
 	
 	/**
 	 * 同步站内信

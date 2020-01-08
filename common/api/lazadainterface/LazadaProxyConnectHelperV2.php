@@ -25,8 +25,10 @@ class LazadaProxyConnectHelperV2
     
     
 	// order api 
+	// dzt20191029 修改接口名称
 	public static $ORDER_API = array(
-		'GetOrderList','GetOrderDetail','getOrderItemImage','packedByMarketplace','shipOrder','getShipmentProviders','GetDocument'
+// 		'GetOrderList','GetOrderDetail','getOrderItemImage','packedByMarketplace','shipOrder','getShipmentProviders','GetDocument'
+	'/orders/get','/orders/items/get','/order/pack','/order/rts','/shipment/providers/get','/order/document/get'
 	);
 	
 	// TODO proxy host

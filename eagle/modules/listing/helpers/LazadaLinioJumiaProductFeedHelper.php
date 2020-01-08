@@ -87,6 +87,20 @@ class LazadaLinioJumiaProductFeedHelper
         //2. 查看是否有需要检查的feed
         $hasGotRecord = false;
         $nowTime = time();
+        
+
+        //*************Step -1, 获取需同步的店铺列表，并循环获取
+        $currentMin = date("i");
+        if( $currentMin % 10 > 4 ){// 每10分钟处理一下异常记录
+            $affectRows = $connection->createCommand("update lazada_feed_list set is_running=0, update_time=".$nowTime." where is_running=1 and update_time<".($nowTime-7200))->execute();
+            if($affectRows > 0){
+                echo self::getTime().' ===fix '.$affectRows.' records.===='.PHP_EOL;
+            }
+        }
+        
+        //*************Step 0, 获取需同步的店铺列表，并循环获取
+        
+        
         // 同步状态 process_status :  0--初始状态，1---已检查, 待调用回调函数，2--已检查等,已调用回调函数，3---已经进入人工待审核队列，7----运行有异常，需要后续重试
         //TODO 去除为了测试的设置
         $sqlStr = 'select `id` from  `lazada_feed_list`  ' .
@@ -145,11 +159,16 @@ class LazadaLinioJumiaProductFeedHelper
     public static function ImageUpload($platforms)
     {
 
-
         //由于 feed check 和image upload 由不同的 Background job执行，status 不能共同修改，所以新增了execution_request 来让feed check 通知图片上传要触发任务执行
-        $recommendJobObjs = UserBackgroundJobControll::find()
-            ->where('is_active = "Y" AND status <>1 AND job_name="' . LazadaApiHelper::IMAGE_UPLOAD_BGJ_NAME . '" AND error_count<5 AND execution_request>0')
+        $query = UserBackgroundJobControll::find()
+            ->where('is_active = "Y" AND status <>1 AND job_name="' . LazadaApiHelper::IMAGE_UPLOAD_BGJ_NAME . '" AND error_count<5 AND execution_request>0');
+        
+        echo "SLQ:".$query->createCommand()->getRawSql().PHP_EOL;
+        
+        $recommendJobObjs = $query
             ->all(); // 多到一定程度的时候，就需要使用多进程的方式来并发拉取。
+        
+        
         if (!empty($recommendJobObjs)) {
             self::doImageUpload($recommendJobObjs,$platforms);
         }
@@ -404,7 +423,8 @@ class LazadaLinioJumiaProductFeedHelper
     static function checkAllFeedStatusLock($rowId)
     {
         $connection = \Yii::$app->db;
-        $command = $connection->createCommand("update lazada_feed_list set is_running=1 where is_running=0 and id=" . $rowId);
+        $nowTime = time();
+        $command = $connection->createCommand("update lazada_feed_list set is_running=1, update_time=".$nowTime." where is_running=0 and id=" . $rowId);
         $affectRows = $command->execute();
         if ($affectRows <= 0)
             return null; //抢不到---如果是多进程的话，有抢不到的情况
@@ -424,7 +444,7 @@ class LazadaLinioJumiaProductFeedHelper
 //         $recommendJobObj->status = 1;
 //         $affectRows = $recommendJobObj->update(false);
 
-        $affectRows = UserBackgroundJobControll::updateAll(['status'=>1],['id'=>$recommendJobObj->id, 'status'=>[0, 3]]);
+        $affectRows = UserBackgroundJobControll::updateAll(['status'=>1],['id'=>$recommendJobObj->id, 'status'=>[0, 2, 3]]);
         if ($affectRows <= 0) {
             return false;
         }
@@ -978,7 +998,7 @@ class LazadaLinioJumiaProductFeedHelper
     static function createAndUpdateStatusCallback($lazadaFeedList, $singleFeedDetail, $config)
     {
         $reqParams = array("puid" => $lazadaFeedList->puid, "feedId" => $lazadaFeedList->Feed, "totalRecords" => $lazadaFeedList->TotalRecords);
-        if ($lazadaFeedList->FailedRecords > 0) {
+        if ($lazadaFeedList->FailedRecords > 0 && !empty($singleFeedDetail)) {
             $reqErrors = array();
             if (isset($singleFeedDetail["FeedErrors"]["Error"]["SellerSku"])) {
                 $errorsInfo = array($singleFeedDetail["FeedErrors"]["Error"]);
@@ -996,8 +1016,7 @@ class LazadaLinioJumiaProductFeedHelper
         }
 
         // dzt20190911 报错过多中止回写
-        if(empty($reqParams["failReport"]) && $lazadaFeedList->FailedRecords == 0 && empty($singleFeedDetail) 
-                && !empty($lazadaFeedList->message) && $lazadaFeedList->error_times >= 10){
+        if(empty($reqParams["failReport"]) && empty($singleFeedDetail) && !empty($lazadaFeedList->message) && $lazadaFeedList->error_times >= 10){
             $reqParams["failReport"] = $lazadaFeedList->message;
         }
 

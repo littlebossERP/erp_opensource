@@ -1373,7 +1373,7 @@ class CdiscountController extends Controller {
 	
 		//write the memery used into it as well.
 		$memUsed = floor (memory_get_usage() / 1024 / 1024);
-		$comment =  "cron service stops for cdiscount GetCdiscountOfferListEagle2 at ".date('Y-m-d H:i:s');
+		$comment =  "cron service stops for cdiscount GetCdiscountOfferListPaginated at ".date('Y-m-d H:i:s');
 		$comment .= " - RAM Used: ".$memUsed."M";
 		echo $comment;
 		\Yii::info(['cdiscount',__CLASS__,__FUNCTION__,'Background',$comment],"file");

@@ -1339,6 +1339,12 @@ class SaasAmazonAutoSyncApiHelper{
 	
 		$nowTime=time();
 		
+		// 每天6点清理记录
+		if(date("H") == "06"){
+		    $threeMonsAgo = $nowTime - 90*86400;
+		    AmazonOrderSubmitQueue::deleteAll("`create_time`<".$threeMonsAgo);
+		}
+		
 		//process_status --- 0 没同步; 1 同步中; 2 submit成功; 3 submit失败; 4 check 中; 5 check 成功; 6 check 访问失败;7 amazon返回之前提交的任务执行失败
 		$SAA_groups = AmazonOrderSubmitQueue::find()
 		->where("(`process_status`=2 OR `process_status`=6 ) AND `next_execution_time`<".$nowTime." AND `error_count`<15")
@@ -1356,11 +1362,30 @@ class SaasAmazonAutoSyncApiHelper{
 			$merchantIdAccountMap=self::_getMerchantIdAccountInfoMap();
 			
 			if(count($SAA_objs)){
+			    
+			    
+			    $nowTime = time();
 				$amzUser = SaasAmazonUser::findOne(["merchant_id"=>$group['merchant_id']]);
 				$merchantUid = null;
-				if(!empty($amzUser))
+				if(!empty($amzUser)){
 					$merchantUid = $amzUser->uid;
-				
+				}else{// 账号已经不存在
+				    $message = "error:merchant_id:".$group['merchant_id']." not exist.";
+				    echo "error:merchant_id:".$group['merchant_id']." not exist, stop and callback.\n";
+					foreach ($SAA_objs as $SAA_obj){
+						$SAA_obj->process_status = 7;
+						$SAA_obj->error_count = $SAA_obj->error_count + 1;
+						$SAA_obj->error_message = $message;
+						$SAA_obj->update_time = $nowTime;
+						$SAA_obj->save(false);
+						//通知oms的发货情况
+						// merchant_id 记录已经丢失 找不到uid通知OMS了。
+					}
+					
+					continue;
+				}
+				echo "uid:".$merchantUid."\n";
+						
 				$amazonAccessInfo=$merchantIdAccountMap[$group['merchant_id']];
 				$submitQueueIds = Helper_Array::getCols($SAA_objs, 'id');
 				\Yii::info("cronCheckAutoOrderSubmit. before _checkAmazonCompletedOrNot submitQueueIds:".implode(',', $submitQueueIds),"file");
@@ -1376,7 +1401,7 @@ class SaasAmazonAutoSyncApiHelper{
 				* true  --- 最后才是amazon已经成功执行之前submit的请求  */
 				
 				\Yii::info("cronCheckAutoOrderSubmit. after _checkAmazonCompletedOrNot");
-				
+				$nowTime = time();
 				if ($ret===-1 or $ret===-4) {
 					echo "error:$message \n";
 					foreach ($submitQueueIds as $submitQueueId){
@@ -1384,8 +1409,8 @@ class SaasAmazonAutoSyncApiHelper{
 						$SAA_obj->process_status=6;
 						$SAA_obj->error_count=$SAA_obj->error_count+1;
 						$SAA_obj->error_message=$message;
-						$SAA_obj->update_time=time();
-						$SAA_obj->next_execution_time=time()+60;
+						$SAA_obj->update_time = $nowTime;
+						$SAA_obj->next_execution_time = $nowTime + 60;
 						$SAA_obj->save(false);
 						//通知oms的发货情况
 						// if ($SAA_obj->api_action=="ShipAmazonOrder"){
@@ -1410,8 +1435,8 @@ class SaasAmazonAutoSyncApiHelper{
 						$SAA_obj->process_status=6;
 						$SAA_obj->error_count=$SAA_obj->error_count+1;
 						$SAA_obj->error_message=$message;
-						$SAA_obj->update_time=time();
-						$SAA_obj->next_execution_time=time()+300;
+						$SAA_obj->update_time = $nowTime;
+						$SAA_obj->next_execution_time = $nowTime + 300;
 						$SAA_obj->save(false);
 					}
 					continue;
@@ -1427,7 +1452,7 @@ class SaasAmazonAutoSyncApiHelper{
 						$SAA_obj->process_status=7;
 						$SAA_obj->error_count=$SAA_obj->error_count+1;
 						$SAA_obj->error_message=$message;
-						$SAA_obj->update_time=time();
+						$SAA_obj->update_time = $nowTime;
 						$SAA_obj->save(false);
 						//通知oms的发货情况
 						if ($SAA_obj->api_action=="ShipAmazonOrder"){
@@ -1438,8 +1463,8 @@ class SaasAmazonAutoSyncApiHelper{
 								if (!is_null($osObj)){
 									$osObj->result = 'false';
 									$osObj->errors =$message;
-									$osObj->updated = time();
-									$osObj->lasttime = time();
+									$osObj->updated = $nowTime;
+									$osObj->lasttime = $nowTime;
 									$osObj->save(false);
 									echo "ret:-3 record the file\n";
 								// 更新订单 虚拟发货 状态 start
@@ -1461,7 +1486,7 @@ class SaasAmazonAutoSyncApiHelper{
 					$SAA_obj->check_result=$message;
 					$SAA_obj->error_count=0;
 					$SAA_obj->error_message="";
-					$SAA_obj->update_time=time();
+					$SAA_obj->update_time = $nowTime;
 					$SAA_obj->check_finish_time=$SAA_obj->update_time;
 					$SAA_obj->save(false);
 					
@@ -1475,8 +1500,8 @@ class SaasAmazonAutoSyncApiHelper{
 								$osObj->status = 1;
 								$osObj->result = 'true';
 								$osObj->errors = '';
-								$osObj->updated = time();
-								$osObj->lasttime = time();
+								$osObj->updated = $nowTime;
+								$osObj->lasttime = $nowTime;
 								$osObj->save(false);
 								//获取发货时间，并转换时间戳
 								$timestring=json_decode($SAA_obj->parms,true);

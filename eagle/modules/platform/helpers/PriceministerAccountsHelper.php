@@ -1,7 +1,6 @@
 <?php
 namespace eagle\modules\platform\helpers;
 use eagle\modules\util\helpers\TranslateHelper;
-use eagle\models\SaasCdiscountUser;
 use eagle\modules\util\helpers\GetControlData;
 use eagle\modules\listing\helpers\CdiscountProxyConnectHelper;
 use eagle\modules\message\apihelpers\MessageApiHelper;

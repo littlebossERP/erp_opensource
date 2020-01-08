@@ -486,7 +486,7 @@ class LB_ALIONLINEDELIVERYCarrierAPI extends BaseCarrierAPI
 			//数据组织完成 准备发送
 			#########################################################################
 // 			\Yii::info(print_r($request,1),"file");
-			\Yii::info('lb_alionlinedelivery,puid:'.$puid.'，order_id:'.$order->order_id.' '.json_encode($request),"carrier_api");
+			\Yii::info('lb_alionlinedelivery,puid:'.$puid.',order_id:'.$order->order_id.' '.json_encode($request),"carrier_api");
 			$response = self::uploadAliexpressCarrier($order->selleruserid, $request, $tmpRefundAddressInfo, $tmpPickupAddressInfo);
 			\Yii::info('lb_alionlinedelivery,response,puid:'.$puid.'，order_id:'.$order->order_id.' '.json_encode($response),"carrier_api");
 // 			print_r($response);
@@ -996,6 +996,7 @@ class LB_ALIONLINEDELIVERYCarrierAPI extends BaseCarrierAPI
 				return array('Ack'=>false,'error'=>'速卖通账号：'.$selleruserid.'授权过期！');
 			}
 		}catch (\Exception $ex){
+		    \Yii::info('lb_alionlinedelivery,Exception:file:'.$ex->getFile().',line:'.$ex->getLine().',message:'.$ex->getMessage(),"carrier_api");
 			return array('Ack'=>false,'error'=>$ex->getMessage());
 		}
 	}

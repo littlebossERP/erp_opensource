@@ -58,30 +58,6 @@ checkprocess ../../yii priceminister/user-priceminister-order-daily-summary
 checkprocess ../../yii aliexpress/cron-aliexpress-order-summary
 checkprocess ../../yii bonanza/user-bonanza-order-daily-summary
 
-# 更新linio,jumia目录树
-checkprocess ../../yii linio/refresh-all-site-category-tree
-	
-# 更新linio,jumia目录属性
-checkprocess ../../yii linio/refresh-category-attrs
-
-# 更新linio,jumia品牌
-checkprocess ../../yii linio/refresh-site-brands
-
-# 更新更新lazada,linio,jumia客户运输方式
-checkprocess ../../yii lazada/refresh-shipment-providers
-
-
-# 更新lazada 新接口目录树
-checkprocess ../../yii lazada/refresh-all-site-category-tree-v2
-	
-# 更新lazada 新接口目录属性
-checkprocess ../../yii lazada/refresh-category-attrs-v2
-
-# 更新lazada 新接口品牌
-checkprocess ../../yii lazada/refresh-site-brands-v2
-
-# 更新lazada access_token
-checkprocess ../../yii lazada/refresh-token
 
 
 # 监控速卖通type=time,status=1的异常数据脚本

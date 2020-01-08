@@ -335,7 +335,7 @@ class SaasNeweggAutoFetchApiHelper{
 					$timeMS1=TimeUtil::getCurrentTimestampMS();
 					$ret = NeweggInterface_Helper::orderInfo($token, $reqParams);
 					$timeMS2=TimeUtil::getCurrentTimestampMS();
-// 					print_r($ret);
+					echo "_getOrderListAndSaveToQueue pageIndex:".$reqParams['PageIndex'].",result:".print_r($ret, true);
 					
 					if(isset($ret['IsSuccess']) && $ret['IsSuccess']){
 						$responseBody = $ret['ResponseBody'];
@@ -541,6 +541,7 @@ class SaasNeweggAutoFetchApiHelper{
 			
 			//3.  订单header和items信息导入到eagle系统
 			try{
+		    	echo "before OrderHelper::importPlatformOrder myorder_arr:".print_r($myorder_arr,true);
 				$result =  OrderHelper::importPlatformOrder($myorder_arr);
 			}catch(\Exception $e){
 				echo "OrderHelper::importPlatformOrder fails. Exception  \n";

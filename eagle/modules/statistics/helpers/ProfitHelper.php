@@ -74,7 +74,10 @@ class ProfitHelper
 	 		
 	 		//**********部分货币需通过抓取页面获取，更精确*********************
 	 		foreach(self::$exchange_country as $val){
-		 		$data = file_get_contents("http://www.baidu.com/s?wd=$val%20RMB&rsv_spt=1");
+// 		 		$data = file_get_contents("http://www.baidu.com/s?wd=$val%20RMB&rsv_spt=1");
+                // dzt20191108 百度需要设置agent才能获取页面
+	 		    $header = array ('User-Agent: Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.146 Safari/537.36');
+	 		    $data = Helper_Curl::get("http://www.baidu.com/s?wd=$val%20RMB&rsv_spt=1", array(), $header);
 		 		preg_match("/<div>1\D*=(\d*\.\d*)\D*<\/div>/",$data, $converted);
 		 		if(is_array($converted) && count($converted) > 1){
 			 		$rate = preg_replace("/[^0-9.]/", "", $converted[1]);
@@ -84,6 +87,19 @@ class ProfitHelper
 		 		}
 	 		}
 			  
+	 		
+	 		// dzt20191108 冷门汇率单独更新 XOF https://huilv.911cha.com/XOFCNY.html
+	 		$params = ["from"=>"XOF", "to"=>"CNY", "num"=>1];
+	 		$response = Helper_Curl::post("https://huilv.911cha.com", $params);
+	 		preg_match("/>1<\/span>XOF[^0-9]*=[^0-9]*(\d*\.\d*)<\/span>CNY<\/div>/", $response, $converted);
+	 		if(is_array($converted) && count($converted) > 1){
+	 		    $rate = preg_replace("/[^0-9.]/", "", $converted[1]);
+	 		    if(!empty($rate) && is_numeric($rate)){
+	 		        $rate_arr["XOF"] = $rate;
+	 		    }
+	 		}
+	 		
+	 		
 		 	/************雅虎旧模式更新汇率，停止服务
 		 	$str = '';
 			foreach(self::$exchange_country as $val){

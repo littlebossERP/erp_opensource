@@ -611,7 +611,8 @@ class JumiaListingController extends \eagle\components\Controller {
 			$historyCats = array();
 			if(!empty($historyCatIds)){
 				foreach ($historyCatIds as $historyCatId){
-					$historyCats[] = $categories[$historyCatId];
+				    if(!empty($categories[$historyCatId]))// 如果过多需要限制显示数量
+						$historyCats[] = $categories[$historyCatId];
 				}
 			}
 			

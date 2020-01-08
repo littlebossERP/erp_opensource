@@ -154,64 +154,38 @@ class AliexpressInterface_Base_V2
     }
 
     //上传图片专用的请求
-    function request2($apiName, $param, $imageurl)
+    function request2($apiName, $param, $is_signature = 1, $api_path = '')
     {
-        //统计api调用情况
-        RedisHelper::RedisAdd('aliexpress_api_call_'.$this->AppKey, $apiName.date('_Y_m_d'));
-        RedisHelper::RedisAdd('aliexpress_api_call_'.$this->AppKey, 'all'.date('_Y_m_d'));
-        //每小时统计次数信息
-        RedisHelper::RedisAdd('aliexpress_api_call_'.$this->AppKey, $apiName.date('_Y_m_d_H'));
-        RedisHelper::RedisAdd('aliexpress_api_call_'.$this->AppKey, 'all'.date('_Y_m_d_H'));
-
-        // 基本的 url
-        $baseUrlParam = 'param2/1/aliexpress.open/' . 'api.' . $apiName . '/' . $this->AppKey;
-
-        $baseUrl = 'http://' . $this->hosturl . $baseUrlParam;
-
+       $apiName = $api_path.strtolower($apiName);
         //各 api的 参数
-        $param_base = array(
-            'access_token' => $this->access_token,
-        );
+        $param_base = [
+        	'method' => $apiName,
+        	'app_key' => $this->AppKey,
+        	'session' => $this->access_token,
+        	'timestamp' => date("Y-m-d H:00:00", time()),
+        	'format' => 'json',
+        	'v' => '2.0',
+        	'sign_method' => 'md5',
+        ];
         if (is_array($param)) {
             $param = $param_base + $param;
         } else {
             $param = $param_base;
         }
-        Helper_Array::removeEmpty($param);
-        $param_str = '';
-        foreach ($param as $k => $v) {
-            $param_str .= "&$k=" . $v;
-        }
-        $param_str = ltrim($param_str, '&');
-        $url = $baseUrl . '?' . $param_str . '&_aop_signature=' . $this->signature($baseUrlParam, $param);
-        $img = @file_get_contents($imageurl);
-        $http_entity_type = 'application/x-www-from-urlencoded';
-        $headers = array("Content-type: " . $http_entity_type);
-        $d = Helper_Curl::post($url, $img, $headers);
-        $r = $this->response($d);
-        /*
-                if (isset($r['error_code']) && $r['error_message'] == 'Request need user authorized'){
-                    //重新获取token
-                    $auth_api = new AliexpressInterface_Auth();
-                    $this->access_token = $auth_api->getAccessToken($this->selleruserid,TRUE);
 
-                    $param['access_token']=$this->access_token;
-                    unset($param['_aop_signature']);
-                    Helper_Array::removeEmpty($param);
-                    $param_str='';
-                    foreach($param as $k=>$v){
-                        $param_str.="&$k=".$v;
-                    }
-                    $param_str=ltrim($param_str,'&');
-                    $url=$baseUrl.'?'.$param_str.'&_aop_signature='.$this->signature($baseUrlParam,$param);
-                    $img = @file_get_contents($imageurl);
-                    $http_entity_type = 'application/x-www-from-urlencoded';
-                    $headers = array("Content-type: " .$http_entity_type);
-                    $d=Helper_Curl::post($url,$img,$headers);
-                    $r = $this->response($d);
-                }
-        */
-        return $r;
+        Helper_Array::removeEmpty($param);
+        unset($param['image_bytes']);// 签名不包含sign 参数和bytes[]类型的数据
+        
+        $signature = $this->signature($this->appSecret, $param);
+        if ($is_signature) {
+            $param['sign'] = $signature;
+        }
+        $param_request = $param;
+
+        $response = Helper_Curl::post($this->hosturl, $param_request);
+        $result = $this->response($response, $apiName);
+        
+        return $result;
     }
 
     /**

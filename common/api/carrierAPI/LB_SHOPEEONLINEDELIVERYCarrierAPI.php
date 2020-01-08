@@ -266,9 +266,10 @@ class LB_SHOPEEONLINEDELIVERYCarrierAPI extends BaseCarrierAPI{
 				foreach($ret['result']['airway_bills'] as $one){
 				    $responsePdf = Helper_Curl::get($one['airway_bill']);
 				    // dzt20190819 出现少于1000的pdf ，改成100
-				    if( strlen( $responsePdf) < 100){
-				        return  self::getResult(1, '', '接口返回内容不是一个有效的PDF！');
-				    }
+				    // dzt20191010 出现strlen = 0 但pdf是40K的，这个判断放弃了
+// 				    if( strlen( $responsePdf) < 100){
+// 				        return  self::getResult(1, '', '接口返回内容不是一个有效的PDF！');
+// 				    }
 				    
 					$pdfUrl = CarrierAPIHelper::savePDF( $responsePdf, $puid, $account->carrier_code.'_'.$order['customer_number'], 0);
 					$pdf->addPDF( $pdfUrl['filePath'], 'all');

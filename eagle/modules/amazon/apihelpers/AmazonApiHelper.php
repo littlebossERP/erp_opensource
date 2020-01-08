@@ -108,7 +108,7 @@ class AmazonApiHelper{
 	protected static $active_users = [];
 	
 	public static $COUNTRYCODE_NAME_MAP=array("US"=>"美国","CA"=>"加拿大","DE"=>"德国","ES"=>"西班牙","FR"=>"法国","IN"=>"印度","IT"=>"意大利",
-	"UK"=>"英国","JP"=>"日本","CN"=>"中国","MX"=>"墨西哥","AU"=>"澳大利亚","BR"=>"巴西","TR"=>"土耳其","AE"=>"阿联酋");
+	        "UK"=>"英国","JP"=>"日本","CN"=>"中国","MX"=>"墨西哥","AU"=>"澳大利亚","BR"=>"巴西","TR"=>"土耳其","AE"=>"阿联酋","SG"=>"新加坡");
 	
 	// 20170124 标记发货时候，允许标记发货的订单item状态
     public static $CAN_SHIP_ORDERITEM_STATUS = array("Unshipped","PartiallyShipped","Shipped","InvoiceUnconfirmed");
@@ -1561,15 +1561,22 @@ class AmazonApiHelper{
 				return ['success'=>false,'message'=>'该店铺未开通FBA库存同步队列，请联系客服'];
 			
 			if(!empty($account_info)){
+			    $nowTime = time();
+			    
+			    if($AutosyncV2->last_finish_time > $nowTime - 15 * 60){
+			        $diffMin = round(($nowTime - $AutosyncV2->last_finish_time) / 60);
+			        return ['success'=>false,'message'=>'FBA库存同步需要间隔15分钟请求一次，目前离上次请求'.$diffMin.'分钟。'];
+			    }
+			    
 				//尝试requestReport
 				// dzt20190411 问开发群的人说一天间隔可能没有报告，15天是经验值
 				// 这次的问题是mws_token为空导致跳过接口调用，一天也是有的，不过这里还是改成15天稳点
-			    $start_date = date('Y-m-d\TH:i:s',time() - 15*86400);
-			    $end_date = date('Y-m-d\TH:i:s',time());
+			    $start_date = date('Y-m-d\TH:i:s',$nowTime - 15*86400);
+			    $end_date = date('Y-m-d\TH:i:s',$nowTime);
 				
 				$rtn = self::requestAmazonReport($account_info, $report_type='_GET_AFN_INVENTORY_DATA_','W', $start_date, $end_date);
-				$AutosyncV2->last_finish_time = time();
-				$AutosyncV2->update_time = time();
+				$AutosyncV2->last_finish_time = $nowTime;
+				$AutosyncV2->update_time = $nowTime;
 				if(!empty($rtn['success'])){
 					$AutosyncV2->err_msg = $rtn['message'];
 					$AutosyncV2->err_cnt = (int)$AutosyncV2->err_cnt+1;

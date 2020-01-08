@@ -350,7 +350,7 @@ class LB_WEISUYICarrierAPI extends BaseCarrierAPI
 				return self::getResult(1,'','操作失败,威速易返回错误');
 			}
 			
-			\Yii::info('LB_WEISUYICarrierAPI1 puid:'.$puid.'，order_id:'.$order->order_id.'  '.print_r($postdata,1), "file");
+			\Yii::info('LB_WEISUYICarrierAPI1 puid:'.$puid.'，order_id:'.$order->order_id.'  '.print_r($postdata,1), "carrier_api");
 			//$response = urldecode($response);
 			$ret = json_decode($response,true);
 			$message = urldecode( $ret['message']);

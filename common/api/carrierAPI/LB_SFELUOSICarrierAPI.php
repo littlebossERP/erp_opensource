@@ -184,7 +184,10 @@ class LB_SFELUOSICarrierAPI extends BaseCarrierAPI
             //订单信息
 
             /**start 该物流商支持配送的国家简码对应的城市代码*/
-            $cCode_to_dCode = array('RU'=>'MOW', 'LT'=>'VNO', 'LV'=>'RIX', 'EE'=>'TLL', 'SE'=>'ARN', 'FI'=>'HEL', 'BY'=>'MSQ', 'UA'=>'KBP', 'PL'=>'WAW','DE'=>'FRA','AU'=>'SYD','CH'=>'BRN','GB'=>'LHR','ID'=>'JKT','IE'=>'DUB','IN'=>'DEL','JP'=>'TYO','KR'=>'ICN','MY'=>'KUL','NO'=>'OSL','NZ'=>'WLG','SG'=>'SIN','TH'=>'BKK','BE'=>'BRU','FR'=>'CDG','AT'=>'AUT','LU'=>'LUX','NL'=>'NLD');
+            $cCode_to_dCode = array('RU'=>'MOW', 'LT'=>'VNO', 'LV'=>'RIX', 'EE'=>'TLL', 'SE'=>'ARN', 'FI'=>'HEL', 'BY'=>'MSQ', 
+                    'UA'=>'KBP', 'PL'=>'WAW','DE'=>'FRA','AU'=>'SYD','CH'=>'BRN','GB'=>'LHR','ID'=>'JKT','IE'=>'DUB','IN'=>'DEL',
+                    'JP'=>'TYO','KR'=>'ICN','MY'=>'KUL','NO'=>'OSL','NZ'=>'WLG','SG'=>'SIN','TH'=>'BKK','BE'=>'BRU','FR'=>'CDG',
+                    'AT'=>'AUT','LU'=>'LUX','NL'=>'NLD', 'IT'=>'ROM', 'CA'=>'YOW', 'US'=>'JFK', 'MQ'=>'FDF','MX'=>'MEX' );
             foreach($cCode_to_dCode as $cCode => $dCode){
                 if($order->consignee_country_code == $cCode){
                     $d_deliverycode = $dCode;
@@ -252,7 +255,7 @@ class LB_SFELUOSICarrierAPI extends BaseCarrierAPI
             $xml_to_str = simplexml_load_string($responseXML);
             $responseArr = json_decode(json_encode($xml_to_str),TRUE);
 
-            \Yii::info("LB_SFELUOSICarrierAPI sfKtsService result:".print_r($responseXML,true), "carrier_api");// 先记下结果，记下refrence_no，这个返回应该与上面提交refrence_no一样。
+            \Yii::info("LB_SFELUOSICarrierAPI sfKtsService puid:'.$puid.'，order_id:'.$order->order_id.' result:".print_r($responseXML,true), "carrier_api");// 先记下结果，记下refrence_no，这个返回应该与上面提交refrence_no一样。
             $track_num_message = '';
             $tracking_number = '';
             if($responseArr['Head'] == 'OK'){

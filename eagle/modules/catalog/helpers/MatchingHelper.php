@@ -1892,6 +1892,8 @@ class MatchingHelper {
     	}
     	$query->orderBy("aliexpress_listing.productid");
     
+    	//echo $query->createCommand()->getRawSql();
+    	
     	$items = $query
     	->asArray()
     	->all();
@@ -1941,9 +1943,12 @@ class MatchingHelper {
 	    		}
     		}
     		
+    		
     		//整理产品明细信息
     		$attributes_arr = array();
     		$aeopAeProductSKUs = json_decode($item['aeopAeProductSKUs'], true);
+//     		print_r($aeopAeProductSKUs);
+    		
     		if(!empty($aeopAeProductSKUs)){
 			    foreach ($aeopAeProductSKUs as $key => $val){
 			    	$detail = [

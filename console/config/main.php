@@ -46,6 +46,16 @@ return [
 	                'maxLogFiles'=>3  //Number of log files used for rotation.
                 ],
                 [
+                    'exportInterval' => 1,
+                    'class' => 'eagle\modules\util\models\EFileTarget',
+                    'levels' => ['info'],
+                    'categories'=>['carrier_api'],
+                    'logVars'=>[],
+                    'logFile'=>'@runtime/logs/carrier_api.log.'.date('Ymd'),
+                    'maxFileSize'=>900000,  //Maximum log file size, in kilo-bytes.
+                    'maxLogFiles'=>2  //Number of log files used for rotation.
+                ],
+                [
 				    'exportInterval' => 1,
 	                'class' => 'eagle\modules\util\models\EDbTarget',
 	                'logVars'=>[],

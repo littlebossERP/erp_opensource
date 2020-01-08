@@ -740,14 +740,17 @@ class LazadaAutoFetchListingHelperV3
             //(2) 非 all的拉取
             // dzt20161221 根据lazada的api对接文档提议，get all获取完信息之后不再 foreach其他状态 获取状态,直接通过getQcStatus 把接口返回的状态填上
             // dzt20170117 从目前来看，deleted 的产品 ，get all还是get 不到的，rejected 则可以
-            list($allProdSku, $delTotalNum) = self::doGetListingAndSave($reqParams, $config, $isFirstTime, array(LazadaProductStatus::DELETED), $saasLazadaAutosync, $allProdSku);
-            if($allProdSku===false){
-                self::handleGetListError($saasLazadaAutosync, $delTotalNum, $nowTime, $failRetryPeriod);
-                return false;
-            }
+            // dzt20191022 不再拉取deleted产品
+            $delTotalNum = 0;
+//             list($allProdSku, $delTotalNum) = self::doGetListingAndSave($reqParams, $config, $isFirstTime, array(LazadaProductStatus::DELETED), $saasLazadaAutosync, $allProdSku);
+//             if($allProdSku===false){
+//                 self::handleGetListError($saasLazadaAutosync, $delTotalNum, $nowTime, $failRetryPeriod);
+//                 return false;
+//             }
             
             //(3) 所有sku 填上qc status 
             // 回填qc status不影响流程，所以尽管数据有问题，不会设置拉取失败。
+            // TODO dzt20191022 拉取deleted的sku会报错。如果要拉deleted产品，则这里要提出deleted的sku再拉取qc
             self::doGetListingQcStatusAndSave($allProdSku,$config,$saasLazadaAutosync);
             
             $saasLazadaAutosync->start_time = $start_time;
@@ -1004,7 +1007,7 @@ class LazadaAutoFetchListingHelperV3
      */
     private static function doGetListingQcStatusAndSave($allProdSku,$config,$saasLazadaAutosync){
         $length = count($allProdSku);
-        $step = 1000;
+        $step = 1000;// 接口一次只能100 但Proxy也做了切割
         $timeMS1 = TimeUtil::getCurrentTimestampMS();
         $updateNum = 0;
         for ($i = 0; $i < $length; $i = $i + $step) {

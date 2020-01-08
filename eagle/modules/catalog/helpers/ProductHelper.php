@@ -2324,7 +2324,7 @@ class ProductHelper {
     				$item ['sku'] = trim($item ['sku']);
     				
     				if ($item ['sku'] != '') {
-    					if (in_array ( $item ['sku'], $allProdSku )) {
+    					if (in_array ( strtoupper($item ['sku']), $allProdSkuUp )) {
     						$sameSkuInfo [$item ['sku']] [] = $key;
     					}
     					else {
@@ -3354,7 +3354,7 @@ class ProductHelper {
     				SysLogHelper::SysLog_Create('Catalog',__CLASS__, __FUNCTION__,'error',$e->getMessage());
     				
     				$uid = \Yii::$app->subdb->getCurrentPuid();
-    				\Yii::info('Catalog, puid: '. $uid .', importProductData, '.$e->getMessage(), "file");
+    				\Yii::info('Catalog, puid: '. $uid .', importProductData, '.$e->getMessage().PHP_EOL."trace:".$e->getTraceAsString(), "file");
     			}
 			} 
 			else {

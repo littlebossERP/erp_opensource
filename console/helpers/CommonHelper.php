@@ -65,7 +65,7 @@ class CommonHelper
         }
         //如果自己的version不同于全局要求的version，自己退出，从新起job来使用新代码
         if ($jobVersion <> $currentVersion) {
-            exit("Version new $currentVersion , this job ver " . $jobVersion . " exits for using new version $currentVersion.");
+            exit("Version new $currentVersion , this job ver " . $jobVersion . " exits for using new version $currentVersion.".PHP_EOL);
         }
         return $jobVersion;
     }

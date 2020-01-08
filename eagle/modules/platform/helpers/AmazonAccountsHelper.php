@@ -262,7 +262,7 @@ class AmazonAccountsHelper
     	
     	//1.检查amazon信息的合法性，连接测试是否ok
     	list($ret,$message)=self::_checkAmazonUserInfo($params);
-    	\Yii::info('Platform,' . __CLASS__ . ',' . __FUNCTION__ .',after _checkAmazonUserInfo',"file");
+    	\Yii::info('Platform,' . __CLASS__ . ',' . __FUNCTION__ .',after _checkAmazonUserInfo message:'.$message.',param:'.json_encode($params),"file");
     	if ($ret===false) return array($ret,$message);
     	
     	\Yii::info('Platform,' . __CLASS__ . ',' . __FUNCTION__ .',after _checkAmazonUserInfo 2',"file");
@@ -405,6 +405,7 @@ class AmazonAccountsHelper
 
 
 
+        
     	return array(true,'');
     }
     
@@ -425,5 +426,4 @@ class AmazonAccountsHelper
             $tmpLowOrderQueue::deleteAll(['saas_platform_autosync_id'=>$autoSyncv2Id]);
         }
     }
-    
 }

@@ -116,8 +116,11 @@ class LB_YANWENCarrierAPI extends BaseCarrierAPI
 				    }else{
 				        $product['NameCh']=$data['Name'][$key];
 				    }
+				   
 				    if(strlen($data['EName'][$key])>64){
 				        return self::getResult(1,'','商品英文品名长度超出长度限制64');
+				    }elseif(stripos($data['EName'][$key], "&") !== false){
+				        return self::getResult(1,'','商品英文名不能包含特殊字符“&”');
 				    }else{
 				        $product['NameEn']=$data['EName'][$key];
 				    }
@@ -282,7 +285,7 @@ class LB_YANWENCarrierAPI extends BaseCarrierAPI
 				$_paramsArray['ExpressType']['GoodsName']['HsCode'] = $product['HsCode'];
 			}
 			#############################################################################
-			\Yii::info('YANWEN params,puid:'.$puid.',result,orderId:'.$order->order_source_order_id.' '.json_encode($_paramsArray),"carrier_api");
+			\Yii::info('YANWEN params,puid:'.$puid.',token:'.$this->AuthToken=$token.',orderId:'.$order->order_source_order_id.' '.json_encode($_paramsArray),"carrier_api");
 	        $this->serverUrl=$this->baseUrl."/Users/".$userid."/Expresses";
 	        $this->AuthToken=$token;
 // 	        echo '<pre>';
@@ -351,9 +354,10 @@ class LB_YANWENCarrierAPI extends BaseCarrierAPI
 	        	return self::getResult(0,$r,"上传成功，客户单号：". $Epcode);
 	        }else{
 	            if(is_array($response)){
-	                if (isset($response['Response']['ReasonMessage'])){
+	                if (isset($response['Message'])){
+	                    $error = $response['Message'];
+	                }elseif (isset($response['Response']['ReasonMessage'])){
 	                    $error = $response['Response']['ReasonMessage'];
-						
 	                }else{
 	                    $error = '创建订单失败!'.self::$errors[$response['Response']['Reason']];
 	                }
@@ -399,21 +403,27 @@ class LB_YANWENCarrierAPI extends BaseCarrierAPI
 			$userid = isset($params['userid'])?$params['userid']:'';
 			$token = isset($params['token'])?$params['token']:'';
 			//组织数据 epcode
-			$_paramsArray['string'] = '';
+			$customer_number_arr = [];
 			foreach ($data as $v) {
 				$order = $v['order'];
-				$_paramsArray['string'].=$order->customer_number.',';
+				// $_paramsArray['string'].=$order->customer_number.',';
+				$customer_number_arr[] = $order->customer_number;
 			}
+			
+			$_paramsArray['string'] = implode(',', $customer_number_arr);
+			
 			#############################################################################
 			$loginfo['request'] = $_paramsArray;
 			$loginfo['userid'] = $userid;
 			$loginfo['token'] = $token;
-			\Yii::info(print_r($loginfo,true));
 			
 			$this->serverUrl=$this->baseUrl."/Users/".$userid."/Expresses/".$label."Label";
 	        $this->AuthToken=$token;
 	        //请求类型
 			$this->setRequestBody($_paramsArray);
+			
+			\Yii::info('YANWEN print loginfo,puid:'.$puid.',result,orderId:'.$order->order_source_order_id.print_r($loginfo,true).PHP_EOL."url:".$this->serverUrl,"carrier_api");
+			
 			$response=$this->sendRequest(1);
 			if(strpos($response,'<title>Request Error</title>') || empty($response)){
 			    if(is_array($response)){

@@ -83,7 +83,7 @@ class AliexpressAccountsV2Controller extends \eagle\components\Controller
     	}
     	try{
     		if($state != 'littleboss_'.$uid){
-    			throw new \Exception('验证错误，不是通过过小老板进行授权！');
+    			throw new \Exception('验证错误，不是通过小老板进行授权！');
     		}
     		if(empty($sellerloginid)){
     			throw new \Exception('账号丢失！');

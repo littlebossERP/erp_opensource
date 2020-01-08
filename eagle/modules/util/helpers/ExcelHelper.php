@@ -1147,7 +1147,7 @@ class ExcelHelper
 				return $result;
 			} catch (\Exception $e) {
 				$errorMessage = "file:".$e->getFile()." line:".$e->getLine()." message:".$e->getMessage();
-				\Yii::error("justExportToExcel $errorMessage","file");
+				\Yii::error("justExportToExcel $errorMessage".$e->getTraceAsString(),"file");
 				$result['message'] = $errorMessage;
 				return $result;
 			}

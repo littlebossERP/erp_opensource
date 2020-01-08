@@ -182,6 +182,7 @@ class LB_SANTAICarrierAPI extends BaseCarrierAPI
 // 			print_r($request);die;
 			\Yii::info('LB_SANTAI,puid:'.$puid.',request,order_id:'.$order->order_id.' '.json_encode($request),"carrier_api");
 			$response = $this->submitGate->mainGate(self::$wsdl, $request, 'soap', 'addOrder');
+			\Yii::info('LB_SANTAI,puid:'.$puid.',response,order_id:'.$order->order_id.' '.json_encode($response),"carrier_api");
 // 			print_r($response);die;
 			if($response['error']){return self::getResult(1,'',$response['msg']);}
 			
@@ -237,7 +238,87 @@ class LB_SANTAICarrierAPI extends BaseCarrierAPI
 	 +----------------------------------------------------------
 	 **/
 	public function getTrackingNO($data){
-		return BaseCarrierAPI::getResult(1, '', '物流接口申请订单号时就会返回跟踪号');
+	    // dzt20191025 由于发欧洲的货要三态那边收货才能获取跟踪号，所以这里要支持获取跟踪号接口
+// 		return BaseCarrierAPI::getResult(1, '', '物流接口申请订单号时就会返回跟踪号');
+	
+	    try{
+	        $user=\Yii::$app->user->identity;
+	        if(empty($user))return self::getResult(1, '', '用户登陆信息缺失,请重新登陆');
+	        $puid = $user->getParentUid();
+	        	
+	        $order = $data['order'];
+	        
+	        //获取到所需要使用的数据
+	        $info = CarrierAPIHelper::getAllInfo($order);
+	        $account = $info['account'];
+	        $service = $info['service'];
+	        
+	        //认证参数
+	        $params = $account->api_params;
+	        $this->appKey = $params['appKey'];
+	        $this->token = $params['token'];
+	        $this->userId = $params['userId'];
+	        
+	        //对当前条件的验证  0 如果订单已存在 则报错 1 订单不存在 则报错
+	        $checkResult = CarrierAPIHelper::validate(0,1,$order);
+	        $shipped = $checkResult['data']['shipped'];
+	    
+	        $orderCode = $shipped['return_no']['OrderSign'];
+	        
+	        $request = array(
+                    'HeaderRequest'=> array(
+                            'appKey'=>$this->appKey,
+                            'token'=>$this->token,
+                            'userId'=>$this->userId,
+                    ),
+                    'searchOrderRequestInfo'=>array(
+                            'orderCode' => $orderCode,   //三态单号
+                    ),
+	        );
+	        
+	        
+	        \Yii::info('LB_SANTAI,puid:'.$puid.',request,order_id:'.$order->order_id.' '.json_encode($request),"carrier_api");
+	        $response = $this->submitGate->mainGate("http://www.sfcservice.com/ishipsvc/web-service?wsdl", $request, 'soap', 'searchOrder');
+	        \Yii::info('LB_SANTAI,puid:'.$puid.',response,order_id:'.$order->order_id.' '.json_encode($response),"carrier_api");
+	        
+	        if($response['error']){return self::getResult(1,'',$response['msg']);}
+	        	
+	        $response = $response['data'];
+	        
+	        if(empty($response) || empty($response->orderInfo)){
+	            return self::getResult(1,'', '查询不到订单信息');
+	        }
+	        
+	        if(empty($response->orderInfo->trackNumber)){
+	            return self::getResult(1,'', '暂时没有跟踪号');
+	        }
+	        $tracking_no = $response->orderInfo->trackNumber;
+	        	
+	        $shipped->tracking_number = $tracking_no;
+	        $shipped->save();
+	        	
+	        $order->tracking_number = $shipped->tracking_number;
+	        $order->save();
+	        	
+	        
+	        $print_param = array();
+	        $print_param['carrier_code'] = 'lb_santaic';
+	        $print_param['api_class'] = 'LB_SANTAICarrierAPI';
+	        $print_param['tracking_number'] = $tracking_no;
+	        $print_param['selleruserid'] = $order->selleruserid;
+	        $print_param['appKey'] = $this->appKey;
+	        $print_param['token'] = $this->token;
+	        $print_param['userId'] = $this->userId;
+	        $print_param['orderCode'] = $orderCode;
+	        $print_param['carrier_params'] = $service->carrier_params;
+	        
+	        try{
+	            CarrierApiHelper::saveCarrierUserLabelQueue($puid, $order->order_id, $order->customer_number, $print_param);
+	        }catch (\Exception $ex){}
+	        	
+	        return  BaseCarrierAPI::getResult(0,'','查询成功成功!跟踪号'.$tracking_no);
+	    
+	    }catch(CarrierException $e){return self::getResult(1,'',$e->msg());}
 	
 	}
 	
@@ -296,9 +377,74 @@ class LB_SANTAICarrierAPI extends BaseCarrierAPI
 			if(strstr($response, "找不到订单")>-1)
 				return self::getResult(1,'',$response);
 			
-			return self::getResult(0,['pdfUrl'=>$requestData],'');
+// 			return self::getResult(0,['pdfUrl'=>$requestData],'');
+			// dzt20191021 三态返回http的pdf，小老板https显示不了，需要先保存
+				
+			if(strlen($response)<1000){
+			    return self::getResult(1, '', '接口返回内容不是一个有效的PDF！');
+			}
+				
+			$pdfUrl = CarrierAPIHelper::savePDF($response,$puid,$account->carrier_code.'_'.$order->customer_number, 0);
+				
+			return self::getResult(0,['pdfUrl'=>$pdfUrl['pdfUrl']],'连接已生成,请点击并打印');
+			
+			
 		}catch(CarrierException $e){return self::getResult(1,'',$e->msg());}
 	}
+	
+	/**
+	 * 获取API的打印面单标签
+	 * 这里需要调用接口货代的接口获取10*10面单的格式
+	 *
+	 * @param $SAA_obj			表carrier_user_label对象
+	 * @param $print_param		相关api打印参数
+	 * @return array()
+	 * Array
+	 (
+	 [error] => 0	是否失败: 1:失败,0:成功
+	 [msg] =>
+	 [filePath] => D:\wamp\www\eagle2\eagle/web/tmp_api_pdf/20160316/1_4821.pdf
+	 )
+	 */
+	public function getCarrierLabelApiPdf($SAA_obj, $print_param){
+	    try {
+	        $puid = $SAA_obj->uid;
+	
+	        $orderCode = $print_param['orderCode'];
+	        if(empty($orderCode))throw new CarrierException('操作失败,订单不存在');
+	        
+	        $url = self::$wsdl_url.'/api/label';
+	        
+	        //取得打印尺寸
+	        $printTypeArr="0-3";
+	        $printType="0";    //纸张格式
+	        $print_type="pdf";   //打印输出方式(pdf, html)
+	        $printSize=3;   //纸张大小
+	        if(!empty($print_param['carrier_params']['printType']))
+	            $printTypeArr = $print_param['carrier_params']['printType'];
+	        
+	        $temp_arr=explode('-',$printTypeArr);
+	        if(isset($temp_arr[0]))
+	            $printType=$temp_arr[0];
+	        if(isset($temp_arr[1]))
+	            $printSize=$temp_arr[1];
+	        
+	        //GET提交数据
+	        $requestURL = $url."?orderCodeList=".$orderCode."&printType=".$printType."&print_type=".$print_type."&printSize=".$printSize;
+	        $response = Helper_Curl::get($requestURL);
+	        
+	        if (strlen($response)>1000){
+	            $pdfPath = CarrierAPIHelper::savePDF2($response,$puid,$SAA_obj->order_id.$SAA_obj->customer_number."_api_".time());
+	            return $pdfPath;
+	        }else{
+	            return ['error'=>1, 'msg'=>'打印失败,请检查订单后重试', 'filePath'=>''];
+	        }
+	
+	    }catch (CarrierException $e){
+	        return ['error'=>1, 'msg'=>$e->msg(), 'filePath'=>''];
+	    }
+	}
+	
 	
 	//获取运输方式
 	public function getCarrierShippingServiceStr($account){

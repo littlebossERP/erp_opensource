@@ -76,9 +76,20 @@ class ShopeeHelper{
 		self::$cronJobId++;
 		echo self::getTime().' time script start '.self::$cronJobId.PHP_EOL;
 	
-		//*************Step 0, 获取需同步的店铺列表，并循环获取
 		$connection = Yii::$app->db;
 		$nowTime = time();
+		
+		//*************Step -1, 获取需同步的店铺列表，并循环获取
+		$currentTime = date("H");
+		if( $currentTime == 6 ){// 每天一小时处理一下异常记录
+		    $affectRows = $connection->createCommand("update saas_shopee_autosync set status=3, last_time=".$nowTime." where status=1 and last_time<".($nowTime-7200))->execute();
+		    if($affectRows > 0){
+		        echo self::getTime().' ===fix '.$affectRows.' records.===='.PHP_EOL;
+		    }
+		}
+		
+		//*************Step 0, 获取需同步的店铺列表，并循环获取
+		
 		$hasGetRecord = false;
 		//查询同步表所有item队列，取前五条，并抢记录
 		$sql = "select id from saas_shopee_autosync where is_active=1 and status<>1 and times<10 and type='time' and next_time<".$nowTime." order by next_time asc limit 5";

@@ -51,11 +51,12 @@ class LB_JIEWANGCarrierAPI extends BaseCarrierAPI{
 		return $return_info;
 	}
 
-	public function getVerifyCarrierAccountInformation($data){
-		$base_config_obj = new NiuMenBaseConfig('',self::$url);
-		$return_info = $base_config_obj->_getVerifyCarrierAccountInformation($data);
-		return $return_info['data'];
-	}
+	//捷网要求不要验证
+// 	public function getVerifyCarrierAccountInformation($data){
+// 		$base_config_obj = new NiuMenBaseConfig('',self::$url);
+// 		$return_info = $base_config_obj->_getVerifyCarrierAccountInformation($data);
+// 		return $return_info['data'];
+// 	}
 	
 	//获取打印标签
 	public function getAjxEmsQueryPDFLabel($data){

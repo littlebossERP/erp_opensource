@@ -177,8 +177,8 @@ class LB_4pxOverseaWarehouseAPI extends BaseOverseaWarehouseAPI
 			}
 			else{
 				//return $response;
-				\Yii::info(['lb_4pxOversea,puid:'.$puid,__CLASS__,__FUNCTION__,'postDate',print_r($request,true)],"carrier_api");
-				\Yii::info(['lb_4pxOversea,puid:'.$puid,__CLASS__,__FUNCTION__,'response',print_r($response,true)],"carrier_api");
+				\Yii::info(['lb_4pxOversea,puid:'.$puid.",order_id:".$order->order_id,__CLASS__,__FUNCTION__,'postDate',print_r($request,true)],"carrier_api");
+				\Yii::info(['lb_4pxOversea,puid:'.$puid.",order_id:".$order->order_id,__CLASS__,__FUNCTION__,'response',print_r($response,true)],"carrier_api");
 				return self::getResult(1,'','上传失败:'.(isset($response['msg'])?$response['msg']:''));
 			}
 		}catch(\Exception $e){return self::getResult(1,'',$e->getMessage());}

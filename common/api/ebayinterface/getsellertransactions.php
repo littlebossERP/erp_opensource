@@ -80,7 +80,7 @@ class getsellertransactions extends base{
 				$api->ModTimeFrom =base::dateTime($ModTimeFrom);
 				$api->ModTimeTo =base::dateTime($ModTimeTo);
 			}
-			if($NumberOfDays){
+			if(!empty($NumberOfDays)){
 				$api->NumberOfDays=$NumberOfDays;
 			}
 			$api->api();
@@ -90,7 +90,8 @@ class getsellertransactions extends base{
 				$requestArr=$api->_last_response_xmlarray;
 				echo "\n ".(__function__)." v1.6 puid=".@$eu['uid'].",selleruserid=".@$eu['selleruserid']." api request ".@$requestArr['Ack']."!"." ModTimeFrom=".@$api->ModTimeFrom." ModTimeTo=".@$api->ModTimeTo;
 				//记录 请求 结果
-				\Yii::info(print_r($requestArr,1) . '   '. __METHOD__ .' -- _last_response_xmlarray');
+				echo PHP_EOL . __METHOD__ .' -- _last_response_xmlarray:'.json_encode($requestArr).PHP_EOL;
+// 				\Yii::info(print_r($requestArr,1) . '   '. __METHOD__ .' -- _last_response_xmlarray');
 				$orderids=array();
 				$orderlineitemids=array();
 				if(isset($requestArr['TransactionArray']['Transaction']['TransactionID'])){
@@ -99,6 +100,7 @@ class getsellertransactions extends base{
 					);
 				}
 
+				
 				$PayPalEmailAddress_s=array();
 				//取得所有
 				if(isset($requestArr['TransactionArray']) && $requestArr['TransactionArray']['Transaction'])
@@ -110,6 +112,8 @@ class getsellertransactions extends base{
 							if(isset($T['PayPalEmailAddress'])){
 								$PayPalEmailAddress_s[$OrderLineItemID]=$T['PayPalEmailAddress'];
 							}
+							
+							echo PHP_EOL.(__FUNCTION__)." puid=".$eu['uid']." selleruserid:".$eu['selleruserid']." ItemID-TransactionID=".$OrderLineItemID;
 						}else{
 							/**/
 							$OrderLineItemID= $T['Item']['ItemID'];

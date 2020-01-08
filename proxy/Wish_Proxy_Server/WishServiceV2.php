@@ -22,8 +22,12 @@ class WishService{
 		'getAwaitingTickets'=>'https://merchant.wish.com/api/v2/ticket/get-action-required',
 		'replyTickets'=>'https://merchant.wish.com/api/v2/ticket/reply',
 		'closeTicket'=>'https://merchant.wish.com/api/v2/ticket/close',
-		'GetAccessToken'=>'https://merchant.wish.com/api/v2/oauth/access_token',
-		'RefreshAccessToken'=>'https://merchant.wish.com/api/v2/oauth/refresh_token',
+		// 'GetAccessToken'=>'https://merchant.wish.com/api/v2/oauth/access_token',
+		// 'RefreshAccessToken'=>'https://merchant.wish.com/api/v2/oauth/refresh_token',
+		// dzt20191122 wish授权端口升级
+		'GetAccessToken'=>'https://merchant.wish.com/api/v3/oauth/access_token',
+		'RefreshAccessToken'=>'https://merchant.wish.com/api/v3/oauth/refresh_token',
+		
 		'authTest'=>'https://merchant.wish.com/api/v2/auth_test',
 	];
 	

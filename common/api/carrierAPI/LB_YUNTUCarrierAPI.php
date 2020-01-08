@@ -394,7 +394,7 @@ class LB_YUNTUCarrierAPI extends BaseCarrierAPI
             //http://t.tinydx.com:901/LMS.API/api/WayBill/GetTrackNumber  测试环境获取跟踪号地址
             $response = Helper_Curl::get('http://api.yunexpress.com/LMS.API/api/WayBill/GetTrackNumber'.$params,null,$get_head);
 
-            \Yii::info(print_r($response,true),"file");   //先记下结果，方便查看和防止失去结果
+            \Yii::info(print_r($response,true),"carrier_api");   //先记下结果，方便查看和防止失去结果
             $responseData = json_decode($response , true);
 
             if (isset($responseData['Item'])) {
@@ -492,7 +492,7 @@ class LB_YUNTUCarrierAPI extends BaseCarrierAPI
                 $response = Helper_Curl::post('http://api.yunexpress.com/LMS.API.Lable/Api/PrintUrl',$json_req,$post_head);
                 $responseData = json_decode($response , true);
                 
-                \Yii::info('YUNTU doPrint,puid:'.$puid.',result,orderId:'.$oneOrder->order_source_order_id.' '.$response,"carrier_api");
+                \Yii::info('YUNTU doPrint,puid:'.$puid.',result,orderId:'.$order->order_source_order_id.' '.$response,"carrier_api");
                 
                 if(empty($responseData['Item'])){
                     return self::getResult(1,'', $responseData['ResultDesc']);

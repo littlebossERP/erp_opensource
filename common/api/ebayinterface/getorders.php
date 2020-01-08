@@ -23,6 +23,7 @@ use eagle\modules\listing\models\EbayItem;
 use eagle\modules\order\helpers\EbayOrderHelper;
 use common\api\ebayinterface\shopping\getsingleitem;
 use eagle\modules\util\helpers\RedisHelper;
+use eagle\models\SaasEbayAutosyncstatus;
 
 /**
  * 获取订单列表
@@ -171,6 +172,7 @@ class getorders extends base{
 						}
 						$logstr="\n\nselleruserid:".$ebay_user->selleruserid."\nEbay OrderID:".$o['OrderID']."\n";
 						echo $logstr;
+						print_r($o);
 						try {
 							$this->saveOneOrder($o,$o['OrderID'],$ebay_user,$ebay_user->selleruserid);
 						}catch(\Exception $ex){
@@ -302,7 +304,7 @@ class getorders extends base{
 				echo "\n".(__function__)." uid=".@$ebay_user->uid." order_id=".$ebay_orderid." ".$selleruserid." ebay api grand_total =0\n";
 			}
 			
-			if (empty($o['subtotal'])){
+			if (empty($o['Subtotal'])){
 				echo "\n".(__function__)." uid=".@$ebay_user->uid." order_id=".$ebay_orderid." ".$selleruserid." ebay api subtotal =0\n";
 			}
 		} catch (\Exception $ex) {
@@ -383,7 +385,13 @@ class getorders extends base{
 			$AMEO['salesrecordnum']=$t['ShippingDetails']['SellingManagerSalesRecordNumber'];
 		}
 
-		echo 'isNewRecord:'." MEO ".$MEO['orderstatus'] ." AMEO ".$AMEO['orderstatus']." \n ";
+		// dzt20191107 createdtime 191101 之后taxtotal grand total计算添加了total tax
+		$totalTaxAmout = 0;
+		if($AMEO['createdtime'] > 1572537600 && isset($t['Taxes']) && isset($t['Taxes']['TotalTaxAmount']))
+		    $totalTaxAmout = $t['Taxes']['TotalTaxAmount'];
+		
+		echo 'isNewRecord:'." MEO ".$MEO['orderstatus'] ." AMEO ".$AMEO['orderstatus'].",totalTaxAmout:$totalTaxAmout \n ";
+
 
 
 		$ifMerge=0;
@@ -429,20 +437,22 @@ class getorders extends base{
 				return false;
 			}
 			// 做退款 判断异常
-			if(!self::check_ebayorder_backmoney($AMEO)){
-				QueueGetorderHelper::Add($ebay_orderid,$selleruserid,$ebay_user->selleruserid);
-				$logstr= "$ebay_orderid :  total $AMEO[total]  , externaltransaction:\n "
-					. var_export($AMEO['externaltransaction'] ,1) ." \n " ;
-				//Yii::log($logstr );
-				echo $logstr;
-				return false;
-			}
+			// dzt20191107 不清楚是否接口变动，这里的逻辑导致取消订单同步不进系统，先注释看看
+// 			if(!self::check_ebayorder_backmoney($AMEO)){
+// 				QueueGetorderHelper::Add($ebay_orderid,$selleruserid,$ebay_user->selleruserid);
+// 				$logstr= "$ebay_orderid :  total $AMEO[total]  , externaltransaction:\n "
+// 					. var_export($AMEO['externaltransaction'] ,1) ." \n " ;
+// 				//Yii::log($logstr );
+// 				echo $logstr;
+// 				return false;
+// 			}
 
-		}elseif((strval($AMEO['subtotal'] + $AMEO['shippingservicecost'] + $AMEO['adjustmentamount']) !=$AMEO['total'])){
+		}elseif((strval($AMEO['subtotal'] + $AMEO['shippingservicecost'] + $AMEO['adjustmentamount'] + $totalTaxAmout) !=$AMEO['total'])){// dzt20191107 add $totalTaxAmout
+			// dzt20191107 这个公式计算total 还是有点混乱，有时候不加$totalTaxAmout 就和total相等（可能是CreatedTime 为191101之前的订单），有时候加了才相等。而total的字段说明是包含了$totalTaxAmout的
 			//正常付款时 判断 异常
 			QueueGetorderHelper::Add($ebay_orderid,$selleruserid,$ebay_user->selleruserid);
-			$logstr= "$ebay_orderid :  subtotal $AMEO[subtotal]  + shippingservicecost $AMEO[shippingservicecost] + adjustmentamount  $AMEO[adjustmentamount] != total $AMEO[total] \n "
-				. var_export($AMEO['subtotal'] + $AMEO['shippingservicecost'] + $AMEO['adjustmentamount'] ,1) ." : ". var_export($AMEO['total'],1) ."\n " ;
+			$logstr= "$ebay_orderid :  subtotal $AMEO[subtotal]  + shippingservicecost $AMEO[shippingservicecost] + adjustmentamount  $AMEO[adjustmentamount] + totalTaxAmout $totalTaxAmout != total $AMEO[total] \n "
+				. var_export($AMEO['subtotal'] + $AMEO['shippingservicecost'] + $AMEO['adjustmentamount'] + $totalTaxAmout ,1) ." : ". var_export($AMEO['total'],1) ."\n " ;
 			//Yii::log($logstr );
 			echo $logstr;
 			//2小时过去了,错误 情况 还是没有更新,启用 ExternalTransaction 的判断
@@ -478,6 +488,7 @@ class getorders extends base{
 				echo $logstr;
 				return false;
 			}
+		
 		// 最后修改时间不对的,也退出更新!
 		if($MEO['lastmodifiedtime'] > 0  && $AMEO['lastmodifiedtime'] >0 && $AMEO['lastmodifiedtime']<$MEO['lastmodifiedtime']){
 			$logstr= "$ebay_orderid :  old > new lastmodifiedtime : $MEO[lastmodifiedtime] >  $AMEO[lastmodifiedtime]  \n";
@@ -974,7 +985,7 @@ class getorders extends base{
 			} else if ( $MEO['shippedtime'] ) {
 				$order_status = 500;
 //			} else if ($MEO['paidtime']||($MEO['checkoutstatus'] == 'Complete'&& $MEO['ebaypaymentstatus']=='NoPaymentFailure')) {
-			} else if ($MEO['paidtime']) {
+			} else if ($MEO['paidtime'] && $MEO['amountpaid']>0) {
 				$order_status = 200;
 			} else if ($MEO['orderstatus']=='Cancelled') {
 				$order_status = 600;
@@ -1760,4 +1771,163 @@ class getorders extends base{
 		}
 		
 	}//end of function saveOrderCurrencyInfo
+	
+	
+	/**
+	 * 将所有订单插入到 订单队列表中
+	 * @param  $eu  Ebay_User , Array() .
+	 *
+	 */
+	static function cronGetOrderByTime($eu,$NumberOfDays=0,$ModTimeFrom=0,$ModTimeTo=0,$externalid=0){
+	    set_time_limit(0);
+	    $api=new self();
+	    $api->resetConfig($eu['DevAcccountID']);
+	    $api->eBayAuthToken=$eu['token'];
+	    $api->EntriesPerPage=50;
+	    $api->PageNumber=1;
+	    
+	    do{
+	        $api->ModTimeFrom =base::dateTime($ModTimeFrom);
+            $api->ModTimeTo =base::dateTime($ModTimeTo);
+	        $result = $api->api();
+	        
+	        
+	        if ($result['Ack']=='Warning'&&isset($result['Errors']['ErrorCode'])&&$result['Errors']['ErrorCode']=='21917182'){
+	            //Invalid orderlineids.
+	            echo "\n ".(__function__)." E001 ".json_encode($result);
+	            if (empty($result['OrderArray']) && count($result['Errors']['ErrorParameters'])==1 && !empty($result['Errors']['ErrorParameters']['Value']) ){
+	                $effect = QueueGetorder::deleteAll(['selleruserid'=>$eu->selleruserid,'ebay_orderid'=>$result['Errors']['ErrorParameters']['Value']]);
+	                echo "\n ".$result['Errors']['ErrorParameters']['Value'].'delete ='.$effect;
+	            }else{
+	                echo "\n E001 delete failure".json_encode($result);
+	            }
+	            return false;
+	        }
+	        
+	        if(! $api->responseIsFailure()){
+	            echo "\n api request success!";
+	            $requestArr=$api->_last_response_xmlarray;
+	            echo "\n ".(__FUNCTION__)." v1.6 puid=".@$eu['uid'].",selleruserid=".@$eu['selleruserid']." api request ".@$requestArr['Ack']."!"." ModTimeFrom=".@$api->ModTimeFrom." ModTimeTo=".@$api->ModTimeTo;
+	            //记录 请求 结果
+	            echo PHP_EOL . __METHOD__ .' -- _last_response_xmlarray:'.json_encode($requestArr).PHP_EOL;
+	            
+	            if(isset($requestArr['OrderArray']['Order']['OrderID'])){
+	                $OrderArray['Order']=array($requestArr['OrderArray']['Order']);
+	            }elseif(Helper_xml::isArray($requestArr['OrderArray']['Order'])&&count($requestArr['OrderArray']['Order'])){
+	                $OrderArray['Order']=$requestArr['OrderArray']['Order'];
+	            }
+	            
+	            if(count($OrderArray['Order'])){
+	                $response_orderids=array();
+	                foreach ($OrderArray['Order'] as $o){
+	                    if(isset($response_orderids[$o['OrderID']])){
+	                        $response_orderids[$o['OrderID']]++;
+	                    }else{
+	                        $response_orderids[$o['OrderID']]=1;
+	                    }
+	                }
+	            
+	                foreach ($OrderArray['Order'] as $o){
+	                    $logstr="\n\nselleruserid:".$eu->selleruserid."\nEbay OrderID:".$o['OrderID']."\n";
+	                    echo $logstr;
+	                    try {
+	                        $api->saveOneOrder($o,$o['OrderID'],$eu,$eu->selleruserid);
+	                    }catch(\Exception $ex){
+	                        echo "\n ".(__function__)." Error Message :  ". $ex->getMessage()." File:".$ex->getFile()." Line no:".$ex->getLine()."\n";
+	                    }
+	                }
+	            }
+	             
+	
+	            if($requestArr['PageNumber']>=$requestArr['PaginationResult']['TotalNumberOfPages']){
+	                echo "\n current page number is ".$requestArr['PageNumber']." and TotalNumberOfPages=".$requestArr['PaginationResult']['TotalNumberOfPages'];
+	                if (strtolower($requestArr['Ack']) == 'success'){
+	                    echo "\n  all request completed,will return true;";
+	                    return true;
+	                }else{
+	                    if (isset($requestArr['Errors']['ErrorCode'] )){
+	                        if($requestArr['Errors']['ErrorCode'] == '21918011'){
+	                            echo "\n  all request completed,will return true;";
+	                            //能正常拉取订单的 warning
+	                            return true;
+	                        }else{
+	                            echo "\n ".(__function__)." puid=".$eu['uid']." selleruserid:".$eu['selleruserid']." short message:".$requestArr['Errors']['ShortMessage']." and error code = ".$requestArr['Errors']['ErrorCode'];
+	                            print_r($requestArr);
+	                        }
+	                    }else{
+	                        echo "\n ".$requestArr['Ack']."no  error code !";
+	                        print_r($requestArr);
+	                    }
+	                }
+	                	
+	                break 1;
+	            }else{
+	                $api->PageNumber=$requestArr['PageNumber']+1;
+	                echo "\n page +1 ".$api->PageNumber." and TotalNumberOfPages is ".$requestArr['PaginationResult']['TotalNumberOfPages'];
+	                //$api->EntriesPerPage=$requestArr['PaginationResult']['TotalNumberOfEntries'];
+	            }
+	
+	            if (($eu['sync_order_retry_count'] > 0) || (!empty($eu['error_message'])) ){
+	                $effect = SaasEbayUser::updateAll(['sync_order_retry_count'=>0,'error_message'=>''],['selleruserid'=>$eu['selleruserid']]);
+	                echo "\n ".(__function__)." puid=".$eu['uid']." selleruserid:".$eu['selleruserid']."  set ebay user sync_order_retry_count = 0  and error_message=".$eu['error_message']." =>'' efftct=".$effect." and retry count=".$eu['sync_order_retry_count'];
+	            }
+	
+	        }else{
+	            echo "\n E001 api request failure!";
+	            if (!empty($api->_last_response_xmlarray)){
+	                $requestArr = $api->_last_response_xmlarray;
+	                echo "\n  this request ack ".@$requestArr['Ack'] ."!";
+	                try {
+	                    /* 以下五种错误需要将同步 关闭
+	                     * 841 = Requested user is suspended.
+	                     * 931 = Auth token is invalid.
+	                     * 932 = Auth token is hard expired.
+	                     * 16110 = Token has been revoked by the user.
+	                     * 17470 = Please login again now. Your security token has expired.
+	                     * 163  Inactive application or developer 开发者账号问题
+	                     */
+	                    if ($requestArr['Ack'] =='Failure' && in_array($requestArr['Errors']['ErrorCode'] , ['841','931','932' , '16110','17470','163']) ){
+	                        //20171019 加入重试10次的机制
+	                        if ($eu['sync_order_retry_count']>10){
+	                            $effect = SaasEbayAutosyncstatus::updateAll(['status'=>0],['selleruserid'=>$eu['selleruserid']]);
+	                            echo "\n ".(__function__)." puid=".$eu['uid']." selleruserid:".$eu['selleruserid']." ".$requestArr['Errors']['ShortMessage'].",then set status = 0  efftct=".$effect." and retry count=".$eu['sync_order_retry_count'];
+	                            $effect = SaasEbayUser::updateAll(['item_status'=>0 ,'sync_order_retry_count'=>0,'error_message'=>$requestArr['Errors']['ShortMessage']],['selleruserid'=>$eu['selleruserid']]);
+	                            echo "\n ".(__function__)." puid=".$eu['uid']." selleruserid:".$eu['selleruserid']."  set ebay user item_status = 0  efftct=".$effect." and retry count=".$eu['sync_order_retry_count'];
+	                        }else{
+	                            $effect = SaasEbayUser::updateAll(['sync_order_retry_count'=>$eu['sync_order_retry_count']+1 ,'error_message'=>$requestArr['Errors']['ShortMessage']],['selleruserid'=>$eu['selleruserid']]);
+	                            echo "\n ".(__function__)." puid=".$eu['uid']." selleruserid:".$eu['selleruserid']."  set ebay user sync_order_retry_count +1  efftct=".$effect." and retry count=".$eu['sync_order_retry_count'];
+	                        }
+	                        	
+	                        	
+	                    }else{
+	                        //warning 的情况
+	                        /*
+	                         * 21918011 = An error has occurred while fetching listing item details through WMM Service API call
+	                         */
+	                        	
+	                        if($requestArr['Errors']['ErrorCode'] == '21918011'){
+	                            print_r($requestArr);
+	                            //应急处理， 避免重试次数过多
+	                            //return true;
+	                        }
+	                        echo "\n ".(__function__)." puid=".$eu['uid']." selleruserid:".$eu['selleruserid']." short message:".$requestArr['Errors']['ShortMessage']." and error code = ".$requestArr['Errors']['ErrorCode'];
+	                    }
+	
+	                } catch (\Exception $ex) {
+	                    echo "\n".(__function__).' Error Message:' . $ex->getMessage () ." Line no ".$ex->getLine(). "\n";
+	                }
+	                	
+	                	
+	            }else{
+	                echo "\n can't get respone ";
+	            }
+	            break 1;
+	        }
+	    }while(1);
+	    return false;
+	}
+	
+	
+	
+	
 }

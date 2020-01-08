@@ -95,7 +95,6 @@ class NeweggOrderController extends \eagle\components\Controller{
 		ConfigHelper::setPageLastOpenedSize($page_url, $pageSize);
 		
 		$data=OdOrder::find();
-		
 		//不显示 解绑的账号的订单
 		if (!in_array($puid,$test_userid['yifeng']))
 			$data->andWhere(['selleruserid'=>$accountList]);
@@ -125,7 +124,6 @@ class NeweggOrderController extends \eagle\components\Controller{
 		$startDateTime = empty($_REQUEST['starttime'])?'':$_REQUEST['starttime'];
 		$endDateTime = empty($_REQUEST['endtime'])?'':$_REQUEST['endtime'];
 		
-		$_REQUEST;
 		$tmp_REQUEST_text['where']=empty($data->where)?Array():$data->where;
 		$tmp_REQUEST_text['orderBy']=empty($data->orderBy)?Array():$data->orderBy;
 		$omsRT = OrderApiHelper::getOrderListByConditionOMS($_REQUEST,$addi_condition,$data,$pageSize,false,'all');
@@ -146,9 +144,13 @@ class NeweggOrderController extends \eagle\components\Controller{
 				'pageSizeLimit'=>[20,200],//每页显示条数范围
 				'params'=>$_REQUEST,
 				]);
-		$models = $data->offset($pages->offset)
-			->limit($pages->limit)
-			->all();
+		
+		$data->offset($pages->offset)->limit($pages->limit);
+		
+// 		$tmpCommand = $data->createCommand();
+// 		echo $tmpCommand->getRawSql();
+		
+		$models = $data->all();
 		
 		
 		$excelmodel	=	new Excelmodel();

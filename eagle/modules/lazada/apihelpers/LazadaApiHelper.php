@@ -86,6 +86,7 @@ class LazadaApiHelper
         "SFC Service"=>"SFC Service",
         "Mail Americas"=>"Mail Americas",
     	"Skypostal"=>"Skypostal",
+        "360 Lion Express"=>"360 Lion Express",
     );
     
     public static $JUMIA_BUYER_SHIPPING_SERVICES = array(
@@ -1464,28 +1465,35 @@ class LazadaApiHelper
     // 由于目录树返回内容比较多，所以更新失败不删除，以免客户自动拉取太慢。
     public static function refreshCategoryTree()
     {
-        $trees = LazadaCategories::find()->asArray()->all(); 
+        $lazadaSites = array_keys(LazadaApiHelper::getLazadaCountryCodeSiteMapping());
+        $trees = LazadaCategories::find()->where(['not in', 'site', $lazadaSites])
+        ->asArray()->all();
         \Yii::info("refreshCategoryTree There are " . count($trees) . " trees to update.", "file");
+		echo "There are ".count($trees)." trees to update.\n";
+		
         foreach ($trees as $tree) {
-            if(!array_key_exists($tree['site'], LazadaApiHelper::getLazadaCountryCodeSiteMapping())){//旧接口不再处理lazada的国家
-                // @todo 最近绑定的账号可能还不可靠，后面可以改为最近更新过信息的账号。
-                $lazadaUserQuery = SaasLazadaUser::find()->where(['lazada_site' => $tree['site']]);
-                $lazadaUser = $lazadaUserQuery->orderBy('create_time desc')->one();
-                \Yii::info("refreshCategoryTree site:" . $tree['site'], "file");
-                if (!empty($lazadaUser)) {
-                    $config = array(
-                            "userId" => $lazadaUser->platform_userid,
-                            "apiKey" => $lazadaUser->token,
-                            "countryCode" => $lazadaUser->lazada_site
-                    );
+            // @todo 最近绑定的账号可能还不可靠，后面可以改为最近更新过信息的账号。
+            $lazadaUserQuery = SaasLazadaUser::find()->where(['lazada_site' => $tree['site'], 'status'=>1]);
+            $lazadaUser = $lazadaUserQuery->orderBy('create_time desc')->one();
+// 			echo "site:".$tree['site']."\n";
+            \Yii::info("refreshCategoryTree site:" . $tree['site'], "file");
+            echo "refreshCategoryTree site:" . $tree['site'].".\n";
+            
+            if (!empty($lazadaUser)) {
+                $config = array(
+                    "userId" => $lazadaUser->platform_userid,
+                    "apiKey" => $lazadaUser->token,
+                    "countryCode" => $lazadaUser->lazada_site
+                );
                 
-                    \Yii::info("refreshCategoryTree getCategoryTree site:" . $tree['site'] . ",config:" . json_encode($config), "file");
-                    list($ret, $categories) = SaasLazadaAutoSyncApiHelper::getCategoryTree($config, false);
-                    if ($ret == false) {
-                        \Yii::info("refreshCategoryTree site:" . $tree['site'] . " " . $categories, "file");
-                    } else {
-                        \Yii::info("refreshCategoryTree site:" . $tree['site'] . " update success.", "file");
-                    }
+                \Yii::info("refreshCategoryTree getCategoryTree site:" . $tree['site'] . ",config:" . json_encode($config), "file");
+                list($ret, $categories) = SaasLazadaAutoSyncApiHelper::getCategoryTree($config, false);
+                if ($ret == false) {
+                    \Yii::info("refreshCategoryTree false site:" . $tree['site'] . " " . $categories, "file");
+					echo "refreshCategoryTree false site:" . $tree['site'] . " " . $categories.PHP_EOL;
+                } else {
+                    \Yii::info("refreshCategoryTree site:" . $tree['site'] . " update success.", "file");
+					echo "refreshCategoryTree site:" . $tree['site'] . " update success.".PHP_EOL;
                 }
             }
         }
@@ -1495,58 +1503,69 @@ class LazadaApiHelper
     // 由于目录树返回内容比较多，所以更新失败不删除，以免客户自动拉取太慢。
     public static function refreshCategoryTreeV2()
     {
-        $trees = LazadaCategories::find()->asArray()->all(); 
+        //新接口只更新lazada的国家
+        $lazadaSites = array_keys(LazadaApiHelper::getLazadaCountryCodeSiteMapping());
+        $trees = LazadaCategories::find()->where(['site'=>$lazadaSites])
+        ->asArray()->all();//->where("`site`='co' and puid=4179")
         \Yii::info("refreshCategoryTree There are " . count($trees) . " trees to update.", "file");
+		echo "There are ".count($trees)." trees to update.\n";
+		
         foreach ($trees as $tree) {
-            if(array_key_exists($tree['site'], LazadaApiHelper::getLazadaCountryCodeSiteMapping())){//新接口只更新lazada的国家
-                // @todo 最近绑定的账号可能还不可靠，后面可以改为最近更新过信息的账号。
-                $lazadaUserQuery = SaasLazadaUser::find()->where(['lazada_site' => $tree['site'],'version'=>"v2"]);
-                $lazadaUser = $lazadaUserQuery->orderBy('create_time desc')->one();
-                \Yii::info("refreshCategoryTree site:" . $tree['site'], "file");
-                if (!empty($lazadaUser)) {
-                    $config = array(
-                        "userId" => $lazadaUser->platform_userid,
-                        "apiKey" => $lazadaUser->access_token,
-                        "countryCode" => $lazadaUser->lazada_site
-                    );
-                
-                    \Yii::info("refreshCategoryTreeV2 getCategoryTree site:" . $tree['site'] . ",config:" . json_encode($config), "file");
-                    list($ret, $categories) = SaasLazadaAutoSyncApiHelperV4::getCategoryTree($config, false);
-                    if ($ret == false) {
-                        \Yii::info("refreshCategoryTreeV2 site:" . $tree['site'] . " " . $categories, "file");
-                    } else {
-                        \Yii::info("refreshCategoryTreeV2 site:" . $tree['site'] . " update success.", "file");
-                    }
+            // @todo 最近绑定的账号可能还不可靠，后面可以改为最近更新过信息的账号。
+            $lazadaUserQuery = SaasLazadaUser::find()->where(['lazada_site' => $tree['site'],'version'=>"v2"]);
+            $lazadaUser = $lazadaUserQuery->orderBy('create_time desc')->one();
+			echo "refreshCategoryTree site:" . $tree['site']."\n";
+            \Yii::info("refreshCategoryTree site:" . $tree['site'], "file");
+            if (!empty($lazadaUser)) {
+                $config = array(
+                    "userId" => $lazadaUser->platform_userid,
+                    "apiKey" => $lazadaUser->access_token,
+                    "countryCode" => $lazadaUser->lazada_site
+                );
+            
+                \Yii::info("refreshCategoryTreeV2 getCategoryTree site:" . $tree['site'] . ",config:" . json_encode($config), "file");
+                list($ret, $categories) = SaasLazadaAutoSyncApiHelperV4::getCategoryTree($config, false);
+                if ($ret == false) {
+                    \Yii::info("refreshCategoryTreeV2 site:" . $tree['site'] . " " . $categories, "file");
+					echo "refreshCategoryTreeV2 site:" . $tree['site'] . " " . $categories.PHP_EOL;
+                } else {
+                    \Yii::info("refreshCategoryTreeV2 site:" . $tree['site'] . " update success.", "file");
+					echo "refreshCategoryTreeV2 site:" . $tree['site'] . " update success.".PHP_EOL;
                 }
             }
         }
     }
 
-    // 刷新数据库缓存的lazada ,linio,jumia目录
+    // 刷新数据库缓存的linio,jumia目录
     // 如果更新失败就删除
     public static function refreshCategoryAttrs()
     {
-        $catAttrs = LazadaCategoryAttr::find()
+        $lazadaSites = array_keys(LazadaApiHelper::getLazadaCountryCodeSiteMapping());
+        $catAttrs = LazadaCategoryAttr::find()->where(['not in', 'site', $lazadaSites])
         ->asArray()->all();
         
         \Yii::info("refreshCategoryAttrs There are " . count($catAttrs) . " categorires to update.", "file");
+		echo "There are ".count($catAttrs)." categorires to update.\n";
         foreach ($catAttrs as $catAttr) {
-            if(!array_key_exists($catAttr['site'], LazadaApiHelper::getLazadaCountryCodeSiteMapping())){
+            \Yii::info("refreshCategoryAttrs site:" . $catAttr['site'] . " categoryid:" . $catAttr['categoryid'], "file");
+            echo"refreshCategoryAttrs site:" . $catAttr['site'] . " categoryid:" . $catAttr['categoryid']."\n";
+            
                 // @todo 最近绑定的账号可能还不可靠，后面可以改为最近更新过信息的账号。
-                $lazadaUser = SaasLazadaUser::find()->where(['lazada_site' => $catAttr['site']])->orderBy('create_time desc')->one();
-                if (!empty($lazadaUser)) {
-                    $config = array(
-                            "userId" => $lazadaUser->platform_userid,
-                            "apiKey" => $lazadaUser->token,
-                            "countryCode" => $lazadaUser->lazada_site
-                    );
+            $lazadaUser = SaasLazadaUser::find()->where(['lazada_site' => $catAttr['site']])->orderBy('create_time desc')->one();
+            if (!empty($lazadaUser)) {
+                $config = array(
+                    "userId" => $lazadaUser->platform_userid,
+                    "apiKey" => $lazadaUser->token,
+                    "countryCode" => $lazadaUser->lazada_site
+                );
                 
-                    list($ret, $categories) = SaasLazadaAutoSyncApiHelper::getCategoryAttributes($config, $catAttr['categoryid'], false);
-                    if ($ret == false) {
-                        \Yii::info("refreshCategoryAttrs $categories", "file");
-                        // 站点目录变化，会导致某些目录无法再更新成功要删除
-                        LazadaCategoryAttr::deleteAll(['id' => $catAttr['id']]);
-                    }
+                list($ret, $categories) = SaasLazadaAutoSyncApiHelper::getCategoryAttributes($config, $catAttr['categoryid'], false);
+                if ($ret == false) {
+	                echo "refreshCategoryAttrs false $categories\n";
+	                \Yii::info("refreshCategoryAttrs false $categories", "file");
+// 					echo " ".$categories.PHP_EOL;
+                    // 站点目录变化，会导致某些目录无法再更新成功要删除
+                    LazadaCategoryAttr::deleteAll(['id' => $catAttr['id']]);
                 }
             }
         }
@@ -1556,29 +1575,32 @@ class LazadaApiHelper
     // 如果更新失败就删除
     public static function refreshCategoryAttrsV2()
     {
-        $catAttrs = LazadaCategoryAttr::find()
+        //新接口只更新lazada的国家
+        $lazadaSites = array_keys(LazadaApiHelper::getLazadaCountryCodeSiteMapping());
+        $catAttrs = LazadaCategoryAttr::find()->where(['site'=>$lazadaSites])
         ->asArray()->all();
     
         \Yii::info("refreshCategoryAttrs There are " . count($catAttrs) . " categorires to update.", "file");
+		echo "refreshCategoryAttrs There are " . count($catAttrs) . " categorires to update.\n";
         foreach ($catAttrs as $catAttr) {
-            if(array_key_exists($catAttr['site'], LazadaApiHelper::getLazadaCountryCodeSiteMapping())){
-                \Yii::info("refreshCategoryAttrsV2 site:" . $catAttr['site'] . " categoryid:" . $catAttr['categoryid'], "file");
+            \Yii::info("refreshCategoryAttrsV2 site:" . $catAttr['site'] . " categoryid:" . $catAttr['categoryid'], "file");
+			echo "refreshCategoryAttrsV2 site:" . $catAttr['site'] . " categoryid:" . $catAttr['categoryid']."\n";
                 
-                // @todo 最近绑定的账号可能还不可靠，后面可以改为最近更新过信息的账号。
-                $lazadaUser = SaasLazadaUser::find()->where(['lazada_site' => $catAttr['site'],'version'=>"v2"])->orderBy('create_time desc')->one();
-                if (!empty($lazadaUser)) {
-                    $config = array(
-                        "userId" => $lazadaUser->platform_userid,
-                        "apiKey" => $lazadaUser->access_token,
-                        "countryCode" => $lazadaUser->lazada_site
-                    );
-                
-                    list($ret, $categories) = SaasLazadaAutoSyncApiHelperV4::getCategoryAttributes($config, $catAttr['categoryid'], false);
-                    if ($ret == false) {
-                        \Yii::info("refreshCategoryAttrsV2 $categories", "file");
-                        // 站点目录变化，会导致某些目录无法再更新成功要删除
-                        LazadaCategoryAttr::deleteAll(['id' => $catAttr['id']]);
-                    }
+            // @todo 最近绑定的账号可能还不可靠，后面可以改为最近更新过信息的账号。
+            $lazadaUser = SaasLazadaUser::find()->where(['lazada_site' => $catAttr['site'],'version'=>"v2"])->orderBy('create_time desc')->one();
+            if (!empty($lazadaUser)) {
+                $config = array(
+                    "userId" => $lazadaUser->platform_userid,
+                    "apiKey" => $lazadaUser->access_token,
+                    "countryCode" => $lazadaUser->lazada_site
+                );
+            
+                list($ret, $categories) = SaasLazadaAutoSyncApiHelperV4::getCategoryAttributes($config, $catAttr['categoryid'], false);
+                if ($ret == false) {
+                    \Yii::info("refreshCategoryAttrsV2 $categories", "file");
+				echo "refreshCategoryAttrsV2 $categories".PHP_EOL;
+                    // 站点目录变化，会导致某些目录无法再更新成功要删除
+                    LazadaCategoryAttr::deleteAll(['id' => $catAttr['id']]);
                 }
             }
         }
@@ -1597,9 +1619,11 @@ class LazadaApiHelper
 
 
         \Yii::info("refreshBrands There are " . count($toUpBrands) . " sites' brands to update.", "file");
-// 		echo "There are ".count($toUpBrands)." sites' brands to update.\n";
+		echo "There are ".count($toUpBrands)." sites' brands to update.\n";
         foreach ($toUpBrands as $brand) {
             \Yii::info("refreshBrands site:" . $brand['site'], "file");
+			echo "refreshBrands site:" . $brand['site'].PHP_EOL;
+            
             // @todo 最近绑定的账号可能还不可靠，后面可以改为最近更新过信息的账号。
             $lazadaUser = SaasLazadaUser::find()->where(['lazada_site' => $brand['site']])->orderBy('create_time desc')->one();
             if (!empty($lazadaUser)) {
@@ -1609,11 +1633,13 @@ class LazadaApiHelper
                     "countryCode" => $lazadaUser->lazada_site
                 );
 
-                list($ret, $categories) = SaasLazadaAutoSyncApiHelper::getBrands($config, "", "", true);
+                list($ret, $brands) = SaasLazadaAutoSyncApiHelper::getBrands($config, "", "", true);
                 if ($ret == false) {
-                    \Yii::info("refreshBrands site:" . $brand['site'] . " " . $categories, "file");
+                    \Yii::info("refreshBrands site:" . $brand['site'] . " " . $brands, "file");
+					echo "refreshBrands site:" . $brand['site'] . " " . $brands.PHP_EOL;
                 } else {
                     \Yii::info("refreshBrands site:" . $brand['site'] . " update success.", "file");
+					echo "refreshBrands site:" . $brand['site'] . " update success.".PHP_EOL;
                 }
             }
         }
@@ -1624,17 +1650,19 @@ class LazadaApiHelper
     public static function refreshBrandsV2()
     {
         $toUpBrands = array();
-        $userSites = SaasLazadaUser::find()->where(['status' => 1])->groupBy('lazada_site')->asArray()->all();
+        // 好像是为了确保站点的有账号可以拉取信息 不用LazadaBrand而是这样列出来的，不过好像没啥用。后面可以改回LazadaBrand foreach 更新
+        $userSites = SaasLazadaUser::find()->where(['status' => 1,'platform'=>"lazada"])->groupBy('lazada_site')->asArray()->all();
         foreach ($userSites as $userSite) {
             if(array_key_exists($userSite['lazada_site'], LazadaApiHelper::getLazadaCountryCodeSiteMapping())){//只更新Lazada的站点
                 $toUpBrands[] = array('site' => $userSite['lazada_site']);
             }
         }
-    
-        \Yii::info("refreshBrands There are " . count($toUpBrands) . " sites' brands to update.", "file");
-        // 		echo "There are ".count($toUpBrands)." sites' brands to update.\n";
+   
+        \Yii::info("refreshBrandsV2 There are " . count($toUpBrands) . " sites' brands to update.", "file");
+		echo "There are ".count($toUpBrands)." sites' brands to update.\n";
         foreach ($toUpBrands as $brand) {
             \Yii::info("refreshBrands site:" . $brand['site'], "file");
+			echo "refreshBrandsV2 site:" . $brand['site'].PHP_EOL;
             // @todo 最近绑定的账号可能还不可靠，后面可以改为最近更新过信息的账号。
             $lazadaUser = SaasLazadaUser::find()->where(['lazada_site' => $brand['site'],'version'=>"v2"])->orderBy('create_time desc')->one();
             if (!empty($lazadaUser)) {
@@ -1647,10 +1675,10 @@ class LazadaApiHelper
                 list($ret, $categories) = SaasLazadaAutoSyncApiHelperV4::getBrands($config, "", "", true);
                 if ($ret == false) {
                     \Yii::info("refreshBrandsV2 site:" . $brand['site'] . " " . $categories, "file");
-                    // 					echo " ".$categories.PHP_EOL;
+					echo "refreshBrandsV2 site:" . $brand['site'] . " " . $categories.PHP_EOL;
                 } else {
                     \Yii::info("refreshBrandsV2 site:" . $brand['site'] . " update success.", "file");
-                    // 					echo " update success.".PHP_EOL;
+					echo "refreshBrandsV2 site:" . $brand['site'] . " update success.".PHP_EOL;
                 }
             }
         }
@@ -2035,10 +2063,10 @@ class LazadaApiHelper
 				ORDER BY que.update_time DESC
 				")->query();
 		$result = $res->readAll();
-		$msg = "";
+		$msg = PHP_EOL."====lazada order item情况====";
 		$isCheckSuccess = true;
 		
-		$undoCount = QueueLazadaGetorder::find()
+		$undoCount = QueueLazadaGetorderV2::find()
 		->where('(status=0 or status =3) and error_times<10 and is_active=1')->count();
 		if ($undoCount > 1000) {
 			$isCheckSuccess = false;
@@ -2057,6 +2085,9 @@ class LazadaApiHelper
 				if($vs['status'] != 4){
 					$id = $vs['id'];
 					$update = $connection->createCommand("UPDATE queue_lazada_getorder_v2 SET `status`=0,`error_times`=0 WHERE id='{$id}'")->execute();
+				}elseif($vs['error_times']<3){// dzt20190815 最近db6经常出现半夜changdb 失败的记录，这里允许它重试两次
+				    $id = $vs['id'];
+				    $update = $connection->createCommand("UPDATE queue_lazada_getorder_v2 SET `status`=3 WHERE id='{$id}'")->execute();
 				}
 	
 				$msg .= $mt . 'ItemError--Orderid:' . $vs['orderid'] . '--status:' . $vs['status'] . '--' . '--PUID:' . $vs['puid'] . '--错误次数:' . $vs['error_times'] . '--错误内容:' . $vs['message'] . ',最后更新时间-- ' . $vs['lt'] . ',Lazada登录账户-- ' . $vs['platform_userid'] . PHP_EOL;
@@ -2069,6 +2100,58 @@ class LazadaApiHelper
 			echo "status--{$status}没有的异常数据";
 			yii::info("status--{$status}没有的异常数据", "file");
 		}
+		
+		// ============== for jumia linio =============
+		$connection = Yii::$app->db;
+		$res = $connection->createCommand("
+		        SELECT que.id,que.puid,que.status,que.message,que.error_times,que.orderid,saas_lazada_user.platform_userid,FROM_UNIXTIME(que.update_time) as lt
+		        FROM queue_lazada_getorder que
+		        LEFT JOIN saas_lazada_user ON saas_lazada_user.lazada_uid = que.lazada_uid
+		        WHERE ((que.`status`='{$status}' AND que.update_time <'{$last_time}')
+		        or (que.`status`='4')) or (que.error_times>=10 )
+		        AND que.is_active=1
+		        ORDER BY que.update_time DESC
+		        ")->query();
+		$result = $res->readAll();
+		
+		$msg .= PHP_EOL."====jumia,linio order item情况====";
+		$isCheckSuccess = true;
+		
+		$undoCount = QueueLazadaGetorder::find()
+		->where('(status=0 or status =3) and error_times<10 and is_active=1')->count();
+		if ($undoCount > 1000) {
+		    $isCheckSuccess = false;
+		    $msg .= 'Warning 当前有'.$undoCount.'个订单待拉取，请留意拉取Job的情况'. PHP_EOL;
+		} else {
+		    $msg .= "queue_lazada_getorder Items 拉取正常 当前有$undoCount 个订单item待拉取". PHP_EOL;
+		    echo "queue_lazada_getorder Items 拉取正常 当前有$undoCount 个订单item待拉取";
+		    yii::info("queue_lazada_getorder Items 拉取正常 当前有$undoCount 个订单item待拉取", "file");
+		}
+		
+		if (!empty($result)) {
+		    $isCheckSuccess = false;
+		    foreach ($result as $vs) {
+		        //检查是否活跃用户,在邮件主体中标记出来吧
+		        $mt = self::isActiveUser($vs['puid']) === false ? '非活跃用户' : '活跃用户';
+		        if($vs['status'] != 4){
+		            $id = $vs['id'];
+		            $update = $connection->createCommand("UPDATE queue_lazada_getorder SET `status`=0,`error_times`=0 WHERE id='{$id}'")->execute();
+		        }elseif($vs['error_times']<3){// dzt20190815 最近db6经常出现半夜changdb 失败的记录，这里允许它重试两次
+		            $id = $vs['id'];
+		            $update = $connection->createCommand("UPDATE queue_lazada_getorder SET `status`=3 WHERE id='{$id}'")->execute();
+				}
+	
+				$msg .= $mt . 'ItemError--Orderid:' . $vs['orderid'] . '--status:' . $vs['status'] . '--' . '--PUID:' . $vs['puid'] . '--错误次数:' . $vs['error_times'] . '--错误内容:' . $vs['message'] . ',最后更新时间-- ' . $vs['lt'] . ',Lazada登录账户-- ' . $vs['platform_userid'] . PHP_EOL;
+				$msg .= "<br />";
+			}
+// 			$result = LazadaApiHelper::sendEmail($sendto_email, $subject, $body);
+
+		} else {
+			$msg .= "status--{$status}没有的异常数据";
+			echo "status--{$status}没有的异常数据";
+			yii::info("status--{$status}没有的异常数据", "file");
+		}
+		
 		echo $msg;
 		return array($isCheckSuccess,$msg);
 

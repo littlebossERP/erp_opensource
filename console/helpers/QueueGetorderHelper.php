@@ -38,9 +38,13 @@ class QueueGetorderHelper
 			$M->created=time();
 			$M->save();
 		} else {
-			$M->status = $default_status;
-			$M->updated = time();
-			$M->save();
+		    if($externalid == 5){// dzt20191106 不是插入的不更新
+			        
+			    }else{
+				$M->status = $default_status;
+				$M->updated = time();
+				$M->save();
+			}
 		}
 		
 	}

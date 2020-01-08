@@ -1302,58 +1302,7 @@ class OrderController extends \eagle\components\Controller{
 		
 		die;
 	}
-	
-	/**
-	 * 获取订单数据 用于及时获取订单数据
-	 * million 2014-11-25
-	 * http://v2.littleboss.com/order/order/get-order1?selleruserid=nt-fairing&orderid=141997714808-1287671565004
-	 */
-	function actionGetOrder1(){
-		$selleruserid=$_GET['selleruserid'];
-		$orderid=$_GET['orderid'];
-		if(empty($orderid)) die('No orderid Input .');
-		if($selleruserid){
-			$eu=SaasEbayUser::findOne(['selleruserid'=>$selleruserid]);
-		}else{
-			die('No selleruserid Input .');
-		}
-		
-		$api=new getorders();
-		$api->resetConfig($eu->DevAcccountID);
-		$api->eBayAuthToken=$eu->token;
-		$api->_before_request_xmlarray['OrderID']=$orderid;
-		$r=$api->api();
-		echo "<pre>";
-		print_r($r);
-		echo "</pre>";
-		die;
-	}
-	/**
-	 * 获取订单transaction数据 用于及时获取订单transaction数据
-	 * million 2014-11-25
-	 * http://v2.littleboss.com/order/order/get-order2?selleruserid=nt-fairing&orderid=141997714808-1287671565004
-	 */
-	function actionGetOrder2(){
-		$selleruserid=$_GET['selleruserid'];
-		$orderid=$_GET['orderid'];
-		if(empty($orderid)) die('No orderid Input .');
-		if($selleruserid){
-			$eu=SaasEbayUser::findOne(['selleruserid'=>$selleruserid]);
-		}else{
-			die('No selleruserid Input .');
-		}
-		$api=new getsellertransactions();
-		$api->resetConfig($eu->DevAcccountID);
-		$api->eBayAuthToken=$eu->token;
-		//控制输出内容
-		//$api->_before_request_xmlarray['OutputSelector']="OrderArray.Order.TransactionArray.Transaction.PayPalEmailAddress,OrderArray.Order.OrderID";
-		$r=$api->api($orderid);
-		echo "<pre>";
-		print_r($r);
-		echo "</pre>";
-		die;
-	}
-	
+
 	
 	/**
 	 +----------------------------------------------------------

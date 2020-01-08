@@ -176,6 +176,7 @@ class ShopeeInterface_Helper{
 				$is_get_item_status = true;   //获取商品是否成功
 				$subtotal = 0;   //产品总价
 				$orderitem_arr = array();   //商品明细
+				$totalDiscount = 0;// 产品折扣
 				foreach($order['items'] as $item){
 					$item_res = $api->GetItemDetail(['item_id' => $item['item_id']]);
 					if(empty($item_res['item'])){// sHopee接口不稳定有时候返回null 重试即可
@@ -192,7 +193,23 @@ class ShopeeInterface_Helper{
 					}
 					$item['attributes'] = rtrim($attributes, ' + ');
 					//单价
-					$price = $item_detail['price'];
+// 					$price = $item_detail['price'];
+                    //dzt20191030 出现订单 sub_total+运费小于grand_total情况，发现产品单价低了，对比其他字段猜测用variation_original_price代替
+                    
+					
+					if(!empty($item['variation_discounted_price'])){
+					    $price = $item['variation_discounted_price'];
+					    
+					    // 计算折扣
+					    if(!empty($item['variation_original_price'])){
+					        $totalDiscount += $item['variation_original_price'] - $item['variation_discounted_price'];
+					    }
+					}elseif(!empty($item['variation_original_price'])){
+					    $price = $item['variation_original_price'];
+					}else{
+						$price = $item_detail['price'];
+					}
+					
 					if(!empty($item['is_wholesale'])){
 						//当是以批发价购买
 						if(!empty($item_detail['wholesales']['unit_price'])){
@@ -297,6 +314,7 @@ class ShopeeInterface_Helper{
 					'order_source_create_time' => self::transLaStrTimetoTimestamp($order['create_time']),
 					'subtotal' => $subtotal,
 					'shipping_cost' => empty($order['estimated_shipping_fee']) ? 0 : $order['estimated_shipping_fee'],
+				    'discount_amount'=>$totalDiscount,
 					'grand_total' => $order['total_amount'],
 					'currency' => $order['currency'],
 					'consignee' => $order['recipient_address']['name'],

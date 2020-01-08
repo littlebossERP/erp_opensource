@@ -789,11 +789,11 @@ class CdiscountOrderHelper {
 								echo "\n isset ".'orders[proxyResponse][orderList][s_Body][GetOrderListResponse][GetOrderListResult][OrderList][Order]';
 							//sync cdiscount info to cdiscount order table
 							if(!empty($orders['proxyResponse']['orderList']['s_Body']['GetOrderListResponse']['GetOrderListResult']['OrderList']['Order'])){
-								echo "\n !empty ".'orders[proxyResponse][orderList][s_Body][GetOrderListResponse][GetOrderListResult][OrderList][Order]';
+								// echo "\n !empty ".'orders[proxyResponse][orderList][s_Body][GetOrderListResponse][GetOrderListResult][OrderList][Order]';
 								//print_r($orders['proxyResponse']['orderList']['s_Body']['GetOrderListResponse']['GetOrderListResult']['OrderList']['Order'][0]);
 								
 								$getOrderCount = count($orders['proxyResponse']['orderList']['s_Body']['GetOrderListResponse']['GetOrderListResult']['OrderList']['Order']);
-								
+								echo "\n !empty ".'orders[proxyResponse][orderList][s_Body][GetOrderListResponse][GetOrderListResult][OrderList][Order] getOrderCount:'.$getOrderCount;
 								$rtn = self::_InsertCdiscountOrder($orders['proxyResponse']['orderList']['s_Body']['GetOrderListResponse']['GetOrderListResult']['OrderList']['Order'] , $cdiscountAccount,$the_day);
 								//\Yii::info(['cdiscount',__CLASS__,__FUNCTION__,'Background',"uid = $uid handled orders count ".count($orders['proxyResponse']['orderList']['s_Body']['GetOrderListResponse']['GetOrderListResult']['OrderList']['Order'])." for ".$cdiscountAccount['token']],"edb\global");
 								
@@ -991,11 +991,11 @@ class CdiscountOrderHelper {
 					echo "\n isset ".'orders[proxyResponse][orderList][s_Body][GetOrderListResponse][GetOrderListResult][OrderList][Order]';
 					//sync cdiscount info to cdiscount order table
 				if(!empty($orders['proxyResponse']['orderList']['s_Body']['GetOrderListResponse']['GetOrderListResult']['OrderList']['Order'])){
-					echo "\n !empty ".'orders[proxyResponse][orderList][s_Body][GetOrderListResponse][GetOrderListResult][OrderList][Order]';
+					// echo "\n !empty ".'orders[proxyResponse][orderList][s_Body][GetOrderListResponse][GetOrderListResult][OrderList][Order]';
 					//print_r($orders['proxyResponse']['orderList']['s_Body']['GetOrderListResponse']['GetOrderListResult']['OrderList']['Order'][0]);
 			
 					$getOrderCount = count($orders['proxyResponse']['orderList']['s_Body']['GetOrderListResponse']['GetOrderListResult']['OrderList']['Order']);
-				
+					echo "\n !empty ".'orders[proxyResponse][orderList][s_Body][GetOrderListResponse][GetOrderListResult][OrderList][Order] getOrderCount:'.$getOrderCount;
 					$rtn = self::_InsertCdiscountOrder($orders['proxyResponse']['orderList']['s_Body']['GetOrderListResponse']['GetOrderListResult']['OrderList']['Order'] , $cdiscountAccount);
 					//\Yii::info(['cdiscount',__CLASS__,__FUNCTION__,'Background',"uid = $uid handled orders count ".count($orders['proxyResponse']['orderList']['s_Body']['GetOrderListResponse']['GetOrderListResult']['OrderList']['Order'])." for ".$cdiscountAccount['token']],"edb\global");
 				
@@ -1168,6 +1168,7 @@ class CdiscountOrderHelper {
 				$ids[] = (string)$anOrder['OrderNumber'] ;
 			}
 			
+			echo PHP_EOL."api get orders".implode(', ', $ids).PHP_EOL;
 			$inCdiscountOrderTable = CdiscountOrder::find()->where(['ordernumber'=>$ids])->all();
 			
 			foreach ($inCdiscountOrderTable as $aRec){
@@ -1370,8 +1371,11 @@ class CdiscountOrderHelper {
 							$toUpdate = true;
 					}
 				}
-				if(empty($toUpdate))
-					continue;
+				if(empty($toUpdate)){
+				    echo PHP_EOL." no update skip ordernumber:".$orderInfo['ordernumber'].PHP_EOL;//.print_r($orderInfo, true)
+				    continue;
+				}
+					
 				if (!empty($orderInfo)){
 					$orderModel->setAttributes($orderInfo);
 					$orderModel->updated_time = TimeUtil::getNow();
@@ -3602,7 +3606,7 @@ class CdiscountOrderHelper {
 				return false;
 			}
 			//start to get unfulfilled orders
-			echo "\n".TimeUtil::getNow()." start to get $uid order for ".$cdiscountAccount['store_name']." since $begincreationdate \n"; //ystest
+			echo "\n".TimeUtil::getNow()." start to get uid:$uid order for ".$cdiscountAccount['store_name']." since $begincreationdate \n"; //ystest
 			
 			//大客户链接时间延长
 			$time_out=120;
@@ -3641,11 +3645,11 @@ class CdiscountOrderHelper {
 					echo "\n isset ".'orders[proxyResponse][orderList][s_Body][GetOrderListResponse][GetOrderListResult][OrderList][Order]';
 				//sync cdiscount info to cdiscount order table
 				if(!empty($orders['proxyResponse']['orderList']['s_Body']['GetOrderListResponse']['GetOrderListResult']['OrderList']['Order'])){
-					echo "\n !empty ".'orders[proxyResponse][orderList][s_Body][GetOrderListResponse][GetOrderListResult][OrderList][Order]';
+					// echo "\n !empty ".'orders[proxyResponse][orderList][s_Body][GetOrderListResponse][GetOrderListResult][OrderList][Order]';
 					//print_r($orders['proxyResponse']['orderList']['s_Body']['GetOrderListResponse']['GetOrderListResult']['OrderList']['Order'][0]);
 								
 					$getOrderCount = count($orders['proxyResponse']['orderList']['s_Body']['GetOrderListResponse']['GetOrderListResult']['OrderList']['Order']);
-		
+					echo "\n !empty ".'orders[proxyResponse][orderList][s_Body][GetOrderListResponse][GetOrderListResult][OrderList][Order] getOrderCount:'.$getOrderCount;
 					$rtn = self::_InsertCdiscountOrder($orders['proxyResponse']['orderList']['s_Body']['GetOrderListResponse']['GetOrderListResult']['OrderList']['Order'] , $cdiscountAccount,$the_day);
 					//\Yii::info(['cdiscount',__CLASS__,__FUNCTION__,'Background',"uid = $uid handled orders count ".count($orders['proxyResponse']['orderList']['s_Body']['GetOrderListResponse']['GetOrderListResult']['OrderList']['Order'])." for ".$cdiscountAccount['token']],"edb\global");
 		

@@ -482,9 +482,9 @@ class SaasLazadaAutoFetchApiHelper{
 			}
 			
 			$timeMS2=TimeUtil::getCurrentTimestampMS();
-			//list($ret,$errorMessage)=self::_getOrderListAndSaveToQueue($config,$start_time,$end_time,$SAA_obj,"createTime",$offset,'pending');
+			list($ret,$errorMessage)=self::_getOrderListAndSaveToQueue($config,$start_time,$end_time,$SAA_obj,"createTime",$offset,'pending');
 			$timeMS3=TimeUtil::getCurrentTimestampMS();
-			list($ret,$errorMessage)=self::_getOrderListAndSaveToQueue($config,$start_time,$end_time,$SAA_obj,"createTime");
+			//list($ret,$errorMessage)=self::_getOrderListAndSaveToQueue($config,$start_time,$end_time,$SAA_obj,"createTime");
 			if ($ret==false){
 			    Yii::info("getOrderListOldFirst platform:".$SAA_obj->platform.",site:".$SAA_obj->site.",puid:".$SAA_obj->puid.",lazada_uid:".$SAA_obj->lazada_uid.", $start_time,$end_time,$type --- error message=$errorMessage,t2_1=".($timeMS2-$timeMS1).",t3_2=".($timeMS3-$timeMS2).",t3_1=".($timeMS3-$timeMS1),"file");
 				$SAA_obj->message=$errorMessage;
@@ -982,7 +982,8 @@ class SaasLazadaAutoFetchApiHelper{
 		if("Côte d’Ivoire" == $consigneeCountry)// dzt20180327 jumia 返回国家为Côte d’Ivoire 数据表为Cote d Ivoire (Ivory Coast)
 		    $consigneeCountry = "Cote d Ivoire (Ivory Coast)";
 		
-		
+		$consigneeCountryCode = "";
+		if(!empty($consigneeCountry)){// dzt20191102 发现cancel订单没有地址信息
 		$tempObj=SysCountry::findOne(['country_en'=>$consigneeCountry]);
 		if ($tempObj===null){
 			echo "lazada consigneeCountry:$consigneeCountry not in Sys_Country table \n";
@@ -990,6 +991,8 @@ class SaasLazadaAutoFetchApiHelper{
 			return array('success'=>1,'message'=>"lazada consigneeCountry:$consigneeCountry not in Sys_Country table" );				
 		} 
 		$consigneeCountryCode=$tempObj->country_code;
+		}
+		
 	
 		//物流信息
 		$orderShipped = array();

@@ -164,9 +164,9 @@ class AliexpressOrderV2Helper{
 								'money_back3x' => $pl['money_back3x'],
 								'product_count' => $pl['product_count'],
 								'product_id' => $productid,
-								'product_img_url' => $pl['product_img_url'],
+								'product_img_url' => empty($pl['product_img_url'])?"":$pl['product_img_url'],//dzt20191018 最近有些产品没有图片，和URL
 								'product_name' => $pl['product_name'],
-								'product_snap_url' => $pl['product_snap_url'],
+								'product_snap_url' => empty($pl['product_snap_url'])?"":$pl['product_snap_url'],//dzt20191018
 								'product_unit' => $pl['product_unit'],
 								'product_unit_price' => empty($pl['product_unit_price']['cent_factor']) ? $pl['product_unit_price']['amount'] : $pl['product_unit_price']['cent'] / $pl['product_unit_price']['cent_factor'],
 								'product_unit_price_cur' => $pl['product_unit_price']['currency_code'],
@@ -498,9 +498,9 @@ class AliexpressOrderV2Helper{
 									'money_back3x' => $pl['money_back3x'],
 									'product_count' => $pl['product_count'],
 									'product_id' => $productid,
-									'product_img_url' => $pl['product_img_url'],
+									'product_img_url' => empty($pl['product_img_url'])?"":$pl['product_img_url'],//dzt20191018
 									'product_name' => $pl['product_name'],
-									'product_snap_url' => $pl['product_snap_url'],
+									'product_snap_url' => empty($pl['product_snap_url'])?"":$pl['product_snap_url'],//dzt20191018
 									'product_unit' => $pl['product_unit'],
 									'product_unit_price' => empty($pl['product_unit_price']['cent_factor']) ? $pl['product_unit_price']['amount'] : $pl['product_unit_price']['cent'] / $pl['product_unit_price']['cent_factor'],
 									'product_unit_price_cur' => $pl['product_unit_price']['currency_code'],
@@ -873,9 +873,9 @@ class AliexpressOrderV2Helper{
 								'money_back3x' => $pl['money_back3x'],
 								'product_count' => $pl['product_count'],
 								'product_id' => $productid,
-								'product_img_url' => $pl['product_img_url'],
+								'product_img_url' => empty($pl['product_img_url'])?"":$pl['product_img_url'],//dzt20191018
 								'product_name' => $pl['product_name'],
-								'product_snap_url' => $pl['product_snap_url'],
+								'product_snap_url' => empty($pl['product_snap_url'])?"":$pl['product_snap_url'],//dzt20191018
 								'product_unit' => $pl['product_unit'],
 								'product_unit_price' => empty($pl['product_unit_price']['cent_factor']) ? $pl['product_unit_price']['amount'] : $pl['product_unit_price']['cent'] / $pl['product_unit_price']['cent_factor'],
 								'product_unit_price_cur' => $pl['product_unit_price']['currency_code'],

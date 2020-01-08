@@ -33,7 +33,7 @@ return [
 			    [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
-					'except'=>['file','edb\*']
+					'except'=>['file','edb\*','carrier_api']
                 ],
                 [
                     'class' => 'yii\log\FileTarget',
@@ -51,6 +51,37 @@ return [
 	                'logFile'=>'@runtime/logs/eagle_error.log.'.date('Ymd'),
 	                'maxFileSize'=>5000,  //Maximum log file size, in kilo-bytes.
 	                'maxLogFiles'=>3  //Number of log files used for rotation.
+                ],
+                [
+                    'exportInterval' => 1,
+                    'class' => 'eagle\modules\util\models\EFileTarget',
+                    'levels' => ['info'],
+                    'categories'=>['sync_order_ship'],
+                    'logVars'=>[],
+                    'logFile'=>'@runtime/logs/sync_order_ship.log.'.date('Ymd'),
+                    'maxFileSize'=>29000,  //Maximum log file size, in kilo-bytes.
+                    'maxLogFiles'=>2  //Number of log files used for rotation.
+                ],
+                [
+                    'exportInterval' => 1,
+                    'class' => 'eagle\modules\util\models\EFileTarget',
+                    'levels' => ['info'],
+                    'categories'=>['carrier_api'],
+                    'logVars'=>[],
+                    'logFile'=>'@runtime/logs/carrier_api.log.'.date('Ymd'),
+                    'maxFileSize'=>900000,  //Maximum log file size, in kilo-bytes.
+                    'maxLogFiles'=>2  //Number of log files used for rotation.
+                ],
+
+                [
+                    'exportInterval' => 1,
+                    'class' => 'eagle\modules\util\models\EFileTarget',
+                    'levels' => ['info'],
+                    'categories'=>['ebayapi'],
+                    'logVars'=>[],
+                    'logFile'=>'@runtime/logs/ebayapi.log.'.date('Ymd'),
+                    'maxFileSize'=>900000,  //Maximum log file size, in kilo-bytes.
+                    'maxLogFiles'=>5  //Number of log files used for rotation.
                 ],
                 [
 	                'class' => 'eagle\modules\util\models\EDbTarget',

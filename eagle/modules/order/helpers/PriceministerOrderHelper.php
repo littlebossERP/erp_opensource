@@ -328,10 +328,17 @@ class PriceministerOrderHelper {
 		try {
 			
 			$half_hours_ago = date('Y-m-d H:i:s',strtotime('-30 minutes'));
+			$twoHoursAgo = date('Y-m-d H:i:s',strtotime('-120 minutes'));
 			//update the new accounts first
 			$command = Yii::$app->db->createCommand("update saas_priceminister_user set last_order_success_retrieve_time='0000-00-00 00:00:00',last_order_retrieve_time='0000-00-00 00:00:00'  
 									where last_order_success_retrieve_time is null or last_order_retrieve_time is null"  );
 			$affectRows = $command->execute();
+			
+			// dzt20191103 fix record
+			$command = Yii::$app->db->createCommand("update saas_priceminister_user set sync_status='F'
+									where sync_status='R' and last_order_retrieve_time<'$twoHoursAgo'"  );
+			$affectRows = $command->execute();
+			echo PHP_EOL." fix count:$affectRows... ===".$twoHoursAgo;
 			
 			$saas_query = SaasPriceministerUser::find()->where("is_active='1' and initial_fetched_changed_order_since is not null 
 					and last_order_success_retrieve_time<'$half_hours_ago'")
@@ -361,7 +368,7 @@ class PriceministerOrderHelper {
 					continue;
 				
 				$uid = $priceministerAccount['uid'];
-				echo "\n <br>YS1 start to fetch for unfuilled uid=$uid ... ";
+				echo "\n <br>YS1 start to fetch for unfuilled uid=$uid site id :".$priceministerAccount['site_id']."... ";
 				if (empty($uid)){
 					//异常情况 
 					$message = "site id :".$priceministerAccount['site_id']." uid:0";

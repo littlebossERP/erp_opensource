@@ -1097,6 +1097,7 @@ class AliexpressV2Helper
     								$batchInsertDatas[] = $batchInsertData;
 	    						}else{
 	    							//当保存的md5 和 现在的md5 不一致,才修改等操作
+	    							// TODO 私下重新拉取要注意去掉这个判断
 	    							$alerdy_save_md5= $re['listen_md5'];
 	    							if( $alerdy_save_md5!=$md5_json_data ) {
 		    							//update

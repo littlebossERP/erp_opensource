@@ -113,8 +113,11 @@ class CdiscountAccountsHelper
 		}else{
     		if($tokenInfo['message']=='302')
     			$tokenInfo['message']='1.账号或密码错误,<br>2.cdiscount官方接口出现问题,<br>3.获取token操作过于频繁';
-    		else 
+    		else {
+    		    \Yii::info(__FUNCTION__.',getCdiscountToken:'.print_r($tokenInfo, true),'file');
     			$tokenInfo['message']='发生了未知错误';
+			}
+    			
     		
     		$CdiscountData->update_time = GetControlData::getNowDateTime_str();
     		if(!empty($CdiscountData->addi_info)){

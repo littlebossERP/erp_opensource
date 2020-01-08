@@ -764,6 +764,7 @@ class ProfitController extends \eagle\components\Controller
 		return json_encode(['succes'=>1, 'message'=>'']);
     }
     
+	// /statistics/profit/refresh-rate-to-redis
     public function actionRefreshRateToRedis(){
     	ProfitHelper::RefreshRateToRedis();
     }

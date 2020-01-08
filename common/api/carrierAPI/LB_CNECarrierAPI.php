@@ -58,9 +58,17 @@ class LB_CNECarrierAPI extends BaseCarrierAPI
 			'TimeStamp'=>self::$timestamp,
 		];
 		
-		$md5 = md5($request['icID'].$request['TimeStamp'].'12345ABCDE');
+		
+		$md5 = md5($request['icID'].$request['TimeStamp'].'c3c04c24d13d0267043128103ceedb3f');
 		$request['MD5'] = $md5;
-		$response = Helper_Curl::post('http://api.cne.com/cgi-bin/EmsData.dll?DoApi',json_encode($request));
+		
+		$headers = [];
+		$headers[] = 'Content-type: application/json;charset=utf-8';
+		$headers[] = 'Accept: application/json';
+		echo json_encode($request).PHP_EOL;
+		$response = Helper_Curl::post('http://api.cne.com/cgi-bin/EmsData.dll?DoApi',json_encode($request), $headers);
+		var_dump($response);
+		exit;
 		$response = json_decode($response);
 		$str = '';
 		foreach($response->List as $v){
@@ -307,9 +315,14 @@ class LB_CNECarrierAPI extends BaseCarrierAPI
 
 	public static function getLabelStyle(){
 		//组织请求数据
-		$signature = md5('71'.self::$timestamp.'12345ABCDE');
+		$signature = md5('71'.self::$timestamp.'c3c04c24d13d0267043128103ceedb3f');
 		$url = 'http://label.cne.com/cnePrint/getType?timestamp='.self::$timestamp.'&icID=71&signature='.$signature;
-		$response = Helper_Curl::get($url);
+
+		$headers = [];
+		$headers[] = 'Content-type: application/json;charset=utf-8';
+		$headers[] = 'Accept: application/json';
+		
+		$response = Helper_Curl::get($url, array(), $headers);
 		$response = json_decode($response);
 		$str = '';
 		foreach($response as $v){
@@ -336,7 +349,10 @@ class LB_CNECarrierAPI extends BaseCarrierAPI
 		$request['MD5'] = $md5;
 // 		if($cEmsKind)$request['cEmsKind'] = $cEmsKind;
 		// var_dump($request);die;
-		$response = Helper_Curl::post($url,json_encode($request));
+		$header=array();
+		$header[]='Content-Type:application/json;charset=utf-8';
+		
+		$response = Helper_Curl::post($url, json_encode($request), $header);
 		\Yii::info('CNE,puid:'.$puid.',result,userKey:'.$id.' '.json_encode($request),"carrier_api");
 		\Yii::info('CNE response,puid:'.$puid.',result,userKey:'.$id.' '.$response,"carrier_api");
 		$response = json_decode($response);
@@ -508,10 +524,7 @@ class LB_CNECarrierAPI extends BaseCarrierAPI
 			//CNE的订单打印比较特殊 打开他们的下载页面就可以
 // 			return self::getResult(0,['pdfUrl'=>$url],'连接已生成,请点击并打印');
 			
-			
-			
 			$response = Helper_Curl::get($url);
-			
 			if($response === false)
 				return self::getResult(1,'','CNE返回打印超时！');
 			
@@ -693,11 +706,21 @@ class LB_CNECarrierAPI extends BaseCarrierAPI
 	            'TimeStamp'=>self::$timestamp,
 	        ];
 	        
-	        $md5 = md5($request['icID'].$request['TimeStamp'].'12345ABCDE');
+	        $md5 = md5($request['icID'].$request['TimeStamp'].'c3c04c24d13d0267043128103ceedb3f');
 	        $request['MD5'] = $md5;
-	        $response = Helper_Curl::post('http://api.cne.com/cgi-bin/EmsData.dll?DoApi',json_encode($request));
+	        
+	        $headers = [];
+	        $headers[] = 'Content-type: application/json;charset=utf-8';
+            $headers[] = 'Accept: application/json';
+            
+	        $response = Helper_Curl::post('http://api.cne.com/cgi-bin/EmsData.dll?DoApi',json_encode($request), $headers);
 	        $response = json_decode($response);
+	        
 	        $channelStr = "";
+	        
+	        // dzt20191022 cne获取服务接口不稳定，暂时放弃开启/保存 运输方式时候检测运输方式是否存在的逻辑。等cne那边稳定再重启逻辑
+	        return self::getResult(0, $channelStr, '');
+	        
 	        foreach($response->List as $v){
 	            $channelStr .= $v->oName.':'.$v->oName.';';
 	        }

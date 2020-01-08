@@ -78,6 +78,7 @@ class EbayOrderController extends \eagle\components\Controller
     	$date_params = [];
     	$sort = ''; //排序的字段
     	$order = '';//排序的字段 升降序
+    	$addi_condition = [];
     	
     	
     	//默认打开的列表记录数为上次用户选择的page size 数	//lzhl	2016-11-30
@@ -984,11 +985,13 @@ class EbayOrderController extends \eagle\components\Controller
     		if (!empty($ModTimeFrom)){
     			RedisHelper::RedisSet("EbayOrderData", "ebayManualSyncOrder_".$selleruserid , 0);
     			RedisHelper::RedisSet("EbayOrderData", "ebayManualSyncOrderProgress_".$selleruserid , "P");
-    			$flag = \common\api\ebayinterface\getsellertransactions::cronInsertIntoQueueGetOrder($this_saas_account, 0, $ModTimeFrom, time(),0,8);
+    			// $flag = \common\api\ebayinterface\getsellertransactions::cronInsertIntoQueueGetOrder($this_saas_account, 0, $ModTimeFrom, time(),0,8);
+    			// dzt20191107 改接口拉订单先在手工订单测试一下
+    			$flag = \common\api\ebayinterface\getorders::cronGetOrderByTime($this_saas_account, 0, $ModTimeFrom, time(), 5);
     			if ($flag ==false){
     				RedisHelper::RedisSet("EbayOrderData", "ebayManualSyncOrderProgress_".$selleruserid , "F");
     			}else{
-    				RedisHelper::RedisSet("EbayOrderData", "ebayManualSyncOrderProgress_".$selleruserid , "S");
+    				RedisHelper::RedisSet("EbayOrderData", "ebayManualSyncOrderProgress_".$selleruserid , "C");
     			}
     		}
     		
@@ -996,13 +999,15 @@ class EbayOrderController extends \eagle\components\Controller
     		//echo QueueGetorder::find()->where(['selleruserid'=>$selleruserid ])->andWhere(['status'=>8])->andWhere(['<','retry_count',10])->createCommand()->getRawSql();
 //     		$rt = QueueGetorder::find()->where(['selleruserid'=>$selleruserid ])->andWhere(['status'=>8])->andWhere(['<','retry_count',10])->count();
 //     		echo $rt;
-    		if ($progressStatus == "S"){
-    			$rt = QueueGetorder::find()->where(['selleruserid'=>$selleruserid ])->andWhere(['status'=>8])->andWhere(['<','retry_count',10])->count();
-    			//echo $rt;
-    			if ($rt == 0 ){
-    				RedisHelper::RedisSet("EbayOrderData", "ebayManualSyncOrderProgress_".$selleruserid , "C");
-    			}
-    		}
+            
+    		// dzt20191107 注释
+//     		if ($progressStatus == "S"){
+//     			$rt = QueueGetorder::find()->where(['selleruserid'=>$selleruserid ])->andWhere(['status'=>8])->andWhere(['<','retry_count',10])->count();
+//     			//echo $rt;
+//     			if ($rt == 0 ){
+//     				RedisHelper::RedisSet("EbayOrderData", "ebayManualSyncOrderProgress_".$selleruserid , "C");
+//     			}
+//     		}
     		
     		if (in_array($progressStatus , ['P',"S"])){
     			$result['success']=true;

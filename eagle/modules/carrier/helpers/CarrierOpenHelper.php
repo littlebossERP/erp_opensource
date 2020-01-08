@@ -779,6 +779,22 @@ class CarrierOpenHelper {
 				}
 				$account->api_params = $api_params;
 			}
+		}elseif( $accountParams['carrier_code'] == "lb_4pxNew" ){
+			//新增时，默认
+			if(empty($id))
+			{
+				$account->is_used = 0;
+				$account->api_params = array();
+			}else{
+			    $api_params = $account->api_params;
+	        	$notupdate = array('access_token', 'refresh_token', 'expires_in', 'access_token_timeout');
+	        	foreach($tmpCarrierParams as $key => $val)
+	        	{
+	        		if(!in_array($key, $notupdate))
+	        			$api_params[$key] = $val;
+	        	}
+				$account->api_params = $api_params;
+			}
 		}
 		else
 		{
@@ -886,7 +902,7 @@ class CarrierOpenHelper {
 			self::saveAddOrEditCarrierToManagedbRecord($account);
 			
 			//wish邮新增，返回物流商账号id
-			if( in_array($account->carrier_code,array("lb_wishyou","lb_chukouyi","lb_chukouyiOversea","lb_newwinit")) && empty($id))
+			if( in_array($account->carrier_code,array("lb_wishyou","lb_chukouyi","lb_chukouyiOversea","lb_newwinit","lb_4pxNew")) && empty($id))
 			{
 				return self::output(array(), 0, $account->id);
 			}
@@ -7193,7 +7209,7 @@ class CarrierOpenHelper {
 				'lb_diwuzhou'=>array('pickupAddress'=>'深圳、广州、东莞','telContact'=>'13713659006','qq'=>'930097651','qqtype'=>'0'),
 				'lb_ande'=>array('pickupAddress'=>'深圳、广州、惠州、武汉','telContact'=>'18588920007','qq'=>'2853686617','qqtype'=>'0'),
 				'lb_yilong'=>array('pickupAddress'=>'上海、深圳、义乌、苏州、昆山','telContact'=>'15921148859','qq'=>'349560526','qqtype'=>'0'),
-				'lb_4px'=>array('pickupAddress'=>'全国各地','telContact'=>'15812674142','qq'=>'120439044','qqtype'=>'0'),
+				'lb_4px'=>array('pickupAddress'=>'全国各地','telContact'=>'13602570615','qq'=>'1061796015','qqtype'=>'0'),
 				'lb_wishyou'=>array('pickupAddress'=>'','telContact'=>'','qq'=>'2518043725','qqtype'=>'0'),
 				'lb_yuntu'=>array('pickupAddress'=>'','telContact'=>'400-0262-126','qq'=>'2851260179','qqtype'=>'0'),
 				'lb_xiapu'=>array('pickupAddress'=>'','telContact'=>'13923780976','qq'=>'2355838766','qqtype'=>'0'),
