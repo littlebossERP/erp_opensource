@@ -122,7 +122,7 @@ class CdiscountAPI{
 					<a:SessionID i:nil="true" />
 					<a:SubjectLocality i:nil="true" />
 					<a:TokenId>$tokenID</a:TokenId>
-					<a:UserName i:nil="true" />
+					<a:UserName>littleboss</a:UserName>
 				</a:Security>
 				<a:Version>1.0</a:Version>
 			</headerMessage>
@@ -278,7 +278,7 @@ SoapDocument;
                     <a:SessionID i:nil="true" />
                     <a:SubjectLocality i:nil="true" />
                     <a:TokenId>$tokenID</a:TokenId>
-                    <a:UserName i:nil="true" />
+                    <a:UserName>littleboss</a:UserName>
                 </a:Security>
                 <a:Version>1.0</a:Version>
             </headerMessage>
@@ -411,7 +411,7 @@ SoapDocument;
                     <a:SessionID i:nil="true" />
                     <a:SubjectLocality i:nil="true" />
                     <a:TokenId>$tokenID</a:TokenId>
-                    <a:UserName i:nil="true" />
+                    <a:UserName>littleboss</a:UserName>
                 </a:Security>
                 <a:Version>1.0</a:Version>
             </headerMessage>
@@ -858,7 +858,7 @@ SoapDocument;
                     <a:SessionID i:nil="true" />
                     <a:SubjectLocality i:nil="true" />
                     <a:TokenId>$tokenID</a:TokenId>
-                    <a:UserName i:nil="true" />
+                    <a:UserName>littleboss</a:UserName>
                 </a:Security>
                 <a:Version>1.0</a:Version>
             </headerMessage>
@@ -980,7 +980,7 @@ SoapDocument;
                     <a:SessionID i:nil="true" />
                     <a:SubjectLocality i:nil="true" />
                     <a:TokenId>$tokenID</a:TokenId>
-                    <a:UserName i:nil="true" />
+                    <a:UserName>littleboss</a:UserName>
                 </a:Security>
                 <a:Version>1.0</a:Version>
             </headerMessage>

@@ -344,10 +344,14 @@ class CdiscountOrderHelper {
 	 **/
 	public static function cronAutoFetchNewAccountOrderList(){
 		try {
-			$half_hours_ago = date('Y-m-d H:i:s',strtotime('-30 minutes'));//600 m is test ,real value is 30
+			$getOrderInterVal = date('Y-m-d H:i:s',strtotime('-10 minutes'));//600 m is test ,real value is 30
 			$days_ago = date('Y-m-d H:i:s',strtotime('-180 days'));
 				
-			$SAASCDISCOUNTUSERLIST = SaasCdiscountUser::find()->where("is_active='1' and initial_fetched_changed_order_since is null or initial_fetched_changed_order_since='0000-00-00 00:00:00' or last_order_success_retrieve_time='0000-00-00 00:00:00' ")->all();
+			$SAASCDISCOUNTUSERLIST = SaasCdiscountUser::find()
+			->where("is_active=1 ")
+			->andWhere("initial_fetched_changed_order_since is null or initial_fetched_changed_order_since='0000-00-00 00:00:00' or last_order_success_retrieve_time='0000-00-00 00:00:00'")
+// 			->andWhere("last_order_retrieve_time<".$getOrderInterVal)// 下面do while会一次性拿完，不需要重新进入
+			->all();
 				
 			//retrieve orders  by  each cdiscount account
 			foreach($SAASCDISCOUNTUSERLIST as $cdiscountAccount ){
@@ -390,12 +394,12 @@ class CdiscountOrderHelper {
 		
 				
 				// for 中断再get
-				if(!empty($cdiscountAccount->last_order_success_retrieve_time) && $cdiscountAccount->last_order_success_retrieve_time != '0000-00-00 00:00:00'){
+				if(!empty($cdiscountAccount->routine_fetched_changed_order_from) && $cdiscountAccount->routine_fetched_changed_order_from != '0000-00-00 00:00:00'){
 				    // initial_fetched_changed_order_since , routine_fetched_changed_order_from两个字段都可以，
 				    // 但由于initial_fetched_changed_order_since 需要设置null才能进入这里，所以重启的第一次不能用这个字段
 				    $dateSince = date("Y-m-d\TH:i:s" ,strtotime($cdiscountAccount->routine_fetched_changed_order_from)-1800);
 				}else{
-				    $dateSince = date("Y-m-d\TH:i:s" ,$days_ago);// test 8hours //1个月前
+				    $dateSince = date("Y-m-d\TH:i:s" ,strtotime($days_ago));// test 8hours //1个月前
 				}
 				
 				
@@ -415,7 +419,13 @@ class CdiscountOrderHelper {
 				
 				do{
 					$startTime = $recentGetOrderTime;
-					$recentGetOrderTime = date("Y-m-d\TH:i:s" ,strtotime($recentGetOrderTime)+3600*24*1);//get 2 day one time
+					$nowTime = time();
+					if($nowTime < (strtotime($recentGetOrderTime)+3600*24*2)){
+					    $recentGetOrderTime = date("Y-m-d\TH:i:s" ,$nowTime);//get 2 day one time
+					}else{
+					    $recentGetOrderTime = date("Y-m-d\TH:i:s" ,strtotime($recentGetOrderTime)+3600*24*2);//get 2 day one time
+					}
+					
 					$endTime = $recentGetOrderTime;
 					
 					$orders = self::_getAllOrdersSince($cdiscountAccount['token'], $startTime,$endTime,$newbinding =true);
@@ -551,6 +561,9 @@ class CdiscountOrderHelper {
 						echo "\n CdiscountAccount model save !";
 					}
 				}while ($recentGetOrderTime < $updateTime );
+				
+				// 循环跳出即已把旧订单获取完，需要设置last_order_success_retrieve_time 停止再进入这里
+				$cdiscountAccount->last_order_success_retrieve_time = $endTime;
 				
 				if(!$has_break){
 					$mark = CdiscountOrderInterface::markSaasAccountOrderSyncFinished($cdiscountAccount,'C', $getOrderCount);
