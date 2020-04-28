@@ -3234,8 +3234,7 @@ linioListing ={
 					success:function(data){
 //						$.hideLoading();
 						if(data.code == 400){
-//							bootbox.alert("您添加的品牌不在Linio规定范围内，请发信到imp.sellercenter@linio.com与Lazada官方联系");
-							err_message.push(shopId_array[i] + "店铺添加的品牌不在Linio规定范围内，请发信到imp.sellercenter@linio.com与Lazada官方联系");
+							err_message.push(shopId_array[i] + "店铺添加的品牌不在Linio规定范围内，请与Linio官方联系");
 							linioListing.validBrand = false;
 						}else{//刊登成功
 							// 拼接提示框信息
@@ -3478,13 +3477,13 @@ linioListing ={
 			$.ajax({
 				async: false,
 				type: "post",
-				url: "/listing/lazada-listing/get-brands",
+				url: "/listing/linio-listing/get-brands",
 				data: { lazada_uid : $("#lazadaUid").val(),name : $('[cid="Brand"]>.secondTd>input').val() , mode:'eq'},
 				dataType:'json',
 				success:function(data){
 					$.hideLoading();
 					if(data.code == 400){
-						bootbox.alert("您添加的品牌不在Linio规定范围内，请发信到imp.sellercenter@linio.com与Lazada官方联系");
+						bootbox.alert("您添加的品牌不在Linio规定范围内，请与Linio官方联系");
 						linioListing.validBrand = false;
 					}else{//刊登成功
 						// 拼接提示框信息

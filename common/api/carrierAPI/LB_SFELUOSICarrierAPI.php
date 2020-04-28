@@ -255,7 +255,9 @@ class LB_SFELUOSICarrierAPI extends BaseCarrierAPI
             $xml_to_str = simplexml_load_string($responseXML);
             $responseArr = json_decode(json_encode($xml_to_str),TRUE);
 
-            \Yii::info("LB_SFELUOSICarrierAPI sfKtsService puid:'.$puid.'，order_id:'.$order->order_id.' result:".print_r($responseXML,true), "carrier_api");// 先记下结果，记下refrence_no，这个返回应该与上面提交refrence_no一样。
+            \Yii::info("LB_SFELUOSICarrierAPI sfKtsService puid:{$puid}，order_id:{$order->order_id} request_xml:".$request_xml,"carrier_api");
+            // 先记下结果，记下refrence_no，这个返回应该与上面提交refrence_no一样。
+            \Yii::info("LB_SFELUOSICarrierAPI sfKtsService puid:{$puid}，order_id:{$order->order_id} result:".print_r($responseXML,true),"carrier_api");
             $track_num_message = '';
             $tracking_number = '';
             if($responseArr['Head'] == 'OK'){

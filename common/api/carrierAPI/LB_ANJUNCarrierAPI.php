@@ -80,6 +80,8 @@ class LB_ANJUNCarrierAPI extends BaseCarrierAPI
 				$is_CustomsFormSpan = true;
 			}
 			
+			// dzt20200106 修改了订单参数展示之后 $e['pickingInfo'] 自动填充了值，导致下面部分逻辑失效
+			unset($e['pickingInfo']);
 			if(!isset($e['pickingInfo'])){
 				$tmpAnjunpickingInfo_mode = '';
 				if(!empty($service_carrier_params['pickingInfo_mode_service'])){
@@ -218,6 +220,7 @@ class LB_ANJUNCarrierAPI extends BaseCarrierAPI
 					'danhao'=>$customer_number,	//订单号
 					'guahao'=>'',	//挂号 （如需申请单号请留空）
 					'contact'=>$order->consignee,	//收件人名称
+			        'tax'=>$e['tax'],	//dzt20200105 tax	税号	巴西自然人税号称为CPF码，格式为000.000.000-00；法人税号称为CNPJ码，格式为00.000.000/0000-00
 					'gs'=>$order->consignee_company,	//收件人公司
 					'tel'=>$phoneContact,	//收件人电话,2)$order->consignee_mobile:收件人手机
 					'sj'=>$order->consignee_mobile,	//收件人电话,2)$order->consignee_mobile:收件人手机
@@ -300,7 +303,7 @@ class LB_ANJUNCarrierAPI extends BaseCarrierAPI
 				
 			//数据组织完成 准备发送
 			#########################################################################
-			\Yii::info('LB_ANJUNCarrierAPI1 puid:'.$puid.'，order_id:'.$order->order_id.'  '.print_r($request,1), "file");
+			\Yii::info('LB_ANJUNCarrierAPI1 puid:'.$puid.'，order_id:'.$order->order_id.'  '.print_r($request,1), "carrier_api");
 			
 			$url = self::$url_aj.'napi.asp';
 			
@@ -578,7 +581,9 @@ class LB_ANJUNCarrierAPI extends BaseCarrierAPI
 			//当是E邮宝渠道时，直接返回url
 			if( strpos($service->shipping_method_name, 'E邮宝') !== false)
 			{
+			    Helper_Curl::$timeout = 60;
 			    $pdf_url = Helper_Curl::get($url.$url_params);
+			    \Yii::info('LB_ANJUNCarrierAPI doPrint puid:'.$puid.'，guahao='.$g.'  result:'.$pdf_url, "carrier_api");
 			    $start = strpos($pdf_url, 'http://');
 			    $end = strpos($pdf_url, '">here');
 			    if($start > 0 && $end > $start){
@@ -593,7 +598,7 @@ class LB_ANJUNCarrierAPI extends BaseCarrierAPI
 			else 
 			{
     			$response = self::get($url.$url_params,null,null,false,null,null,true);
-    			
+    			\Yii::info('LB_ANJUNCarrierAPI doPrint2 puid:'.$puid.',request_url='.$url.$url_params.'  result:'.$response, "carrier_api");
     			if($response === false)
     			    return self::getResult(1,'','安骏返回打印超时！');
     			
@@ -730,7 +735,7 @@ class LB_ANJUNCarrierAPI extends BaseCarrierAPI
 		}
 
 		curl_setopt($connection, CURLOPT_CONNECTTIMEOUT,self::$connecttimeout);
-		curl_setopt($connection, CURLOPT_TIMEOUT,10);
+		curl_setopt($connection, CURLOPT_TIMEOUT,60);
 		if ($justInit){
 			return $connection;
 		}

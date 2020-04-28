@@ -441,15 +441,15 @@ class AliexpressApiPostHelper {
 		}
 	
 		$data = $api->createwarehouseorder($param);
-		\Yii::info('Createwarehouseorder, '.(empty($param['trade_order_id']) ? '' : $param['trade_order_id']).', '.json_encode($data),"file");
+		\Yii::info('Createwarehouseorder, params:'.json_encode($param),"file");
+		\Yii::info('Createwarehouseorder, result:'.(empty($param['trade_order_id']) ? '' : $param['trade_order_id']).', '.json_encode($data),"file");
+		
 	
 		if(!empty($data['error_message'])){
-			\Yii::info('Createwarehouseorder, error, '.json_encode($data),"file");
 			
 			return self::$ret_type($data, false, $data['error_code'], $data['error_desc']);
 		}
 	
-		\Yii::info('Createwarehouseorder, '.json_encode(self::$ret_type($data, $data['success'], $data['error_code'], $data['error_desc'])),"file");
 		return self::$ret_type($data, $data['success'], $data['error_code'], $data['error_desc']);
 	}
 	
@@ -817,12 +817,13 @@ class AliexpressApiPostHelper {
 	    // 图片文件的字节流图片大小限制：3MB。图片大小不能超过5000*5000。image_bytes	byte[]
         if(!empty($param['param1']['imageSouce'])){
             $img = @file_get_contents($param['param1']['imageSouce']);
-	        $param_v2['image_bytes'] = $img;
+            $webDir = \Yii::getAlias('@eagle/web');
+            $tmpImg = $webDir."/tmpImage.jpg";
+            file_put_contents($tmpImg, $img);
+	        $param_v2['image_bytes'] = @$tmpImg;
 	    }
-	    
         $res = $api->uploadimageforsdk($param_v2);
-        \Yii::info(__FUNCTION__.', result:'.json_encode($res),"file");
-        
+        \Yii::info(__FUNCTION__.', param fileName:'.$webDir.json_encode($param_v2).',result:'.json_encode($res),"file");
         
         if(!empty($res['error_response'])){
             \Yii::info(__FUNCTION__.', error, '.json_encode($res),"file");
@@ -836,7 +837,7 @@ class AliexpressApiPostHelper {
 	        return self::$ret_type($res, false, $res['error_code'], $res['error_message']);
 	    }
         
-        $result = $res['aliexpress_photobank_redefining_uploadimageforsdk_response']['result'];
+        $result = $res;
 	    
 	    //清除多余的层
 	    return self::$ret_type($result, true, '', '');
@@ -914,7 +915,7 @@ class AliexpressApiPostHelper {
 	
 	//订单接口，清除多余的层
 	public static $assembleCos = ['aeop_ae_product_propertys', 'aeop_ae_product_s_k_us'];
-	public static function assembleOrderDetail($ordersDetail, $times = 3){
+	public static function assembleOrderDetail($ordersDetail, $times = 5){// 检查3层刚好吧product_list抽出来了 改成检查5层 去掉product_list里面的tags字段tags
 		if($times > 0){
 			foreach($ordersDetail as $key => $item){
 				if(is_array($item) && !empty($item)){
@@ -931,6 +932,18 @@ class AliexpressApiPostHelper {
 						$ordersDetail[$key] = self::assembleOrderDetail($ordersDetail[$key], $times - 1);
 					}
 				}
+				
+				// dzt20200417 product_list 下的tags结构，一般是空数组返回，但有一个返回了内容 
+// 				"tags": {
+// 				"string": [
+// 				        "AE_PLUS_RU"
+// 				]
+// 				},
+                // 检查聚石塔发出json数据没有问题，但erp接收 变成"tags":, 这样导致json解释不了，估计是奇门那边卡掉的内容。
+                // 这里先去掉tags不返回
+                if($key === 'tags'){//有些 key 为0的，如果用in_array 或 == 会跳进去
+                    $ordersDetail[$key] = [];
+                }
 				
 				if(in_array($key, ['loan_info', 'file_path_list', 'refund_info', 'escrow_fee']) && empty($item)){
 					unset($ordersDetail[$key]);

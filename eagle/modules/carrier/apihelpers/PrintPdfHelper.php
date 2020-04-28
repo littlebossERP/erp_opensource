@@ -422,7 +422,8 @@ class PrintPdfHelper{
 					//假如访问时间过短直接跳过暂时不再获取新的图片
 					if($tmpCarrierTcpdfImg->update_time > 0){
 						if(time() - $tmpCarrierTcpdfImg->update_time < 300){
-							$itemListDetailInfo['products'][$tmp_products_key]['PICTURE'] = '';
+						    // dzt20191127 还是先不设置空导致拣货标签 的图片为空
+							$itemListDetailInfo['products'][$tmp_products_key]['PICTURE'] = $tmp_orig_url;
 							
 							continue;
 						}
@@ -452,9 +453,12 @@ class PrintPdfHelper{
 							$tmpCarrierTcpdfImg->save(false);
 						}
 					}else{
-						$itemListDetailInfo['products'][$tmp_products_key]['PICTURE'] = '';
+					    // dzt20191127 没获取到就返回原图吧
+						$itemListDetailInfo['products'][$tmp_products_key]['PICTURE'] = $tmp_orig_url;
 						
-						$tmpCarrierTcpdfImg->update_time = time();
+						\Yii::error(__FUNCTION__.", curl fail to get image:".json_encode($tmpHelp::$last_post_info), "file");
+						// dzt20191127 拿不到不要update了
+						// $tmpCarrierTcpdfImg->update_time = time();
 						$tmpCarrierTcpdfImg->save(false);
 					}
 					

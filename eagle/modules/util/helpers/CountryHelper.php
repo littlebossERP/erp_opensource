@@ -56,7 +56,7 @@ class CountryHelper {
             'PAN'=> 'PA','RWA'=> 'RW','TKM'=> 'TM','USA'=> 'US','PLW'=> 'PW',
             'SRB'=> 'RS','MNE'=> 'ME','FRO'=> 'FO','PLE'=> 'PS','NFK'=>'NF',
             'GGY'=> 'GG','IMN'=> 'IM','UMI'=> 'UM','ASC'=> 'AC','CUW'=> 'CW',
-            'JEY'=> 'JE','BLM'=> 'BL',
+            'JEY'=> 'JE','BLM'=> 'BL','MAF'=> 'MF',
         ];
         $keywords = strtoupper($keywords);
         return isset($data[$keywords]) ? $data[$keywords] : '';
@@ -303,7 +303,7 @@ class CountryHelper {
 			'CW' => '{"country_code":"CW","country_en":"Curaçao","country_zh":"\u5e93\u62c9\u7d22","region":"South America"}',
 			'JE' => '{"country_code":"JE","country_en":"Jersey","country_zh":"\u6cfd\u897f\u5c9b","region":"Europe"}',
 			'BL' => '{"country_code":"BL","country_en":"Saint Barthélemy","country_zh":"\u5723\u5df4\u6258\u6d1b\u7f2a\u5c9b","region":"other"}',
-
+            'MF' => '{"country_code":"MF","country_en":"Saint Martin","country_zh":"\u5723\u9a6c\u4e01\u5c9b","region":"North America"}',
         ];
         $keywords = strtoupper($keywords);
         return isset($data[$keywords]) ? $data[$keywords] : '';

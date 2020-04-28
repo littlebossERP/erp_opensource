@@ -938,8 +938,12 @@ $addtionLog = '';
 			}
 			//第2优先级
 			// 能到这里， 证明上面 的item 级别平台 状态没有配对上 ， 所以要用订单级别的订单状态
+			// dzt20200219 amazon暂停发货的订单更新订单时候 平台是shipped但由于暂停发货，这里传入的$currentOrderSourceStatus 是暂停发货，被认为不能发货
+			// 由于平台状态没有传入，所以这里没法判断 平台是取消订单或已发货进行的更新，挂起中的订单就认为是可以发货的，再交由客户自己判断是否发货。而不是直接禁止发货
 			if (!empty($currentOrderSourceStatus)){
-				$CanShipStatus = [OdOrder::STATUS_PAY , OdOrder::STATUS_WAITSEND , OdOrder::STATUS_SHIPPED , OdOrder::STATUS_OUTOFSTOCK];
+			    $CanShipStatus = [OdOrder::STATUS_PAY , OdOrder::STATUS_WAITSEND , OdOrder::STATUS_SHIPPED , OdOrder::STATUS_OUTOFSTOCK
+			        , OdOrder::STATUS_SUSPEND
+			    ];
 				if (in_array($currentOrderSourceStatus ,$CanShipStatus  ) && $currentManualStatus != 'disable'){
 					//当前的平台状态允许发货
 					return 'allow';

@@ -555,6 +555,17 @@ class JumiaListingController extends \eagle\components\Controller {
 				if($category['isLeaf']){
 					$check = true;
 				}else{
+				    
+				    // 无用的历史记录去除，否则，导致读取目录数据出问题
+				    $path = LazadaApiHelper::getSelectedCategoryHistoryPath('jumia');
+				    $path = $path.$jumia_uid;
+				    $historyCatIdsStr = ConfigHelper::getConfig($path);
+				    $historyCatIds = json_decode($historyCatIdsStr,true);
+				    if(in_array($primaryCategory, $historyCatIds)){
+				        $historyCatIds = array_diff($historyCatIds, [$primaryCategory]);
+				        ConfigHelper::setConfig($path, json_encode($historyCatIds));
+				    }
+				    
 					return ResultHelper::getResult(400, "" , TranslateHelper::t("类目非子类目，请选择子类目！"));
 				}
 			}

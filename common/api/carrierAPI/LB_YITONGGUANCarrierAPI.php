@@ -154,6 +154,7 @@ class LB_YITONGGUANCarrierAPI extends BaseCarrierAPI
 			$parcelList['apvalues'] = '';	//价值 (每个物品价格)0 < apweight<= [10,2].多个价值，采用分号分隔.例：价值 1;价值2;价值3;价值4
 			$parcelList['customsArticleNames'] = '';	//报关品名信息:多个报关品名，采用分号分隔.例：报关品名1; 报关品名2; 报关品名3; 报关品名4
 			$parcelList['imageUrl']='';      //sku图片地址
+			$parcelList['taxNumber'] = $e['taxNumber'];	//税号
 			
 			$totalWeight = 0;
 			$totalAmount = 0;

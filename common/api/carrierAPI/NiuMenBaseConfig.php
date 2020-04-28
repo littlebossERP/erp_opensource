@@ -220,7 +220,7 @@ class NiuMenBaseConfig{
 				}
 				
 				if(in_array($order->default_carrier_code, array('lb_jiewang'))){
-					if(in_array($service->shipping_method_code,array("J-NET俄全通带电","J-NET俄全通普货"))){
+					if(in_array($service->shipping_method_code,array("J-NET俄全通带电","J-NET俄全通普货","J-NET墨西哥专线"))){
 						//商品属性
 						$product_attributes="";
 						$product_attributes_arr=\eagle\modules\order\helpers\OrderListV3Helper::getProductAttributesByPlatformItem($order->order_source, $v->product_attributes);
@@ -271,7 +271,8 @@ class NiuMenBaseConfig{
 					array('RecList'=>$lastRequest,'cEmsKind'=>$service->shipping_method_code)
 			);
 
-			\Yii::info($order->default_carrier_code.'1 '.$order->order_source_order_id.' '.print_r($response,1), "file");
+			\Yii::info($order->default_carrier_code.'1 '.$order->order_source_order_id.' '.print_r($response,1).
+			        PHP_EOL."params:".json_encode($lastRequest), "carrier_api");
 			
 			if(!isset($response->OK)){
 				if(isset($response->ReturnValue)){
@@ -416,7 +417,8 @@ class NiuMenBaseConfig{
 				);
 // 			}
 
-			\Yii::info($account->carrier_code.'2 puid:'.$puid.' '.print_r($response,1), "file");
+			\Yii::info($account->carrier_code.'2 puid:'.$puid.' response:'.print_r($response,1)
+			        .PHP_EOL."params:labelstyle:".$carrier_params['labelstyle'].print_r($aNoArr, 1), "carrier_api");
 				
 			if(strlen($response)<1000){
 				//print_r ( array('iTable'=>1,'iNoType'=>1,'cModelName'=>$carrier_params['labelstyle'],'aNo'=>$aNoArr) );exit;

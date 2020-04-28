@@ -110,7 +110,7 @@ class NeweggAccountsApiHelper {
 			
 			//判断SellerID是否重复
 			$filteSellerID = SaasNeweggUser::find()
-			->where(['SellerID' => $params['SellerID'],'uid'=>$saasId]);
+			->where(['SellerID' => $params['SellerID']]);//dzt20200330 去除条件 ,'uid'=>$saasId SellerID要全局唯一
 			if(!empty($site_id))
 				$filteSellerID->andwhere(['not',['site_id'=>$site_id]]);
 			

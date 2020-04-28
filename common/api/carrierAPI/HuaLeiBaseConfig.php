@@ -654,6 +654,9 @@ class HuaLeiBaseConfig
     				curl_setopt( $ch, CURLOPT_URL, $PDF_URL);
     				curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
     				curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
+    				curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT, 10);
+		            curl_setopt( $ch, CURLOPT_TIMEOUT, 60);
+    				
     				$response = curl_exec( $ch);
     				$httpCode = curl_getinfo( $ch, CURLINFO_HTTP_CODE);
     				$responseHeaders = curl_getinfo( $ch);

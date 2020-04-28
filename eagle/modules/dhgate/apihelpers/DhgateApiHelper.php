@@ -195,7 +195,9 @@ class DhgateApiHelper {
 					$is_manual_order = 1;
 					$order_status = 600;
 				}elseif (in_array($dhgateOrderHeader['orderStatus'], array('103002','101009'))){
-					$order_status = 400;
+// 					$order_status = 400;
+                    // dzt20191128 很久没有发货中状态了，已发货在小老板状态统一是已完成
+				    $order_status = 500;
 				}elseif (in_array($dhgateOrderHeader['orderStatus'], array('102111','102006','102007','111111'))){
 					$order_status = 500;
 				}elseif (in_array($dhgateOrderHeader['orderStatus'], array('102001','105001','105002','106001','106002','105004','106003'))){//需要挂起的订单

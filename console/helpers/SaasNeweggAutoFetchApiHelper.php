@@ -194,16 +194,18 @@ class SaasNeweggAutoFetchApiHelper{
 				
 				echo "type $type start time $start_time , end time $end_time \n";
 				
-				$start_time = self::_PRCToPacific($start_time );
-				$end_time = self::_PRCToPacific($end_time);'';
+				$start_timeStr = self::_PRCToPacific($start_time );
+				$end_timeStr = self::_PRCToPacific($end_time);'';
 				$status = '';
 				$downloaded = 0;
 			}
 			//拉取旧订单Unshipped
 			else if($type == 2){
 				$status = 0;
-				$start_time = '';
-				$end_time = $SAA_obj_binding_time;
+				$start_time=0;
+				$start_timeStr = '';
+				$end_time = $SAA_obj->create_time;
+				$end_timeStr = $SAA_obj_binding_time;
 				$downloaded = 0;
 				//$start_time ='2016-10-10 20:00:32';//ys test
 				//$end_time ='2016-10-20 20:00:32';//ys test
@@ -213,22 +215,26 @@ class SaasNeweggAutoFetchApiHelper{
 			//拉取旧订单Partially Shipped
 			else if($type == 3){
 				$status = 1;
-				$start_time = '';
-				$end_time = $SAA_obj_binding_time;
+				$start_time=0;
+				$start_timeStr = '';
+				$end_time = $SAA_obj->create_time;
+				$end_timeStr = $SAA_obj_binding_time;
 				$downloaded = 0;
 			}
 			//拉取旧订单Shipped
 			else if($type == 4){
 				$status = 2;
-				$start_time = '';
-				$end_time = $SAA_obj_binding_time;
+				$start_time=0;
+				$start_timeStr = '';
+				$end_time = $SAA_obj->create_time;
+				$end_timeStr = $SAA_obj_binding_time;
 				$downloaded = 0;
 			}
 			
 			//req参数
 			$reqParams = [
-				'start_time' => $start_time,
-				'end_time' => $end_time,
+				'start_time' => $start_timeStr,
+				'end_time' => $end_timeStr,
 				'PageIndex' => 1,
 				'fetchType' => $type,
 				'Status' => $status,
@@ -250,7 +256,7 @@ class SaasNeweggAutoFetchApiHelper{
 				$SAA_autoSync->message = $e->getMessage();
 				$SAA_autoSync->error_times=$SAA_autoSync->error_times+1;
 				$SAA_autoSync->status=3;
-				$SAA_autoSync->last_start_time=$nowTime;//上一次运行时间
+				$SAA_autoSync->update_time=$nowTime;//上一次运行时间
 				if(!$SAA_autoSync->save()){
 				    // TODO newegg console job monitor emails
 					MailHelper::sendMailBySQ('xxx@xxx.com', '小老板后台job监测', 'xxx@xxx2.com', '订单同步状态回写失败', 'Newegg同步订单 time='.date("Y-m-d H:i:s",time()).' type='.$type.', uid='.$SAA_autoSync->uid.' 的时候，状态回写失败，请查看后台日志！');
@@ -264,10 +270,15 @@ class SaasNeweggAutoFetchApiHelper{
 			$ret = json_decode($ret, true);
 			//存在失败
 			if($ret['code'] != 200){
+			    // dzt20200402 授权问题，停止同步
+			    if("The specified seller id is invalid or you have not yet got the authorization from this seller." == $ret['message']){
+			        $SAA_autoSync->is_active = 0;
+			    }
+			    
 				$SAA_autoSync->message=$ret['message'];
 				$SAA_autoSync->error_times=$SAA_autoSync->error_times+1;
 				$SAA_autoSync->status=3;
-				$SAA_autoSync->last_start_time=$nowTime;//上一次运行时间
+				$SAA_autoSync->update_time=$nowTime;//上一次运行时间
 				if(!$SAA_autoSync->save()){
 				    // TODO newegg console job monitor emails
 					MailHelper::sendMailBySQ('xxx@xxx.com', '小老板后台job监测', 'xxx@xxx2.com', '订单同步状态回写失败', 'Newegg同步订单 time='.date("Y-m-d H:i:s",time()).' type='.$type.', uid='.$SAA_autoSync->uid.' 的时候，状态回写失败，请查看后台日志！');
@@ -275,12 +286,14 @@ class SaasNeweggAutoFetchApiHelper{
 				continue;
 			}
 			
-			$SAA_autoSync->last_start_time=$nowTime;
-			$SAA_autoSync->last_finish_time=$nowTime;//上一次运行时间
+			$SAA_autoSync->last_start_time=$start_time;
+			$SAA_autoSync->last_finish_time=$end_time; 
+			$SAA_autoSync->update_time=$nowTime;//上一次运行时间 
 			$SAA_autoSync->status = 2;
 			$SAA_autoSync->error_times = 0;
 			$SAA_autoSync->message="";
 			if(!$SAA_autoSync->save()){
+				echo "SAA_autoSync->save fail: ".json_encode($SAA_autoSync->errors).PHP_EOL;
 			    // TODO newegg console job monitor emails
 				MailHelper::sendMailBySQ('xxx@xxx.com', '小老板后台job监测', 'xxx@xxx2.com', '订单同步状态回写失败', 'Newegg同步订单 time='.date("Y-m-d H:i:s",time()).' type='.$type.', uid='.$SAA_autoSync->uid.' 的时候，状态回写失败，请查看后台日志！');
 			}
@@ -326,7 +339,7 @@ class SaasNeweggAutoFetchApiHelper{
 			$PageInfo = $responseBody['PageInfo'];
 			//超过一页
 			if($PageInfo['TotalPageCount'] > 1){
-				while($reqParams['PageIndex'] > $PageInfo['TotalPageCount']){
+				while($reqParams['PageIndex'] < $PageInfo['TotalPageCount']){
 					$reqParams['PageIndex']++;
 					echo "_getOrderListAndSaveToQueue  ".$reqParams['start_time'].",".$reqParams['end_time'].",pageIndex:".$reqParams['PageIndex']." \n";
 					

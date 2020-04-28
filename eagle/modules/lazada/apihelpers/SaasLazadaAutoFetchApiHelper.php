@@ -1047,6 +1047,12 @@ class SaasLazadaAutoFetchApiHelper{
 			}
 		}
 		
+		// dzt20200326 jumia客户反映，有平台发货的子订单 平台发货后，子订单状态覆盖了订单状态，导致小老板订单转为已完成，导致自发货产品无法发货
+		if($orderType == 'FBM' && in_array("pending", $itemStatus)){
+		    $lazadaOrderStatus = 'pending';
+		    $order_status=self::$LAZADA_EAGLE_ORDER_STATUS_MAP[$lazadaOrderStatus];
+		}
+		
 		// dzt20180228 jumia 客户要求标记COD 货到付款订单
 		if(strtolower($platform) == "jumia" && !empty($orderHeaderInfo['PaymentMethod']) && "CashOnDelivery" == $orderHeaderInfo['PaymentMethod']){
 		    $orderType = 'COD';

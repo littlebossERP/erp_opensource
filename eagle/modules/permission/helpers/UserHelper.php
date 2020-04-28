@@ -562,8 +562,10 @@ class UserHelper
 			//拥有所有平台账号权限，则返回所有绑定的账号
 			return $getPlatformAllAccount;
 		}
-		if(in_array('all', array_keys($userPermission['platforms'])))
-			return $getPlatformAllAccount;
+		
+		// dzt20191129 判断有问题，导致所有账号返回了，现在这个没有用了，界面点all之后会自动选择全部账号，但取消选择一个之后，这个没有反选
+// 		if(in_array('all', array_keys($userPermission['platforms'])))
+// 			return $getPlatformAllAccount;
 		
 		$platformPermissionInfo = [];
 		foreach ($userPermission['platforms'] as $key=>$data){

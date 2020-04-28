@@ -574,7 +574,7 @@ class CdiscountOrderHelper {
 			}//end of each cdiscount user account
 		}
 		catch (\Exception $e) {
-			echo "\n cronAutoFetchNewAccountOrderList Exception:".$e->getMessage();
+			echo "\n cronAutoFetchNewAccountOrderList Exception:".$e->getMessage().PHP_EOL.$e->getTraceAsString();
 			//\Yii::error(['cdiscount',__CLASS__,__FUNCTION__,'Background',"uid retrieve order :".$e->getMessage()],"edb\global");
 		}
 	}
@@ -2933,8 +2933,8 @@ class CdiscountOrderHelper {
 			
 			if(!empty($update_offer_id)){
 				$id_str = implode(',', $update_offer_id);
-				$resetCount = CdiscountOfferList::updateAll(['last_15_days_sold'=>0],"id not in ($id_str)");
-				echo "\n update have no sold in 15 days prods,count=$resetCount";
+				$resetCount = CdiscountOfferList::updateAll(['last_15_days_sold'=>0],"id not in ($id_str) and seller_id='{$user_name}'");
+				echo "\n update have no sold in 15 days prods,count=$resetCount seller_id=$user_name";
 			}
 		
 			$calculateSalesInfo[$user_name] = TimeUtil::getNow();

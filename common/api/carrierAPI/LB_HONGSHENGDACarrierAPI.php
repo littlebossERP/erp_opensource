@@ -14,8 +14,13 @@ use Jurosh\PDFMerge\PDFMerger;
 
 class LB_HONGSHENGDACarrierAPI extends BaseCarrierAPI
 {
-    static public $url1 = "120.25.96.115:8082"; //提交订单地址
-    static public $url2 = "120.25.96.115";   //打印地址
+//     static public $url1 = "120.25.96.115:8082"; //提交订单地址
+//     static public $url2 = "120.25.96.115";   //打印地址
+    
+    // dzt20200427 更新
+    static public $url1 = "193.112.161.59:8082"; //提交订单地址
+    static public $url2 = "193.112.161.59:8089";   //打印地址
+    
     
     /**
      +----------------------------------------------------------

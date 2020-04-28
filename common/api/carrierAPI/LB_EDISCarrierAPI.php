@@ -101,6 +101,8 @@ class LB_EDISCarrierAPI extends BaseCarrierAPI
     		$itemList=array();
 //     		$oet = OdEbayTransaction::find()->select(['transactionid','itemid'])->where(['order_id'=>$o["order_id"]])->one();
 //     		$transactionid = isset($oet->transactionid)?$oet->transactionid:'';
+
+    		$checkDuplicate = [];
     		foreach ($order->items as $j=>$vitem){	
     			
     		    // dzt20190815 发现order_source_transactionid 为0 订单再次同步还是0，392381865995-0，尝试提交给物流
@@ -110,6 +112,15 @@ class LB_EDISCarrierAPI extends BaseCarrierAPI
     			else
     				$orderLineItem="";
     			
+    			// dzt20191116 处理 duplicate orderLineItem
+    			// 该报错原因为交易重复上传，同一个包裹里有两个相同的交易。 此报错多出现在组合销售，也就是多商品的itemid一样，transactionid也一样。如果是这种情况，sku上传其中一个商品即可。
+    			if(empty($checkDuplicate[$orderLineItem])){
+    			    $checkDuplicate[$orderLineItem] = 1;
+    			} else {
+    			    \Yii::info('LB_EDIS,puid:'.$puid.',request,order_id:'.$order->order_id.' orderLineItem duplicate:'.$orderLineItem,"carrier_api");
+    			    continue;
+    			}
+    			    
     			$itemList[]=array(  
     			        // dzt20190815 
     					// "transactionId"=>empty($vitem['order_source_transactionid'])?"":$vitem['order_source_transactionid'],   //eBay交易号
@@ -202,7 +213,8 @@ class LB_EDISCarrierAPI extends BaseCarrierAPI
     		$request["ebayId"]=$o["selleruserid"];
     		$request["data"]=$parm;
 
-//     		print_r($request);die;
+//     		print_r($request);
+//     		echo json_encode($request);die;
     		\Yii::info('LB_EDIS,puid:'.$puid.',request,order_id:'.$order->order_id.' '.json_encode($request),"carrier_api");
     		$response=Helper_Curl::post($url,json_encode($request), $header);
     		\Yii::info('LB_EDIS,puid:'.$puid.',response,order_id:'.$order->order_id.' '.$response,"carrier_api");
@@ -437,8 +449,12 @@ class LB_EDISCarrierAPI extends BaseCarrierAPI
 				
 				$request["data"]=$parm;
 			
+				\Yii::info('LB_EDIS,puid:'.$puid.',doPrint response,order_id:'.$order->order_id.' '.json_encode($request),"carrier_api");
+				
 				$response=Helper_Curl::post($url,json_encode($request), $header);
 					
+				\Yii::info('LB_EDIS,puid:'.$puid.',doPrint response,order_id:'.$order->order_id.' '.$response,"carrier_api");
+				
 				$response_arr=json_decode($response,true);
 					
 				if(isset($response_arr["status"]["resultCode"]) && $response_arr["status"]["resultCode"]==200){

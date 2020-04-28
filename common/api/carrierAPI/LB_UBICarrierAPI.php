@@ -129,7 +129,7 @@ class LB_UBICarrierAPI extends BaseCarrierAPI
             'serviceOption' => empty($data['serviceOption']) ? '' : $data['serviceOption'],//服务类型
             // 'facility' => '',//发货人站点代码
             // 'platform' => '',//电商平台代码
-            'sku' => $order->order_source_order_id,//包裹SKU
+            'sku' => $data['package_sku'],//包裹SKU
             );
 
             $totalPrice = 0;  //订单总物品价格
@@ -577,7 +577,7 @@ class LB_UBICarrierAPI extends BaseCarrierAPI
             
             $response_arr=json_decode($response,true);
 
-            if($response_arr['status']=="Failed"){
+            if($response_arr['status']=="Failed" || $response_arr['status'] == "Failure"){
             	return self::getResult(1, '', $response_arr['errors'][0]['message']);
             }
             

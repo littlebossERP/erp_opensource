@@ -332,8 +332,10 @@ class LB_JIEMAISONGCarrierAPI extends BaseCarrierAPI
 					return self::getResult(1,'',$responseArr[0]->errorMsg[0]);
 				}
 			}
-			if(empty($responseArr[0]->soldItemId))
-				return self::getResult(1,'','没有返回明细id');
+			
+			// dzt20191220 捷买送反馈，soldItemId 这个字段没用了
+// 			if(empty($responseArr[0]->soldItemId))
+// 				return self::getResult(1,'','没有返回明细id');
 			
 			//上传申报明细
 // 			$response2 = $this->soapClient->addOrdersClearances(array('arg0'=>$requestClearance));

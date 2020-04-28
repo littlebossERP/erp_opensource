@@ -179,6 +179,10 @@ class AliexpressV2Helper
     			//初始同步
     			$start_time = $SAA_obj->binding_time;
     			$end_time = $time;
+    		} elseif($time-$SAA_obj->end_time> (10*86400)) {// 有时候拉一个月订单会报错isp.50001 服务器错误，设置间隔超10天则一次只拉10天
+    			//增量同步
+    			$start_time = $SAA_obj->end_time;
+    			$end_time = $SAA_obj->end_time + 10*86400;
     		} else {
     			//增量同步
     			$start_time = $SAA_obj->end_time;
@@ -223,20 +227,20 @@ class AliexpressV2Helper
 	    			
 	    			$param = ['id' => $sellerloginid, 'param1' => json_encode($param1)];
 	    			
-					echo json_encode($param);
+					echo json_encode($param).PHP_EOL;
 	    			// 调用接口获取订单列表
 	    			$result = $api->findOrderListQuery($param);
 	    			\Yii::info("getOrderListByTime--findOrderListQuery--$api_type--".json_encode($result), "file");
 	    			// 判断是否有订单
 	    			if (!isset ($result['total_item'])) {
 	    				$success = false;
-	    				echo "getOrderListByTime--findOrderListQuery--$api_type--err--".PHP_EOL;
+	    				echo "getOrderListByTime--findOrderListQuery--$api_type--err1--".PHP_EOL;
 	    				echo json_encode($result).PHP_EOL;
 	    				break;
 	    			}
 	    			else if($result['total_item'] > 0 && empty($result['order_list'])) {
 	    				$success = false;
-	    				echo "getOrderListByTime--findOrderListQuery--$api_type--err--".PHP_EOL;
+	    				echo "getOrderListByTime--findOrderListQuery--$api_type--err2--".PHP_EOL;
 	    				echo json_encode($result).PHP_EOL;
 	    				break;
 	    			}

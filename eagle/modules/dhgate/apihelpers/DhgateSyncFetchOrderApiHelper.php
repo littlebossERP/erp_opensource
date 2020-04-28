@@ -211,6 +211,7 @@ class DhgateSyncFetchOrderApiHelper{
             		$SAA_obj->status = 2;
             	}
             	$SAA_obj->times = 0;
+            	$SAA_obj->message = "";
             	$SAA_obj->save ();
             } else {
             	$SAA_obj->message = $errorMessage;

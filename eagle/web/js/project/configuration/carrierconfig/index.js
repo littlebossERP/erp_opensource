@@ -195,6 +195,42 @@ function openOrCloseAccount(id,is_used,code,account){
 			}
 		});
 	}
+	else if(is_used == 1 && code == "lb_4pxNew"){
+		//进入v2环境模拟登陆
+		var Url = global.baseUrl +'platform/fpx-new/get-url';
+		$.ajax({
+			type : 'post',
+			dataType: 'json',
+			data : { '4px_account_id':id },
+			url: Url,
+			success:function(response) 
+			{
+				if(response['status'] == 0)
+				{
+					$.ajax({
+						type:'get',
+						url:response['url'],
+			          	dataType: 'json',
+			           	xhrFields: {
+			           		withCredentials: true
+			           	},
+			           	success: function(result) 
+			           	{
+			           		//alert(result);
+			           		if(result == 1)
+			           			window.open (global.baseUrl+"platform/fpx-new/auth?4px_account_id="+id);
+			           		else
+			           			alert('登陆失败！');
+			            }
+			        });
+				}
+				else
+				{
+					window.open (global.baseUrl+"platform/fpx-new/auth?4px_account_id="+id);
+				}
+			}
+		});
+	}
 	else
 	{
 		var Url=global.baseUrl +'configuration/carrierconfig/open-or-close-account';

@@ -47,7 +47,7 @@ if (!empty($_REQUEST['country'])){
 
 $this->registerJs("OrderList.initClickTip();" , \yii\web\View::POS_READY);
 
-$this->registerJs("OrderCommon.NationList=".json_encode(@$countrys).";" , \yii\web\View::POS_READY);
+$this->registerJs("OrderCommon.NationList=".json_encode(@$countryRegion).";" , \yii\web\View::POS_READY);
 $this->registerJs("OrderCommon.NationMapping=[];" , \yii\web\View::POS_READY);
 $this->registerJs("OrderCommon.initNationBox($('div[name=div-select-nation][data-role-id=0]'));" , \yii\web\View::POS_READY);
 

@@ -5531,7 +5531,7 @@ class CarrierOpenHelper {
 		
 		//判断是否已经完成新版本更改,如果是则取新版的html代码
 		if($isCarrierNewVersion == true){
-			return self::getOrdersCarrierInfoViewNewVersion($order, $carrierAccountInfo, $declarationInfo);
+			return self::getOrdersCarrierInfoViewNewVersion($order, $sys_carrier_params, $carrierAccountInfo, $declarationInfo);
 		}
 		
 		$tmpHtml = '';
@@ -7068,7 +7068,7 @@ class CarrierOpenHelper {
 	 * @param $declarationInfo
 	 * @return string html
 	 */
-	public static function getOrdersCarrierInfoViewNewVersion($order, $carrierAccountInfo, $declarationInfo){
+	public static function getOrdersCarrierInfoViewNewVersion($order, $sys_carrier_params, $carrierAccountInfo, $declarationInfo){
 		$declaredLabel = array('chName'=>'中文报关名','enName'=>'英文报关名','declaredWeight'=>'申报重量g','declaredValue'=>'申报金额(USD)',
 				'detailHsCode'=>'海关编码','hasBattery'=>'是否含电');
 		
@@ -7121,6 +7121,24 @@ class CarrierOpenHelper {
 				"<span class='carrier_qtip_ajinformation'></span>".'</div></div>';
 		}
 		
+		// dzt20200105 html新版 没有处理订单参数html，这里加上
+		if(isset($sys_carrier_params[$order->default_carrier_code])){
+		    foreach ($sys_carrier_params[$order->default_carrier_code]['order_params'] as $v){
+		        $field = $v['data_key'];
+		        $data = isset($order->$field)?$order->$field:'';
+		
+		        $data = self::getCarrierOrderParamsData($order->default_carrier_code, $v['carrier_param_key'], $declarationInfo, $carrierAccountInfo[$order->default_shipping_method_code], $order, $data);
+		
+		        if($v['carrier_param_key'] == 'total_weight_4px'){
+		            $data = (string)$data;
+		        }
+		
+		        if($data != 'not_continue_carrier'){
+		            $tmpHeadhtml .= self::getCarrierViewHeadhtml($v, $data, $order->default_carrier_code, $carrierAccountInfo[$order->default_shipping_method_code], $order);
+		        }
+		    }
+		}
+		
 		$tmpHeadhtml .= '<div class=" order-param-group" style="width: 350px;" >
         <div style="float: left;width: 120px;margin-top: 9px;margin-right: 10px;"><label qtipkey="carrier_customer_number">客户参考号<span class="star" style="color: red;">*</span></label></div>
         <div style="float: left;"><input type="text"  class="eagle-form-control" name="customer_number" style="width:150px;" value ='.$customerNumber.'>';
@@ -7129,7 +7147,7 @@ class CarrierOpenHelper {
 		}
 		$tmpHeadhtml .= '</div></div>';
 		
-		$tmpHeadhtml = '<div style="width: 100%; float:left; ">'.$tmpHeadhtml.'</div>';
+		$tmpHeadhtml = '<div style="width: 100%; float:left; ">'.self::getAdditionalHeadhtml($order->default_carrier_code, $carrierAccountInfo[$order->default_shipping_method_code]).$tmpHeadhtml.'</div>';
 		
 		$tmpItmeshtml = '<div name="items_param" style="float:left; ">';
 		
@@ -7210,6 +7228,7 @@ class CarrierOpenHelper {
 				'lb_ande'=>array('pickupAddress'=>'深圳、广州、惠州、武汉','telContact'=>'18588920007','qq'=>'2853686617','qqtype'=>'0'),
 				'lb_yilong'=>array('pickupAddress'=>'上海、深圳、义乌、苏州、昆山','telContact'=>'15921148859','qq'=>'349560526','qqtype'=>'0'),
 				'lb_4px'=>array('pickupAddress'=>'全国各地','telContact'=>'13602570615','qq'=>'1061796015','qqtype'=>'0'),
+				'lb_4pxNew'=>array('pickupAddress'=>'全国各地','telContact'=>'13602570615','qq'=>'1061796015','qqtype'=>'0'),
 				'lb_wishyou'=>array('pickupAddress'=>'','telContact'=>'','qq'=>'2518043725','qqtype'=>'0'),
 				'lb_yuntu'=>array('pickupAddress'=>'','telContact'=>'400-0262-126','qq'=>'2851260179','qqtype'=>'0'),
 				'lb_xiapu'=>array('pickupAddress'=>'','telContact'=>'13923780976','qq'=>'2355838766','qqtype'=>'0'),

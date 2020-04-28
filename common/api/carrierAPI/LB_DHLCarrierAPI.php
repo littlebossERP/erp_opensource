@@ -329,7 +329,8 @@ class LB_DHLCarrierAPI extends BaseCarrierAPI
 				"width"=> $form_data['width'] == '' ? 0.0 : (float)$form_data['width'],
 				"customerReference1"=> null,
 				"customerReference2"=> null,
-				"productCode"=> empty($service_carrier_params['productCode']) ? 'PKD' : $service_carrier_params['productCode'],
+// 				"productCode"=> empty($service_carrier_params['productCode']) ? 'PKD' : $service_carrier_params['productCode'],
+		        "productCode"=> $service->shipping_method_code,// dzt20200417 DHL加了几个运输方式，允许输入
 				"incoterm"=> (!empty($form_data['incoterm']) && $form_data['incoterm'] != '1') ? $form_data['incoterm'] : null,
 				"contentIndicator"=> null,
 				"codValue"=> null,
@@ -374,7 +375,7 @@ class LB_DHLCarrierAPI extends BaseCarrierAPI
             	$request_label = $this->accordingArrayToModifyJson($body_req['shipmentItems'][0]['shipmentContents'][$key]['itemValue'],"itemValue",$request_label,".00");
             }
             
-            \Yii::info('LB_DHLCarrierAPI1 puid:'.$puid.'  order_id:'.$order['order_id'].'  '.$request_label, "file");
+            \Yii::info('LB_DHLCarrierAPI1 puid:'.$puid.'  order_id:'.$order['order_id'].'  '.$request_label, "carrier_api");
             //发送信息
 			$post_head = array();
 			$post_head[] = "Content-Type: application/json;charset=UTF-8";
@@ -390,7 +391,7 @@ class LB_DHLCarrierAPI extends BaseCarrierAPI
 			if($response == false){throw new CarrierException(print_r($response));}
 			
 			$response_label = json_decode($response, true);
-			\Yii::info('LB_DHLCarrierAPI2 puid:'.$puid.'  order_id:'.$order['order_id'].'  '.$response, "file");
+			\Yii::info('LB_DHLCarrierAPI2 puid:'.$puid.'  order_id:'.$order['order_id'].'  '.$response, "carrier_api");
 			if ($response_label['labelResponse']['bd']['responseStatus']['message'] == 'SUCCESS') {
 			//===因为该物流直接返回base64打印，所以需要直接保存到我们服务器做备用
 				$printLabelPdfPathSave = CarrierAPIHelper::savePDF2(base64_decode($response_label['labelResponse']['bd']['labels'][0]['content']),$puid,$order['order_id'].$customer_number."_printLabel_".time(),'pdf');
@@ -550,7 +551,7 @@ class LB_DHLCarrierAPI extends BaseCarrierAPI
 	        
 	        $request_label = json_encode($request_label);
 	        
-	        \Yii::info('LB_DHLCarrierAPI3 puid:'.$puid.'  order_id:'.$order->order_id.'  '.$request_label, "file");
+	        \Yii::info('LB_DHLCarrierAPI3 puid:'.$puid.'  order_id:'.$order->order_id.'  '.$request_label, "carrier_api");
 	        //发送信息
 	        $post_head = array();
 	        $post_head[] = "Content-Type: application/json;charset=UTF-8";
@@ -564,7 +565,7 @@ class LB_DHLCarrierAPI extends BaseCarrierAPI
 	        if($response == false){throw new CarrierException(print_r($response));}
 	        
 	        $response_label = json_decode($response, true);
-	        \Yii::info('LB_DHLCarrierAPI4 puid:'.$puid.'  order_id:'.$order->order_id.'  '.$response, "file");
+	        \Yii::info('LB_DHLCarrierAPI4 puid:'.$puid.'  order_id:'.$order->order_id.'  '.$response, "carrier_api");
 	        
 	        if ($response_label['closeOutResponse']['bd']['responseStatus']['message'] == 'SUCCESS') {
 	            $order->carrier_step = OdOrder::CARRIER_WAITING_PRINT;
@@ -659,7 +660,7 @@ class LB_DHLCarrierAPI extends BaseCarrierAPI
 	        
 	        $request_label = json_encode($request_label);
 	        
-	        \Yii::info('LB_DHLCarrierAPI7 puid:'.$puid.'  order_id:'.$order->order_id.'  '.$request_label, "file");
+	        \Yii::info('LB_DHLCarrierAPI7 puid:'.$puid.'  order_id:'.$order->order_id.'  '.$request_label, "carrier_api");
 	        //发送信息
 	        $post_head = array();
 	        $post_head[] = "Content-Type: application/json;charset=UTF-8";
@@ -669,7 +670,7 @@ class LB_DHLCarrierAPI extends BaseCarrierAPI
 	        if($response == false){throw new CarrierException(print_r($response));}
 	        
 	        $response_label = json_decode($response, true);
-	        \Yii::info('LB_DHLCarrierAPI8 puid:'.$puid.'  order_id:'.$order->order_id.'  '.$response, "file");
+	        \Yii::info('LB_DHLCarrierAPI8 puid:'.$puid.'  order_id:'.$order->order_id.'  '.$response, "carrier_api");
 	        
 	        if ($response_label['labelReprintResponse']['bd']['responseStatus']['message'] == 'SUCCESS') {
 	            $printLabelPdfPathSave = CarrierAPIHelper::savePDF2(base64_decode($response_label['labelReprintResponse']['bd']['shipmentItems'][0]['content']),$puid,$order->order_id.$order->customer_number."_printLabel_".time(),'pdf');

@@ -80,11 +80,11 @@ class AliexpressApiPostController extends \yii\web\Controller
 					\Yii::$app->getResponse()->redirect($redirect_url);
 				}
 			}elseif(isset($d['error_msg'])){
-				if($d['error_msg'] == 'application need purchase'){
+				if($d['error_msg'] == 'application need purchase'){// 需要先购买服务才能绑定
 					$redirect_url = $err_url.'err_code=102&msg=';
 				}
 				else{
-					$redirect_url = $err_url.'err_code=101&msg='.$d['error_msg'];
+					$redirect_url = $err_url.'err_code=101&msg='.urlencode($d['error_msg']);
 				}
 				\Yii::$app->getResponse()->redirect($redirect_url);
 			}elseif(isset($d['error'])){
@@ -233,7 +233,7 @@ class AliexpressApiPostController extends \yii\web\Controller
 	    return AliexpressApiPostHelper::AliexpressPost(__FUNCTION__, '12');
 	}
 	
-	// 自定义场景接口，交易订单列表查询
+	// 自定义场景接口，上传图片库
 	public function actionUploadimageforsdk(){
 	    return AliexpressApiPostHelper::AliexpressPost(__FUNCTION__, '12');
 	}

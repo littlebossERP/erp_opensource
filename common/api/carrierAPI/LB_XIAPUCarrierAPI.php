@@ -49,7 +49,7 @@ class LB_XIAPUCarrierAPI extends BaseCarrierAPI{
              }
              
              //对当前条件的验证  0 如果订单已存在 则报错 1 订单不存在 则报错
-             $checkResult = CarrierAPIHelper::validate(0,0,$order,$extra_id,$customer_number);//第一个参数检验puid，第二个检验是否存在相关订单
+             $checkResult = CarrierAPIHelper::validate(1,0,$order,$extra_id,$customer_number);//第一个参数检验puid，第二个检验是否存在相关订单
              $puid = $checkResult['data']['puid'];
              
              $info = CarrierAPIHelper::getAllInfo($order);
@@ -105,11 +105,13 @@ class LB_XIAPUCarrierAPI extends BaseCarrierAPI{
                  $order_product_ItemList['Quantity']=$order_CustomerItemList['Quantity'];//不知道是否需要，暂时不填商品的信息
                  $order_list['OrderItemList'][$i] = $order_product_ItemList;
              }
-             if(!empty($form_data['currency'])){//申报价值
-                 $order_customer['Currency']=$form_data['currency'];
-             }else{
+//              if(!empty($form_data['currency'])){//申报价值
+//                  $order_customer['Currency']=$form_data['currency'];
+//              }else{
+//                  $order_customer['Currency']="USD";
+//              }
+             // dzt20191202 客户报错"customs currency error, currency must serve USD" 貌似只支持USD
                  $order_customer['Currency']="USD";
-             }
              if(!empty($form_data['CustomsType'])){//申报类型
                  $order_customer['CustomsType']=$form_data['CustomsType'];
              }else{

@@ -4,6 +4,8 @@ namespace common\helpers;
 class SubmitGate{
 	//超时设置
 	static private $timeout = 20;
+	static private $connecttimeout = 10;
+	
 	/**
 	 +----------------------------------------------------------
 	 * 远程表求总的入口
@@ -65,6 +67,7 @@ class SubmitGate{
 			curl_setopt($connection, CURLOPT_SSL_VERIFYPEER, 0);
 			curl_setopt($connection, CURLOPT_SSL_VERIFYHOST, 0);
 			curl_setopt($connection, CURLOPT_HTTPHEADER, array('Content-Type: text/xml;charset=utf-8'));
+			curl_setopt($connection, CURLOPT_CONNECTTIMEOUT, self::$connecttimeout);
 			curl_setopt($connection, CURLOPT_TIMEOUT, $timeout);//只需要设置一个秒的数量就可以
 			if($method == 'POST'){
 				curl_setopt($connection, CURLOPT_POST, 1);

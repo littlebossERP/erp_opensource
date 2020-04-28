@@ -206,7 +206,7 @@ class CdiscountAccountsHelper
     	if($tokenInfo['success']){
     		$info['token'] = $tokenInfo['token'];
     	}else{
-    	    \Yii::info("getCdiscountToken result:".print_r($tokenInfo, true), "file");
+    	    \Yii::info("getCdiscountToken result:".print_r($tokenInfo, true).PHP_EOL."params:".json_encode($params), "file");
     		if($tokenInfo['message']=='302')
     			$tokenInfo['message']='1.账号或密码错误,<br>2.cdiscount官方接口出现问题,<br>3.获取token操作过于频繁';
     		return array(false,TranslateHelper::t("获取token失败!可能原因:<br>").$tokenInfo['message']);

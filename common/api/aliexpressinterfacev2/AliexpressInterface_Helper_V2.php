@@ -399,7 +399,7 @@ class AliexpressInterface_Helper_V2{
 				$myorder_arr = array();//小老板订单数据数组
 				$payment_type = isset($OrderById['payment_type']) ? $OrderById['payment_type'] : '';
 				\Yii::info("aliexpressOrder orderid=".$order_id.",paymentType=$payment_type,puid=".$getorder_obj->uid,"file");
-				
+				// dzt20200310 add MF MAF 663 Saint Martin 圣马丁
 				$countryInfo = CountryHelper::getCountryName($OrderById['receipt_address']['country']);
 				if (count($countryInfo) === 0) {
 				    \Yii::info("aliexpressOrder  Error country:".$OrderById['receipt_address']['country'], "file");			    

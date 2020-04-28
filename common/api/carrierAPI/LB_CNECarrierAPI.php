@@ -383,17 +383,102 @@ class LB_CNECarrierAPI extends BaseCarrierAPI
 			$puid = $user->getParentUid();
 			
 			$order = $data['order'];
-			$params = '&cno='.$order->customer_number;
-			$url = 'http://track.api.cne.com/cgi-bin/GInfo.dll?EmsTrackState'.$params;
-			$response = Helper_Curl::get($url);
-			$status = $this->getOrderStatus($response);
-			if($status){
-				if(\Yii::$app->session['super_login'] == 1){
-					$info = CarrierAPIHelper::getAllInfo($order);
-					$service = $info['service'];
-					$account = $info['account'];
-					$a = $account->api_params;
+			
+			$checkResult = CarrierAPIHelper::validate(0,1,$order);
+			$shipped = $checkResult['data']['shipped'];
+			
+			$info = CarrierAPIHelper::getAllInfo($order);
+			$service = $info['service'];
+			$account = $info['account'];
+			$a = $account->api_params;
 					
+			
+			// dzt20191127 cne新接口 
+// 			$params = '&cno='.$order->customer_number;
+// 			$url = 'http://track.api.cne.com/cgi-bin/GInfo.dll?EmsTrackState'.$params;
+// 			$response = Helper_Curl::get($url);
+// 			$status = $this->getOrderStatus($response);
+// 			if($status){
+// 				if(\Yii::$app->session['super_login'] == 1){
+// 					$info = CarrierAPIHelper::getAllInfo($order);
+// 					$service = $info['service'];
+// 					$account = $info['account'];
+// 					$a = $account->api_params;
+					
+// 					$print_param = array();
+// 					$print_param['carrier_code'] = $service->carrier_code;
+// 					$print_param['api_class'] = 'LB_CNECarrierAPI';
+// 					$print_param['userkey'] = $a['userkey'];
+// 					$print_param['token'] = $a['token'];
+// 					$print_param['cNum'] = $order->customer_number;
+// 					$print_param['carrier_params'] = $service->carrier_params;
+					
+// 					try{
+// 						CarrierAPIHelper::saveCarrierUserLabelQueue($puid, $order->order_id, $order->customer_number, $print_param);
+// 					}catch (\Exception $ex){
+// 					}
+// 				}
+// // 				$order->carrier_step = OdOrder::CARRIER_WAITING_PRINT;
+// 				$order->save();
+// 				return self::getResult(0,'','订单状态:'.$status);
+// 			}
+// 			else {
+// 				return self::getResult(1,'','物流商返回数据错误');
+// 			}
+			
+			$url = 'https://apitracking.cne.com/client/track';
+// 			$request = [
+// 			        'RequestName'=>'ClientTrack',
+// 			        'icID'=>71,
+// 			        'TimeStamp'=>self::$timestamp,
+// 			];
+			 
+// 			$md5 = md5($request['icID'].$request['TimeStamp'].'c3c04c24d13d0267043128103ceedb3f');
+			
+			$request = [
+			        'RequestName'=>'ClientTrack',
+			        'icID'=>$a['userkey'],
+			        'TimeStamp'=>self::$timestamp,
+			];
+			
+			$md5 = md5($request['icID'].$request['TimeStamp'].$a['token']);
+			
+			$request['MD5'] = $md5;
+			
+			$request['cNo'] = $order->customer_number;
+			$request['lan'] = "cn";
+			
+			
+			$headers = [];
+			$headers[] = 'Content-type: application/json;charset=utf-8';
+			$headers[] = 'Accept: application/json';
+			
+			$response = Helper_Curl::post($url, json_encode($request), $headers);
+			
+			\Yii::info("LB_CNECarrierAPI getTrackingNO result:".$response.PHP_EOL."post info:".
+			        print_r(Helper_Curl::$last_post_info, true).PHP_EOL."request info:".json_encode($request), "carrier_api");
+			
+			$result = json_decode($response, true);
+			
+			// 1 成功
+			if(!empty($result['ReturnValue']) && $result['ReturnValue'] == 1){ // ReturnValue == 1
+			    $is_new = false;
+			    
+			    $track_no = $result['Response_Info']['trackingNbr'];
+			    if($shipped->tracking_number != $track_no){
+			        $is_new = true;
+			        \eagle\modules\util\helpers\OperationLogHelper::log('order',$order->order_id,'获取跟踪号', '旧的跟踪号:'.$shipped->tracking_number.'.新的跟踪号:'.$track_no, '斑头雁');
+			    }
+			    
+			    $old_track_no = $shipped->tracking_number;
+			    $shipped->tracking_number = $track_no;
+			    $shipped->save();
+			    $order->tracking_number = $shipped->tracking_number;
+			    	
+			    $order->save();
+			    	
+			    if(\Yii::$app->session['super_login'] == 1){
+			    
 					$print_param = array();
 					$print_param['carrier_code'] = $service->carrier_code;
 					$print_param['api_class'] = 'LB_CNECarrierAPI';
@@ -407,13 +492,19 @@ class LB_CNECarrierAPI extends BaseCarrierAPI
 					}catch (\Exception $ex){
 					}
 				}
-// 				$order->carrier_step = OdOrder::CARRIER_WAITING_PRINT;
-				$order->save();
-				return self::getResult(0,'','订单状态:'.$status);
+			    
+			    $status = $this->getOrderStatus($result['Response_Info']['status']);
+			    
+			    return self::getResult(0,'','跟踪号：'.$track_no.',订单状态:'.$status);
+			}else{
+			    if(!empty($result['ReturnValue']))
+	                $message = $this->getTrackStatus($result['ReturnValue']);
+			    else 
+			        $message = $result['message'];
+			        
+			    throw new CarrierException("cne错误：".$message);
 			}
-			else {
-				return self::getResult(1,'','物流商返回数据错误');
-			}
+			
 		}catch(CarrierException $e){return self::getResult(1,'',$e->msg());}
 	}
 
@@ -456,6 +547,7 @@ class LB_CNECarrierAPI extends BaseCarrierAPI
 	 */
 	public function getTrackStatus($key){
 	    $arr = [
+            -8=>"授权失败" ,
 	        -9=>'系统错误',
 	        -102=>'运单不存在'
 	    ];

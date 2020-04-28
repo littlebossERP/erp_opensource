@@ -175,6 +175,48 @@ function saveAccount($code,$id){
 							}
 						});
 						
+					}else if( $id == 0 && $code == "lb_4pxNew" ){
+						$id = response.message;
+						//进入v2环境模拟登陆
+						var Url = global.baseUrl +'platform/fpx-new/get-url';
+						$.ajax({
+							type : 'post',
+							dataType: 'json',
+							data : { '4px_account_id':$id },
+							url: Url,
+							success:function(response)
+							{
+								if(response['status'] == 0)
+								{
+									$.ajax({
+										type:'get',
+										url:response['url'],
+										dataType: 'json',
+										xhrFields: {
+											withCredentials: true
+										},
+										success: function(result)
+										{
+											//alert(result);
+											if(result == 1){
+												window.open (global.baseUrl+"\platform/fpx-new/auth?4px_account_id="+$id);
+
+												window.location.href = global.baseUrl+'configuration/carrierconfig/index?tcarrier_code='+$code;
+											}
+											else
+												alert('登陆失败！');
+										}
+									});
+								}
+								else
+								{
+									window.open (global.baseUrl+"\platform/fpx-new/auth?4px_account_id="+$id);
+
+									window.location.href = global.baseUrl+'configuration/carrierconfig/index?tcarrier_code='+$code;
+								}
+							}
+						});
+						
 					}
         			else
         			{

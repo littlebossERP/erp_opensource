@@ -39,9 +39,9 @@ CLASS OrderGetDataHelper{
 	 **/
 	static public function formatQueryOrderConditionPurchase(&$query, $is_FBA = false){
 		if (empty($query)) $query = OdOrder::find();
-		//采购不要fba 与 fbc 的订单
+		//采购不要fba 与 fbc 的订单,fbl 
 		if(!$is_FBA){
-			$query->andWhere(['not in' , 'order_type' , ['AFN' , 'FBC']]);
+			$query->andWhere(['not in' , 'order_type' , ['AFN' , 'FBC', 'FBL']]);
 		}
 		//只要正常订单和合并后的订单
 		$query->andWhere(['order_relation'=>['normal' , 'sm', 'ss', 'fs']]);
@@ -1323,6 +1323,9 @@ CLASS OrderGetDataHelper{
 	 					if(!in_array('fbc', $value)){
 	 						$query->andWhere(['not in' , 'order_type' , ['FBC']]);
 	 					}
+	 					if(!in_array('fbl', $value)){
+	 					    $query->andWhere(['not in' , 'order_type' , ['FBL']]);
+	 					}
  					}
  					break;
 	 			case 'page':
@@ -1337,7 +1340,7 @@ CLASS OrderGetDataHelper{
 	 		}
 	 	}
 	 	if(empty($params['order_type'])){
-	 		$query->andWhere(['not in' , 'order_type' , ['AFN', 'FBC']]);
+	 		$query->andWhere(['not in' , 'order_type' , ['AFN', 'FBC', 'FBL']]);
 	 	}
 	 	
 	 	//已完成订单，并且利润不为空，有付款时间才计算
@@ -1727,6 +1730,8 @@ CLASS OrderGetDataHelper{
 	 	->where(['root_sku'=>$sku])
 	 	->andwhere("(od_order_v2.order_status >='".OdOrder::STATUS_PAY."' and od_order_v2.order_status <'".OdOrder::STATUS_SHIPPED."') or od_order_v2.order_status='".OdOrder::STATUS_SUSPEND."' or od_order_v2.order_status='".OdOrder::STATUS_OUTOFSTOCK."' ")
 	 	->andwhere("order_relation in ('normal' , 'sm', 'ss', 'fs')")
+	 	->andwhere("isshow='Y'") // dzt20200221 解绑平台订单不包含
+	 	
 	 	->count();
 	 	
 	 	/*

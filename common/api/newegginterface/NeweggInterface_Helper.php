@@ -13,6 +13,10 @@ class NeweggInterface_Helper
 		'SecretKey' => '@XXX@'
 	];
 	
+	// dzt20200402 for 请求卡死，导致同步卡死
+	public static $connecttimeout = 10;
+	public static $timeout = 60;
+	
 	/**
 	 * 标记订单已经下载了
 	 */
@@ -189,6 +193,9 @@ class NeweggInterface_Helper
 		//print_r($token);
 		//print_r($config);
 		//print_r($reqParams);
+		if(!empty($timeout)){// dzt20200402
+		    self::$timeout = $timeout;
+		}
 		
 		$SellerID = @$token['SellerID'];
 		$Authorization = @$token['Authorization'];
@@ -235,6 +242,10 @@ class NeweggInterface_Helper
 			curl_setopt($session, CURLOPT_HEADER, false);
 			curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
 			curl_setopt($session, CURLOPT_SSL_VERIFYPEER, 0);
+			
+			// dzt20200402 
+			curl_setopt($session, CURLOPT_CONNECTTIMEOUT, self::$connecttimeout);
+			curl_setopt($session, CURLOPT_TIMEOUT, self::$timeout);
 			
 			// Do the POST/GET and then close the session
 			$response = curl_exec($session);

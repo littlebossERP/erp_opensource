@@ -484,6 +484,7 @@ class MessageBGJHelper {
 					try{ 
 						$dhgateinterface_Api = new Dhgateinterface_Api();
 						$rtn1 = $dhgateinterface_Api->sendOrderMessage($puid, $pendingMessage['order_id'], $pendingMessage['content'].$content_tail);
+						echo PHP_EOL.'dhgate sendOrderMessage puid:'.$puid.',id:'.$pendingMessage['id'].' order_id:'.$pendingMessage['order_id'].' '.json_encode($value).PHP_EOL;
 					} catch (Exception $e) {
 						$rtn1 = array('success'=>false,'error_message'=>'Dhgate API Failed');
 					}
@@ -493,6 +494,7 @@ class MessageBGJHelper {
 					//敦煌的站内信回复不需要知道orderid或者buyer_id
 					try{
 						$rtn1 = MessageDhgateApiHelper::addMessage($puid, $pendingMessage['seller_id'], $tmpAddi_info, $pendingMessage['content']);
+						echo PHP_EOL.'dhgate addMessage puid:'.$puid.',id:'.$pendingMessage['id'].' seller_id:'.$pendingMessage['seller_id'].' '.json_encode($rtn1).PHP_EOL;
 					} catch (Exception $e) {
 						$rtn1 = array('success'=>false,'error_message'=>'Dhgate API Failed');
 					}

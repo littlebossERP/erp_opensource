@@ -41,6 +41,7 @@ use common\api\lazadainterface\LazadaInterface_Helper_V2;
 use common\api\shopeeinterface\ShopeeInterface_Api;
 use eagle\models\SaasShopeeUser;
 use eagle\modules\order\helpers\OrderHelper;
+use common\helpers\Helper_Array;
 
 /**
  +------------------------------------------------------------------------------
@@ -458,6 +459,11 @@ class QueueAutoShippedHelper {
 		global $LOG_CONTENT;
 		$ebayuser = SaasEbayUser::findOne(['selleruserid'=>$queueSyncShippedObj->selleruserid]);
 		if (!empty($ebayuser)) {
+			//dzt20200326 shipping_method_code 传了“万邑通” ebay返回Input data for tag Shipment.ShippingCarrierUsed  is invalid or missing. Please check API documentation.
+			// 估计是中文不行，追查到上传订单从	sys_shipping_method 表 复制service_code 字段值的，不清楚为什么传了中文
+			if(stripos($queueSyncShippedObj->shipping_method_code, "万邑通") !== false){
+			    $queueSyncShippedObj->shipping_method_code = str_replace($queueSyncShippedObj->shipping_method_code, "WANYITONG", "万邑通");
+			}
 			 
 			$api = new completesale();
 			$api->resetConfig($ebayuser->DevAcccountID);

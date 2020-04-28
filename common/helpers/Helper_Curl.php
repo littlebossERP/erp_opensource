@@ -77,6 +77,7 @@ class Helper_Curl {
 		curl_setopt($connection, CURLOPT_URL,$url);
 		curl_setopt($connection, CURLOPT_SSL_VERIFYPEER, 0);
 		curl_setopt($connection, CURLOPT_SSL_VERIFYHOST, 0);
+		curl_setopt($connection, CURLOPT_FOLLOWLOCATION, true);// 出现图片短链接需要302跳转才能获取
 		if (!is_null($requestHeader)){
 			curl_setopt($connection, CURLOPT_HTTPHEADER, $requestHeader);
 		}
@@ -104,7 +105,7 @@ class Helper_Curl {
 		}
 		if ($error){
 		    //throw new CurlExcpetion_Connection_Timeout('curl_error:'.(print_r($error,1)).'URL:'.$url.'DATA:'.$requestBody);
-		    $e = 'curl_error:'.(print_r($error, true)).'URL:'.$url.'DATA:'.$requestBody;
+		    $e = 'curl_error:'.(print_r($error, true)).'URL:'.$url.'DATA:'.print_r($requestBody, true);
 		    \Yii::error($e, "file");
 		    return false;
 		}

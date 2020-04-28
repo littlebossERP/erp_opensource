@@ -324,6 +324,20 @@ profit.list=
 								profit.list.profit_search(0);
 							}
 						});
+					}else if (ErrorMsg != "" && success==1){
+						ErrorMsg= "<div style='height: 600px;overflow: auto;'>部分导入成功,点击确认刷新窗口数据。"+ErrorMsg+"</div>";
+						bootbox.alert({
+							buttons: {
+								ok: {
+									label: 'OK',
+									className: 'btn-primary'
+								}
+							},
+							message: ErrorMsg,
+							callback: function() {
+								profit.list.profit_search(0);
+							}
+						});
 					}else{
 						bootbox.alert({
 							buttons: {

@@ -7,7 +7,7 @@ use yii\data\Sort;
 use yii\jui\JuiAsset;
 use eagle\modules\purchase\helpers\PurchaseHelper;
 
-$tmp_js_version = '1.06';
+$tmp_js_version = '1.07';
 $baseUrl = \Yii::$app->urlManager->baseUrl;
 
 $this->registerJsFile($baseUrl."/js/project/statistics/statisticsList.js?v=".$tmp_js_version, ['depends' => ['yii\web\JqueryAsset']]);

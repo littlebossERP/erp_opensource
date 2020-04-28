@@ -258,6 +258,8 @@ class LB_YANWENCarrierAPI extends BaseCarrierAPI
 					        'City'=>$order->consignee_city,
 					        'Address1'=>$addressAndPhone['address_line1'],
 					        'Address2'=>$addressAndPhone['address_line2'],
+					        
+					        'NationalId'=>$data['NationalId'],// 20191209 护照ID，税号。（国家为巴西时 此属性必填）
 					),
 					'Memo'=>$data['orderNote'],
 			        'MRP'=>$data['MRP'],//申请建议零售价
@@ -660,6 +662,8 @@ class LB_YANWENCarrierAPI extends BaseCarrierAPI
 	function sendRequest($returnXml=0,$method='post'){
 		$xmlArr=$this->requestBody;
 		$xmlArr=self::simpleArr2xml($xmlArr,0);
+		\Yii::info('YANWEN sendRequest'.$xmlArr,"carrier_api");
+		 
 		return $this->sendHttpRequest($xmlArr,$returnXml,$method);
 	}
 	/**
@@ -691,6 +695,8 @@ class LB_YANWENCarrierAPI extends BaseCarrierAPI
 		$headers = array (
 				'Authorization: basic '.$this->AuthToken,
 				'Content-Type: text/xml; charset=utf-8',
+		        'Accept: application/xml',
+		        
 		);
 // 		echo '<pre>';
 // 		print_r($this->serverUrl);
@@ -700,6 +706,7 @@ class LB_YANWENCarrierAPI extends BaseCarrierAPI
 		try {
 
 			$response = Helper_Curl::$method($this->serverUrl,$requestBody,$headers,false);
+			\Yii::info('LB_YANWEN response:'.$response,"carrier_api");
 		}catch (Exception $ex){
 			$response = Array
 			(

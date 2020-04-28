@@ -20,7 +20,7 @@ $this->registerJs("OrderTagApi.init();" , \yii\web\View::POS_READY);
 }
 </style>
 <div class="panel-order">
-
+    <?php if(!empty($orderData)):?>
 	<div class="panel-order-row">
 		<div class="panel-order-body">
 		<div class="panel-order-heading"><?= TranslateHelper::t('订单基本信息')?></div>
@@ -177,4 +177,7 @@ $this->registerJs("OrderTagApi.init();" , \yii\web\View::POS_READY);
 		</div>
 	</div>
 	<div class="order_tag_dialog_<?=$orderData['order_id'] ?>"></div>
+	<?php else:?>
+	<div>订单信息已经不存在</div>
+	<?php endif;?>
 </div>

@@ -368,8 +368,12 @@ class WishAccountsV2Helper
 								$model->refresh_token = $wishReturn['data']['refresh_token'];
 							if (!empty($wishReturn['data']['expires_in']))
 								$model->expires_in = $wishReturn['data']['expires_in'];
+							
+							//  dzt20191125 字段内容有调整"expiry_time": "2019-12-25T08:03:50.948+00:00",
+// 							if (!empty($wishReturn['data']['expiry_time']))
+// 								$model->expiry_time = date('Y-m-d H:i:s',$wishReturn['data']['expiry_time']);
 							if (!empty($wishReturn['data']['expiry_time']))
-								$model->expiry_time = date('Y-m-d H:i:s',$wishReturn['data']['expiry_time']);
+							    $model->expiry_time = date('Y-m-d H:i:s', strtotime($wishReturn['data']['expiry_time']));
 							
 							// dzt20191012 这段逻辑没有用了
 							//20170814 验证access token 与当前的账号信息是否一致

@@ -46,9 +46,15 @@ class SaasLazadaAutoFetchApiHelperV2{
 			'delivered'=>500,
 			'return_waiting_for_approval'=>500,//买家申请退货，等待卖家同意
 			'return_shipped_by_customer'=>500,//买家申请退货，买家已退回
+			'INFO_ST_DOMESTIC_BACK_TO_SHIPPER'=>500,// 对应return_shipped_by_customer状态
 			'return_rejected'=>500,//买家申请退货，卖家拒绝
+			'INFO_ST_DOMESTIC_RETURN_WITH_LAST_MILE_3PL'=>500,// 对应 return_rejected
+	        'INFO_ST_DOMESTIC_RETURN_AT_TRANSIT_HUB'=>500,// failed return_rejected 都能拿到INFO_ST_DOMESTIC_RETURN_AT_TRANSIT_HUB
 			'returned'=>600,
+	        'INFO_ST_DOMESTIC_PACKAGE_RETURNED'=>600,// 对应returned状态
 			'failed'=>600,
+	        'LOST_BY_3PL'=>600,// return_waiting_for_approval,return_rejected,return_shipped_by_customer 状态都能过滤出这状态的订单，lazada技术那边估计 包裹丢失了，让卖家建立工单进行索赔。
+	        'INFO_ST_DOMESTIC_DELIVERY_FAILED'=>600,// 对应failed状态
 			'canceled'=>600
 	);	
 
@@ -73,8 +79,10 @@ class SaasLazadaAutoFetchApiHelperV2{
 	 */
 	private static function _lockLazadaAutosyncRecord($autosyncId){
 		$nowTime=time();
+		// dzt20200403 get order list create 和 update都多加一个进程，尽管这里可以避免同事执行同一条记录，但不能避免重复执行
+		// 由于大部分控制了每次只读30条记录，每轮等待至少20分钟，正常大概2分钟内就可以处理完这批，所以这里添加where 条件nowTime-5*60 
 		$connection=Yii::$app->db;
-		$command = $connection->createCommand("update saas_lazada_autosync_v2 set status=1,last_finish_time=$nowTime where id =". $autosyncId." and status<>1 ") ;
+		$command = $connection->createCommand("update saas_lazada_autosync_v2 set status=1,last_finish_time=$nowTime where id =". $autosyncId." and status<>1 and next_execution_time < ".($nowTime-5*60)) ;
 		$affectRows = $command->execute();
 		if ($affectRows <= 0)	return null; //抢不到---如果是多进程的话，有抢不到的情况
 		// 抢到记录
@@ -181,7 +189,7 @@ class SaasLazadaAutoFetchApiHelperV2{
 		$connection=\Yii::$app->db;
 		$type = 2;//同步job类型:1--获取旧订单,2--获取最新create产生的订单,3--获取最新update产生的订单
 		$hasGotRecord=false;//是否抢到账号
-		$fetchPeriod=20*60; //秒为单位. 2次后台自动拉取的时间间隔
+		$fetchPeriod=30*60; //秒为单位. 2次后台自动拉取的时间间隔 // dzt20200403 累积比较多 获取间隔从20分钟改成30分钟
 		$fetchEndTimeAdvanced=5*60;  //秒为单位 .为了避免由于服务器的时间不准确导致尝试拉取超前时间点的订单。这里end_time主动往前移5分钟。
 		$failRetryPeriod=5*60;// 失败重试
 		
@@ -274,7 +282,7 @@ class SaasLazadaAutoFetchApiHelperV2{
 			        $config["countryCode"] = $countries['country'];
 			        list($ret,$errorMessage)=self::_getOrderListAndSaveToQueue($config,$start_time,$end_time,$SAA_obj,"createTime",$offset);
 			        if(!$ret){
-			            $all_errMsg .= $errorMessage.";";
+			            $all_errMsg .= $config["countryCode"].":".$errorMessage.";";
 			        }
 			    }
 			    
@@ -337,7 +345,7 @@ class SaasLazadaAutoFetchApiHelperV2{
 		$connection=\Yii::$app->db;
 		$type = 3;//同步job类型:1--获取旧订单,2--获取最新create产生的订单,3--获取最新update产生的订单
 		$hasGotRecord=false;//是否抢到账号
-		$fetchPeriod=20*60; //秒为单位. 2次后台自动拉取的时间间隔
+		$fetchPeriod=30*60; //秒为单位. 2次后台自动拉取的时间间隔 // dzt20200403 累积比较多 获取间隔从20分钟改成30分钟
 		$fetchEndTimeAdvanced=5*60;  //秒为单位 .为了避免由于服务器的时间不准确导致尝试拉取超前时间点的订单。这里end_time主动往前移5分钟。
 		$failRetryPeriod=5*60;// 失败重试
 		
@@ -490,7 +498,7 @@ class SaasLazadaAutoFetchApiHelperV2{
 		$connection=\Yii::$app->db;
 		$type = 1;//同步job类型:1--获取旧订单,2--获取最新create产生的订单,3--获取最新update产生的订单
 		$hasGotRecord=false;//是否抢到账号
-		$fetchPeriod=20*60; //秒为单位. 2次后台自动拉取的时间间隔
+		$fetchPeriod=30*60; //秒为单位. 2次后台自动拉取的时间间隔 // dzt20200403 累积比较多 获取间隔从20分钟改成30分钟
 		$failRetryPeriod=5*60;// 失败重试
 		
 		//2. 从账户同步表（订单列表同步表提取带同步的账号。
@@ -638,7 +646,7 @@ class SaasLazadaAutoFetchApiHelperV2{
 		$oldestOrderDay=50; //最多拉取60天之前的订单
 		$type = 1;//同步job类型:1--获取旧订单,2--获取最新create产生的订单,3--获取最新update产生的订单
 		$hasGotRecord=false;//是否抢到账号
-		$fetchPeriod=20*60; //秒为单位. 2次后台自动拉取的时间间隔
+		$fetchPeriod=30*60; //秒为单位. 2次后台自动拉取的时间间隔// dzt20200403 累积比较多 获取间隔从20分钟改成30分钟
 		$failRetryPeriod=5*60;// 失败重试
 		
 		//2. 从账户同步表（订单列表同步表提取带同步的账号。

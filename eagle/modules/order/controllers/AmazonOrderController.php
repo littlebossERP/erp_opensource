@@ -137,7 +137,7 @@ class AmazonOrderController extends \eagle\components\Controller{
 		/**
 		 * [OrderApiHelper::getOrderListByConditionOMS 统一OMS接口]
 		 */
-		$addi_condition = ['order_source'=>'amazon'];
+		
 		$addi_condition['sys_uid'] = \Yii::$app->user->id;
 		$addi_condition['selleruserid_tmp'] = $amzStoreDropdownList;
 		$omsRT = OrderApiHelper::getOrderListByConditionOMS($_REQUEST,$addi_condition,$data,$pageSize,false,'all');
@@ -305,7 +305,11 @@ class AmazonOrderController extends \eagle\components\Controller{
 		}else{
 			$redis_order_status = '';
 		}
-	 	$countrys = OrderHelper::getPlatformOrderCountries($puid , 'amazon',$amzUsersDropdownList ,$redis_order_status);
+	 	$countrys = OrderHelper::getPlatformOrderCountries($puid , 'amazon',$amzStoreDropdownList ,$redis_order_status);
+	 	
+	    
+	 	//国家地区，上方订单过滤
+		$countryRegion = OrderHelper::getCountryAndRegion();
 	 	
 	    
 		/**
@@ -354,6 +358,8 @@ class AmazonOrderController extends \eagle\components\Controller{
 			'selleruserids'=>$selleruserids,
 			//
 			'countrys'=>$countrys,
+			//
+	        'countryRegion'=>$countryRegion,
 			//
 			'all_tag_list'=>$allTagList,
 			//

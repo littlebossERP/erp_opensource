@@ -1063,7 +1063,7 @@ $this->registerJs("doConnect();" , \yii\web\View::POS_READY);
 			</td>
 			<td  rowspan="<?=count($order->items)?>" width="150" style="word-break:break-all;word-wrap:break-word;border:1px solid #d1d1d1">
 			<span><font color="red" id="desc-<?php echo $order->order_id;?>"><?=$order->desc?></font></span>
-				<a href="javascript:void(0)" style="border:1px solid #00bb9b;" onclick="updatedesc('<?=$order->order_id?>',this)" oiid="<?=$order->order_id?>"><font color="00bb9b">备注</font></a>
+				<a href="javascript:void(0)" style="border:1px solid #00bb9b;white-space: nowrap;" onclick="updatedesc('<?=$order->order_id?>',this)" oiid="<?=$order->order_id?>"><font color="00bb9b">备注</font></a>
 			</td>
 			<?php endif;?>
 		</tr>	

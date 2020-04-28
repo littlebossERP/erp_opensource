@@ -244,7 +244,7 @@ class LB_YUNTUCarrierAPI extends BaseCarrierAPI
             \Yii::info('YUNTU request,puid:'.$puid.',request,orderId:'.$order->order_id.' '.$json_req,"carrier_api");
             
 
-            $response = Helper_Curl::post('http://api.yunexpress.com/LMS.API/api/WayBill/BatchAdd',$json_req,$post_head);
+            $response = Helper_Curl::post('http://oms.api.yunexpress.com/LMS.API/api/WayBill/BatchAdd',$json_req,$post_head);
 
 //            \Yii::info(print_r($response,true),"file");   //先记下结果，方便查看和防止失去结果
 //             \Yii::info('YUNTU,puid:'.$puid.',result,order_id:'.$order->order_id.' '.$response,"file");//先记下结果，方便查看和防止失去结果
@@ -392,7 +392,7 @@ class LB_YUNTUCarrierAPI extends BaseCarrierAPI
             $params = '?orderId='.$order->customer_number;
 
             //http://t.tinydx.com:901/LMS.API/api/WayBill/GetTrackNumber  测试环境获取跟踪号地址
-            $response = Helper_Curl::get('http://api.yunexpress.com/LMS.API/api/WayBill/GetTrackNumber'.$params,null,$get_head);
+            $response = Helper_Curl::get('http://oms.api.yunexpress.com/LMS.API/api/WayBill/GetTrackNumber'.$params,null,$get_head);
 
             \Yii::info(print_r($response,true),"carrier_api");   //先记下结果，方便查看和防止失去结果
             $responseData = json_decode($response , true);
@@ -489,7 +489,7 @@ class LB_YUNTUCarrierAPI extends BaseCarrierAPI
 
                 $json_req=json_encode($OrderNumbers);
                 //http://t.tinydx.com:860/Api/PrintUrl    标签打印的测试环境地址
-                $response = Helper_Curl::post('http://api.yunexpress.com/LMS.API.Lable/Api/PrintUrl',$json_req,$post_head);
+                $response = Helper_Curl::post('http://oms.api.yunexpress.com/LMS.API.Lable/Api/PrintUrl',$json_req,$post_head);
                 $responseData = json_decode($response , true);
                 
                 \Yii::info('YUNTU doPrint,puid:'.$puid.',result,orderId:'.$order->order_source_order_id.' '.$response,"carrier_api");
@@ -552,7 +552,7 @@ class LB_YUNTUCarrierAPI extends BaseCarrierAPI
             $json_req=json_encode($OrderNumbers);
 
             //http://t.tinydx.com:860/Api/PrintUrl    标签打印的测试环境地址
-            $response = Helper_Curl::post('http://api.yunexpress.com/LMS.API.Lable/Api/PrintUrl',$json_req,$print_param['post_head']);
+            $response = Helper_Curl::post('http://oms.api.yunexpress.com/LMS.API.Lable/Api/PrintUrl',$json_req,$print_param['post_head']);
             $responseData = json_decode($response , true);
 
 
@@ -643,7 +643,7 @@ class LB_YUNTUCarrierAPI extends BaseCarrierAPI
         // $params = '?trackingNumber='.'YT1601814154800014';
         $params = '?trackingNumber='.$data[0];
 
-        $response = Helper_Curl::get('http://api.yunexpress.com/LMS.API/api/WayBill/GetTrackingNumber'.$params,null,$get_head);
+        $response = Helper_Curl::get('http://oms.api.yunexpress.com/LMS.API/api/WayBill/GetTrackingNumber'.$params,null,$get_head);
         $responseArr = json_decode($response,true);
 
         $result = array();
@@ -693,7 +693,7 @@ class LB_YUNTUCarrierAPI extends BaseCarrierAPI
             $post_head[] = "Content-Type: application/json;charset=UTF-8";
             $post_head[] = $authorization;
             $post_head[] = "version: 1.0";
-            $response = Helper_Curl::get('http://api.yunexpress.com/LMS.API/api/lms/Get',null,$post_head);
+            $response = Helper_Curl::get('http://oms.api.yunexpress.com/LMS.API/api/lms/Get',null,$post_head);
             $channelArr=json_decode($response,true);
 
             if(empty($channelArr) || !is_array($channelArr) || json_last_error()!=false){

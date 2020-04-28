@@ -97,12 +97,11 @@ class AmazonSyncFetchOrderV2BaseHelper{
 		'AAHKV2X7AFYLW'=>"CN",
 		'A1AM78C64UM0Y8'=>"MX",
 		'A39IBJ37TRP1C6'=>"AU",
-	        
 		'A2Q3Y263D00KWC'=>"BR",
         'A2VIGQ35RCS4UG'=>"AE",
         'A33AVAJ2PDY3EV'=>"TR",
-		
 		'A19VAU5U5O7RUS'=>"SG",
+		'A1805IZSGTT6HS'=>"NL",
     );
 	/**
 	 * [listGetOrderHeaderFromAmazonAndSave description]
@@ -395,31 +394,31 @@ class AmazonSyncFetchOrderV2BaseHelper{
 		$BGJobId=AmazonSyncFetchOrderV2ApiHelper::getCronJobId();
 		switch ($type) {
 			case "amzOldUnshippedAll":
-			$SAA_objs=SaasAmazonAutosyncV2::find()->where('status=1')->andWhere('process_status <> 1')->andWhere('err_cnt < 30')->andWhere("type="."'".$type."'")->andWhere('next_execute_time<'.$nowTime.' OR next_execute_time IS NULL')->andWhere('deadline_time<last_finish_time OR last_finish_time IS NULL OR last_finish_time=0')->orderBy('next_execute_time asc')->all();
+			$SAA_objs=SaasAmazonAutosyncV2::find()->where('status=1')->andWhere('process_status <> 1')->andWhere('err_cnt < 30')->andWhere("type="."'".$type."'")->andWhere('next_execute_time<'.$nowTime.' OR next_execute_time IS NULL')->andWhere('deadline_time<last_finish_time OR last_finish_time IS NULL OR last_finish_time=0')->orderBy('next_execute_time asc')->limit(50)->all();
 			$tmpchannel = "MFN,AFN";
 			$tmpstatus = "Unshipped,PartiallyShipped";
 			\Yii::info($BGJobId."[".__FUNCTION__."]"." here is amzOldUnshippedAll tmpchannel=".$tmpchannel." tmpstatus=".$tmpstatus,"file");
 				break;
 			case "amzNewNotFba":
-			$SAA_objs=SaasAmazonAutosyncV2::find()->where('status=1')->andWhere('process_status <> 1')->andWhere('err_cnt < 30')->andWhere("type="."'".$type."'")->andWhere('next_execute_time<'.$nowTime.' OR next_execute_time IS NULL')->orderBy('next_execute_time asc')->all();
+			$SAA_objs=SaasAmazonAutosyncV2::find()->where('status=1')->andWhere('process_status <> 1')->andWhere('err_cnt < 30')->andWhere("type="."'".$type."'")->andWhere('next_execute_time<'.$nowTime.' OR next_execute_time IS NULL')->orderBy('next_execute_time asc')->limit(50)->all();
 			$tmpchannel = "MFN";
 			$tmpstatus = "Unshipped,PartiallyShipped,Shipped,Canceled";
 			\Yii::info($BGJobId."[".__FUNCTION__."]"." here is amzNewNotFba tmpchannel=".$tmpchannel." tmpstatus=".$tmpstatus,"file");
 				break;
 			case "amzNewFba":
-			$SAA_objs=SaasAmazonAutosyncV2::find()->where('status=1')->andWhere('process_status <> 1')->andWhere('err_cnt < 30')->andWhere("type="."'".$type."'")->andWhere('next_execute_time<'.$nowTime.' OR next_execute_time IS NULL')->orderBy('next_execute_time asc')->all();
+			$SAA_objs=SaasAmazonAutosyncV2::find()->where('status=1')->andWhere('process_status <> 1')->andWhere('err_cnt < 30')->andWhere("type="."'".$type."'")->andWhere('next_execute_time<'.$nowTime.' OR next_execute_time IS NULL')->orderBy('next_execute_time asc')->limit(50)->all();
 			$tmpchannel = "AFN";
 			$tmpstatus = "Shipped,Canceled";
 			\Yii::info($BGJobId."[".__FUNCTION__."]"." here is amzNewFBA tmpchannel=".$tmpchannel." tmpstatus=".$tmpstatus,"file");
 				break;
 			case "amzOldNotFbaNotUnshipped":
-			$SAA_objs=SaasAmazonAutosyncV2::find()->where('status=1')->andWhere('process_status <> 1')->andWhere('err_cnt < 30')->andWhere("type="."'".$type."'")->andWhere('next_execute_time<'.$nowTime.' OR next_execute_time IS NULL')->andWhere('deadline_time<last_finish_time OR last_finish_time IS NULL OR last_finish_time=0')->orderBy('next_execute_time asc')->all();
+			$SAA_objs=SaasAmazonAutosyncV2::find()->where('status=1')->andWhere('process_status <> 1')->andWhere('err_cnt < 30')->andWhere("type="."'".$type."'")->andWhere('next_execute_time<'.$nowTime.' OR next_execute_time IS NULL')->andWhere('deadline_time<last_finish_time OR last_finish_time IS NULL OR last_finish_time=0')->orderBy('next_execute_time asc')->limit(50)->all();
 			$tmpchannel = "MFN";
 			$tmpstatus = "Shipped,Canceled";
 			\Yii::info($BGJobId."[".__FUNCTION__."]"." here is amzOldNotFbaNotUnshipped tmpchannel=".$tmpchannel." tmpstatus=".$tmpstatus,"file");
 				break;
 			case "amzOldFbaNotUnshipped":
-			$SAA_objs=SaasAmazonAutosyncV2::find()->where('status=1')->andWhere('process_status <> 1')->andWhere('err_cnt < 30')->andWhere("type="."'".$type."'")->andWhere('next_execute_time<'.$nowTime.' OR next_execute_time IS NULL')->andWhere('deadline_time<last_finish_time OR last_finish_time IS NULL OR last_finish_time=0')->orderBy('next_execute_time asc')->all();
+			$SAA_objs=SaasAmazonAutosyncV2::find()->where('status=1')->andWhere('process_status <> 1')->andWhere('err_cnt < 30')->andWhere("type="."'".$type."'")->andWhere('next_execute_time<'.$nowTime.' OR next_execute_time IS NULL')->andWhere('deadline_time<last_finish_time OR last_finish_time IS NULL OR last_finish_time=0')->orderBy('next_execute_time asc')->limit(50)->all();
 			$tmpchannel = "AFN";
 			$tmpstatus = "Shipped,Canceled";
 			\Yii::info($BGJobId."[".__FUNCTION__."]"." here is amzOldFbaNotUnshipped tmpchannel=".$tmpchannel." tmpstatus=".$tmpstatus,"file");

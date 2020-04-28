@@ -104,7 +104,7 @@ $this->registerJs('$("#show-debug-log").html($("#debug-log").html());$("#debug-l
 	<!-- <footer class="footer"> -->
 	<?php if(!Yii::$app->user->isGuest):?>
     <footer class="footer text-center">
-        <?= TranslateHelper::t('Copyright © 2018 上海创邺信息科技有限公司 All Rights Reserved')?>&nbsp;&nbsp;<a href="http://www.miitbeian.gov.cn" style="color: #FFFFFF; text-decoration: none;">沪ICP备15025693号-4</a>
+        <?= TranslateHelper::t('Copyright © 2020 UAB Glocash Payment All Rights Reserved')?>&nbsp;&nbsp;<a href="http://www.beian.miit.gov.cn" style="color: #FFFFFF; text-decoration: none;">沪ICP备15025693号-4</a>
     </footer>
 	<?php endif;?>
     <div id="over-lay">

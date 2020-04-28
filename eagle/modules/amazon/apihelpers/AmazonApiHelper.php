@@ -52,12 +52,12 @@ class AmazonApiHelper{
 			'AAHKV2X7AFYLW'=>"CN",
 			'A1AM78C64UM0Y8'=>"MX",
 			'A39IBJ37TRP1C6'=>"AU",
-	        
 			'A2Q3Y263D00KWC'=>"BR",
 			'A2VIGQ35RCS4UG'=>"AE",
 			'A33AVAJ2PDY3EV'=>"TR",
+	        'A19VAU5U5O7RUS'=>"SG",
+	        'A1805IZSGTT6HS'=>"NL",
 			
-			'A19VAU5U5O7RUS'=>"SG",
 	);
 	
 	public static $AMAZON_MARKETPLACE_DOMAIN_CONFIG = array(
@@ -78,6 +78,7 @@ class AmazonApiHelper{
 	        "TR"=>'www.amazon.com.tr',
 	        "AE"=>'www.amazon.ae',
 			"SG"=>'www.amazon.sg',
+			"NL"=>'www.amazon.nl',
 	);
 	
 	public static $AWS_DOMAIN_CONFIG = array(
@@ -98,6 +99,7 @@ class AmazonApiHelper{
 	        "TR"=>'com.tr',
 	        "AE"=>'ae',
 			"SG"=>'sg',
+			"NL"=>'nl',
 	);
 	
 	// aws账号 self::getBrowseNode 用到
@@ -108,7 +110,8 @@ class AmazonApiHelper{
 	protected static $active_users = [];
 	
 	public static $COUNTRYCODE_NAME_MAP=array("US"=>"美国","CA"=>"加拿大","DE"=>"德国","ES"=>"西班牙","FR"=>"法国","IN"=>"印度","IT"=>"意大利",
-	        "UK"=>"英国","JP"=>"日本","CN"=>"中国","MX"=>"墨西哥","AU"=>"澳大利亚","BR"=>"巴西","TR"=>"土耳其","AE"=>"阿联酋","SG"=>"新加坡");
+	        "UK"=>"英国","JP"=>"日本","CN"=>"中国","MX"=>"墨西哥","AU"=>"澳大利亚","BR"=>"巴西","TR"=>"土耳其","AE"=>"阿联酋","SG"=>"新加坡", 
+			"NL"=>"荷兰");
 	
 	// 20170124 标记发货时候，允许标记发货的订单item状态
     public static $CAN_SHIP_ORDERITEM_STATUS = array("Unshipped","PartiallyShipped","Shipped","InvoiceUnconfirmed");

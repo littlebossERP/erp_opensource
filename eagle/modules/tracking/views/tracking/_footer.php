@@ -10,4 +10,4 @@ use eagle\modules\util\helpers\TranslateHelper;
   position: absolute;
   bottom: 0;
   width: 100%;
-"><p class="text-center" style="font-size: 12px;"><?= TranslateHelper::t('Copyright © 2014-2018 上海创邺信息科技有限公司 All Rights Reserved ')?>&nbsp;&nbsp;<a href="http://www.miitbeian.gov.cn" style="color: #808d9a; text-decoration: none;">沪ICP备15025693号-4</a></p></div>
+"><p class="text-center" style="font-size: 12px;"><?= TranslateHelper::t('Copyright © 2014-2020 上海创邺信息科技有限公司 All Rights Reserved ')?>&nbsp;&nbsp;<a href="http://www.beian.miit.gov.cn" style="color: #808d9a; text-decoration: none;">沪ICP备15025693号-4</a></p></div>

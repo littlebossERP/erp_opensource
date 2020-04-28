@@ -59,7 +59,7 @@ class WishAccountsV2Controller extends \eagle\components\Controller{
 		
 		if(empty(self::$goproxy)){
 		    // TODO proxy dev account @XXX@
-		    $url = "https://merchant.wish.com/oauth/authorize?client_id=@XXX@";
+		    $url = "https://merchant.wish.com/v3/oauth/authorize?client_id=@XXX@";
 		}else{
 		    if (!empty($_SESSION['site_id'])){
 		        $model = SaasWishUser::findOne(['site_id'=>$_SESSION['site_id']]);

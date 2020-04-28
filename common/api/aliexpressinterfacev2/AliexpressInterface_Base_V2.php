@@ -181,8 +181,10 @@ class AliexpressInterface_Base_V2
             $param['sign'] = $signature;
         }
         $param_request = $param;
-
-        $response = Helper_Curl::post($this->hosturl, $param_request);
+        $headers = [];
+        $http_entity_type = 'application/x-www-from-urlencoded';
+        $headers = array("Content-type: " . $http_entity_type);
+        $response = Helper_Curl::post($this->hosturl, $param_request, $headers);
         $result = $this->response($response, $apiName);
         
         return $result;
