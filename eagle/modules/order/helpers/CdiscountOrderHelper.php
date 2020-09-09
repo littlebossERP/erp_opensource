@@ -812,7 +812,7 @@ class CdiscountOrderHelper {
 								
 								if($rtn['success']){
 									//update last order success retrieve time of this cdiscount account
-									$cdiscountAccount->last_order_success_retrieve_time = $updateTime;
+									$cdiscountAccount->last_order_success_retrieve_time = $onwTimeUTC;
 								}
 							}else{
 								if(!empty($orders['proxyResponse']['orderList']['s_Body']['GetOrderListResponse']['GetOrderListResult']['OperationSuccess']) && 
@@ -821,7 +821,7 @@ class CdiscountOrderHelper {
 								){
 									echo "\n get none order";
 									//update last order success retrieve time of this cdiscount account
-									$cdiscountAccount->last_order_success_retrieve_time = $updateTime;
+									$cdiscountAccount->last_order_success_retrieve_time = $onwTimeUTC;
 								}
 								else{
 									echo "\n OperationSuccess=false:".

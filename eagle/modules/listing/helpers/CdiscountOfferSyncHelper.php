@@ -299,6 +299,9 @@ class CdiscountOfferSyncHelper{
 			
 		}//end of each account
 	
+		//2020-7-20
+	    self::getCdProductStockList($uid);
+		
 		return $result;
 	}
 	
@@ -2006,4 +2009,244 @@ class CdiscountOfferSyncHelper{
 		RedisHelper::RedisDel("CdiscountAccountMaxHotSale","user_$uid" );
 		RedisHelper::RedisDel("CdiscountAccountAddiHotSale","user_$uid" );
 	}
+	
+	public static function xml_to_array($xml)
+	{
+		if (trim($xml) == "") return array();
+		$xmlstr = $xml;
+		$xmlstr = preg_replace('/\sxmlns="(.*?)"/', ' _xmlns="${1}"', $xmlstr);
+		$xmlstr = preg_replace('/<(\/)?(\w+):(\w+)/', '<${1}${2}_${3}', $xmlstr);
+		$xmlstr = preg_replace('/(\w+):(\w+)="(.*?)"/', '${1}_${2}="${3}"', $xmlstr);
+		$array = (array)(simplexml_load_string($xmlstr));
+		foreach ($array as $key=>$item){
+			$array[$key] = self::struct_to_array((array)$item);
+		}
+		return $array;
+	}//end of xml_to_array
+	
+	public static function struct_to_array($item)
+	{
+		if(!is_string($item))
+		{
+			$item = (array)$item;
+			foreach ($item as $key=>$val){
+				$item[$key] = self::struct_to_array($val);
+			}
+		}
+		return $item;
+	}//end of struct_to_array
+		
+	//cd跟卖商品没有库存的通过这个接口再获取一次
+	public static function getCdProductStockList($uid){
+		
+		try{
+			
+			//切换user数据库
+// 			$ret=\Yii::$app->subdb->changeUserDataBase($uid);
+// 			if ($ret===false){
+// 				//异常情况
+// 				echo "\n site id :".$account->site_id." changeUserDataBase false";
+// 				return "";
+// 			}
+			
+			//获取商铺信息
+			$SAASCDISCOUNTUSERLIST = SaasCdiscountUser::find()->where(['uid'=>$uid,'is_active'=>1])->asArray()->all();
+						
+			
+			if(!empty($SAASCDISCOUNTUSERLIST)){
+				$updataArr=[];
+				
+				foreach ($SAASCDISCOUNTUSERLIST as $saitem){
+				    
+// 				    $m1 = memory_get_usage(true);
+// 				    echo "memory usage 0:".round($m1/1000000000).PHP_EOL;
+				    
+				    // 查找fbc订单相关产品的sku
+				    $fbcSkus = [];
+				    // 这种写法爆内存，客户4g的机器玩不了
+				    // $fbcOrders = OdOrder::find()->where(['order_source'=>"cdiscount", 'selleruserid'=>$saitem["username"], 'order_type'=>"FBC"])->all();
+				                
+				    $sql = 'SELECT sku FROM `od_order_item_v2` where order_id in (SELECT order_id FROM `od_order_v2` where order_source="cdiscount" and selleruserid="'.$saitem["username"].'" and order_type="FBC" ) group by sku';
+				    $command = \Yii::$app->subdb->createCommand($sql);
+				    $fbcRecords = $command->queryAll();
+				    
+// 				    $m1 = memory_get_usage(true);
+// 				    echo "memory usage 0.5:".round($m1/1000000000).PHP_EOL;
+				    
+				    // 这种写法爆内存，客户4g的机器玩不了
+// 				    foreach ($fbcOrders as $fbcOrder){
+//     				    if($fbcOrder($order->getItemsPT()) > 0){
+//     				        foreach ($order->getItemsPT() as $key => $item){
+// 				                $nonDeliverySku = \eagle\modules\order\helpers\CdiscountOrderInterface::getNonDeliverySku();
+// 				                if(empty($item->sku) or in_array(strtoupper($item->sku),$nonDeliverySku) ) continue;
+				                
+// 				                $fbcSkus[] = $item->sku;
+//     				        }
+//     				    }
+// 				    }
+
+				    foreach ($fbcRecords as $fbcRecord){
+				        $fbcSkus[] = $fbcRecord['sku'];
+				    }
+					
+// 				    $m1 = memory_get_usage(true);
+// 				    echo "memory usage 1:".round($m1/1000000000).PHP_EOL;
+					
+				    // dzt20200803 问cd的人 目前只能通过fbc订单拿到相关产品是否海外仓
+				    // 但如果库存出现变化则必须依赖我们的订单系统正常，否则库存则一直是从0后更新过来的值
+				    $fbcOffers = CdiscountOfferList::find()->select("`seller_product_id`,`product_ean`,`seller_id`")->where(['seller_product_id'=>$fbcSkus,'seller_id'=>$saitem["username"]])->orderBy('seller_id ASC')->asArray()->all();
+				    	
+				    
+// 				    $m1 = memory_get_usage(true);
+// 				    echo "memory usage 2:".round($m1/1000000000).PHP_EOL;
+				    
+					//库存为0的商品
+					$stock0Offers = CdiscountOfferList::find()->select("`seller_product_id`,`product_ean`,`seller_id`")->where(['stock'=>0,'seller_id'=>$saitem["username"]])->orderBy('seller_id ASC')->asArray()->all();
+						
+// 					$m1 = memory_get_usage(true);
+// 					echo "memory usage 3:".round($m1/1000000000).PHP_EOL;
+					
+					// 先不去重
+					$stock0Offers = array_merge($fbcOffers, $stock0Offers);
+					echo "getCdProductStockList toUpStockOffers:".count($stock0Offers)."\n";
+// 					$m1 = memory_get_usage(true);
+// 					exit($m1);
+					
+					if(!empty($stock0Offers)){
+					
+						$parms="";
+						$num=0;
+					
+						foreach ($stock0Offers as $itemkey=>$item){
+							
+							$parms.="<arr:string>".$item["product_ean"]."</arr:string>";
+							$num++;
+								
+							if($num>=30 || $itemkey>=count($stock0Offers)-1){
+					
+								//调用接口
+					
+								try{
+										
+									$TokenId=$saitem["token"];
+					
+									$hearder=[];
+									$hearder[]="Content-Type:text/xml";
+									$hearder[]="SoapAction:http://www.cdiscount.com/IMarketplaceAPIService/GetProductStockList";
+										
+									$url="https://wsvc.cdiscount.com/MarketplaceAPIService.svc";
+										
+									$body='<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+								xmlns:cdis="http://www.cdiscount.com"
+								xmlns:cdis1="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"
+								xmlns:sys="http://schemas.datacontract.org/2004/07/System.Device.Location"
+								xmlns:cdis2="http://schemas.datacontract.org/2004/07/Cdiscount.Service.Fulfillment.API.External.Contract.Data.InputParameters"
+								xmlns:arr="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+								<soapenv:Header/>
+								<soapenv:Body>
+									<cdis:GetProductStockList>
+										<cdis:headerMessage>
+											<cdis1:Context>
+												<cdis1:CatalogID>1</cdis1:CatalogID>
+												<cdis1:CustomerPoolID>1</cdis1:CustomerPoolID>
+												<cdis1:SiteID>100</cdis1:SiteID>
+											</cdis1:Context>
+											<cdis1:Localization>
+												<cdis1:Country>Fr</cdis1:Country>
+												<cdis1:Currency>Eur</cdis1:Currency>
+												<cdis1:DecimalPosition>2</cdis1:DecimalPosition>
+												<cdis1:Language>Fr</cdis1:Language>
+											</cdis1:Localization>
+											<cdis1:Security>
+												<cdis1:DomainRightsList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+												<cdis1:IssuerID xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+												<cdis1:SessionID xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+												<cdis1:SubjectLocality xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+												<cdis1:TokenId>'.$TokenId.'</cdis1:TokenId>
+												<cdis1:UserName xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+											</cdis1:Security>
+											<cdis1:Version>1.0</cdis1:Version>
+										</cdis:headerMessage>
+										<cdis:request>
+											<cdis3:BarCodeList xmlns:cdis3="http://schemas.datacontract.org/2004/07/Cdiscount.Service.Marketplace.API.External.Contract.Data.Product">
+												'.$parms.'
+											</cdis3:BarCodeList>
+											<cdis3:BlockedStock xmlns:cdis3="http://schemas.datacontract.org/2004/07/Cdiscount.Service.Marketplace.API.External.Contract.Data.Product">All</cdis3:BlockedStock>
+											<cdis3:FulfilmentReferencement xmlns:cdis3="http://schemas.datacontract.org/2004/07/Cdiscount.Service.Marketplace.API.External.Contract.Data.Product">All</cdis3:FulfilmentReferencement>
+											<cdis3:ShippableStock xmlns:cdis3="http://schemas.datacontract.org/2004/07/Cdiscount.Service.Marketplace.API.External.Contract.Data.Product">All</cdis3:ShippableStock>
+											<cdis3:SoldOut xmlns:cdis3="http://schemas.datacontract.org/2004/07/Cdiscount.Service.Marketplace.API.External.Contract.Data.Product">All</cdis3:SoldOut>
+										</cdis:request>
+									</cdis:GetProductStockList>
+								</soapenv:Body>
+								</soapenv:Envelope>';
+										
+									$response = \common\helpers\Helper_Curl::post($url,$body,$hearder);
+										
+									//解析接口返回的数据
+									if (trim($response) != "")
+										$response = self::xml_to_array($response);
+										
+									if(!empty($response)){
+										if(!empty($response["s_Body"]["GetProductStockListResponse"]["GetProductStockListResult"]["a_ProductStockList"]["a_ProductStock"])){
+											$a_ProductStock=$response["s_Body"]["GetProductStockListResponse"]["GetProductStockListResult"]["a_ProductStockList"]["a_ProductStock"];
+											foreach ($a_ProductStock as $Productitem){
+												if(!empty($Productitem["a_FrontStock"])){
+													$updataArr[$Productitem["a_SellerReference"]]=$Productitem["a_FrontStock"];
+												}
+											}
+										}
+									}
+										
+								}
+								catch (\Exception $err){
+									//调用接口错误
+									print_r($err->getMessage());
+								}
+					
+								echo $num."\n";
+								echo "===============================\n";
+					
+
+								$parms="";
+								$num=0;
+					
+							}
+								
+								
+								
+						}
+
+					}
+					
+					
+				}
+				
+				
+				//更新数据库
+					
+				if(!empty($updataArr)){
+					foreach ($updataArr as $updatakey=>$updataitem){
+						$updb=CdiscountOfferList::find()->where(['seller_product_id'=>$updatakey])->one();
+						if(count($updb)>0){
+							$updb->stock=$updataitem;
+							$updb->save();
+						}
+						unset($updb);
+					}
+				}
+				
+				
+			}
+			
+			
+			echo "end";
+			
+		}
+		catch (\Exception $err){
+			print_r($err->getMessage()); 
+		}
+		
+		
+	}
+	
 }

@@ -303,7 +303,7 @@ class LB_ANJUNCarrierAPI extends BaseCarrierAPI
 				
 			//数据组织完成 准备发送
 			#########################################################################
-			\Yii::info('LB_ANJUNCarrierAPI1 puid:'.$puid.'，order_id:'.$order->order_id.'  '.print_r($request,1), "carrier_api");
+			\Yii::info('LB_ANJUNCarrierAPI1 puid:'.$puid.'，order_id:'.$order->order_id.'  '.json_encode($request), "carrier_api");
 			
 			$url = self::$url_aj.'napi.asp';
 			
@@ -315,7 +315,7 @@ class LB_ANJUNCarrierAPI extends BaseCarrierAPI
 			
 			$response = $this->submitGate->mainGate($url, $url_params, 'curl', 'GET', 40);
 			
-			\Yii::info('lb_anjun,puid:'.$puid.'，order_id:'.$order->order_id.' '.json_encode($response),"carrier_api");
+			\Yii::info('LB_ANJUNCarrierAPI2 ,puid:'.$puid.'，order_id:'.$order->order_id.' '.json_encode($response), "carrier_api");
 			
 			//安骏的访问速度不能过快，这里限制为200000微秒
 			usleep(200000);
@@ -356,7 +356,7 @@ class LB_ANJUNCarrierAPI extends BaseCarrierAPI
 				        
 				        	$response_2 = Helper_Curl::get(self::$url_aj.'/api2.asp?username='.$this->username.'&password='.$this->password.$params);
 				        	
-				        	\Yii::info('LB_ANJUNCarrierAPI3 puid:'.$puid.'，order_id:'.$order->order_id.'  '.print_r($response_2,1), "file");
+				        	\Yii::info('LB_ANJUNCarrierAPI3 puid:'.$puid.'，order_id:'.$order->order_id.'  '.print_r($response_2,1), "carrier_api");
 				        
 				        	$tmpArr_2 = explode(",",$response_2);
 				        	if(count($tmpArr_2) == 2)

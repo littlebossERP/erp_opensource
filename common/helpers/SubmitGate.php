@@ -76,10 +76,11 @@ class SubmitGate{
 			curl_setopt($connection, CURLOPT_RETURNTRANSFER, 1);
 			// 执行
 			$response = curl_exec($connection);
+			$error=curl_error($connection);
 			// close curl
 			curl_close($connection);
 			if(!$response){
-				$result = self::getResult('400013', '', '服务器连接失败，请检查网络是否正常！');
+				$result = self::getResult('400013', '', '服务器连接失败，请检查网络是否正常！'.$error);
 			}else{
 				$result = self::getResult(0, $response, '');
 			}
